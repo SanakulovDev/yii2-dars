@@ -1,4 +1,5 @@
  <?php
+
         echo \yii\widgets\DetailView::widget([
             'model' => $company,
             'attributes' => [

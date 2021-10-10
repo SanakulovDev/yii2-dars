@@ -80,18 +80,7 @@ class Company extends \yii\db\ActiveRecord
             'updated_At' => Yii::t('app', 'Updated  At'),
         ];
     }
-    public function edit($image)
-    {
-        if ($image) {
-            $dir = Yii::getAlias('@frontend')."/web/uploads/company/";
-            $image_name = time();
-            $image_name .= '.'.$image->extension;
 
-            if ($image->saveAs($dir.$image_name)) {
-                $this->logo = $image_name;
-            }
-        }
-    }
     public function upload($image)     
     {
         if ($image) {
@@ -118,8 +107,8 @@ class Company extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_UPDATE => ['name','director_name','phone','regionId','cityId','address'],
-            self::SCENARIO_SIGNUP => ['name','director_name','phone','regionId','cityId','address','username','password','email']
+            self::SCENARIO_UPDATE => ['name','director_name','phone','regionId','cityId','address','image'],
+            self::SCENARIO_SIGNUP => ['name','director_name','phone','regionId','cityId','address','image','username','password','email']
         ];
     }
 

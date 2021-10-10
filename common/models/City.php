@@ -56,10 +56,10 @@ class City extends \yii\db\ActiveRecord
 
     public static function selectList($regionId = null) {
         $name = 'name' . ucfirst(Yii::$app->language);
-        $codition = [];
+        $condition = [];
         if ($regionId){
-            $codition = ['regionId' => $regionId];
+            $condition = ['regionId' => $regionId];
         }
-        return ArrayHelper::map(self::find()->where($codition)->all(), 'id', Yii::t('app', $name));
+        return ArrayHelper::map(self::find()->where($condition)->all(), 'id', Yii::t('app', $name));
     }
 }

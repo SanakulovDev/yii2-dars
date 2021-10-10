@@ -1,7 +1,15 @@
+<?php
+
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
+use yii\helpers\Html;
+
+?>
 <header class="site-navbar " style="top: 0;" >
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="site-logo col-md-3"><a href="/site/index" class="text-black"><?= Yii::t('app', 'Jobboard') ?></a></div>
+
 
             <nav class="site-navigation col-md-6 " style="position: relative">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0 ">
@@ -31,16 +39,30 @@
                     </div>
 
                     <div class="m-1">
-                        <a href="/site/login"
-                           class="btn btn-primary border-width-2 d-none d-lg-inline-block"><?= Yii::t('app', 'Login') ?></a>
-                        <a href="/site/signup" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                                    class="mr-2 icon-lock_outline"><?= Yii::t('app', 'Signup') ?></span></a>
+                       <?php
+                        if (Yii::$app->user->isGuest) {
+                        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'options'=>['class'=>'btn btn-outline-warning p-0']];
+                        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'],'options'=>['class'=>'btn btn-outline-warning p-0']];
+                        } else {
+                        $menuItems[] = '<li>'
+                            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                            . Html::submitButton(
+                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            ['class' => 'btn btn-link logout']
+                            )
+                            . Html::endForm()
+                            . '</li>';
+                        }
+                       echo Nav::widget([
+                           'items' => $menuItems,
+                       ]);
+
+                        ?>
                     </div>
                 </div>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                             class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
-
         </div>
     </div>
 </header>

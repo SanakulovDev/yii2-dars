@@ -1,0 +1,36 @@
+<?php
+
+
+echo \yii\widgets\DetailView::widget([
+    'model' => $worker,
+    'attributes' => [
+        'firstname',
+        'lastname',
+        'patronymic',
+        'birthdate',
+        [
+            'attribute' => 'regionId',
+            'label' => Yii::t('app', 'Region'),
+            'value' => $worker->region->nameEn
+        ],
+        [
+            'attribute' => 'cityId',
+            'label' => Yii::t('app', 'City / District'),
+            'value' => $worker->city->nameEn
+        ],
+
+        'address',
+        'phone',
+        'gender',
+        'nationality_id',
+        [
+            'attribute' => 'photo',
+            'value' => '@web/uploads/company/' . $worker->photo,
+            'format' => ['photo', ['width' => '150', 'height' => '150']]
+        ],
+
+    ],
+]);
+
+?>
+<?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/worker-edit', ['class' => 'btn btn-success']) ?>

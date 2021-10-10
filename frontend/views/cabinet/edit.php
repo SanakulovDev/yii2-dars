@@ -6,7 +6,6 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Lang */
 $regionList = \common\models\Region::selectList();
-//$cityList=[];
 $cityList = \common\models\City::selectList($model->regionId);
 $this->title = Yii::t('app', 'Update Lang: {name}', [
     'name' => $model->name,

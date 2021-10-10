@@ -41,7 +41,8 @@ class Worker extends \yii\db\ActiveRecord
         return [
             [['userId', 'gender', 'nationality_id'], 'integer'],
             [['birthdate', 'created_at', 'updated_at'], 'safe'],
-            [['firstname', 'lastname', 'patronymic', 'address', 'phone', 'photo'], 'string', 'max' => 255],
+            [['firstname', 'lastname', 'patronymic', 'address', 'phone'], 'string', 'max' => 255],
+            [['photo'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
         ];
     }
 
