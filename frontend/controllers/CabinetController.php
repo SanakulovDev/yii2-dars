@@ -73,10 +73,16 @@ class CabinetController extends Controller
             return $this->redirect('worker-create');
         }
     }
+    public function actionWorkerCreate()
+    {
+        $worker = new Worker();
+        $worker->scenario = Worker::SCENARIO_EDIT;
+        return $this->redirect('worker-create');
+    }
 
     protected function findWorker($id)
     {
-        if ($worker = User::findOne(['id' => $id])) {
+        if ($worker = Worker::findOne(['id' => $id])) {
             return $worker;
         }
         return null;

@@ -28,6 +28,8 @@ class Worker extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    const SCENARIO_EDIT = 'edit';
     public static function tableName()
     {
         return 'worker';
@@ -79,6 +81,10 @@ class Worker extends \yii\db\ActiveRecord
     }
     public function scenarios()
     {
-        return ;
+        return [
+            self::SCENARIO_EDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
+                'gender','phone','photo'
+                ]
+        ];
     }
 }

@@ -1,3 +1,8 @@
+<?php
+
+use yii\widgets\ActiveForm;
+
+?>
 
 <h2 class="mb-4"><?= Yii::t('app', 'Edit company information') ?></h2>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -20,35 +25,39 @@
     <?php endif; ?>
 </div>
 <div class="row form-group">
-    <div class="col-md-6 mb-3 mb-md-0">
-        <?= $form->field($worker, 'name')->textInput(['autofocus' => true]) ?>
+    <div class="col-md-6 mb-3 ">
+        <?= $form->field($worker, 'firstname')->textInput(['autofocus' => true]) ?>
     </div>
 
-    <div class="col-md-6 mb-3 mb-md-0">
-        <?= $form->field($worker, 'director_name')->textInput() ?>
+    <div class="col-md-6 mb-3 ">
+        <?= $form->field($worker, 'lastname')->textInput() ?>
     </div>
 </div>
 <div class="row form-group ">
-    <div class="col-md-6 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'regionId')->dropdownList($regionList) ?>
     </div>
-    <div class="col-md-6 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'cityId')->dropdownList($cityList) ?>
     </div>
-
 </div>
 <div class="row form-group ">
-    <div class="col-md-6 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'address')->textInput() ?>
     </div>
-    <div class="col-md-6 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'phone')->widget(\yii\widgets\MaskedInput::class, [
             'mask' => '+\9\98-99-999-9999',
         ]) ?>
     </div>
 </div>
+<div class="row form-group">
+    <div class="col-md-6 mb-3">
+
+    </div>
+</div>
 <div class="row form-group ">
-    <div class="col-md-6 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'image')->fileInput() ?>
     </div>
 
