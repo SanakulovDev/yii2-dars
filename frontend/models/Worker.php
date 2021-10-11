@@ -30,6 +30,7 @@ class Worker extends \yii\db\ActiveRecord
      */
 
     const SCENARIO_EDIT = 'edit';
+    const SCENARIO_WORKEREDIT = 'worker-edit';
     public static function tableName()
     {
         return 'worker';
@@ -84,7 +85,26 @@ class Worker extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_EDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
                 'gender','phone','photo'
+                ],
+            self::SCENARIO_WORKEREDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
+                'gender','phone','photo'
                 ]
+
         ];
     }
+
+    public function upload($image)
+    {
+        if ($image) {
+            $dir = Yii::getAlias('@frontend')."/web/uploads/user/";
+            $image_name = time();
+            $image_name .= '.'.$image->extension;
+            if ($image->saveAs($dir.$image_name)) {
+                $this->photo = $image_name;
+            }
+        }
+
+        return true;
+    }
+
 }

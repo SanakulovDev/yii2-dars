@@ -1,4 +1,4 @@
-<h1><?= Yii::t('app',Yii::$app->user->identity->username.Yii::t('app',' personal information'))?></h1>
+<h1><?= Yii::t('app',ucfirst(Yii::$app->user->identity->username)." ".Yii::t('app',' personal information'))?></h1>
 <?php
 echo \yii\widgets\DetailView::widget([
     'model' => $worker,
@@ -23,7 +23,7 @@ echo \yii\widgets\DetailView::widget([
         'nationality_id',
         [
             'attribute' => 'photo',
-            'value' => '@web/uploads/company/' . $worker->photo,
+            'value' => '@web/uploads/user/' . $worker->photo,
             'format' => ['image', ['width' => '150', 'height' => '150']]
         ],
 

@@ -23,7 +23,8 @@
         "skeeks/yii2-multi-language": "^1.0.0",
         "yii2mod/yii2-google-maps-markers": "*",
         "eddmash/yii2-clipboard": "@dev",
-        "kartik-v/yii2-editors": "dev-master"
+        "kartik-v/yii2-editors": "dev-master",
+        "mdmsoft/yii2-admin": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -28,7 +28,7 @@ return [
     'Gender'=>'Jinsi',
     'Nationality ID'=>'Millat Id si',
     'photo'=>'Rasmi',
-    'Edit company information'=>"Companiya ma'lumotlarini tharirlash",
+    'Edit company information'=>"Companiya ma'lumotlarini tahrirlash",
     'Employer'=>'Ish beruvchi',
     'Job seeker'=>'Ish qidiruvchi',
     'Are you an employer or a job seeker?'=>'Siz ish beruvchimisiz yoki ish qidiruvchimi?',

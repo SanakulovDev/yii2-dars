@@ -8,27 +8,6 @@ use yii\helpers\Html;
 
 <!doctype html>
 <html lang="en">
-<head>
-    <title>JobBoard &mdash; <?= Yii::t('app', 'Website Template by Colorlib') ?></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <meta name="author" content="Free-Template.co"/>
-    <link rel="shortcut icon" href="ftco-32x32.png">
-    <!-- CSS only -->
-
-    <link rel="stylesheet" href="/jobboard/css/custom-bs.css">
-    <link rel="stylesheet" href="/jobboard/css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="/jobboard/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="/jobboard/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="/jobboard/fonts/line-icons/style.css">
-    <link rel="stylesheet" href="/jobboard/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/jobboard/css/animate.min.css">
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/jobboard/css/style.css">
-</head>
 <body id="top">
 
 <div id="overlayer"></div>
@@ -89,7 +68,8 @@ use yii\helpers\Html;
 
 <!-- SCRIPTS -->
 <!-- JavaScript Bundle with Popper -->
-<script src="/jobboard/js/jquery.min.js"></script>
+<script src="/js/jquery-1.9.0.min.js"></script>
+<!--<script src="/jobboard/js/jquery.min.js"></script>-->
 <script src="/jobboard/js/bootstrap.bundle.min.js"></script>
 <script src="/jobboard/js/isotope.pkgd.min.js"></script>
 <script src="/jobboard/js/stickyfill.min.js"></script>
@@ -103,8 +83,31 @@ use yii\helpers\Html;
 <script src="/jobboard/js/bootstrap-select.min.js"></script>
 
 <script src="/jobboard/js/custom.js"></script>
-<script src="/frontend/web/js/main.js"></script>
+
+<script src="/js/jquery.maskedinput.js"></script>
+<script src="/js/main.js"></script>
 
 
 </body>
+<head>
+    <title>JobBoard &mdash; <?= Yii::t('app', 'Website Template by Colorlib') ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="Free-Template.co"/>
+    <link rel="shortcut icon" href="ftco-32x32.png">
+    <!-- CSS only -->
+
+    <link rel="stylesheet" href="/jobboard/css/custom-bs.css">
+    <link rel="stylesheet" href="/jobboard/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/jobboard/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/jobboard/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/jobboard/fonts/line-icons/style.css">
+    <link rel="stylesheet" href="/jobboard/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/jobboard/css/animate.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/jobboard/css/style.css">
+</head>
 </html>

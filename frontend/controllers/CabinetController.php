@@ -17,13 +17,13 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
-        $worker = new Worker();
-        if ($identity) {
-            if ($company)
-                return $this->render('index', ['model' => $company]);
-            return $this->render('worker', ['worker' => $worker]);
+        $worker = $this->findWorker($identity->id);
+        if ($company) {
+            return $this->render('index',
+                ['company' => $company]);
         }
-
+        return $this->render('worker',
+            ['worker' => $worker]);
     }
 
     protected function findModel($userId)
@@ -65,24 +65,39 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-
-        if ($identity) {
-            if ($worker !==null){
-               return $this->render('worker-edit',['worker'=>$worker]);
+        $worker->scenario = Worker::SCENARIO_WORKEREDIT;
+        if ($this->request->isPost && $worker->load($this->request->post())) {
+            $image = UploadedFile::getInstance($worker, 'photo');
+            if ($worker->upload($image) && $worker->save()) {
+                \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
+                return $this->redirect(['index', 'id' => $worker->id]);
+            } else {
+                \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
             }
-            return $this->redirect('worker-create');
         }
+
+        return $this->render('worker-edit', [
+            'worker' => $worker,
+        ]);
     }
     public function actionWorkerCreate()
     {
         $worker = new Worker();
+
         $worker->scenario = Worker::SCENARIO_EDIT;
-        return $this->redirect('worker-create');
+
+        if ($worker->load(\Yii::$app->request->post())){
+            $image = UploadedFile::getInstance($worker, 'photo');
+            $worker->userId = \Yii::$app->user->identity->id;
+            if ($worker->upload($image) && $worker->save())
+                return $this->redirect('index');
+        }
+        return $this->render('worker-create',['worker'=>$worker]);
     }
 
     protected function findWorker($id)
     {
-        if ($worker = Worker::findOne(['id' => $id])) {
+        if ($worker = Worker::findOne(['userId' => $id])) {
             return $worker;
         }
         return null;

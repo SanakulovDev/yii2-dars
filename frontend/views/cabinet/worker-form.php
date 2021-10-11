@@ -1,7 +1,10 @@
 <?php
 
 use yii\widgets\ActiveForm;
-
+use yii\helpers\Html;
+$regionList = \common\models\Region::selectList();
+$cityList = \common\models\City::selectList($worker->regionId  );
+$nationality = \frontend\models\Nationality::selectList();
 ?>
 
 <h2 class="mb-4"><?= Yii::t('app', 'Edit company information') ?></h2>
@@ -37,6 +40,9 @@ use yii\widgets\ActiveForm;
     <div class="col-md-6 mb-3">
         <?= $form->field($worker, 'patronymic')->textInput() ?>
     </div>
+    <div class="col-md-6 mb-3">
+        <?= $form->field($worker, 'birthdate')->textInput() ?>
+    </div>
 </div>
 <div class="row form-group ">
     <div class="col-md-6 mb-3 ">
@@ -58,12 +64,16 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row form-group">
     <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'patr')->textInput() ?>
+        <?= $form->field($worker, 'gender')->dropDownList([0=>'femail',1=>'mail']) ?>
     </div>
+     <div class="col-md-6 mb-3">
+        <?= $form->field($worker, 'nationality_id')->dropDownList($nationality) ?>
+    </div>
+
 </div>
 <div class="row form-group ">
     <div class="col-md-6 mb-3 ">
-        <?= $form->field($worker, 'image')->fileInput() ?>
+        <?= $form->field($worker, 'photo')->fileInput() ?>
     </div>
 
 
