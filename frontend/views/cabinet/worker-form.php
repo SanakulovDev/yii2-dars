@@ -33,6 +33,11 @@ use yii\widgets\ActiveForm;
         <?= $form->field($worker, 'lastname')->textInput() ?>
     </div>
 </div>
+<div class="row form-group">
+    <div class="col-md-6 mb-3">
+        <?= $form->field($worker, 'patronymic')->textInput() ?>
+    </div>
+</div>
 <div class="row form-group ">
     <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'regionId')->dropdownList($regionList) ?>
@@ -53,7 +58,7 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row form-group">
     <div class="col-md-6 mb-3">
-
+        <?= $form->field($worker, 'patr')->textInput() ?>
     </div>
 </div>
 <div class="row form-group ">
