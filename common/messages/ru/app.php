@@ -9,6 +9,7 @@ return [
     'Signup' => "Зарегистрироваться",
     'LoginTitle' =>"Войти в JobBoard",
     'SignupTitle' => "Зарегистрироваться в JobBoard",
+    'Logout ('=>'Выйти (',
     'ID'=>'Id',
     'User Id'=>'ID пользователя',
     'Name'=>'Имя',
@@ -37,6 +38,7 @@ return [
     'City / District'=>'Город / Район',
     'Your data has been successfully modified'=>'Ваши данные были успешно изменены',
     'An error occurred while modifying your data'=>'Произошла ошибка при изменении ваших данных',
-
+    ' personal information'=>'Персональные данные',
+    'Cabinet'=>'Кабинет'
 ];
 ?>

@@ -39,7 +39,7 @@ class Worker extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId', 'gender', 'nationality_id'], 'integer'],
+            [['userId','regionId','cityId', 'gender', 'nationality_id'], 'integer'],
             [['birthdate', 'created_at', 'updated_at'], 'safe'],
             [['firstname', 'lastname', 'patronymic', 'address', 'phone'], 'string', 'max' => 255],
             [['photo'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
@@ -56,6 +56,8 @@ class Worker extends \yii\db\ActiveRecord
             'userId' => Yii::t('app', 'User ID'),
             'firstname' => Yii::t('app', 'Firstname'),
             'lastname' => Yii::t('app', 'Lastname'),
+            'regionId' => Yii::t('app', 'Region ID'),
+            'cityId' => Yii::t('app', 'City ID'),
             'patronymic' => Yii::t('app', 'Patronymic'),
             'birthdate' => Yii::t('app', 'Birthdate'),
             'gender' => Yii::t('app', 'Gender'),
@@ -74,5 +76,9 @@ class Worker extends \yii\db\ActiveRecord
     public function getCity()
     {
         return $this->hasOne(City::class, ['id' => 'cityId']);
+    }
+    public function scenarios()
+    {
+        return ;
     }
 }

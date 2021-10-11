@@ -1,6 +1,5 @@
+<h1><?= Yii::t('app',Yii::$app->user->identity->username.Yii::t('app',' personal information'))?></h1>
 <?php
-
-
 echo \yii\widgets\DetailView::widget([
     'model' => $worker,
     'attributes' => [
@@ -18,7 +17,6 @@ echo \yii\widgets\DetailView::widget([
             'label' => Yii::t('app', 'City / District'),
             'value' => $worker->city->nameEn
         ],
-
         'address',
         'phone',
         'gender',
@@ -26,7 +24,7 @@ echo \yii\widgets\DetailView::widget([
         [
             'attribute' => 'photo',
             'value' => '@web/uploads/company/' . $worker->photo,
-            'format' => ['photo', ['width' => '150', 'height' => '150']]
+            'format' => ['image', ['width' => '150', 'height' => '150']]
         ],
 
     ],

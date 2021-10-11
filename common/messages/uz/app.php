@@ -7,6 +7,7 @@ return [
     'Contact' =>'Kontakt',
     'Login' => 'Kirish',
     'Signup' => "Ro'yxatdan o'tish",
+    'Logout ('=>'Chiqish (',
     'ID'=>'Id',
     'User Id'=>'User Id',
     'Name'=>'Ism',
@@ -35,5 +36,8 @@ return [
     'City'=>'Shahar/Tuman',
     'Your data has been successfully modified'=>'Ma`lumotlaringiz muvaffaqiyatli o`zgartirildi',
     'An error occurred while modifying your data'=>'Ma`lumotlaringiz o`zgartirishda xatolik yuz berdi',
+    ' personal information'=>'shaxsiy ma1lumotlari',
+    'Cabinet'=>'Kabinet',
+
 ];
 ?>

@@ -17,8 +17,7 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
-        $worker = $this->findWorker($identity->id);
-
+        $worker = new Worker();
         if ($identity) {
             if ($company)
                 return $this->render('index', ['model' => $company]);
@@ -34,14 +33,6 @@ class CabinetController extends Controller
         }
         return false;
 
-    }
-
-    protected function findWorker($id)
-    {
-        if ($worker = User::findOne(['id' => $id])) {
-            return $worker;
-        }
-        throw new NotFoundHttpException(\Yii::t('app', 'Bundayin sahifa mavjud emas.'));
     }
 
     public function actionEdit()
@@ -68,5 +59,26 @@ class CabinetController extends Controller
     {
         $worker = new Worker();
         return $this->render('worker', ['model' => $worker]);
+    }
+
+    public function actionWorkerEdit()
+    {
+        $identity = \Yii::$app->user->identity;
+        $worker = $this->findWorker($identity->id);
+
+        if ($identity) {
+            if ($worker !==null){
+               return $this->render('worker-edit',['worker'=>$worker]);
+            }
+            return $this->redirect('worker-create');
+        }
+    }
+
+    protected function findWorker($id)
+    {
+        if ($worker = User::findOne(['id' => $id])) {
+            return $worker;
+        }
+        return null;
     }
 }

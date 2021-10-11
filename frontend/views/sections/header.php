@@ -27,6 +27,28 @@ use yii\helpers\Html;
             <div class="right-cta-menu text-right d-flex aligin-items-center col-md-5" style="z-index: 1000">
                 <div class="ml-auto d-flex  align-items-center justify-content-center">
                     <div class="m-1">
+                        <?php
+                        if (Yii::$app->user->isGuest) {
+                            $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'options'=>['class'=>'btn btn-outline-warning p-0']];
+                            $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'],'options'=>['class'=>'btn btn-outline-warning p-0']];
+                        } else {
+                            $menuItems[] = '<li>'
+                                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                                . Html::a(Yii::t('app','Cabinet'),'cabinet/index',['class'=>'btn btn-link'])
+
+                                . Html::submitButton(
+                                    'Logout (' . Yii::$app->user->identity->username . ')',
+                                    ['class' => 'btn btn-link logout']
+                                )  . Html::endForm()
+                                . '</li>';
+                        }
+                        echo Nav::widget([
+                            'items' => $menuItems,
+                        ]);
+
+                        ?>
+                    </div>
+                    <div class="m-1">
 
                         <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
                             'itemTemplate' => '<li class="dropdown-item"><a href="{link}"  title="{language}"><i id="{language}"></i> {name}</a></li>',
@@ -38,27 +60,7 @@ use yii\helpers\Html;
 
                     </div>
 
-                    <div class="m-1">
-                       <?php
-                        if (Yii::$app->user->isGuest) {
-                        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'options'=>['class'=>'btn btn-outline-warning p-0']];
-                        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'],'options'=>['class'=>'btn btn-outline-warning p-0']];
-                        } else {
-                        $menuItems[] = '<li>'
-                            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                            . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link logout']
-                            )
-                            . Html::endForm()
-                            . '</li>';
-                        }
-                       echo Nav::widget([
-                           'items' => $menuItems,
-                       ]);
 
-                        ?>
-                    </div>
                 </div>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                             class="icon-menu h3 m-0 p-0 mt-2"></span></a>
