@@ -170,10 +170,14 @@ class SiteController extends Controller
             $user->username = $model->username;
             $user->email = $model->email;
             $user->password = $model->password;
+
+            $user->role = isset($model->director_name)?'company':'worker';
+            
             if ($user = $user->signup()) {
                 $image = UploadedFile::getInstance($model, 'image');
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
+
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
                 } else {
                     Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');

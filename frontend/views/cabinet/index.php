@@ -1,5 +1,4 @@
 <?php
-use barcode\barcode\BarcodeGenerator;
 echo \yii\widgets\DetailView::widget([
     'model' => $company,
     'attributes' => [

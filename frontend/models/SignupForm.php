@@ -14,6 +14,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $role;
 
 
     /**
@@ -30,7 +31,7 @@ class SignupForm extends Model
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'string', 'max' => 255],
+            [['email', 'role'], 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
@@ -45,19 +46,26 @@ class SignupForm extends Model
      */
     public function signup()
     {
+        if ($this->validate()) {
 
-        $user = new User();
-        $user->status =10;
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
-        if($user->save()){
-            return $user;
+            $user = new User();
+            $user->status = 10;
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            if ($user->save() && $this->sendEmail($user)) {
+                $auth = Yii::$app->authManager;
+                $authrole = $auth->getRole($this->role);
+                if (!$auth->getAssignment($this->role, $user->id)) {
+                    $auth->assign($authrole, $user->id);
+                }
+
+                return $user;
+            }
         }
-        return $user->save();
 
+        return null;
     }
 
     /**
@@ -68,14 +76,14 @@ class SignupForm extends Model
     protected function sendEmail($user)
     {
         return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        ->mailer
+        ->compose(
+            ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+            ['user' => $user]
+        )
+        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+        ->setTo($this->email)
+        ->setSubject('Account registration at ' . Yii::$app->name)
+        ->send();
     }
 }
