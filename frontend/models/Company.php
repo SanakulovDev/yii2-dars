@@ -112,4 +112,9 @@ class Company extends \yii\db\ActiveRecord
         ];
     }
 
+    public function qrcode()
+    {
+
+    }
+
 }
