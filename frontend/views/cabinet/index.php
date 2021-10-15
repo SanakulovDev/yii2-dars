@@ -1,23 +1,7 @@
 <?php
-use Da\QrCode\QrCode;
 
-$qrCode = (new QrCode('This is my text'))
-    ->setSize(250)
-    ->setMargin(5)
-    ->useForegroundColor(51, 153, 255);
+Qrcode::png("Hello world","qrcode1.png");
 
-// now we can display the qrcode in many ways
-// saving the result to a file:
-
-$qrCode->writeFile(__DIR__ . '/code.png'); // writer defaults to PNG when none is specified
-
-// display directly to the browser
-header('Content-Type: '.$qrCode->getContentType());
-echo $qrCode->writeString();
-
-// or even as data:uri url
-echo '<img src="' . $qrCode->writeDataUri() . '">';
-?>
 
 echo \yii\widgets\DetailView::widget([
     'model' => $company,
