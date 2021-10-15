@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 
 ?>
@@ -31,33 +30,12 @@ use yii\helpers\Html;
 
     <div class="container">
         <div class="row my-5">
-            <div class="col-md-4" style="text-align: center;">
-                <nav class="navbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Home')?></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','About')?></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Contact')?></a></li>
-                    </ul>
-                </nav>
-                <?php
-                if (!Yii::$app->user->isGuest) {
-                    $menuItems[] = '<li class="nav-item">'
-                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-                        . Html::submitButton(
-                            Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
-                            ['class' => 'nav-item-link btn btn-link logout']
-                        )
-                        . Html::endForm()
-                        . '</li>';
-                }
-                echo Nav::widget([
-                    'items' => $menuItems,
-                ]);
-                ?>
-
-            </div>
+            <?= Yii::$app->controller->renderPartial("/layouts/cabinet-sidebar") ?>
             <div class="col-md-6">
                 <?= $content; ?>
+                <?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success m-2 ']) ?>
+                <?= \yii\helpers\Html::a(Yii::t('app', "Pdf"), '/cabinet/report', ['class' => 'btn btn-warning m-2']) ?>
+                <?= \yii\helpers\Html::a(Yii::t('app', "Excel"), '/', ['class' => 'btn btn-info m-2']) ?>
             </div>
         </div>
 

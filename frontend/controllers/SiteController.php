@@ -3,12 +3,11 @@
 namespace frontend\controllers;
 
 use common\models\Appeals;
+use common\models\City;
 use common\models\Partners;
-use common\models\User;
 use frontend\models\Company;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
-use frontend\models\Worker;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -19,9 +18,8 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
-use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+//use yii2mod\rbac\filters\AccessControl;
 
 /**
  * Site controller
@@ -35,8 +33,9 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'class' => \yii\filters\AccessControl::class,
+
+                'only' => ['logout', 'signup','logout'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -177,7 +176,7 @@ class SiteController extends Controller
                 if ($model->upload($image) && $model->save()) {
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
                 } else {
-                    Yii::$app->session->setFlash('danger', 'Ma`lumotlaringiz muvaffaqqiyatsiz companiya nomidan qo`shilmadi.');
+                    Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');
                 }
             }
             return $this->redirect('/site/login/');
@@ -281,5 +280,15 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+
+    public function actionPerevod(){
+        $model = City::find()->all();
+        foreach ($model as $item){
+            $model2 = City::findOne($item->id);
+            $model2->nameUz = City::cyrllat($item->nameUz);
+            $model2->save();
+        }
     }
 }

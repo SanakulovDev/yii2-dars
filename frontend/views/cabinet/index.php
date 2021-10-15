@@ -1,20 +1,24 @@
-<?php if (Yii::$app->session->hasFlash('success')): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <?= Yii::$app->session->getFlash('success') ?>
-    </div>
-<?php endif; ?>
-<?php if (Yii::$app->session->hasFlash('error')): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <?= Yii::$app->session->getFlash('error') ?>
-    </div>
-<?php endif; ?>
 <?php
+use Da\QrCode\QrCode;
+
+$qrCode = (new QrCode('This is my text'))
+    ->setSize(250)
+    ->setMargin(5)
+    ->useForegroundColor(51, 153, 255);
+
+// now we can display the qrcode in many ways
+// saving the result to a file:
+
+$qrCode->writeFile(__DIR__ . '/code.png'); // writer defaults to PNG when none is specified
+
+// display directly to the browser
+header('Content-Type: '.$qrCode->getContentType());
+echo $qrCode->writeString();
+
+// or even as data:uri url
+echo '<img src="' . $qrCode->writeDataUri() . '">';
+?>
+
 echo \yii\widgets\DetailView::widget([
     'model' => $company,
     'attributes' => [
@@ -43,4 +47,4 @@ echo \yii\widgets\DetailView::widget([
 
 
 ?>
-<?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success']) ?>
+

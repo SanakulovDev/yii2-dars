@@ -18,7 +18,7 @@ $regionList = \common\models\Region::selectList();
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <h2 class="mb-4"><?=Yii::t('app','LoginTitle')?></h2>
+                    <h2 class="mb-4"><?=Yii::t('app','Login')?></h2>
                     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class'=>'p-4 border rounded']]); ?>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
@@ -33,7 +33,7 @@ $regionList = \common\models\Region::selectList();
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                                <?= Html::submitButton(Yii::t('app','Login'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                             </div>
                         </div>
 

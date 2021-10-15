@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use Eddmash\Clipboard\Clipboard;
+
 $this->title = 'My Yii Application';
 ?>
 <section class="site-section py-4">
@@ -14,6 +16,7 @@ $this->title = 'My Yii Application';
                         <h2 class="section-title mb-2">Company We've Helped</h2>
                         <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam
                             fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
+
                     </div>
                 </div>
 

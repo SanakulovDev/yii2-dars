@@ -83,17 +83,17 @@ class Company extends \yii\db\ActiveRecord
 
     public function upload($image)     
     {
-        if ($image) {
+        if ($image !== null) {
             $dir = Yii::getAlias('@frontend')."/web/uploads/company/";
             $image_name = time();
-            $a= 10;
             $image_name .= '.'.$image->extension;
             if ($image->saveAs($dir.$image_name)) {
                 $this->logo = $image_name;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
     public function getRegion()
     {
