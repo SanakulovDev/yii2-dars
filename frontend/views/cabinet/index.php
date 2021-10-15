@@ -1,8 +1,4 @@
 <?php
-
-Qrcode::png("Hello world","qrcode1.png");
-
-
 echo \yii\widgets\DetailView::widget([
     'model' => $company,
     'attributes' => [
