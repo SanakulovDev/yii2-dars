@@ -46,10 +46,9 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if ($this->validate()) {
+
 
             $user = new User();
-            $user->status = 10;
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
@@ -63,7 +62,6 @@ class SignupForm extends Model
 
                 return $user;
             }
-        }
 
         return null;
     }
@@ -81,9 +79,9 @@ class SignupForm extends Model
             ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
             ['user' => $user]
         )
-        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Anvar Sanakulov'])
         ->setTo($this->email)
-        ->setSubject('Account registration at ' . Yii::$app->name)
+        ->setSubject('Xush kelibsiz sizga yangi xabar yuborildi ' . Yii::$app->name)
         ->send();
     }
 }

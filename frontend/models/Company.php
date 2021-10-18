@@ -73,7 +73,7 @@ class Company extends \yii\db\ActiveRecord
             'cityId' => Yii::t('app', 'City ID'),
             'address' => Yii::t('app', 'Address'),
             'phone' => Yii::t('app', 'Phone'),
-            'image' => Yii::t('app', 'image'),
+//            'image' => Yii::t('app', 'image'),
             'status' => Yii::t('app', 'Status'),
             'date' => Yii::t('app', 'Date'),
             'created_At' => Yii::t('app', 'Created  At'),
@@ -85,7 +85,7 @@ class Company extends \yii\db\ActiveRecord
     {
         if ($image !== null) {
             $dir = Yii::getAlias('@frontend')."/web/uploads/company/";
-            $image_name = time();
+            $image_name = $this->name."_".time();
             $image_name .= '.'.$image->extension;
             if ($image->saveAs($dir.$image_name)) {
                 $this->logo = $image_name;

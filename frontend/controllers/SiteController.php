@@ -19,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use yii\web\UploadedFile;
+
 //use yii2mod\rbac\filters\AccessControl;
 
 /**
@@ -35,7 +36,7 @@ class SiteController extends Controller
             'access' => [
                 'class' => \yii\filters\AccessControl::class,
 
-                'only' => ['logout', 'signup','logout'],
+                'only' => ['logout', 'signup', 'logout'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -153,7 +154,20 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionTest()
+    {
+        $user = new SignupForm();
+        $user->username = "Sanakulov1234";
+        $user->email = "emailkerak@gmail.com";
+        $user->password = "12345678";
 
+        if ($user->signup()) {
+            var_dump($user->signup());
+            die();
+        }
+
+        return false;
+    }
 
     /**
      * Signs user up.
@@ -171,19 +185,16 @@ class SiteController extends Controller
             $user->email = $model->email;
             $user->password = $model->password;
 
-            $user->role = isset($model->director_name)?'company':'worker';
-            
+            $user->role = isset($model->director_name) ? 'company' : 'worker';
+
             if ($user = $user->signup()) {
-                $image = UploadedFile::getInstance($model, 'image');
+                $image = UploadedFile::getInstance($model, 'logo');
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
-
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
-                } else {
-                    Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');
                 }
+                return $this->redirect('/site/login/');
             }
-            return $this->redirect('/site/login/');
         }
 
         return $this->render('signup', [
@@ -247,8 +258,7 @@ class SiteController extends Controller
      * @return yii\web\Response
      * @throws BadRequestHttpException
      */
-    public
-    function actionVerifyEmail($token)
+    public function actionVerifyEmail($token)
     {
         try {
             $model = new VerifyEmailForm($token);
@@ -287,12 +297,24 @@ class SiteController extends Controller
     }
 
 
-    public function actionPerevod(){
+    public function actionPerevod()
+    {
         $model = City::find()->all();
-        foreach ($model as $item){
+        foreach ($model as $item) {
             $model2 = City::findOne($item->id);
             $model2->nameUz = City::cyrllat($item->nameUz);
             $model2->save();
         }
     }
+
+//    public function actionCityId()
+//    {
+//        $model = City::find()->all();
+//        foreach ($model as $item) {
+//            $model2 = City::findOne($item->id);
+//            $model2->regionId = City::region($model2->regionId);
+//            $model2->save();
+//
+//        }
+//    }
 }

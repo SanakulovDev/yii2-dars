@@ -11,7 +11,7 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 $regionList = \common\models\Region::selectList();
-$cityList = [];
+$cityList = \common\models\City::selectList($model->regionId);
 ?>
 
 
@@ -95,7 +95,7 @@ $cityList = [];
                                     </div>
                                     <div class="row form-group mb-4">
                                         <div class="col-md-6 mb-3 mb-md-0">
-                                            <?= $form->field($model, 'image')->fileInput() ?>
+                                            <?= $form->field($model, 'logo')->fileInput() ?>
                                         </div>
 
                                         <div class="col-md-6 mb-3 mb-md-0">

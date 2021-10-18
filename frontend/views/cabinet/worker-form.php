@@ -3,7 +3,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 $regionList = \common\models\Region::selectList();
-$cityList = \common\models\City::selectList($worker->regionId  );
+$cityList = \common\models\City::selectList($worker->regionId);
 $nationality = \frontend\models\Nationality::selectList();
 ?>
 

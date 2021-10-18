@@ -32,6 +32,13 @@ class City extends \yii\db\ActiveRecord
 
         return $text;
     }
+    public static function region($regionId)
+    {
+        $regionId = $regionId - 1;
+
+
+        return $regionId;
+    }
 
     /**
      * {@inheritdoc}
@@ -71,4 +78,5 @@ class City extends \yii\db\ActiveRecord
         }
         return ArrayHelper::map(self::find()->where($condition)->all(), 'id', Yii::t('app', $name));
     }
+
 }

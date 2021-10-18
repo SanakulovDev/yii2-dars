@@ -44,21 +44,6 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
-
-
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'sanakulovanvar2001@gmail.com',
-                'password' => 'bstkeevkkvoqgcgt',
-                'port' => '587',
-                'encryption' => 'tls',
-            ],
-        ],
-
-
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
@@ -101,6 +86,22 @@ return [
                 ],
             ],
         ],
+
+
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'port' => '587',
+                'encryption' => 'tls',
+                'username' => 'murodsanakulov52@gmail.com',
+                'password' => 'rtpgjcdygszhsfnq',
+            ],
+        ],
+
+
         'languagepicker' => [
             'class' => 'lajax\languagepicker\Component',
             // List of available languages (icons and text)
