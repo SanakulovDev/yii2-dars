@@ -30,7 +30,6 @@ use yii\helpers\Html;
                         <?php
                         if (Yii::$app->user->isGuest) {
                             $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'options'=>['class'=>'btn btn-outline-warning p-0']];
-                            $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'],'options'=>['class'=>'btn btn-outline-warning p-0']];
                         } else {
                             $menuItems[] = '<li>'
                                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
@@ -57,6 +56,10 @@ use yii\helpers\Html;
                             'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',      // StyleSheets
                             'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',    // JavaScripts
                         ]); ?>
+
+                    </div>
+                    <div class="m-1">
+                        <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
 
                     </div>
 

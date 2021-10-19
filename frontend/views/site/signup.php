@@ -11,7 +11,7 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 $regionList = \common\models\Region::selectList();
-$cityList = \common\models\City::selectList($model->regionId);
+$cityList = [];
 ?>
 
 

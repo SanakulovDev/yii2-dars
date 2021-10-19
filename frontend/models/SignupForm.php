@@ -46,11 +46,10 @@ class SignupForm extends Model
      */
     public function signup()
     {
-
-
             $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
+//            $user->status = 10;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             if ($user->save() && $this->sendEmail($user)) {
@@ -59,8 +58,8 @@ class SignupForm extends Model
                 if (!$auth->getAssignment($this->role, $user->id)) {
                     $auth->assign($authrole, $user->id);
                 }
-
                 return $user;
+
             }
 
         return null;

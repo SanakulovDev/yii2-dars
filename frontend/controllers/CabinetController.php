@@ -56,11 +56,6 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function actionWorker()
-    {
-        $worker = new Worker();
-        return $this->render('worker', ['model' => $worker]);
-    }
 
     public function actionWorkerEdit()
     {
@@ -101,7 +96,7 @@ class CabinetController extends Controller
         if ($worker = Worker::findOne(['userId' => $id])) {
             return $worker;
         }
-        return null;
+        return $worker;
     }
 
 

@@ -7,14 +7,11 @@ class AjaxController extends Controller
 {
     public function actionCity($id)
     {
+//        $cities = City::selectList($id);
         $cities = City::find()->where(['regionId'=> $id])->all();
-        $data ='';
-        $lang = ucfirst(Yii::$app->language);
-        $name = 'name'.$lang;
         foreach ($cities as  $item)
         {
-            $a = $item->name;
-            $data .= "<option value={$item->id}>{}</option>";
+            $data .= "<option value={$item->id}>{$item->nameUz}</option>";
         }
         return $data;
     }
