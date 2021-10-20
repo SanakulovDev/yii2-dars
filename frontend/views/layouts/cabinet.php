@@ -35,7 +35,6 @@ use yii\helpers\Html;
 
             <div class="col-md-8">
                 <?= $content; ?>
-                <?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success m-2 ']) ?>
             </div>
         </div>
 

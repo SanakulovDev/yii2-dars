@@ -11,6 +11,7 @@ use frontend\models\SignupForm;
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Home')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','About')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Contact')?></a></li>
+            <li class="nav-item"><a href="/vacancy/index" class="nav-link"><?= Yii::t('app','View Vacancy')?></a></li>
             <li class="nav-item"><a href="/vacancy/create" class="nav-link"><?= Yii::t('app','Add  Vacancy')?></a></li>
 
         </ul>

@@ -8,14 +8,14 @@ use yii\helpers\Html;
 <header class="site-navbar " style="top: 0;" >
     <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="site-logo col-md-3"><a href="/site/index" class="text-black"><?= Yii::t('app', 'Jobboard') ?></a></div>
+            <div class="site-logo col-md-3"><a href="/site/index" class=""><?= Yii::t('app', 'Jobboard') ?></a></div>
 
 
             <nav class="site-navigation col-md-6 " style="position: relative">
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0 ">
-                    <li><a href="/site/index" class="nav-link text-success active"><?= Yii::t('app', 'Home') ?></a></li>
-                    <li><a href="/site/about" class="nav-link text-success"><?= Yii::t('app', 'About') ?></a></li>
-                    <li><a href="/site/contact" class="nav-link text-success"><?= Yii::t('app', 'Contact') ?></a></li>
+                    <li><a href="/site/index" class="nav-link  active"><?= Yii::t('app', 'Home') ?></a></li>
+                    <li><a href="/site/about" class="nav-link "><?= Yii::t('app', 'About') ?></a></li>
+                    <li><a href="/site/contact" class="nav-link "><?= Yii::t('app', 'Contact') ?></a></li>
                     <li>
                     </li>
                     <li class="d-lg-none"><a href="/site/logout"><?=Yii::t('app','Login')?></a></li>

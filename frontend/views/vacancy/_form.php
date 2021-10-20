@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 
-
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Vacancy */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,6 +15,22 @@ $regionList = \common\models\Region::selectList();
 $cityList = [];
 $genderList = \common\models\Gender::selectList();
 
+
+CKEditor::widget([
+    'editorOptions' => [
+        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+        'inline' => false, //по умолчанию false
+    ]
+]);
+
+//или c ActiveForm
+
+echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
+    'editorOptions' => [
+        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+        'inline' => false, //по умолчанию false
+    ],
+]);
 ?>
 
 <div class="vacancy-form">
@@ -46,22 +61,14 @@ $genderList = \common\models\Gender::selectList();
                     </div>
 
                     <div class="form-group row">
-                        <?= $form->field($model, 'description_uz')->widget(CKEditor::className(),[
-                        'editorOptions' => [
-                        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-                        'inline' => false, //по умолчанию false
-                        ],
-                        ])?>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'description_cyrl')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-12">
+                            <?= $form->field($model, 'description_uz')->widget(CKEditor::className(), [
+                                'editorOptions' => [
+                                    'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                                    'inline' => false, //по умолчанию false
+                                ],
+                            ]) ?>
                         </div>
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'description_ru')->textInput(['maxlength' => true]) ?>
-                        </div>
-
                     </div>
 
 

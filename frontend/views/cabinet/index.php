@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Html;
+
 echo \yii\widgets\DetailView::widget([
     'model' => $company,
     'attributes' => [
@@ -24,7 +27,7 @@ echo \yii\widgets\DetailView::widget([
         ],
     ],
 ]);
-
+ Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success'])
 
 ?>
 

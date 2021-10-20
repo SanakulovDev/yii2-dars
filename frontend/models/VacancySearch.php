@@ -18,7 +18,7 @@ class VacancySearch extends Vacancy
     {
         return [
             [['id', 'company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count_vacancy', 'salary', 'gender', 'views', 'status'], 'integer'],
-            [['description_uz', 'description_ru', 'description_en', 'descrition_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
+            [['description_uz', 'description_ru', 'description_en', 'description_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -78,7 +78,7 @@ class VacancySearch extends Vacancy
         $query->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'description_ru', $this->description_ru])
             ->andFilterWhere(['like', 'description_en', $this->description_en])
-            ->andFilterWhere(['like', 'descrition_cyrl', $this->descrition_cyrl])
+            ->andFilterWhere(['like', 'description_cyrl', $this->description_cyrl])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'experience', $this->experience])
             ->andFilterWhere(['like', 'telegram', $this->telegram])
