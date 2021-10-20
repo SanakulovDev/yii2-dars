@@ -1,7 +1,10 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Vacancy */
@@ -43,12 +46,12 @@ $genderList = \common\models\Gender::selectList();
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'description_uz')->textInput(['maxlength' => true]) ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $form->field($model, 'description_en')->textInput(['maxlength' => true]) ?>
-                        </div>
+                        <?= $form->field($model, 'description_uz')->widget(CKEditor::className(),[
+                        'editorOptions' => [
+                        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                        'inline' => false, //по умолчанию false
+                        ],
+                        ])?>
                     </div>
 
                     <div class="form-group row">
