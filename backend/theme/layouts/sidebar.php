@@ -29,6 +29,9 @@
                     ['label' => "Hamkorlar ro'yxati", 'icon' => 'th', 'url'=>['partners/index']],
                     ['label' => "Tillar ro'yxati", 'icon' => 'th', 'url'=>['lang/index']],
                     ['label' => "Userlar ro'yxati", 'icon' => 'th', 'url'=>['appeals/index']],
+                    ['label' => "Ish vaqti", 'icon' => 'th', 'url'=>['job-type/index']],
+                    ['label' => "Kasblar ro'yxati", 'icon' => 'th', 'url'=>['profession/index']],
+                    ['label' => "Jinslar", 'icon' => 'th', 'url'=>['gender/index']],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                 ],
             ]);

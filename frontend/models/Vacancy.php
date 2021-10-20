@@ -54,10 +54,10 @@ class Vacancy extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'user_id', 'profession_id', 'description_uz', 'description_ru', 'description_en', 'descrition_cyrl', 'region_id', 'city_id', 'image', 'count_vacancy'], 'required'],
+            [['company_id', 'user_id', 'profession_id', 'description_uz', 'description_ru', 'description_en', 'description_cyrl', 'region_id', 'city_id', 'image', 'count_vacancy'], 'required'],
             [['company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count_vacancy', 'salary', 'gender', 'views', 'status'], 'integer'],
             [['deadline', 'created_at', 'updated_at'], 'safe'],
-            [['description_uz', 'description_ru', 'description_en', 'descrition_cyrl'], 'string', 'max' => 255],
+            [['description_uz', 'description_ru', 'description_en', 'description_cyrl'], 'string', 'max' => 255],
             ['image', 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'svg'], 'maxSize' => 1024 * 1024 * 4],
             [['experience'], 'string', 'max' => 250],
             [['telegram'], 'string', 'max' => 70],
@@ -128,5 +128,19 @@ class Vacancy extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+    public function upload($image)
+    {
+        if ($image) {
+            $dir = Yii::getAlias('@frontend')."/web/uploads/vacancy/";
+            $image_name = "vacancy_".time();
+            $image_name .= '.'.$image->extension;
+            if ($image->saveAs($dir.$image_name)) {
+                $this->image = $image_name;
+                return true;
+            }
+        }
+
+        return false;
     }
 }

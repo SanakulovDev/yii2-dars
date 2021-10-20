@@ -101,10 +101,11 @@ class Worker extends \yii\db\ActiveRecord
             $image_name .= '.'.$image->extension;
             if ($image->saveAs($dir.$image_name)) {
                 $this->photo = $image_name;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
 }

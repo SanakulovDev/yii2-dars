@@ -11,6 +11,7 @@ $profession = \common\models\Profession::selectList();
 $jobtype = \common\models\JobType::selectList();
 $regionList = \common\models\Region::selectList();
 $cityList = [];
+$genderList = \common\models\Gender::selectList();
 
 ?>
 
@@ -80,7 +81,7 @@ $cityList = [];
                             <?= $form->field($model, 'salary')->textInput() ?>
                         </div>
                         <div class="col-md-4">
-                            <?= $form->field($model, 'gender')->textInput() ?>
+                            <?= $form->field($model, 'gender')->dropDownList($genderList) ?>
                         </div>
                     </div>
 
@@ -98,7 +99,7 @@ $cityList = [];
                         <div class="col-md-12">
                             <?= $form->field($model, 'experience')->textInput(['maxlength' => true]) ?>
                         </div>
-                    </div><?= $form->field($model, 'deadline')->textInput(['maxlength' => true]) ?>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-md-12">

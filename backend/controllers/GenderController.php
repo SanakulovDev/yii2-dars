@@ -1,17 +1,17 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
-use common\models\JobType;
-use common\models\JobTypeSearch;
+use common\models\Gender;
+use common\models\GenderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * JobTypeController implements the CRUD actions for JobType model.
+ * GenderController implements the CRUD actions for Gender model.
  */
-class JobTypeController extends Controller
+class GenderController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +32,12 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Lists all JobType models.
+     * Lists all Gender models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new JobTypeSearch();
+        $searchModel = new GenderSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +47,7 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Displays a single JobType model.
+     * Displays a single Gender model.
      * @param int $id Id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,13 +60,13 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Creates a new JobType model.
+     * Creates a new Gender model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new JobType();
+        $model = new Gender();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -82,7 +82,7 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Updates an existing JobType model.
+     * Updates an existing Gender model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id Id
      * @return mixed
@@ -102,7 +102,7 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Deletes an existing JobType model.
+     * Deletes an existing Gender model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id Id
      * @return mixed
@@ -116,15 +116,15 @@ class JobTypeController extends Controller
     }
 
     /**
-     * Finds the JobType model based on its primary key value.
+     * Finds the Gender model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id Id
-     * @return JobType the loaded model
+     * @return Gender the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = JobType::findOne($id)) !== null) {
+        if (($model = Gender::findOne($id)) !== null) {
             return $model;
         }
 

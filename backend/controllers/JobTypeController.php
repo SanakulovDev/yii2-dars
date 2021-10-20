@@ -1,21 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
-use frontend\models\Company;
-use frontend\models\Vacancy;
-use frontend\models\VacancySearch;
+use common\models\JobType;
+use common\models\JobTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * VacancyController implements the CRUD actions for Vacancy model.
+ * JobTypeController implements the CRUD actions for JobType model.
  */
-class VacancyController extends Controller
+class JobTypeController extends Controller
 {
-    public  $layout = "cabinet";
     /**
      * @inheritDoc
      */
@@ -35,12 +32,12 @@ class VacancyController extends Controller
     }
 
     /**
-     * Lists all Vacancy models.
+     * Lists all JobType models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new VacancySearch();
+        $searchModel = new JobTypeSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,7 +47,7 @@ class VacancyController extends Controller
     }
 
     /**
-     * Displays a single Vacancy model.
+     * Displays a single JobType model.
      * @param int $id Id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -63,20 +60,16 @@ class VacancyController extends Controller
     }
 
     /**
-     * Creates a new Vacancy model.
+     * Creates a new JobType model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Vacancy();
-        $company = new Company();
+        $model = new JobType();
 
         if ($this->request->isPost) {
-            $image = UploadedFile::getInstance($model, 'image');
-            $model->company_id = $company->id;
-            $model->user_id = $company->userId;
-            if ($model->load($this->request->post()) && $model->upload($image) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -89,7 +82,7 @@ class VacancyController extends Controller
     }
 
     /**
-     * Updates an existing Vacancy model.
+     * Updates an existing JobType model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id Id
      * @return mixed
@@ -109,7 +102,7 @@ class VacancyController extends Controller
     }
 
     /**
-     * Deletes an existing Vacancy model.
+     * Deletes an existing JobType model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id Id
      * @return mixed
@@ -123,15 +116,15 @@ class VacancyController extends Controller
     }
 
     /**
-     * Finds the Vacancy model based on its primary key value.
+     * Finds the JobType model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id Id
-     * @return Vacancy the loaded model
+     * @return JobType the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Vacancy::findOne($id)) !== null) {
+        if (($model = JobType::findOne($id)) !== null) {
             return $model;
         }
 

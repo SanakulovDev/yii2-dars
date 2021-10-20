@@ -62,7 +62,7 @@ class Profession extends \yii\db\ActiveRecord
     }
     public static function selectList() {
         $lang = Yii::$app->language;
-        $name = 'name'.$lang;
+        $name = 'name_'.$lang;
         return ArrayHelper::map(self::find()->all(), 'id', $name);
     }
 }

@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Vacancy */
+/* @var $model common\models\Gender */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Vacancies'), 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Genders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="vacancy-view">
+<div class="gender-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,28 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'company_id',
-            'user_id',
-            'profession_id',
-            'description_uz',
-            'description_ru',
-            'description_en',
-            'description_cyrl',
-            'job_type_id',
-            'region_id',
-            'city_id',
-            'image',
-            'count_vacancy',
-            'salary',
-            'gender',
-            'experience',
-            'telegram',
-            'address',
-            'views',
-            'status',
-            'deadline',
-            'created_at',
-            'updated_at',
+            'name',
+            'name_ru',
+            'name_en',
+            'name_cyrl',
         ],
     ]) ?>
 
