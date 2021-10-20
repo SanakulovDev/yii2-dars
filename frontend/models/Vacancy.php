@@ -2,8 +2,11 @@
 
 namespace frontend\models;
 
+use common\models\City;
+use common\models\Gender;
 use common\models\JobType;
 use common\models\Profession;
+use common\models\Region;
 use common\models\User;
 use Yii;
 
@@ -109,6 +112,10 @@ class Vacancy extends \yii\db\ActiveRecord
     {
         return $this->hasOne(JobType::className(), ['id' => 'job_type_id']);
     }
+    public function getGender()
+    {
+        return $this->hasOne(Gender::className(), ['id' => 'gender']);
+    }
 
     /**
      * Gets query for [[Profession]].
@@ -118,6 +125,10 @@ class Vacancy extends \yii\db\ActiveRecord
     public function getProfession()
     {
         return $this->hasOne(Profession::className(), ['id' => 'profession_id']);
+    }
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['id' => 'company_id']);
     }
 
     /**
@@ -129,6 +140,15 @@ class Vacancy extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    public function getRegion()
+    {
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
+    }
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
     public function upload($image)
     {
         if ($image) {

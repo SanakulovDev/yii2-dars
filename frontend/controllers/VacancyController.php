@@ -69,9 +69,11 @@ class VacancyController extends Controller
      */
     public function actionCreate()
     {
+        $identity = \Yii::$app->user->identity;
         $model = new Vacancy();
-        $company = new Company();
-
+        $company =  $this->findCompany($identity->id);
+//        var_dump($company);
+//        die();
         if ($this->request->isPost) {
             $image = UploadedFile::getInstance($model, 'image');
             $model->company_id = $company->id;
@@ -87,7 +89,13 @@ class VacancyController extends Controller
             'model' => $model,
         ]);
     }
-
+    protected function findCompany($id)
+    {
+        if ($company = Company::findOne(['userId' => $id])) {
+            return $company;
+        }
+        return $company;
+    }
     /**
      * Updates an existing Vacancy model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -98,8 +106,8 @@ class VacancyController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $image = UploadedFile::getInstance($model, 'image');
+        if ($this->request->isPost && $model->load($this->request->post()) &&$model->upload($image) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

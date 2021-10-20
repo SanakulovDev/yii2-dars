@@ -2,6 +2,7 @@
 
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
+use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 
@@ -16,21 +17,6 @@ $cityList = [];
 $genderList = \common\models\Gender::selectList();
 
 
-CKEditor::widget([
-    'editorOptions' => [
-        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-        'inline' => false, //по умолчанию false
-    ]
-]);
-
-//или c ActiveForm
-
-echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
-    'editorOptions' => [
-        'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-        'inline' => false, //по умолчанию false
-    ],
-]);
 ?>
 
 <div class="vacancy-form">
@@ -46,10 +32,10 @@ echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype) ?>
+                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => 'Ish turini tanlang']) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'profession_id')->dropDownList($profession) ?>
+                            <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt' => 'Kasbingizni tanlang']) ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -62,22 +48,28 @@ echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
 
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <?= $form->field($model, 'description_uz')->widget(CKEditor::className(), [
-                                'editorOptions' => [
-                                    'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-                                    'inline' => false, //по умолчанию false
-                                ],
-                            ]) ?>
+                            <?= $form->field($model, 'description_uz')->textInput() ?>
+                        </div>
+                        <div class="col-md-12">
+                            <?= $form->field($model, 'description_en')->textInput() ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <?= $form->field($model, 'description_cyrl')->textInput() ?>
+                        </div>
+                        <div class="col-md-12">
+                            <?= $form->field($model, 'description_ru')->textInput() ?>
                         </div>
                     </div>
 
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'region_id')->dropDownList($regionList) ?>
+                            <?= $form->field($model, 'region_id')->dropDownList($regionList,['prompt' => 'Viloyatni tanlang']) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'city_id')->dropDownList($cityList) ?>
+                            <?= $form->field($model, 'city_id')->dropDownList($cityList,['prompt' => 'Shaharni tanlang']) ?>
                         </div>
 
                     </div>
@@ -101,8 +93,10 @@ echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
                             <?= $form->field($model, 'telegram')->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="col-md-12">
-                            <?= $form->field($model, 'deadline')->textInput(['maxlength' => true]) ?>
-
+                            <?= $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
+                                //'language' => 'ru',
+                                //'dateFormat' => 'yyyy-MM-dd',
+                            ]) ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -129,3 +123,4 @@ echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
 
 
 </div>
+

@@ -30,20 +30,52 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'company_id',
-            'user_id',
-            'profession_id',
+            [
+                'attribute'=>'company_id',
+                'label'=>Yii::t('app','User Id'),
+                'value'=>$model->company->name
+            ],
+            [
+                    'attribute'=>'user_id',
+                    'label'=>Yii::t('app','User Id'),
+                    'value'=>$model->user->username
+            ],
+            [
+                'attribute' => 'profession_id',
+                'label' => Yii::t('app', 'Profession Id'),
+                'value' => $model->profession->name_en
+            ],
             'description_uz',
             'description_ru',
             'description_en',
             'description_cyrl',
-            'job_type_id',
-            'region_id',
-            'city_id',
-            'image',
+            [
+                'attribute' => 'job_type_id',
+                'label' => Yii::t('app', 'Job type'),
+                'value' => $model->jobType->name_en
+            ],
+            [
+                'attribute' => 'region_id',
+                'label' => Yii::t('app', 'Region'),
+                'value' => $model->region->nameEn
+            ],
+            [
+                'attribute' => 'city_id',
+                'label' => Yii::t('app', 'City / District'),
+                'value' => $model->city->nameEn
+            ],
+            [
+                'attribute' => 'image',
+                'value' => '@web/uploads/vacancy/' . $model->image,
+                'format' => ['image', ['width' => '150', 'height' => '150']]
+            ],
             'count_vacancy',
             'salary',
-            'gender',
+            [
+                'attribute' => 'gender',
+                'label' => Yii::t('app', 'Gender'),
+                'value' => $model->gender->name_en
+            ],
             'experience',
             'telegram',
             'address',
