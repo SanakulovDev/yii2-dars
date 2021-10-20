@@ -2,6 +2,7 @@
 
 use yii\bootstrap4\Nav;
 use yii\helpers\Html;
+use frontend\models\SignupForm;
 
 ?>
 <div class="col-md-4" style="text-align: center;">
@@ -10,6 +11,8 @@ use yii\helpers\Html;
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Home')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','About')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Contact')?></a></li>
+            <li class="nav-item"><a href="/vacancy/create" class="nav-link"><?= Yii::t('app','Add  Vacancy')?></a></li>
+
         </ul>
     </nav>
     <?php

@@ -15,8 +15,6 @@ use yii\helpers\Html;
                 <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0 ">
                     <li><a href="/site/index" class="nav-link text-success active"><?= Yii::t('app', 'Home') ?></a></li>
                     <li><a href="/site/about" class="nav-link text-success"><?= Yii::t('app', 'About') ?></a></li>
-
-                    <li><a href="blog.html" class="nav-link text-success"><?= Yii::t('app', 'Blog') ?></a></li>
                     <li><a href="/site/contact" class="nav-link text-success"><?= Yii::t('app', 'Contact') ?></a></li>
                     <li>
                     </li>
@@ -26,6 +24,10 @@ use yii\helpers\Html;
 
             <div class="right-cta-menu text-right d-flex aligin-items-center col-md-5" style="z-index: 1000">
                 <div class="ml-auto d-flex  align-items-center justify-content-center">
+                    <div class="m-1">
+                        <a href="/vacancy/create" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
+
+                    </div>
                     <div class="m-1">
                         <?php
                         if (Yii::$app->user->isGuest) {
@@ -58,10 +60,7 @@ use yii\helpers\Html;
                         ]); ?>
 
                     </div>
-                    <div class="m-1">
-                        <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
 
-                    </div>
 
 
                 </div>

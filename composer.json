@@ -38,6 +38,8 @@
         }
     ],
     "require": {
+        "hail812/yii2-adminlte3": "~1.1",
+        "yiisoft/yii2-bootstrap" : "*",
         "yiisoft/yii2-bootstrap4": "^2.0",
         "2amigos/qrcode-library": "~1.1",
         "kartik-v/yii2-widget-datepicker": "@dev",

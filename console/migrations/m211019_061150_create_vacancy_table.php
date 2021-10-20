@@ -19,13 +19,13 @@ class m211019_061150_create_vacancy_table extends Migration
     {
         $this->createTable('{{%vacancy}}', [
             'id' => $this->primaryKey(),
-            'company_id' => $this->integer()->notNullforeignKey(company),
+            'company_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
             'profession_id' => $this->integer()->notNull(),
             'description_uz' => $this->string()->notNull(),
             'description_ru' => $this->string()->notNull(),
             'description_en' => $this->string()->notNull(),
-            'descrition_cyrl' => $this->string()->notNull(),
+            'description_cyrl' => $this->string()->notNull(),
             'job_type_id' => $this->integer()->defaultValue(0),
             'region_id' => $this->integer()->notNull(),
             'city_id' => $this->integer()->notNull(),
@@ -33,7 +33,6 @@ class m211019_061150_create_vacancy_table extends Migration
             'count_vacancy' => $this->integer()->notNull(),
             'salary' => $this->integer(),
             'gender' => $this->integer(),
-            'experience' => $this->integer()->defalultValue(Null),
             'experience' => $this->string(250)->defaultValue(Null),
             'telegram' => $this->string(70),
             'address' => $this->string(150),
