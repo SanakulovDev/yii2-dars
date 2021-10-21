@@ -53,4 +53,3 @@ $('#vacancy-region_id').change(function(){
         }
     });
 });
-$("#worker-phone").mask("+/9/98-99-999-9999");

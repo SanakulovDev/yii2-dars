@@ -1,6 +1,5 @@
 <?php
 
-use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
@@ -93,10 +92,7 @@ $genderList = \common\models\Gender::selectList();
                             <?= $form->field($model, 'telegram')->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="col-md-12">
-                            <?= $form->field($model, 'deadline')->widget(\yii\jui\DatePicker::classname(), [
-                                //'language' => 'ru',
-                                //'dateFormat' => 'yyyy-MM-dd',
-                            ]) ?>
+                            <?= $form->field($model,'deadline')->textInput(['placeholder'=>'yyyy-mm-dd'])   ?>
                         </div>
                     </div>
                     <div class="form-group row">
