@@ -7,6 +7,7 @@ use common\models\City;
 use common\models\Partners;
 use frontend\models\Company;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\Vacancy;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -18,8 +19,8 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
-//use yii2mod\rbac\filters\AccessControl;
 
 /**
  * Site controller
@@ -287,12 +288,29 @@ class SiteController extends Controller
     }
 
 
-    public function actionPerevod(){
-        $model = City::find()->all();
-        foreach ($model as $item){
-            $model2 = City::findOne($item->id);
-            $model2->nameUz = City::cyrllat($item->nameUz);
-            $model2->save();
-        }
+//    public function actionPerevod(){
+//        $model = City::find()->all();
+//        foreach ($model as $item){
+//            $model2 = City::findOne($item->id);
+//            $model2->nameUz = City::cyrllat($item->nameUz);
+//            $model2->save();
+//        }
+//    }
+
+    public function actionVacancyViews($id)
+    {
+        return $this->render('vacancy-views', [
+            'vacancy' =>$this->findModel($id) ,
+        ]);
+    }
+
+
+    public function actionVacancyViewAll()
+    {
+        $vacancy = Vacancy::find()->orderBy('user_id')->all();
+
+        return $this->render('vacancy-view-all', [
+            'vacancy' => $vacancy,
+        ]);
     }
 }

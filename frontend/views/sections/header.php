@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <header class="site-navbar " style="top: 0;" >
     <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="site-logo col-md-3"><a href="/site/index" class=""><?= Yii::t('app', 'Jobboard') ?></a></div>
+            <div class="site-logo col-md-3"><a href="/site/index" ><?= Yii::t('app', 'Jobboard') ?></a></div>
 
 
             <nav class="site-navigation col-md-6 " style="position: relative">
@@ -16,8 +16,7 @@ use yii\helpers\Html;
                     <li><a href="/site/index" class="nav-link  active"><?= Yii::t('app', 'Home') ?></a></li>
                     <li><a href="/site/about" class="nav-link "><?= Yii::t('app', 'About') ?></a></li>
                     <li><a href="/site/contact" class="nav-link "><?= Yii::t('app', 'Contact') ?></a></li>
-                    <li>
-                    </li>
+                    <li><a href="/vacany/vacancy-view-all" class="nav-link "><?= Yii::t('app', 'Contact') ?></a></li>
                     <li class="d-lg-none"><a href="/site/logout"><?=Yii::t('app','Login')?></a></li>
                 </ul>
             </nav>

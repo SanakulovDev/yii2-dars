@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\models\Company;
 use frontend\models\Vacancy;
 use frontend\models\VacancySearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -115,6 +116,7 @@ class VacancyController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Deletes an existing Vacancy model.
