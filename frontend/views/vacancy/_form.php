@@ -83,7 +83,6 @@ $genderList = \common\models\Gender::selectList();
                             <div class="tab-pane fade show active" id="descuz" role="tabpanel" aria-labelledby="descuz-tab">
                                 <?php echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
                                     'editorOptions' => [
-//                            'preset' => 'full',
                                         'inline' => false,
 
                                     ],
@@ -93,7 +92,6 @@ $genderList = \common\models\Gender::selectList();
                             <div class="tab-pane fade" id="descen" role="tabpanel" aria-labelledby="descen-tab">
                                 <?php echo $form->field($model, 'description_en')->widget(CKEditor::className(),[
                                     'editorOptions' => [
-//                            'preset' => 'full',
                                         'inline' => false,
 
                                     ],
@@ -103,7 +101,6 @@ $genderList = \common\models\Gender::selectList();
                             <div class="tab-pane fade" id="descru" role="tabpanel" aria-labelledby="descru-tab">
                                 <?php echo $form->field($model, 'description_ru')->widget(CKEditor::className(),[
                                     'editorOptions' => [
-//                            'preset' => 'full',
                                         'inline' => false,
 
                                     ],
@@ -113,7 +110,6 @@ $genderList = \common\models\Gender::selectList();
                             <div class="tab-pane fade" id="desccyrl" role="tabpanel" aria-labelledby="desccyrl-tab">
                                 <?php echo $form->field($model, 'description_cyrl')->widget(CKEditor::className(),[
                                     'editorOptions' => [
-//                            'preset' => 'full',
                                         'inline' => false,
 
                                     ],
@@ -156,9 +152,6 @@ $genderList = \common\models\Gender::selectList();
                         <div class="col-md-6">
                             <?= $form->field($model, 'telegram')->textInput(['maxlength' => true]) ?>
                         </div>
-<!--                        <div class="col-md-12">-->
-<!--                            --><?//= $form->field($model,'deadline')->textInput(['placeholder'=>'yyyy-mm-dd'])   ?>
-<!--                        </div>-->
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12">

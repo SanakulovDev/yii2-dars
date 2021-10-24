@@ -6,6 +6,7 @@ use yii\helpers\Html;
 <section class="site-section">
     <div class="container">
         <div class="row align-items-center mb-5">
+
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="d-flex align-items-center">
                     <div class=" p-2 d-inline-block mr-3 " style="width: 150px">
@@ -28,11 +29,12 @@ use yii\helpers\Html;
             <div class="col-lg-4">
                 <div class="row">
                     <div class="col-6">
-                        <a href="#" class="btn btn-block btn-light btn-md"><span
-                                    class="icon-heart-o mr-2 text-danger"></span><?= Yii::t('app', 'Save Job') ?></a>
+                        <a href="#" class="btn btn-block btn-light btn-md">
+                            <span class="icon-heart-o mr-2 text-danger"></span>
+                            <?= Yii::t('app', 'Save Job') ?></a>
                     </div>
                     <div class="col-6">
-                        <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                        <?=Html::a(Yii::t('app','Apply now'),['apply-vacancy', 'id' => $vacancy->id],['class'=>'btn btn-block btn-primary btn-md'])?>
                     </div>
                 </div>
             </div>
@@ -81,7 +83,7 @@ use yii\helpers\Html;
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
-                        <a href="https://telegram.org/<?=$vacancy->telegram?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-telegram"></span></a>
+                        <a href="https://telegram.me/<?=str_replace('@','',$vacancy->telegram)?>" target="_blanks" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-telegram"></span></a>
                     </div>
                 </div>
 

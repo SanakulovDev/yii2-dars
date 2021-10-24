@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Appeals;
 use common\models\City;
 use common\models\Partners;
+use frontend\models\ApplyVacancy;
 use frontend\models\Company;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
@@ -177,7 +178,6 @@ class SiteController extends Controller
                 $image = UploadedFile::getInstance($model, 'image');
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
-
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
                 } else {
                     Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');
@@ -303,8 +303,9 @@ class SiteController extends Controller
         if ($vacan->save())
             return $this->render('vacancy-views', [
                 'vacancy' => $this->findModel($id),
-                'vacancyx'=>$this->findVacancyx($vacan->profession_id)
+                'vacancyx' => $this->findVacancyx($vacan->profession_id)
             ]);
+        return $this->redirect('vacancy-view-all');
     }
 
 
@@ -317,11 +318,30 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionApplyVacancy()
+    public function actionApplyVacancy($id)
     {
+            $apply_vacancy = new ApplyVacancy();
+            $image = UploadedFile::getInstance($apply_vacancy, 'rezume');
+            $apply_vacancy->company_id = $this->findModel($id)->company_id;
+            $apply_vacancy->vacancy_id = $this->findModel($id)->id;
+            if ($apply_vacancy->upload($image) && $apply_vacancy->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', "Xabaringiz jo'natildi tez orada sizga aloqaga chiqamiz"));
+                return $this->redirect(['vacancy-views', 'id' => $id]);
+            } else {
+                Yii::$app->session->setFlash('danger', Yii::t('app', "Xabaringiz jo'natilmadi. Qaytadan urinib ko'ring"));
+            }
+            return $this->render('apply-vacancy', [
+                'apply_vacancy' => $apply_vacancy
+            ]);
 
     }
-
+    protected function findApplyVacancy($id)
+    {
+        if (($apply_vacancy = ApplyVacancy::findOne(['id' => $id])) !== null) {
+            return $apply_vacancy;
+        }
+        return false;
+    }
     protected function findModel($id)
     {
         if (($vacancy = Vacancy::findOne(['id' => $id])) !== null) {
@@ -329,6 +349,8 @@ class SiteController extends Controller
         }
         return false;
     }
+
+
     protected function findVacancyx($profession_id)
     {
         if (($vacancyx = Vacancy::findAll(['profession_id' => $profession_id])) !== null) {

@@ -1,7 +1,8 @@
 <?php
 
 namespace frontend\models;
-
+use frontend\models\Company;
+use frontend\models\Vacancy;
 use Yii;
 
 /**
@@ -35,10 +36,11 @@ class ApplyVacancy extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vacancy_id', 'company_id', 'firstname', 'lastname', 'email', 'rezume'], 'required'],
+            [['firstname', 'lastname', 'email', 'rezume','purpose'], 'required'],
             [['vacancy_id', 'company_id'], 'integer'],
             [['purpose'], 'string'],
-            [['firstname', 'lastname', 'email', 'rezume'], 'string', 'max' => 255],
+            [['rezume'],'file','extensions' => ['pdf', 'docx', 'rar', 'doc','jpeg','jpg','png'], 'maxSize' => 1024 * 1024 * 4],
+            [['firstname', 'lastname', 'email', 'rezume', ], 'string','min'=>'1', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             [['vacancy_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vacancy::className(), 'targetAttribute' => ['vacancy_id' => 'id']],
         ];
@@ -61,6 +63,20 @@ class ApplyVacancy extends \yii\db\ActiveRecord
         ];
     }
 
+    public function upload($image)
+    {
+        if ($image) {
+            $dir = Yii::getAlias('@frontend')."/web/uploads/apply/";
+            $image_name = "apply_vacancy_".time();
+            $image_name .= '.'.$image->extension;
+            if ($image->saveAs($dir.$image_name)) {
+                $this->rezume = $image_name;
+                return true;
+            }
+        }
+
+        return false;
+    }
     /**
      * Gets query for [[Company]].
      *
