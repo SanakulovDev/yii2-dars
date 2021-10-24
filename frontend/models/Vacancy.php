@@ -51,6 +51,8 @@ class Vacancy extends \yii\db\ActiveRecord
         return 'vacancy';
     }
 
+
+
     /**
      * {@inheritdoc}
      */
@@ -123,7 +125,7 @@ class Vacancy extends \yii\db\ActiveRecord
     {
         return $this->hasOne(JobType::className(), ['id' => 'job_type_id']);
     }
-    public function getGender()
+    public function getGenders()
     {
         return $this->hasOne(Gender::className(), ['id' => 'gender']);
     }

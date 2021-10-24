@@ -73,8 +73,6 @@ class VacancyController extends Controller
         $identity = \Yii::$app->user->identity;
         $model = new Vacancy();
         $company =  $this->findCompany($identity->id);
-//        var_dump($company);
-//        die();
         if ($this->request->isPost) {
             $image = UploadedFile::getInstance($model, 'image');
             $model->company_id = $company->id;

@@ -3,7 +3,9 @@
 use yii\bootstrap4\Nav;
 use yii\helpers\Html;
 use frontend\models\SignupForm;
-
+/*
+ * $company  frontend/models/Company
+ */
 ?>
 <div class="col-md-4" style="text-align: center;">
     <nav class="navbar">
@@ -11,7 +13,10 @@ use frontend\models\SignupForm;
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Home')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','About')?></a></li>
             <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Contact')?></a></li>
+            <li class="nav-item"><?=Html::a(Yii::t('app','Update Company'),'edit',['class'=>'nav-link'])?></li>
+            <li class="nav-item"><?=Html::a(Yii::t('app','Update Worker'),'edit-worker',['class'=>'nav-link'])?></li>
             <li class="nav-item"><a href="/vacancy/index" class="nav-link"><?= Yii::t('app','View Vacancy')?></a></li>
+
             <li class="nav-item"><a href="/vacancy/create" class="nav-link"><?= Yii::t('app','Add  Vacancy')?></a></li>
 
         </ul>

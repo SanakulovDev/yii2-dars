@@ -44,7 +44,7 @@
         "2amigos/qrcode-library": "~1.1",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "phpoffice/phpspreadsheet": "^1.18",
-        "kartik-v/yii2-widget-select2": "dev-master",
+        "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-grid": "dev-master",
         "lajax/yii2-language-picker": "^1.2",
         "yii2mod/yii2-google-maps-markers": "*",

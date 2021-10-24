@@ -12,6 +12,8 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css",
+        'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
         "/jobboard/css/custom-bs.css",
         "/jobboard/css/jquery.fancybox.min.css",
         "/jobboard/css/bootstrap-select.min.css",
@@ -20,10 +22,10 @@ class AppAsset extends AssetBundle
         "/jobboard/css/owl.carousel.min.css",
         "/jobboard/css/animate.min.css",
         "/jobboard/css/style.css",
-        'frontend/web/css/site.css',
-
+        "css/header.css"
     ];
     public $js = [
+        "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js",
         "/jobboard/js/jquery.min.js",
         "/jobboard/js/bootstrap.bundle.min.js",
         "/jobboard/js/isotope.pkgd.min.js",
@@ -38,7 +40,7 @@ class AppAsset extends AssetBundle
         "/jobboard/js/bootstrap-select.min.js",
 
         "/jobboard/js/custom.js",
-        '/frontend/web/js/main.js',
+        'js/main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

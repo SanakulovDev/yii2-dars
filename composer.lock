@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dad464856f3f410d82cf1d2d3ca5adf",
+    "content-hash": "3afd67b32ad51120926ca1fd804ffbd4",
     "packages": [
         {
             "name": "2amigos/qrcode-library",
@@ -216,7 +216,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -1028,12 +1028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "98257627814abf52aa8c1e6dc020d8eb6c1c39b5"
+                "reference": "b0740f790f501def72c4988f46a137e1165a8fa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/98257627814abf52aa8c1e6dc020d8eb6c1c39b5",
-                "reference": "98257627814abf52aa8c1e6dc020d8eb6c1c39b5",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/b0740f790f501def72c4988f46a137e1165a8fa5",
+                "reference": "b0740f790f501def72c4988f46a137e1165a8fa5",
                 "shasum": ""
             },
             "require": {
@@ -1079,7 +1079,7 @@
                 "issues": "https://github.com/kartik-v/yii2-widget-datepicker/issues",
                 "source": "https://github.com/kartik-v/yii2-widget-datepicker/tree/master"
             },
-            "time": "2020-12-29T09:25:58+00:00"
+            "time": "2021-10-22T02:22:21+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -5854,7 +5854,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-11-30T07:30:19+00:00"
         },
         {

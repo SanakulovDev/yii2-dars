@@ -17,7 +17,7 @@ use yii\helpers\Html;
         <ul class="job-listings mb-5">
             <?php foreach ($vacancy as $key => $item): ?>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <?= Html::a(Yii::t('app', ''), ['vacancy-views', 'id' => $vacancy->id]) ?>
+                    <?= Html::a(Yii::t('app', ''), ['vacancy-views', 'id' => $item->id]) ?>
                     <div class="job-listing-logo">
                         <img src="/uploads/vacancy/<?=$item->image?>" alt="Image" class="img-fluid">
                     </div>
@@ -26,6 +26,9 @@ use yii\helpers\Html;
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
                             <h2><?=$item->profession->name_en?></h2>
                             <strong><?=$item->company->name?></strong>
+                            <br>
+                            <i class="far fa-eye"></i>
+                            <strong><?=$item->views?></strong>
                         </div>
                         <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                             <span class="icon-room"></span> <?=$item->address?>

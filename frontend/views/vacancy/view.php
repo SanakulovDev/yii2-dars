@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Vacancies'), 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="vacancy-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -25,24 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             [
                 'attribute'=>'company_id',
-                'label'=>Yii::t('app','User Id'),
+                'label'=>Yii::t('app','Company name'),
                 'value'=>$model->company->name
             ],
             [
                     'attribute'=>'user_id',
-                    'label'=>Yii::t('app','User Id'),
+                    'label'=>Yii::t('app','User name'),
                     'value'=>$model->user->username
             ],
             [
                 'attribute' => 'profession_id',
-                'label' => Yii::t('app', 'Profession Id'),
+                'label' => Yii::t('app', 'Profession name'),
                 'value' => $model->profession->name_en
             ],
             'description_uz',
@@ -57,12 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'region_id',
                 'label' => Yii::t('app', 'Region'),
-                'value' => $model->region->nameEn
+                'value' => $model->region->nameUz
             ],
             [
                 'attribute' => 'city_id',
                 'label' => Yii::t('app', 'City / District'),
-                'value' => $model->city->nameEn
+                'value' => $model->city->nameUz
             ],
             [
                 'attribute' => 'image',
@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'gender',
                 'label' => Yii::t('app', 'Gender'),
-                'value' => $model->gender->name_en
+                'value' => $model->genders->name_en
             ],
             'experience',
             'telegram',
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'deadline',
             'created_at',
-            'updated_at',
+
         ],
     ]) ?>
 

@@ -36,7 +36,7 @@ class SiteController extends Controller
             'access' => [
                 'class' => \yii\filters\AccessControl::class,
 
-                'only' => ['logout', 'signup','logout'],
+                'only' => ['logout', 'signup', 'logout'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -155,7 +155,6 @@ class SiteController extends Controller
     }
 
 
-
     /**
      * Signs user up.
      *
@@ -172,7 +171,7 @@ class SiteController extends Controller
             $user->email = $model->email;
             $user->password = $model->password;
 
-            $user->role = isset($model->director_name)?'company':'worker';
+            $user->role = isset($model->director_name) ? 'company' : 'worker';
 
             if ($user = $user->signup()) {
                 $image = UploadedFile::getInstance($model, 'image');
@@ -299,9 +298,13 @@ class SiteController extends Controller
 
     public function actionVacancyViews($id)
     {
-        return $this->render('vacancy-views', [
-            'vacancy' =>$this->findModel($id) ,
-        ]);
+        $vacan = $this->findModel($id);
+        $vacan->views++;
+        if ($vacan->save())
+            return $this->render('vacancy-views', [
+                'vacancy' => $this->findModel($id),
+                'vacancyx'=>$this->findVacancyx($vacan->profession_id)
+            ]);
     }
 
 
@@ -312,5 +315,25 @@ class SiteController extends Controller
         return $this->render('vacancy-view-all', [
             'vacancy' => $vacancy,
         ]);
+    }
+
+    public function actionApplyVacancy()
+    {
+
+    }
+
+    protected function findModel($id)
+    {
+        if (($vacancy = Vacancy::findOne(['id' => $id])) !== null) {
+            return $vacancy;
+        }
+        return false;
+    }
+    protected function findVacancyx($profession_id)
+    {
+        if (($vacancyx = Vacancy::findAll(['profession_id' => $profession_id])) !== null) {
+            return $vacancyx;
+        }
+        return false;
     }
 }

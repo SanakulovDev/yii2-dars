@@ -1,5 +1,7 @@
 <?php
 
+use kartik\select2\Select2;
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
@@ -18,6 +20,11 @@ $genderList = \common\models\Gender::selectList();
 
 ?>
 
+<style>
+    #vacancy-profession_id{
+        visibility: visible!important;
+    }
+</style>
 <div class="vacancy-form">
 
 
@@ -34,7 +41,7 @@ $genderList = \common\models\Gender::selectList();
                             <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => 'Ish turini tanlang']) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt' => 'Kasbingizni tanlang']) ?>
+                            <?= $form->field($model, 'profession_id')->dropDownList($profession, ['prompt' => 'Kasb turini tanlang']) ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -46,21 +53,79 @@ $genderList = \common\models\Gender::selectList();
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-12">
-                            <?= $form->field($model, 'description_uz')->textInput() ?>
+
+
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="descuz-tab" data-toggle="tab" href="#descuz" role="tab" aria-controls="descuz" aria-selected="true">
+                                    <?=Yii::t('app','Description_uz')?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="descen-tab" data-toggle="tab" href="#descen" role="tab" aria-controls="descen" aria-selected="false">
+                                    <?=Yii::t('app','Description_en')?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="descru-tab" data-toggle="tab" href="#descru" role="tab" aria-controls="descru" aria-selected="false">
+                                    <?=Yii::t('app','Description_ru')?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="desccyrl-tab" data-toggle="tab" href="#desccyrl" role="tab" aria-controls="desccyrl" aria-selected="false">
+                                    <?=Yii::t('app','Description_cyrl')?>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="descuz" role="tabpanel" aria-labelledby="descuz-tab">
+                                <?php echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
+                                    'editorOptions' => [
+//                            'preset' => 'full',
+                                        'inline' => false,
+
+                                    ],
+                                ]);
+                                ?>
+                            </div>
+                            <div class="tab-pane fade" id="descen" role="tabpanel" aria-labelledby="descen-tab">
+                                <?php echo $form->field($model, 'description_en')->widget(CKEditor::className(),[
+                                    'editorOptions' => [
+//                            'preset' => 'full',
+                                        'inline' => false,
+
+                                    ],
+                                ]);
+                                ?>
+                            </div>
+                            <div class="tab-pane fade" id="descru" role="tabpanel" aria-labelledby="descru-tab">
+                                <?php echo $form->field($model, 'description_ru')->widget(CKEditor::className(),[
+                                    'editorOptions' => [
+//                            'preset' => 'full',
+                                        'inline' => false,
+
+                                    ],
+                                ]);
+                                ?>
+                            </div>
+                            <div class="tab-pane fade" id="desccyrl" role="tabpanel" aria-labelledby="desccyrl-tab">
+                                <?php echo $form->field($model, 'description_cyrl')->widget(CKEditor::className(),[
+                                    'editorOptions' => [
+//                            'preset' => 'full',
+                                        'inline' => false,
+
+                                    ],
+                                ]);
+                                ?>
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <?= $form->field($model, 'description_en')->textInput() ?>
-                        </div>
+
+
+
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <?= $form->field($model, 'description_cyrl')->textInput() ?>
-                        </div>
-                        <div class="col-md-12">
-                            <?= $form->field($model, 'description_ru')->textInput() ?>
-                        </div>
-                    </div>
+
 
 
                     <div class="form-group row">
@@ -91,9 +156,9 @@ $genderList = \common\models\Gender::selectList();
                         <div class="col-md-6">
                             <?= $form->field($model, 'telegram')->textInput(['maxlength' => true]) ?>
                         </div>
-                        <div class="col-md-12">
-                            <?= $form->field($model,'deadline')->textInput(['placeholder'=>'yyyy-mm-dd'])   ?>
-                        </div>
+<!--                        <div class="col-md-12">-->
+<!--                            --><?//= $form->field($model,'deadline')->textInput(['placeholder'=>'yyyy-mm-dd'])   ?>
+<!--                        </div>-->
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12">
@@ -119,4 +184,5 @@ $genderList = \common\models\Gender::selectList();
 
 
 </div>
+
 

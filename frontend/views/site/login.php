@@ -30,7 +30,11 @@ $regionList = \common\models\Region::selectList();
                                 <?= $form->field($model, 'password')->passwordInput() ?>
                             </div>
                         </div>
-
+                        <span>
+                            <p style="font-style: italic">Siz hali ham ro'yxatdan o'tmadingizmi
+                            <a href="/site/signup"><?= Yii::t('app', "Ro'yxatdan o'tish");?></a>
+                            </p>
+                        </span>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <?= Html::submitButton(Yii::t('app','Login'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

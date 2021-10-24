@@ -53,3 +53,4 @@ $('#vacancy-region_id').change(function(){
         }
     });
 });
+$('#vacancy-profession_id').select2();
