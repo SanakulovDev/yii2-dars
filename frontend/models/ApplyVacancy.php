@@ -39,7 +39,7 @@ class ApplyVacancy extends \yii\db\ActiveRecord
             [['firstname', 'lastname', 'email', 'rezume','purpose'], 'required'],
             [['vacancy_id', 'company_id'], 'integer'],
             [['purpose'], 'string'],
-            [['rezume'],'file','extensions' => ['pdf', 'docx', 'rar', 'doc','jpeg','jpg','png'], 'maxSize' => 1024 * 1024 * 4],
+            [['rezume'],'file','skipOnEmpty'=>true, 'extensions' => ['txt', 'pdf', 'docx', 'rar', 'doc','jpeg','jpg','png'], 'maxSize' => 1024 * 1024 * 4],
             [['firstname', 'lastname', 'email', 'rezume', ], 'string','min'=>'1', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             [['vacancy_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vacancy::className(), 'targetAttribute' => ['vacancy_id' => 'id']],

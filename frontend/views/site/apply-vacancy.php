@@ -2,12 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+/* @var $apply_vacancy frontend\models\ApplyVacancy */
 ?>
 <div class="apply-vacancy">
     <div class="container">
-        <h2><?= Yii::t('app', 'Apply now');?></h2>
+        <h2><?= Yii::t('app', 'Apply now')?></h2>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'p-4 p-md-5 border rounded']]); ?>
-
+        <?php
+        ?>
             <div class="form-group row ">
                 <div class="col-md-6">
                     <?= $form->field($apply_vacancy, 'firstname')->textInput() ?>
