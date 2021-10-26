@@ -2,7 +2,6 @@
 
 use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
-use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
@@ -22,8 +21,8 @@ $genderList = \common\models\Gender::selectList();
 ?>
 
 <style>
-    #vacancy-profession_id{
-        visibility: visible!important;
+    #vacancy-profession_id {
+        visibility: visible !important;
     }
 </style>
 <div class="vacancy-form">
@@ -39,10 +38,11 @@ $genderList = \common\models\Gender::selectList();
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => Yii::t('app','Select the job type')]) ?>
+                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => Yii::t('app', 'Select the job type')]) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'profession_id')->dropDownList($profession, ['prompt' => Yii::t('app','Choose a career type')]) ?>
+                            <?= $form->field($model, 'profession_id')->dropDownList($profession, ['prompt' => Yii::t('app', 'Choose a career type')]); ?>
+
                         </div>
                     </div>
                     <div class="form-group row">
@@ -56,35 +56,39 @@ $genderList = \common\models\Gender::selectList();
                     <div class="form-group">
 
 
-
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="descuz-tab" data-toggle="tab" href="#descuz" role="tab" aria-controls="descuz" aria-selected="true">
-                                    <?=Yii::t('app','Description_uz')?>
+                                <a class="nav-link active" id="descuz-tab" data-toggle="tab" href="#descuz" role="tab"
+                                   aria-controls="descuz" aria-selected="true">
+                                    <?= Yii::t('app', 'Description_uz') ?>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="descen-tab" data-toggle="tab" href="#descen" role="tab" aria-controls="descen" aria-selected="false">
-                                    <?=Yii::t('app','Description_en')?>
+                                <a class="nav-link" id="descen-tab" data-toggle="tab" href="#descen" role="tab"
+                                   aria-controls="descen" aria-selected="false">
+                                    <?= Yii::t('app', 'Description_en') ?>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="descru-tab" data-toggle="tab" href="#descru" role="tab" aria-controls="descru" aria-selected="false">
-                                    <?=Yii::t('app','Description_ru')?>
+                                <a class="nav-link" id="descru-tab" data-toggle="tab" href="#descru" role="tab"
+                                   aria-controls="descru" aria-selected="false">
+                                    <?= Yii::t('app', 'Description_ru') ?>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="desccyrl-tab" data-toggle="tab" href="#desccyrl" role="tab" aria-controls="desccyrl" aria-selected="false">
-                                    <?=Yii::t('app','Description_cyrl')?>
+                                <a class="nav-link" id="desccyrl-tab" data-toggle="tab" href="#desccyrl" role="tab"
+                                   aria-controls="desccyrl" aria-selected="false">
+                                    <?= Yii::t('app', 'Description_cyrl') ?>
                                 </a>
                             </li>
 
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="descuz" role="tabpanel" aria-labelledby="descuz-tab">
+                            <div class="tab-pane fade show active" id="descuz" role="tabpanel"
+                                 aria-labelledby="descuz-tab">
                                 <?= $form->field($model, 'description_uz')->widget(TinyMce::className(), [
                                     'options' => ['rows' => 6],
-                                    'language' => 'en',
+                                    'language' => 'ru',
                                     'clientOptions' => [
                                         'plugins' => [
                                             "advlist autolink lists link charmap print preview anchor",
@@ -116,12 +120,12 @@ $genderList = \common\models\Gender::selectList();
                                         'images_upload_url' => '/posAcceptor.php',
                                         'plugin_prevqiew_width' => 1110,
                                     ]
-                                ]);?>
+                                ]); ?>
                             </div>
                             <div class="tab-pane fade" id="descen" role="tabpanel" aria-labelledby="descen-tab">
                                 <?= $form->field($model, 'description_en')->widget(TinyMce::className(), [
                                     'options' => ['rows' => 6],
-                                    'language' => 'en',
+                                    'language' => 'es',
                                     'clientOptions' => [
                                         'plugins' => [
                                             "advlist autolink lists link charmap print preview anchor",
@@ -153,7 +157,7 @@ $genderList = \common\models\Gender::selectList();
                                         'images_upload_url' => '/posAcceptor.php',
                                         'plugin_prevqiew_width' => 1110,
                                     ]
-                                ]);?>
+                                ]); ?>
                             </div>
                             <div class="tab-pane fade" id="descru" role="tabpanel" aria-labelledby="descru-tab">
                                 <?= $form->field($model, 'description_ru')->widget(TinyMce::className(), [
@@ -190,7 +194,7 @@ $genderList = \common\models\Gender::selectList();
                                         'images_upload_url' => '/posAcceptor.php',
                                         'plugin_prevqiew_width' => 1110,
                                     ]
-                                ]);?>
+                                ]); ?>
                             </div>
                             <div class="tab-pane fade" id="desccyrl" role="tabpanel" aria-labelledby="desccyrl-tab">
                                 <?= $form->field($model, 'description_cyrl')->widget(TinyMce::className(), [
@@ -227,22 +231,20 @@ $genderList = \common\models\Gender::selectList();
                                         'images_upload_url' => '/posAcceptor.php',
                                         'plugin_prevqiew_width' => 1110,
                                     ]
-                                ]);?>
+                                ]); ?>
                             </div>
                         </div>
-
 
 
                     </div>
 
 
-
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'region_id')->dropDownList($regionList,['prompt' => Yii::t('app','Select a region')]) ?>
+                            <?= $form->field($model, 'region_id')->dropDownList($regionList, ['prompt' => Yii::t('app', 'Select a region')]) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'city_id')->dropDownList($cityList,['prompt' => Yii::t('app','Select a city')]) ?>
+                            <?= $form->field($model, 'city_id')->dropDownList($cityList, ['prompt' => Yii::t('app', 'Select a city')]) ?>
                         </div>
 
                     </div>

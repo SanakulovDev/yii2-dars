@@ -320,10 +320,18 @@ class SiteController extends Controller
 
     public function actionVacancyViewAll()
     {
-        $vacancy = Vacancy::find()->orderBy('user_id')->all();
-
+        $vacancy = Vacancy::find()->orderBy('user_id');
+        $count = $vacancy->count();
+        $pages = new Pagination([
+            'totalCount' =>$count,
+            'pageSize'=>3
+        ]);
+        $vacancy = $vacancy->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
         return $this->render('vacancy-view-all', [
             'vacancy' => $vacancy,
+            'pages'=>$pages
         ]);
     }
 

@@ -59,6 +59,8 @@ AppAsset::register($this);
     </div>
     </body>
     <?php $this->endBody() ?>
+    <script>
 
+    </script>
     </html>
 <?php $this->endPage();

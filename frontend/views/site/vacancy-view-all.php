@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
+
 /*
  *
  * $vacancy frontend/models/Vacancy
@@ -72,6 +74,16 @@ $lang = 'name_'.Yii::$app->language;
                 </div>
             </div>
         </div>
-
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'options'=>['class'=>'pagination  '],
+            'pageCssClass'=>'text-center text-md-right custom-pagination',
+            'prevPageLabel'=>'prev',
+            'nextPageLabel'=>'next',
+            'prevPageCssClass'=>'prev d-flex ',
+            'nextPageCssClass'=>'next border-1',
+            'linkOptions'=>['class'=>'rounded']
+        ])
+        ?>
     </div>
 </section>

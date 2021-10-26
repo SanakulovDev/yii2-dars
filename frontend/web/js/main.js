@@ -37,7 +37,7 @@ $('#worker-regionid').change(function(){
 });
 $('#vacancy-region_id').change(function(){
     let id = $(this).val();
-
+    $(this).select2();
     $.ajax({
         method: "get",
         url: "/ajax/city",
@@ -53,4 +53,6 @@ $('#vacancy-region_id').change(function(){
         }
     });
 });
+
 $('#vacancy-profession_id').select2();
+$('#vacancy-city_id').select2();
