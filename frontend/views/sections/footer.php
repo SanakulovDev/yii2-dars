@@ -7,35 +7,35 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Search Trending</h3>
+            <h3><?=Yii::t('app','Search Trending')?></h3>
             <ul class="list-unstyled">
-              <li><a href="#">Web Design</a></li>
-              <li><a href="#">Graphic Design</a></li>
-              <li><a href="#">Web Developers</a></li>
-              <li><a href="#">Python</a></li>
-              <li><a href="#">HTML5</a></li>
-              <li><a href="#">CSS3</a></li>
+              <li><a href="#"><?=Yii::t('app','Web Design')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Graphic Design')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Web Developers')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Python')?></a></li>
+              <li><a href="#"><?=Yii::t('app','HTML5')?></a></li>
+              <li><a href="#"><?=Yii::t('app','CSS3')?></a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Company</h3>
+            <h3><?=Yii::t('app','Company name')?></h3>
             <ul class="list-unstyled">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Career</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Resources</a></li>
+              <li><a href="#"><?=Yii::t('app','About Us')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Career')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Blog')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Resources')?></a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Support</h3>
+            <h3><?=Yii::t('app','Support')?></h3>
             <ul class="list-unstyled">
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Privacy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#"><?=Yii::t('app','Support')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Privacy')?></a></li>
+              <li><a href="#"><?=Yii::t('app','Terms of Service')?></a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-4 mb-md-0">
-            <h3>Contact Us</h3>
+            <h3><?=Yii::t('app','Contact')?></h3>
             <div class="footer-social">
               <a href="#"><span class="icon-facebook"></span></a>
               <a href="#"><span class="icon-twitter"></span></a>

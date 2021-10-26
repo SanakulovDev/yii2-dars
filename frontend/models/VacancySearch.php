@@ -46,6 +46,9 @@ class VacancySearch extends Vacancy
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 1,
+            ],
         ]);
 
         $this->load($params);

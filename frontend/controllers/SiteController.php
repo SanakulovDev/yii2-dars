@@ -9,9 +9,12 @@ use frontend\models\ApplyVacancy;
 use frontend\models\Company;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
+use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
+use Mpdf\Tag\Article;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -298,17 +301,19 @@ class SiteController extends Controller
 
     public function actionVacancyViews($id)
     {
-        $vacan = $this->findModel($id);
-        $vacan->views++;
-//        echo "<pre>";
-//        var_dump($this->findVacancyx($vacan->profession_id, $id));
-//        echo "</pre>";
-//        die();
-        if ($vacan->save())
+        $vacancy = $this->findModel($id);
+        $vacancyx =$this->findVacancyx($vacancy->profession_id, $id);
+        $vacancy->views++;
+        if ($vacancy->save()) {
+            $searchModel = new VacancySearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
             return $this->render('vacancy-views', [
-                'vacancy' => $this->findModel($id),
-                'vacancyx' => $this->findVacancyx($vacan->profession_id, $id)
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'vacancy' => $vacancy,
+                'vacancyx' => $vacancyx
             ]);
+        }
         return $this->redirect('vacancy-view-all');
     }
 

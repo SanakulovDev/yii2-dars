@@ -1,5 +1,6 @@
 <?php
 
+use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
@@ -38,10 +39,10 @@ $genderList = \common\models\Gender::selectList();
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => 'Ish turini tanlang']) ?>
+                            <?= $form->field($model, 'job_type_id')->dropDownList($jobtype, ['prompt' => Yii::t('app','Select the job type')]) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'profession_id')->dropDownList($profession, ['prompt' => 'Kasb turini tanlang']) ?>
+                            <?= $form->field($model, 'profession_id')->dropDownList($profession, ['prompt' => Yii::t('app','Choose a career type')]) ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -52,7 +53,7 @@ $genderList = \common\models\Gender::selectList();
 
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group">
 
 
 
@@ -81,40 +82,152 @@ $genderList = \common\models\Gender::selectList();
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="descuz" role="tabpanel" aria-labelledby="descuz-tab">
-                                <?php echo $form->field($model, 'description_uz')->widget(CKEditor::className(),[
-                                    'editorOptions' => [
-                                        'inline' => false,
-
-                                    ],
-                                ]);
-                                ?>
+                                <?= $form->field($model, 'description_uz')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 6],
+                                    'language' => 'en',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            "advlist autolink lists link charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table contextmenu paste",
+                                            "save image imagetools textcolor fullscreen charmap"
+                                        ],
+                                        'toolbar' => "save | undo redo | code styleselect | fontselect fontsizeselect hilitecolor forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image imagetools media fullscreen charmap | redbtn defaultbuttons roundbuttons numscroller anchor",
+                                        'fontsize_formats' => '8pt 10pt 12pt 14pt 18pt 20pt 24pt 36pt',
+                                        'image_advtab' => true,
+                                        'image_class_list' => [
+                                            [
+                                                'value' => '',
+                                                'title' => 'None',
+                                            ],
+                                            [
+                                                'value' => 'img-circle img-no-padding img-responsive',
+                                                'title' => 'Circle',
+                                            ],
+                                            [
+                                                'value' => 'img-rounded img-responsive',
+                                                'title' => 'Rounded',
+                                            ],
+                                            [
+                                                'value' => 'img-thumbnail img-responsive',
+                                                'title' => 'Thumbnail',
+                                            ]
+                                        ],
+                                        'images_upload_url' => '/posAcceptor.php',
+                                        'plugin_prevqiew_width' => 1110,
+                                    ]
+                                ]);?>
                             </div>
                             <div class="tab-pane fade" id="descen" role="tabpanel" aria-labelledby="descen-tab">
-                                <?php echo $form->field($model, 'description_en')->widget(CKEditor::className(),[
-                                    'editorOptions' => [
-                                        'inline' => false,
-
-                                    ],
-                                ]);
-                                ?>
+                                <?= $form->field($model, 'description_en')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 6],
+                                    'language' => 'en',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            "advlist autolink lists link charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table contextmenu paste",
+                                            "save image imagetools textcolor fullscreen charmap"
+                                        ],
+                                        'toolbar' => "save | undo redo | code styleselect | fontselect fontsizeselect hilitecolor forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image imagetools media fullscreen charmap | redbtn defaultbuttons roundbuttons numscroller anchor",
+                                        'fontsize_formats' => '8pt 10pt 12pt 14pt 18pt 20pt 24pt 36pt',
+                                        'image_advtab' => true,
+                                        'image_class_list' => [
+                                            [
+                                                'value' => '',
+                                                'title' => 'None',
+                                            ],
+                                            [
+                                                'value' => 'img-circle img-no-padding img-responsive',
+                                                'title' => 'Circle',
+                                            ],
+                                            [
+                                                'value' => 'img-rounded img-responsive',
+                                                'title' => 'Rounded',
+                                            ],
+                                            [
+                                                'value' => 'img-thumbnail img-responsive',
+                                                'title' => 'Thumbnail',
+                                            ]
+                                        ],
+                                        'images_upload_url' => '/posAcceptor.php',
+                                        'plugin_prevqiew_width' => 1110,
+                                    ]
+                                ]);?>
                             </div>
                             <div class="tab-pane fade" id="descru" role="tabpanel" aria-labelledby="descru-tab">
-                                <?php echo $form->field($model, 'description_ru')->widget(CKEditor::className(),[
-                                    'editorOptions' => [
-                                        'inline' => false,
-
-                                    ],
-                                ]);
-                                ?>
+                                <?= $form->field($model, 'description_ru')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 6],
+                                    'language' => 'en',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            "advlist autolink lists link charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table contextmenu paste",
+                                            "save image imagetools textcolor fullscreen charmap"
+                                        ],
+                                        'toolbar' => "save | undo redo | code styleselect | fontselect fontsizeselect hilitecolor forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image imagetools media fullscreen charmap | redbtn defaultbuttons roundbuttons numscroller anchor",
+                                        'fontsize_formats' => '8pt 10pt 12pt 14pt 18pt 20pt 24pt 36pt',
+                                        'image_advtab' => true,
+                                        'image_class_list' => [
+                                            [
+                                                'value' => '',
+                                                'title' => 'None',
+                                            ],
+                                            [
+                                                'value' => 'img-circle img-no-padding img-responsive',
+                                                'title' => 'Circle',
+                                            ],
+                                            [
+                                                'value' => 'img-rounded img-responsive',
+                                                'title' => 'Rounded',
+                                            ],
+                                            [
+                                                'value' => 'img-thumbnail img-responsive',
+                                                'title' => 'Thumbnail',
+                                            ]
+                                        ],
+                                        'images_upload_url' => '/posAcceptor.php',
+                                        'plugin_prevqiew_width' => 1110,
+                                    ]
+                                ]);?>
                             </div>
                             <div class="tab-pane fade" id="desccyrl" role="tabpanel" aria-labelledby="desccyrl-tab">
-                                <?php echo $form->field($model, 'description_cyrl')->widget(CKEditor::className(),[
-                                    'editorOptions' => [
-                                        'inline' => false,
-
-                                    ],
-                                ]);
-                                ?>
+                                <?= $form->field($model, 'description_cyrl')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 6],
+                                    'language' => 'en',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            "advlist autolink lists link charmap print preview anchor",
+                                            "searchreplace visualblocks code fullscreen",
+                                            "insertdatetime media table contextmenu paste",
+                                            "save image imagetools textcolor fullscreen charmap"
+                                        ],
+                                        'toolbar' => "save | undo redo | code styleselect | fontselect fontsizeselect hilitecolor forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image imagetools media fullscreen charmap | redbtn defaultbuttons roundbuttons numscroller anchor",
+                                        'fontsize_formats' => '8pt 10pt 12pt 14pt 18pt 20pt 24pt 36pt',
+                                        'image_advtab' => true,
+                                        'image_class_list' => [
+                                            [
+                                                'value' => '',
+                                                'title' => 'None',
+                                            ],
+                                            [
+                                                'value' => 'img-circle img-no-padding img-responsive',
+                                                'title' => 'Circle',
+                                            ],
+                                            [
+                                                'value' => 'img-rounded img-responsive',
+                                                'title' => 'Rounded',
+                                            ],
+                                            [
+                                                'value' => 'img-thumbnail img-responsive',
+                                                'title' => 'Thumbnail',
+                                            ]
+                                        ],
+                                        'images_upload_url' => '/posAcceptor.php',
+                                        'plugin_prevqiew_width' => 1110,
+                                    ]
+                                ]);?>
                             </div>
                         </div>
 
@@ -126,10 +239,10 @@ $genderList = \common\models\Gender::selectList();
 
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <?= $form->field($model, 'region_id')->dropDownList($regionList,['prompt' => 'Viloyatni tanlang']) ?>
+                            <?= $form->field($model, 'region_id')->dropDownList($regionList,['prompt' => Yii::t('app','Select a region')]) ?>
                         </div>
                         <div class="col-md-6">
-                            <?= $form->field($model, 'city_id')->dropDownList($cityList,['prompt' => 'Shaharni tanlang']) ?>
+                            <?= $form->field($model, 'city_id')->dropDownList($cityList,['prompt' => Yii::t('app','Select a city')]) ?>
                         </div>
 
                     </div>

@@ -1,7 +1,10 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
-
+use yii\widgets\LinkPager;
+$lang = 'name_'.Yii::$app->language;
+$langTolower = 'name'.ucfirst(Yii::$app->language);
 ?>
 <section class="site-section">
     <div class="container">
@@ -13,13 +16,13 @@ use yii\helpers\Html;
                         <?= Html::img("/uploads/vacancy/$vacancy->image", ['class' => 'img-fluid ']) ?>
                     </div>
                     <div>
-                        <h2><?= $vacancy->profession->name_en ?></h2>
+                        <h2><?= $vacancy->profession->$lang ?></h2>
                         <div>
                             <span class="ml-0 mr-2 mb-2"><span
                                         class="icon-briefcase mr-2"></span><?= $vacancy->company->name ?></span>
                             <span class="m-2"><span class="icon-room mr-2"></span><?= $vacancy->address ?></span>
                             <span class="m-2"><span class="icon-clock-o mr-2"></span><span
-                                        class="text-primary"><?= $vacancy->jobType->name_uz ?></span></span>
+                                        class="text-primary"><?= $vacancy->jobType->$lang ?></span></span>
                             <span class="m-2"><span class="mr-2"><i
                                             class="far fa-eye"></i> <?= $vacancy->views ?></span></span>
                         </div>
@@ -42,21 +45,23 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-8">
                 <div class="mb-5">
-                    <figure class="mb-5"><img src="/jobboard/images/job_single_img_1.jpg" alt="Image"
-                                              class="img-fluid rounded"></figure>
+                    <figure class="mb-5">
+                        <?=Html::img('/jobboard/images/job_single_img_1.jpg',['class'=>'img-fluid rounded', 'alt'=>Yii::t('app','Here is the picture')])?>
+
+                    </figure>
                     <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-align-left mr-3"></span>Job Description</h3>
-                    <?=$vacancy->description_en?>
+                                class="icon-align-left mr-3"></span><?=Yii::t('app','Job Description')?></h3>
+
                 </div>
 
 
                 <div class="row mb-5">
                     <div class="col-6">
                         <a href="#" class="btn btn-block btn-light btn-md"><span
-                                    class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
+                                    class="icon-heart-o mr-2 text-danger"></span><?=Yii::t('app','Save Job')?></a>
                     </div>
                     <div class="col-6">
-                        <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
+                        <a href="#" class="btn btn-block btn-primary btn-md"><?=Yii::t('app','Apply now')?></a>
                     </div>
                 </div>
 
@@ -66,13 +71,13 @@ use yii\helpers\Html;
                     <h3 class="text-primary  mt-3 h5 pl-3 mb-3 "><?=Yii::t('app','Job Summary')?></h3>
                     <ul class="list-unstyled pl-3 mb-0">
                         <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Published on:  ')?></strong> <?=date('Y-m-d', $vacancy->created_at)?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Vacancy:  ')?></strong> <?=$vacancy->count_vacancy?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Employment:</ Status:  ')?></strong><?=$vacancy->jobType->name_en?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Experience:  ')?></strong> <?=$vacancy->experience?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Job Location:  ')?></strong><?=$vacancy->address?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Salary:  ')?></strong> <?=$vacancy->salary?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Genderstrong> Any:  ')?></strong> <?=$vacancy->genders->name_en?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Application Deadline:  ')?></strong> <?=$vacancy->deadline?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Vacancy:')?></strong> <?=$vacancy->count_vacancy?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Employment / Status:')?></strong><?=$vacancy->jobType->$lang?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Experience').':  '?></strong> <?=$vacancy->experience?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Job Location:')?></strong><?=$vacancy->address?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Salary').':  '?></strong> <?=$vacancy->salary?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Gender').':  '?></strong> <?=$vacancy->genders->$lang?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Application Deadline:')?></strong> <?=$vacancy->deadline?></li>
                     </ul>
                 </div>
 
@@ -92,16 +97,16 @@ use yii\helpers\Html;
     </div>
 </section>
 
-<?php
-//var_dump($vacancyx);
-//die();
-?>
 <section class="site-section" id="next">
     <div class="container">
 
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <h2 class="section-title mb-2"><?= Yii::t('app', '43,167 Job Listed') ?></h2>
+                <?php
+                $query=Yii::$app->getDb()->createCommand("SELECT count(*) as num, id, profession_id FROM vacancy where id != $vacancy->id and profession_id = $vacancy->profession_id");
+                $query = $query->queryAll();
+                ?>
+                <h2 class="section-title mb-2"><?= $query[0]['num'].' '.Yii::t('app','Job Listed')?></h2>
             </div>
         </div>
 
@@ -115,7 +120,7 @@ use yii\helpers\Html;
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?= $item->profession->name_en ?></h2>
+                            <h2><?= $item->profession->$lang ?></h2>
                             <strong><?= $item->company->name ?></strong>
                             <br>
                             <i class="far fa-eye"></i>
@@ -125,7 +130,7 @@ use yii\helpers\Html;
                             <span class="icon-room"></span> <?= $item->address ?>
                         </div>
                         <div class="job-listing-meta">
-                            <span class="badge badge-danger"><?= $item->jobType->name_en ?></span>
+                            <span class="badge badge-danger"><?= $item->jobType->$lang ?></span>
                         </div>
                     </div>
                 </li>
@@ -154,3 +159,4 @@ use yii\helpers\Html;
 
     </div>
 </section>
+

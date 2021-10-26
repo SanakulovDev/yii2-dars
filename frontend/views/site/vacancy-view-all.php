@@ -4,13 +4,20 @@ use yii\helpers\Html;
  *
  * $vacancy frontend/models/Vacancy
  */
+
+$lang = 'name_'.Yii::$app->language;
+
 ?>
 <section class="site-section" id="next">
     <div class="container">
 
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <h2 class="section-title mb-2"><?=Yii::t('app','43,167 Job Listed')?></h2>
+                <?php
+                $query=Yii::$app->getDb()->createCommand('SELECT count(*) as num FROM vacancy where 1');
+                $query = $query->queryAll();
+                ?>
+                <h2 class="section-title mb-2"><?= $query[0]['num'].' '.Yii::t('app','Job Listed')?></h2>
             </div>
         </div>
 
@@ -19,12 +26,12 @@ use yii\helpers\Html;
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <?= Html::a(Yii::t('app', ''), ['vacancy-views', 'id' => $item->id]) ?>
                     <div class="job-listing-logo">
-                        <img src="/uploads/vacancy/<?=$item->image?>" alt="Image" class="img-fluid">
+                        <?=Html::img("/uploads/vacancy/$item->image",['class'=>'img-fluid','alt'=>'Image'])?>
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?=$item->profession->name_en?></h2>
+                            <h2><?=$item->profession?$item->profession->$lang:'Kiritilmagan' ?></h2>
                             <strong><?=$item->company->name?></strong>
                             <br>
                             <i class="far fa-eye"></i>
@@ -34,7 +41,7 @@ use yii\helpers\Html;
                             <span class="icon-room"></span> <?=$item->address?>
                         </div>
                         <div class="job-listing-meta">
-                            <span class="badge badge-danger"><?=$item->jobType->name_en?></span>
+                            <span class="badge badge-danger"><?=$item->jobType?$item->jobType->$lang:null?></span>
                         </div>
                     </div>
                 </li>

@@ -27,7 +27,7 @@ use yii\helpers\Html;
                     </li>
                 </ul>
                 <a href="/vacancy/create" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block m-1"><span
-                            class="mr-2 icon-add"></span>Post a Job</a>
+                            class="mr-2 icon-add"></span><?=Yii::t('app','Post a Job')?></a>
                 <?php
                 if (Yii::$app->user->isGuest) {
                     $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login'], 'options' => ['class' => 'btn btn-outline-warning p-0']];
@@ -37,7 +37,7 @@ use yii\helpers\Html;
                         . Html::a(Yii::t('app', 'Cabinet'), '/cabinet/index', ['class' => 'm-1 btn btn-link'])
 
                         . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            Yii::t('app','Logout (') . Yii::$app->user->identity->username . ')',
                             ['class' => 'btn btn-link m-1 logout']
                         ) . Html::endForm()
                         . '</li>';
@@ -63,10 +63,10 @@ use yii\helpers\Html;
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">About Us</h1>
+                <h1 class="text-white font-weight-bold"><?=Yii::t('app','About Us')?></h1>
                 <div class="custom-breadcrumbs">
-                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
-                    <span class="text-white"><strong>About Us</strong></span>
+                    <a href="#"><?=Yii::t('app','Home')?></a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong><?=Yii::t('app','About Us')?></strong></span>
                 </div>
             </div>
         </div>

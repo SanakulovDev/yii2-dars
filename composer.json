@@ -53,6 +53,7 @@
         "mdmsoft/yii2-admin": "2.x-dev",
         "yiisoft/yii2-swiftmailer": "*",
         "mihaildev/yii2-ckeditor": "*",
-        "rmrevin/yii2-fontawesome": "2.10.*"
+        "rmrevin/yii2-fontawesome": "2.10.*",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     }
 }

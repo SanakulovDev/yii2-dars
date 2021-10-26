@@ -10,6 +10,8 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Vacancies'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$lang = 'name_'.Yii::$app->language;
+$langTolower = 'name'.ucfirst(Yii::$app->language);
 ?>
 
 <div class="vacancy-view">
@@ -43,26 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'profession_id',
                 'label' => Yii::t('app', 'Profession name'),
-                'value' => $model->profession->name_en
+                'value' => $model->profession->$lang
             ],
-            'description_uz',
-            'description_ru',
-            'description_en',
-            'description_cyrl',
+            'description_uz:html',
+            'description_ru:html',
+            'description_en:html',
+            'description_cyrl:html',
             [
                 'attribute' => 'job_type_id',
                 'label' => Yii::t('app', 'Job type'),
-                'value' => $model->jobType->name_en
+                'value' => $model->jobType->$lang
             ],
             [
                 'attribute' => 'region_id',
                 'label' => Yii::t('app', 'Region'),
-                'value' => $model->region->nameUz
+                'value' => $model->region->$langTolower
             ],
             [
                 'attribute' => 'city_id',
                 'label' => Yii::t('app', 'City / District'),
-                'value' => $model->city->nameUz
+                'value' => $model->city->$langTolower
             ],
             [
                 'attribute' => 'image',
@@ -74,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'gender',
                 'label' => Yii::t('app', 'Gender'),
-                'value' => $model->genders->name_en
+                'value' => $model->genders->$lang
             ],
             'experience',
             'telegram',

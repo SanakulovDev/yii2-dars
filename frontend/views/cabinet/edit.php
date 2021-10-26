@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
 <div class="row form-group">
     <div class="col-md-12">
-        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+        <?= Html::submitButton('Save    ', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
     </div>
 </div>
 

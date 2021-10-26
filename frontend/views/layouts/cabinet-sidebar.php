@@ -10,14 +10,11 @@ use frontend\models\SignupForm;
 <div class="col-md-4" style="text-align: center;">
     <nav class="navbar">
         <ul class="navbar-nav">
-            <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Home')?></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','About')?></a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><?= Yii::t('app','Contact')?></a></li>
-            <li class="nav-item"><?=Html::a(Yii::t('app','Update Company'),'edit',['class'=>'nav-link'])?></li>
-            <li class="nav-item"><?=Html::a(Yii::t('app','Update Worker'),'edit-worker',['class'=>'nav-link'])?></li>
-            <li class="nav-item"><a href="/vacancy/index" class="nav-link"><?= Yii::t('app','View Vacancy')?></a></li>
-
-            <li class="nav-item"><a href="/vacancy/create" class="nav-link"><?= Yii::t('app','Add  Vacancy')?></a></li>
+            <li class="nav-item"><?=Html::a(Yii::t('app','Home'),'/site/index',['class'=>'nav-link'])?></li>
+            <li class="nav-item"><?=Html::a(Yii::t('app','Update Company'),'/site/edit',['class'=>'nav-link'])?></li>
+            <li class="nav-item"><?=Html::a(Yii::t('app','Create Worker'),'/site/worker-create',['class'=>'nav-link'])?></li>
+            <li class="nav-item"><a href="/vacancy/index" class="nav-link"><?=Yii::t('app','View Vacancies')?></a></li>
+            <li class="nav-item"><a href="/vacancy/create" class="nav-link"><?=Yii::t('app','Add Vacancies')?></a></li>
 
         </ul>
     </nav>

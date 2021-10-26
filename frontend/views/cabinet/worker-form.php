@@ -7,7 +7,7 @@ $cityList = \common\models\City::selectList($worker->regionId);
 $nationality = \frontend\models\Nationality::selectList();
 ?>
 
-<h2 class="mb-4"><?= Yii::t('app', 'Edit company information') ?></h2>
+<h2 class="mb-4"><?= Yii::t('app', 'Edit worker information') ?></h2>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="col-md-12">
     <?php if (Yii::$app->session->hasFlash('success')): ?>
@@ -81,7 +81,7 @@ $nationality = \frontend\models\Nationality::selectList();
 
 <div class="row form-group">
     <div class="col-md-12">
-        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
     </div>
 </div>
 
