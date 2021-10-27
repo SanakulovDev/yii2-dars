@@ -303,6 +303,14 @@ class SiteController extends Controller
     {
         $vacancy = $this->findModel($id);
         $vacancyx =$this->findVacancyx($vacancy->profession_id, $id);
+        $count = $vacancyx->count();
+        $pages = new Pagination([
+            'totalCount' =>$count,
+            'pageSize'=>3
+        ]);
+        $vacancyx = $vacancyx->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
         $vacancy->views++;
         if ($vacancy->save()) {
             $searchModel = new VacancySearch();
@@ -311,7 +319,8 @@ class SiteController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
                 'vacancy' => $vacancy,
-                'vacancyx' => $vacancyx
+                'vacancyx' => $vacancyx,
+                'pages'=>$pages
             ]);
         }
         return $this->redirect('vacancy-view-all');
@@ -372,7 +381,7 @@ class SiteController extends Controller
 
     protected function findVacancyx($profession_id, $id)
     {
-        if (($vacancyx = Vacancy::find()->where(['profession_id' => $profession_id])->andWhere(['!=','id',$id])->all()) !== null) {
+        if (($vacancyx = Vacancy::find()->where(['profession_id' => $profession_id])->andWhere(['!=','id',$id])) !== null) {
             return $vacancyx;
         }
         return false;

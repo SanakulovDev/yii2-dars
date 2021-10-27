@@ -144,16 +144,16 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                 <span>Showing 1-7 Of 43,167 Jobs</span>
             </div>
             <div class="col-md-6 text-center text-md-right">
-                <div class="custom-pagination ml-auto">
-                    <a href="#" class="prev">Prev</a>
-                    <div class="d-inline-block">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                    </div>
-                    <a href="#" class="next">Next</a>
-                </div>
+                <?= LinkPager::widget([
+                    'pagination' => $pages,
+                    'options' => ['class' => 'custom-pagination ml-auto d-flex align-items-center justify-content-end nav'],
+                    'pageCssClass' => 'mr-2',
+                    'prevPageLabel' => Yii::t('app', 'Prev'),
+                    'nextPageLabel' => Yii::t('app', 'Next'),
+                    'prevPageCssClass' => 'prev ',
+                    'nextPageCssClass' => 'next ',
+                    'linkOptions' => ['class' => 'prev']
+                ]) ?>
             </div>
         </div>
 

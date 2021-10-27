@@ -53,7 +53,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             'description_cyrl:html',
             [
                 'attribute' => 'job_type_id',
-                'label' => Yii::t('app', 'Job type'),
+                'label' => Yii::t('app', 'Job Type'),
                 'value' => $model->jobType->$lang
             ],
             [
