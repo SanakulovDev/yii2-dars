@@ -78,6 +78,7 @@ return [
     'Here is the picture'=>'Вот картинка',
     'Job Description'=>'Описание работы',
     'Job Summary'=>'Резюме вакансии',
+    'Published on'=>'Опубликован в',
     'Vacancy:'=>'Вакансия:',
     'Vacancies'=>'Вакансия',
     'Employment / Status:'=>'Работа / Статус:',

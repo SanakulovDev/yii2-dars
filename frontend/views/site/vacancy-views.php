@@ -2,12 +2,25 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 $lang = 'name_'.Yii::$app->language;
 $langTolower = 'name'.ucfirst(Yii::$app->language);
 ?>
 <section class="site-section">
     <div class="container">
+        <?php
+        echo Breadcrumbs::widget([
+            'itemTemplate' => "<li>{link}</li>\n",
+            'links' => [
+                [
+                    'label' => '/' . Yii::t('app', 'Vacancy views') . '/',
+                    'url' => ['site/vacancy-view-all'],
+                ],
+                Yii::t('app', 'Vacancy views')
+            ],
+        ]);
+        ?>
         <div class="row align-items-center mb-5">
 
             <div class="col-lg-8 mb-4 mb-lg-0">
@@ -49,9 +62,13 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                         <?=Html::img('/jobboard/images/job_single_img_1.jpg',['class'=>'img-fluid rounded', 'alt'=>Yii::t('app','Here is the picture')])?>
 
                     </figure>
-                    <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span
-                                class="icon-align-left mr-3"></span><?=Yii::t('app','Job Description')?></h3>
-
+                    <h3 class="h5 d-flex align-items-center mb-4 text-primary">
+                        <span class="icon-align-left mr-3"></span><?=Yii::t('app','Job Description')?>
+                    </h3>
+                    <?php
+                    $description = 'description_'.Yii::$app->language;
+                    ?>
+                        <p><?=$vacancy->$description?></p>
                 </div>
 
 
@@ -70,7 +87,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                 <div class="bg-light p-3 border rounded mb-4">
                     <h3 class="text-primary  mt-3 h5 pl-3 mb-3 "><?=Yii::t('app','Job Summary')?></h3>
                     <ul class="list-unstyled pl-3 mb-0">
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Published on:  ')?></strong> <?=date('Y-m-d', $vacancy->created_at)?></li>
+                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Published on').': '?></strong> <?=date('Y-m-d', $vacancy->created_at)?></li>
                         <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Vacancy:')?></strong> <?=$vacancy->count_vacancy?></li>
                         <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Employment / Status:')?></strong><?=$vacancy->jobType->$lang?></li>
                         <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Experience').':  '?></strong> <?=$vacancy->experience?></li>
@@ -102,11 +119,8 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
 
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <?php
-                $query=Yii::$app->getDb()->createCommand("SELECT count(*) as num, id, profession_id FROM vacancy where id != $vacancy->id and profession_id = $vacancy->profession_id");
-                $query = $query->queryAll();
-                ?>
-                <h2 class="section-title mb-2"><?= $query[0]['num'].' '.Yii::t('app','Job Listed')?></h2>
+
+                <h2 class="section-title mb-2"><?= $pages->totalCount.' '.Yii::t('app','Job Listed')?></h2>
             </div>
         </div>
 

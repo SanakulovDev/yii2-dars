@@ -76,6 +76,7 @@ return [
     'Here is the picture'=>'Бу жойда расм жойлашган',
     'Job Description'=>'Иш тавсифи',
     'Job Summary'=>'Ишнинг қисқача мазмуни',
+    'Published on'=>'Чоп етилган санаси',
     'Vacancy:'=>'Ваканция:',
     'Vacancies'=>'Бўш иш ўринлари',
     'Employment / Status:'=>'Иш билан таъминлаш / Статус: ',

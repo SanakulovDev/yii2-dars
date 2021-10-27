@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
 /*
@@ -13,14 +14,22 @@ $lang = 'name_' . Yii::$app->language;
 ?>
 <section class="site-section" id="next">
     <div class="container">
-
+        <?php
+        echo Breadcrumbs::widget([
+            'itemTemplate' => "<li>{link}</li>\n",
+            'links' => [
+                [
+                    'label' => '/' . Yii::t('app', 'Vacancy views') . '/',
+                    'url' => ['site/vacancy-view-all'],
+                ],
+                Yii::t('app', 'Vacancy views')
+            ],
+        ]);
+        ?>
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <?php
-                $query = Yii::$app->getDb()->createCommand('SELECT count(*) as num FROM vacancy where 1');
-                $query = $query->queryAll();
-                ?>
-                <h2 class="section-title mb-2"><?= $query[0]['num'] . ' ' . Yii::t('app', 'Job Listed') ?></h2>
+
+                <h2 class="section-title mb-2"><?= $pages->totalCount . ' ' . Yii::t('app', 'Job Listed') ?></h2>
             </div>
         </div>
 
@@ -55,7 +64,7 @@ $lang = 'name_' . Yii::$app->language;
 
         <div class="row pagination-wrap">
             <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of <?=$query[0]['num']?> Jobs</span>
+                <span>Showing 1-7 Of <?= $query[0]['num'] ?> Jobs</span>
             </div>
             <div class="col-md-6 text-center text-md-right">
                 <?= LinkPager::widget([

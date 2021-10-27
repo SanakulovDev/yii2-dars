@@ -73,6 +73,7 @@ return [
     'Here is the picture'=>'Bu joyda rasm joylashgan',
     'Job Description'=>'Ish tavsifi',
     'Job Summary'=>'Ishning qisqacha mazmuni',
+    'Published on'=>'Chop etilgan sanasi',
     'Vacancy:'=>'Vakansiya:',
     'Vacancies'=>"Bo'sh ish o'rinlari",
     'Employment / Status:'=>'Ish bilan ta`minlash / Status:',
