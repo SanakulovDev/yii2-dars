@@ -18,13 +18,22 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
-        $worker = $this->findWorker($identity->id);
+        $worker = new Worker();
         if ($company) {
             return $this->render('index',
                 ['company' => $company]);
         }
         return $this->render('worker',
             ['worker' => $worker]);
+    }
+
+    public function actionWorker()
+    {
+        $identity = \Yii::$app->user->identity;
+        $worker = $this->findWorker($identity->id);
+        return $this->render('worker',[
+            'worker'=>$worker
+        ]);
     }
 
     protected function findModel($userId)
@@ -61,34 +70,38 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-        $worker->scenario = Worker::SCENARIO_WORKEREDIT;
-        if ($this->request->isPost && $worker->load($this->request->post())) {
-            $image = UploadedFile::getInstance($worker, 'photo');
-            if ($worker->upload($image) && $worker->save()) {
-                \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
-                return $this->redirect(['index', 'id' => $worker->id]);
+
+        if ($worker!=null) {
+            if ($worker->load($this->request->post())) {
+                $image = UploadedFile::getInstance($worker, 'photo');
+
+                if ($worker->upload($image) && $worker->save()) {
+                    \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
+                    return $this->redirect(['index', 'id' => $worker->id]);
+                } else {
+                    \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
+                }
             } else {
-                \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
+                return $this->redirect('worker-create', ['id' => $identity]);
             }
         }
 
-        return $this->render('worker-edit', [
-            'worker' => $worker,
-        ]);
+        return $this->redirect('worker-create');
     }
+
     public function actionWorkerCreate()
     {
         $worker = new Worker();
 
         $worker->scenario = Worker::SCENARIO_EDIT;
 
-        if ($worker->load(\Yii::$app->request->post())){
+        if ($worker->load(\Yii::$app->request->post())) {
             $image = UploadedFile::getInstance($worker, 'photo');
             $worker->userId = \Yii::$app->user->identity->id;
             if ($worker->upload($image) && $worker->save())
-                return $this->redirect('index');
+                return $this->redirect('worker');
         }
-        return $this->render('worker-create',['worker'=>$worker]);
+        return $this->render('worker-create', ['worker' => $worker]);
     }
 
     protected function findWorker($id)
@@ -96,25 +109,22 @@ class CabinetController extends Controller
         if ($worker = Worker::findOne(['userId' => $id])) {
             return $worker;
         }
-        return $worker;
+        return null;
     }
 
 
-
-
-
-    public function actionReport() {
+    public function actionReport()
+    {
         // get your HTML raw content without any layouts or scripts
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
         if ($company) {
-            $content =  $this->renderPartial('index',
+            $content = $this->renderPartial('index',
                 ['company' => $company]);
-        }
-        else
-        $content =  $this->renderPartial('worker',
-            ['worker' => $worker]);
+        } else
+            $content = $this->renderPartial('worker',
+                ['worker' => $worker]);
 
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
@@ -137,8 +147,8 @@ class CabinetController extends Controller
             'options' => ['title' => 'Krajee Report Title'],
             // call mPDF methods on the fly
             'methods' => [
-                'SetHeader'=>['Krajee Report Header'],
-                'SetFooter'=>['{PAGENO}'],
+                'SetHeader' => ['Krajee Report Header'],
+                'SetFooter' => ['{PAGENO}'],
             ]
         ]);
 

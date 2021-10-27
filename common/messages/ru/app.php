@@ -96,6 +96,10 @@ return [
     'Support'=>'Служба поддержки',
     'Privacy'=>'Конфиденциальность',
     'Terms of Service'=>'условия обслуживания',
+    //    Pagination
+    'Prev'=>'',
+    'Next'=>''
+
 
 ];
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
@@ -7,7 +8,7 @@ use yii\widgets\LinkPager;
  * $vacancy frontend/models/Vacancy
  */
 
-$lang = 'name_'.Yii::$app->language;
+$lang = 'name_' . Yii::$app->language;
 
 ?>
 <section class="site-section" id="next">
@@ -16,10 +17,10 @@ $lang = 'name_'.Yii::$app->language;
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
                 <?php
-                $query=Yii::$app->getDb()->createCommand('SELECT count(*) as num FROM vacancy where 1');
+                $query = Yii::$app->getDb()->createCommand('SELECT count(*) as num FROM vacancy where 1');
                 $query = $query->queryAll();
                 ?>
-                <h2 class="section-title mb-2"><?= $query[0]['num'].' '.Yii::t('app','Job Listed')?></h2>
+                <h2 class="section-title mb-2"><?= $query[0]['num'] . ' ' . Yii::t('app', 'Job Listed') ?></h2>
             </div>
         </div>
 
@@ -28,31 +29,26 @@ $lang = 'name_'.Yii::$app->language;
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <?= Html::a(Yii::t('app', ''), ['vacancy-views', 'id' => $item->id]) ?>
                     <div class="job-listing-logo">
-                        <?=Html::img("/uploads/vacancy/$item->image",['class'=>'img-fluid','alt'=>'Image'])?>
+                        <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?=$item->profession?$item->profession->$lang:'Kiritilmagan' ?></h2>
-                            <strong><?=$item->company->name?></strong>
+                            <h2><?= $item->profession ? $item->profession->$lang : 'Kiritilmagan' ?></h2>
+                            <strong><?= $item->company->name ?></strong>
                             <br>
                             <i class="far fa-eye"></i>
-                            <strong><?=$item->views?></strong>
+                            <strong><?= $item->views ?></strong>
                         </div>
                         <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> <?=$item->address?>
+                            <span class="icon-room"></span> <?= $item->address ?>
                         </div>
                         <div class="job-listing-meta">
-                            <span class="badge badge-danger"><?=$item->jobType?$item->jobType->$lang:null?></span>
+                            <span class="badge badge-danger"><?= $item->jobType ? $item->jobType->$lang : null ?></span>
                         </div>
                     </div>
                 </li>
             <?php endforeach ?>
-
-
-
-
-
 
 
         </ul>
@@ -62,28 +58,19 @@ $lang = 'name_'.Yii::$app->language;
                 <span>Showing 1-7 Of 43,167 Jobs</span>
             </div>
             <div class="col-md-6 text-center text-md-right">
-                <div class="custom-pagination ml-auto">
-                    <a href="#" class="prev">Prev</a>
-                    <div class="d-inline-block">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                    </div>
-                    <a href="#" class="next">Next</a>
-                </div>
+                <?= LinkPager::widget([
+                    'pagination' => $pages,
+                    'options' => ['class' => 'custom-pagination ml-auto d-flex align-items-center justify-content-end nav'],
+                    'pageCssClass' => 'mr-2',
+                    'prevPageLabel' => Yii::t('app', 'Prev'),
+                    'nextPageLabel' => Yii::t('app', 'Next'),
+                    'prevPageCssClass' => 'prev ',
+                    'nextPageCssClass' => 'next ',
+                    'linkOptions' => ['class' => 'prev']
+                ]) ?>
             </div>
         </div>
-        <?= LinkPager::widget([
-            'pagination' => $pages,
-            'options'=>['class'=>'pagination  '],
-            'pageCssClass'=>'text-center text-md-right custom-pagination',
-            'prevPageLabel'=>'prev',
-            'nextPageLabel'=>'next',
-            'prevPageCssClass'=>'prev d-flex ',
-            'nextPageCssClass'=>'next border-1',
-            'linkOptions'=>['class'=>'rounded']
-        ])
-        ?>
+
+
     </div>
 </section>

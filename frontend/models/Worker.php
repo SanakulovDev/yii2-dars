@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use common\models\City;
+use common\models\Gender;
 use common\models\Region;
 use Yii;
 
@@ -80,6 +81,11 @@ class Worker extends \yii\db\ActiveRecord
     {
         return $this->hasOne(City::class, ['id' => 'cityId']);
     }
+    public function getGenders()
+    {
+        return $this->hasOne(Gender::class, ['id' => 'gender']);
+    }
+
     public function scenarios()
     {
         return [

@@ -104,6 +104,8 @@ return [
         ],
 
 
+
+
         'languagepicker' => [
             'class' => 'lajax\languagepicker\Component',
             // List of available languages (icons and text)

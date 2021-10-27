@@ -93,5 +93,9 @@ return [
     'Terms of Service'=>'Xizmat ko`rsatish shartlari',
 
 
+    //    Pagination
+    'Prev'=>'',
+    'Next'=>''
+
 ];
 ?>

@@ -95,5 +95,9 @@ return [
     'Privacy'=>'Махфийлик',
     'Terms of Service'=>'Хизмат кўрсатиш шартлари',
 
+
+//    Pagination
+    'Prev'=>'',
+    'Next'=>''
 ];
 ?>
