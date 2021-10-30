@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $js = [
-        "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",
+//        "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",
         "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js",
 
         "/jobboard/js/bootstrap.bundle.min.js",

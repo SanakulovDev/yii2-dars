@@ -46,7 +46,7 @@ return [
         'errorAction' => 'site/error',
     ],
         'urlManager' => [
-            'scripturl' => '/bacckend/index.php',
+            'scripturl' => '/backend/index.php',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

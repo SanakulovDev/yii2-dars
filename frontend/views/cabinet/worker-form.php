@@ -5,6 +5,8 @@ use yii\helpers\Html;
 $regionList = \common\models\Region::selectList();
 $cityList = \common\models\City::selectList($worker->regionId);
 $nationality = \frontend\models\Nationality::selectList();
+$genderList = \common\models\Gender::selectList();
+$profession_list = \common\models\Profession::selectList();
 ?>
 
 <h2 class="mb-4"><?= Yii::t('app', 'Edit worker information') ?></h2>
@@ -64,13 +66,21 @@ $nationality = \frontend\models\Nationality::selectList();
 </div>
 <div class="row form-group">
     <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'gender')->dropDownList([0=>'femail',1=>'mail']) ?>
+        <?= $form->field($worker, 'gender')->dropDownList($genderList) ?>
     </div>
      <div class="col-md-6 mb-3">
         <?= $form->field($worker, 'nationality_id')->dropDownList($nationality) ?>
     </div>
-
 </div>
+<div class="row form-group">
+    <div class="col-md-6 mb-3">
+        <?= $form->field($worker, 'hobby')->textInput() ?>
+    </div>
+     <div class="col-md-6 mb-3">
+        <?= $form->field($worker, 'profession_id')->dropDownList($profession_list) ?>
+    </div>
+</div>
+
 <div class="row form-group ">
     <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'photo')->fileInput() ?>

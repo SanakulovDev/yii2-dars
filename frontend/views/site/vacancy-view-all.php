@@ -64,7 +64,7 @@ $lang = 'name_' . Yii::$app->language;
 
         <div class="row pagination-wrap">
             <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of <?= $query[0]['num'] ?> Jobs</span>
+                <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
             </div>
             <div class="col-md-6 text-center text-md-right">
                 <?= LinkPager::widget([

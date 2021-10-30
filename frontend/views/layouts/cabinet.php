@@ -48,7 +48,7 @@ AppAsset::register($this);
                 <?= Yii::$app->controller->renderPartial("/layouts/cabinet-sidebar") ?>
 
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <?= $content; ?>
                 </div>
             </div>

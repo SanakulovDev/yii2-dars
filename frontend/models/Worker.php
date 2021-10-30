@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use common\models\City;
 use common\models\Gender;
+use common\models\Profession;
 use common\models\Region;
 use Yii;
 
@@ -23,6 +24,8 @@ use Yii;
  * @property string|null $photo
  * @property string $created_at
  * @property string $updated_at
+ * @property string $hobby
+ * @property string $profession_id
  */
 class Worker extends \yii\db\ActiveRecord
 {
@@ -32,6 +35,7 @@ class Worker extends \yii\db\ActiveRecord
 
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_WORKEREDIT = 'worker-edit';
+    const SCENARIO_WORKERLANG = 'worker-rezyume';
     public static function tableName()
     {
         return 'worker';
@@ -43,9 +47,9 @@ class Worker extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId','regionId','cityId', 'gender', 'nationality_id'], 'integer'],
+            [['userId','regionId','cityId', 'gender', 'nationality_id','profession_id'], 'integer'],
             [['birthdate', 'created_at', 'updated_at'], 'safe'],
-            [['firstname', 'lastname', 'patronymic', 'address', 'phone'], 'string', 'max' => 255],
+            [['firstname', 'lastname', 'patronymic', 'address', 'phone','hobby'], 'string', 'max' => 255],
             [['photo'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
         ];
     }
@@ -66,6 +70,8 @@ class Worker extends \yii\db\ActiveRecord
             'birthdate' => Yii::t('app', 'Birthdate'),
             'gender' => Yii::t('app', 'Gender'),
             'nationality_id' => Yii::t('app', 'Nationality ID'),
+            'profession_id' => Yii::t('app', 'Profession'),
+            'hobbby' => Yii::t('app', 'Hobby'),
             'address' => Yii::t('app', 'Address'),
             'phone' => Yii::t('app', 'Phone'),
             'photo' => Yii::t('app', 'Photo'),
@@ -85,16 +91,22 @@ class Worker extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Gender::class, ['id' => 'gender']);
     }
+    public function getProfessions()
+    {
+        return $this->hasOne(Profession::class, ['id' => 'profession_id']);
+    }
+
 
     public function scenarios()
     {
         return [
             self::SCENARIO_EDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
-                'gender','phone','photo'
+                'gender','phone','photo','hobby','profession_id'
                 ],
             self::SCENARIO_WORKEREDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
-                'gender','phone','photo'
-                ]
+                'gender','phone','photo','hobby','profession_id'
+                ],
+            self::SCENARIO_WORKERLANG=>['hobby','profession_id']
 
         ];
     }

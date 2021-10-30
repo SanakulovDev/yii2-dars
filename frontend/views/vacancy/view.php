@@ -82,7 +82,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             'telegram',
             'address',
             'views',
-            'status',
+             'status',
             'deadline',
             'created_at',
 
