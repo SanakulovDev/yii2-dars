@@ -106,7 +106,7 @@ class VacancyController extends Controller
     {
         $model = $this->findModel($id);
         $image = UploadedFile::getInstance($model, 'image');
-        if ($this->request->isPost && $model->load($this->request->post()) &&$model->upload($image) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->upload($image) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

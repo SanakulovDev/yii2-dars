@@ -18,23 +18,7 @@ return [
     'modules' => [
         'sanakulov' => [
             'class' => 'mdm\admin\Module',
-
-
-
-
-
-
             'layout' => 'left-menu',
-//            'mainLayout' => '@mdm/admin/views/layouts/main.php',
-//            'menus' => [
-//                'assignment' => [
-//                    'label' => 'Grant Access' // change label
-//                ],
-//                'route' => null, // disable menu
-//            ],
-
-
-
         ],
     ],
 
