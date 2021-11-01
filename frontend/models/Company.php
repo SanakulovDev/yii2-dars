@@ -33,7 +33,7 @@ class Company extends \yii\db\ActiveRecord
     public $password;
     public $image;
 
-    const SCENARIO_UPDATE='login';
+    const SCENARIO_UPDATE='update';
     const SCENARIO_SIGNUP='signup';
     public static function tableName()
     {
@@ -55,7 +55,7 @@ class Company extends \yii\db\ActiveRecord
             [['phone'], 'string', 'max' => 30],
             [['email'], 'email'],
             [['password'],'string'],
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
+            [['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
         ];
     }
 
@@ -66,7 +66,7 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'userId' => Yii::t('app', 'User ID'),
+            'userId' => Yii::t('app', 'Username'),
             'name' => Yii::t('app', 'Company name'),
             'director_name' => Yii::t('app', 'Director Name'),
             'regionId' => Yii::t('app', 'Region'),

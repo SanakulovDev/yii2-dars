@@ -1,11 +1,11 @@
-<h1><?= Yii::t('app',ucfirst(Yii::$app->user->identity->username)." ".Yii::t('app',' personal information'))?></h1>
+<h1><?= Yii::t('app', ucfirst(Yii::$app->user->identity->username) . " " . Yii::t('app', ' personal information')) ?></h1>
 <?php
 /**
  *
  * @var \frontend\models\Worker $worker
  */
-$lang = 'name_'.Yii::$app->language;
-$langTolower = 'name'.ucfirst(Yii::$app->language);
+$lang = 'name_' . Yii::$app->language;
+$langTolower = 'name' . ucfirst(Yii::$app->language);
 echo \yii\widgets\DetailView::widget([
     'model' => $worker,
     'attributes' => [
@@ -37,8 +37,8 @@ echo \yii\widgets\DetailView::widget([
         ],
         'hobby',
         [
-                'attribute'=>'profession_id',
-                'value'=>$worker->profession_id
+            'attribute' => 'profession_id',
+            'value' =>  $worker->professions->$lang
         ]
 
     ],

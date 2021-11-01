@@ -170,25 +170,42 @@ class SiteController extends Controller
         $model->scenario = Company::SCENARIO_SIGNUP;
         $user = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
-
             $user->username = $model->username;
             $user->email = $model->email;
             $user->password = $model->password;
 
-            $user->role = isset($model->director_name) ? 'company' : 'worker';
-
+            $user->role = !empty($model->director_name) ? 'company' : 'worker';
+            $a = $user->role;
             if ($user = $user->signup()) {
-                $image = UploadedFile::getInstance($model, 'image');
+                if ($a === 'worker'){
+                    Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
+                    return $this->redirect('/site/login/');
+                }
+                $image = UploadedFile::getInstance($model, 'logo');
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
+                    return $this->redirect('/site/login/');
                 } else {
                     Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');
                 }
             }
-            return $this->redirect('/site/login/');
         }
+        else {
+            $user->username = $model->username;
+            $user->email = $model->email;
+            $user->password = $model->password;
 
+            $user->role = !empty($model->director_name) ? 'company' : 'worker';
+            $a = $user->role;
+            if ($user = $user->signup()) {
+                if ($a === 'worker'){
+                    Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
+                    return $this->redirect('/site/login/');
+                }
+
+            }
+        }
         return $this->render('signup', [
             'model' => $model
         ]);

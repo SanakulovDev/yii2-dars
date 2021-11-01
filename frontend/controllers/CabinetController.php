@@ -29,22 +29,22 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
-        if ($worker) {
-            return $this->render('worker',
-                ['worker' => $worker]);
-        }
-
-        return $this->render('index',
-        ['company' => $company]);
+        if ($company)
+            return $this->render('index',
+                ['company' => $company]);
+        return $this->redirect('worker');
     }
-
 
 
     public function actionWorker()
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-
+        if (empty($worker)){
+            return $this->render('worker',[
+                'worker'=>new Worker()
+            ]);
+        }
         return $this->render('worker', [
             'worker' => $worker
         ]);
@@ -63,20 +63,23 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $model = $this->findModel($identity->id);
-        $model->scenario = Company::SCENARIO_UPDATE;
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            $image = UploadedFile::getInstance($model, 'image');
-            if ($model->upload($image) && $model->save()) {
-                \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
-                return $this->redirect(['index', 'id' => $model->id]);
-            } else {
-                \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
+        if (!empty($model)) {
+            $model->scenario = Company::SCENARIO_UPDATE;
+            if ($this->request->isPost && $model->load($this->request->post())) {
+                $image = UploadedFile::getInstance($model, 'image');
+                if ($model->upload($image) && $model->save()) {
+                    \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
+                    return $this->redirect(['index', 'id' => $model->id]);
+                } else {
+                    \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
+                }
             }
+            return $this->render('edit', [
+                'model' => $model,
+            ]);
         }
+        return $this->redirect('index');
 
-        return $this->render('edit', [
-            'model' => $model,
-        ]);
     }
 
 
@@ -129,10 +132,10 @@ class CabinetController extends Controller
                     $worker->userId = $identity->id;
 
                     try {
-                        if ($flag =($worker->upload($image) && $worker->save(false))) {
+                        if ($flag = ($worker->upload($image) && $worker->save(false))) {
                             foreach ($modelsLaborActivity as $modelLaborActivity) {
                                 $modelLaborActivity->worker_id = $worker->id;
-                                if (! ($flag = $modelLaborActivity->save(false))) {
+                                if (!($flag = $modelLaborActivity->save(false))) {
                                     $transaction->rollBack();
                                     break;
                                 }

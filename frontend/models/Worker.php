@@ -35,7 +35,6 @@ class Worker extends \yii\db\ActiveRecord
 
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_WORKEREDIT = 'worker-edit';
-    const SCENARIO_WORKERLANG = 'worker-rezyume';
     public static function tableName()
     {
         return 'worker';

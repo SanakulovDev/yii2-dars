@@ -38,20 +38,22 @@ $cityList = [];
                     <?php endif; ?>
                 </div>
             </div>
-            <div >
-                <h3><?= Yii::t('app','Are you an employer or a job seeker?')?></h3>
+            <div>
+                <h3><?= Yii::t('app', 'Are you an employer or a job seeker?') ?></h3>
                 <div id="accordion" class=" row">
                     <div class="card col-md-6 p-0">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true"
                                         aria-controls="collapseOne">
                                     <?= Yii::t('app', 'Employer') ?>
                                 </button>
                             </h5>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                             data-parent="#accordion">
                             <div class="card-body ">
                                 <div class="col-lg-6" style="max-width: 100%!important;">
                                     <h2 class="mb-4"><?= Yii::t('app', 'Signup') ?></h2>
@@ -117,7 +119,8 @@ $cityList = [];
                     <div class="card col-md-6 p-0">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed d-block" data-toggle="collapse" data-target="#collapseTwo"
+                                <button class="btn btn-link collapsed d-block" data-toggle="collapse"
+                                        data-target="#collapseTwo"
                                         aria-expanded="false" aria-controls="collapseTwo">
                                     <?= Yii::t('app', 'Job seeker') ?>
                                 </button>
