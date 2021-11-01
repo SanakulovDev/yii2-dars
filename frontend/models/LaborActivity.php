@@ -32,9 +32,9 @@ class LaborActivity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['worker_id', 'position'], 'integer'],
+            [['worker_id'], 'integer'],
             [['form_date', 'to_date'], 'safe'],
-            [['company_name'], 'string', 'max' => 255],
+            [['company_name','position'], 'string', 'max' => 255],
             [['worker_id'], 'exist', 'skipOnError' => true, 'targetClass' => Worker::className(), 'targetAttribute' => ['worker_id' => 'id']],
         ];
     }

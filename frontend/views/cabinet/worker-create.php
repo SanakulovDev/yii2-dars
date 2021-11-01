@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\LaborActivity;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,5 +18,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Create');
 
 
 <?= $this->render('worker-form', [
-  'worker' => $worker
+  'worker' => $worker,
+  'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
 ]) ?>

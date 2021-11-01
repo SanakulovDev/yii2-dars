@@ -43,6 +43,5 @@ echo \yii\widgets\DetailView::widget([
 
     ],
 ]);
-
 ?>
 <?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/worker-edit', ['class' => 'btn btn-success']) ?>

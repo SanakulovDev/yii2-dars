@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\LaborActivity;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,4 +14,5 @@ $this->title = Yii::t('app', 'Update Lang: {name}', [
 
 <?= $this->render('worker-form', [
     'worker' => $worker,
+    'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
 ]) ?>

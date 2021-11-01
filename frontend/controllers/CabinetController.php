@@ -6,6 +6,7 @@ use common\models\Language;
 use common\models\User;
 use Complex\Exception;
 use frontend\models\Company;
+use frontend\models\LaborActivity;
 use frontend\models\Worker;
 use frontend\models\WorkerLanguage;
 use Yii;
@@ -28,64 +29,16 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
-        if ($company) {
-            return $this->render('index',
-                ['company' => $company]);
-        }
-        return $this->render('worker',
-            ['worker' => $worker]);
-    }
-
-    public function actionWorkerRezyume()
-    {
-        $modelWorker = new Worker;
-        $modelWorker->scenario = Worker::SCENARIO_WORKERLANG;
-        $modelsLanguage = [new WorkerLanguage];
-
-        if ($modelWorker->load(Yii::$app->request->post())) {
-
-            $modelsLanguage = Model::createMultiple(WorkerLanguage::classname());
-            Model::loadMultiple($modelsLanguage, Yii::$app->request->post());
-//             ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($modelsLanguage),
-                    ActiveForm::validate($modelWorker)
-                );
-            }
-
-            // validate all models
-            $valid = $modelWorker->validate();
-            $valid = Model::validateMultiple($modelsLanguage) && $valid;
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $modelWorker->save(false)) {
-                        foreach ($modelsLanguage as $modelLanguage) {
-                            $modelLanguage->worker_id = $modelWorker->id;
-                            $modelLanguage->other_lang = "Uz";
-                            if (!($flag = $modelLanguage->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
-                    }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['index']);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
-            }
+        if ($worker) {
+            return $this->render('worker',
+                ['worker' => $worker]);
         }
 
-        return $this->render('worker-rezyume', [
-            'modelWorker' => $modelWorker,
-            'modelsLanguage' => (empty($modelsLanguage)) ? [new WorkerLanguage] : $modelsLanguage
-        ]);
+        return $this->render('index',
+        ['company' => $company]);
     }
+
+
 
     public function actionWorker()
     {
@@ -145,8 +98,8 @@ class CabinetController extends Controller
 
 
             }
-            return $this->render('worker-edit',[
-                'worker'=>$worker
+            return $this->render('worker-edit', [
+                'worker' => $worker
             ]);
         }
 
@@ -157,15 +110,48 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-//        var_dump($worker);
+        $modelsLaborActivity = [new LaborActivity];
+
         $worker->scenario = Worker::SCENARIO_EDIT;
-        if ($worker->userId !== $identity->id) {
+        if (empty($worker->userId)) {
             if ($worker->load(\Yii::$app->request->post())) {
-                $image = UploadedFile::getInstance($worker, 'photo');
-                $worker->userId = $identity->id;
-                if ($worker->upload($image) && $worker->save())
-                    return $this->redirect('worker');
+
+                $modelsLaborActivity = Model::createMultiple(LaborActivity::classname());
+                Model::loadMultiple($modelsLaborActivity, Yii::$app->request->post());
+
+                // validate all models
+                $valid = $worker->validate();
+                $valid = Model::validateMultiple($modelsLaborActivity) && $valid;
+
+                if ($valid) {
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    $image = UploadedFile::getInstance($worker, 'photo');
+                    $worker->userId = $identity->id;
+
+                    try {
+                        if ($flag =($worker->upload($image) && $worker->save(false))) {
+                            foreach ($modelsLaborActivity as $modelLaborActivity) {
+                                $modelLaborActivity->worker_id = $worker->id;
+                                if (! ($flag = $modelLaborActivity->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
+                            }
+                        }
+
+                        if ($flag) {
+                            $transaction->commit();
+                            return $this->redirect('worker');
+                        }
+                    } catch (Exception $e) {
+                        $transaction->rollBack();
+                    }
+                }
             }
+            return $this->render('worker-create', [
+                'worker' => $worker,
+                'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
+            ]);
 
         }
 
@@ -181,7 +167,6 @@ class CabinetController extends Controller
         }
         return null;
     }
-
 
 
 }
