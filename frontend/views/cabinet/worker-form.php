@@ -1,5 +1,6 @@
 <?php
 
+use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
@@ -61,15 +62,34 @@ $this->registerJs($js);
         <?= $form->field($worker, 'patronymic')->textInput() ?>
     </div>
     <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'birthdate')->textInput() ?>
+        <?= $form->field($worker, 'birthdate')->widget(\yii\jui\DatePicker::classname(), [
+            'language' => 'ru',
+            'dateFormat' => 'yyyy-MM-dd',
+        ]) ?>
     </div>
 </div>
 <div class="row form-group ">
     <div class="col-md-6 mb-3 ">
-        <?= $form->field($worker, 'regionId')->dropdownList($regionList) ?>
+        <?= $form->field($worker, 'regionId')->widget(Select2::classname(), [
+            'data' => $regionList,
+            'language' => 'en',
+            'options' => ['placeholder' => 'Select a state ...'],
+//            'pluginOptions' => [
+//                'allowClear' => true
+//            ],
+        ]);
+        ?>
     </div>
     <div class="col-md-6 mb-3 ">
-        <?= $form->field($worker, 'cityId')->dropdownList($cityList) ?>
+        <?= $form->field($worker, 'cityId')->widget(Select2::classname(), [
+            'data' => $cityList,
+            'language' => 'en',
+            'options' => ['placeholder' => 'Select a state ...'],
+//            'pluginOptions' => [
+//                'allowClear' => true
+//            ],
+        ]);
+        ?>
     </div>
 </div>
 <div class="row form-group ">
@@ -95,7 +115,15 @@ $this->registerJs($js);
         <?= $form->field($worker, 'hobby')->textInput() ?>
     </div>
      <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'profession_id')->dropDownList($profession_list) ?>
+        <?= $form->field($worker, 'profession_id')->widget(Select2::classname(), [
+            'data' => $profession_list,
+            'language' => 'en',
+            'options' => ['placeholder' => 'Select a state ...'],
+//            'pluginOptions' => [
+//                'allowClear' => true
+//            ],
+        ]);
+        ?>
     </div>
 </div>
 
@@ -180,6 +208,8 @@ $this->registerJs($js);
 </div>
 
 <?php ActiveForm::end(); ?>
+
+
 
 
 

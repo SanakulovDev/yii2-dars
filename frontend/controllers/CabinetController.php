@@ -40,9 +40,9 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-        if (empty($worker)){
-            return $this->render('worker',[
-                'worker'=>new Worker()
+        if (empty($worker)) {
+            return $this->render('worker', [
+                'worker' => new Worker()
             ]);
         }
         return $this->render('worker', [
@@ -112,54 +112,52 @@ class CabinetController extends Controller
     public function actionWorkerCreate()
     {
         $identity = \Yii::$app->user->identity;
-        $worker = $this->findWorker($identity->id);
+        $worker = new Worker();
         $modelsLaborActivity = [new LaborActivity];
 
         $worker->scenario = Worker::SCENARIO_EDIT;
-        if (empty($worker->userId)) {
-            if ($worker->load(\Yii::$app->request->post())) {
+        if ($worker->load(\Yii::$app->request->post())) {
 
-                $modelsLaborActivity = Model::createMultiple(LaborActivity::classname());
-                Model::loadMultiple($modelsLaborActivity, Yii::$app->request->post());
+            $modelsLaborActivity = Model::createMultiple(LaborActivity::classname());
+            Model::loadMultiple($modelsLaborActivity, Yii::$app->request->post());
 
-                // validate all models
-                $valid = $worker->validate();
-                $valid = Model::validateMultiple($modelsLaborActivity) && $valid;
+            // validate all models
+            $valid = $worker->validate();
+            $valid = Model::validateMultiple($modelsLaborActivity) && $valid;
 
-                if ($valid) {
-                    $transaction = \Yii::$app->db->beginTransaction();
-                    $image = UploadedFile::getInstance($worker, 'photo');
-                    $worker->userId = $identity->id;
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                $image = UploadedFile::getInstance($worker, 'photo');
+                $worker->userId = $identity->id;
 
-                    try {
-                        if ($flag = ($worker->upload($image) && $worker->save(false))) {
-                            foreach ($modelsLaborActivity as $modelLaborActivity) {
-                                $modelLaborActivity->worker_id = $worker->id;
-                                if (!($flag = $modelLaborActivity->save(false))) {
-                                    $transaction->rollBack();
-                                    break;
-                                }
+                try {
+                    if ($flag = ($worker->upload($image) && $worker->save(false))) {
+                        foreach ($modelsLaborActivity as $modelLaborActivity) {
+                            $modelLaborActivity->worker_id = $worker->id;
+                            if (!($flag = $modelLaborActivity->save(false))) {
+                                $transaction->rollBack();
+                                break;
                             }
                         }
-
-                        if ($flag) {
-                            $transaction->commit();
-                            return $this->redirect('worker');
-                        }
-                    } catch (Exception $e) {
-                        $transaction->rollBack();
                     }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect('worker');
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
                 }
             }
-            return $this->render('worker-create', [
-                'worker' => $worker,
-                'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
-            ]);
 
+            return $this->redirect('worker-edit');
         }
 
+        return $this->render('worker-create', [
+            'worker' => $worker,
+            'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
+        ]);
 
-        return $this->redirect('worker-edit');
 
     }
 
