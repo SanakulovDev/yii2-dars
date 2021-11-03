@@ -5,6 +5,8 @@
  * @var \frontend\models\Worker $worker
  * @var \frontend\models\WorkerLanguage $modelsWorkerLanguage
  */
+
+use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\widgets\ActiveForm;
@@ -29,6 +31,7 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
         jQuery(this).html("LaborActivity: " + (index + 1))
     });
 });
+
 
 
 
@@ -78,7 +81,7 @@ $this->registerJs($js);
     </div>
 </div>
 <div class="row form-group ">
-    <div class="col-md-6 mb-3 ">
+    <div class="col-md-4 mb-3 ">
         <?= $form->field($worker, 'regionId')->widget(Select2::classname(), [
             'data' => $regionList,
             'language' => 'en',
@@ -89,9 +92,20 @@ $this->registerJs($js);
         ]);
         ?>
     </div>
-    <div class="col-md-6 mb-3 ">
+    <div class="col-md-4 mb-3 ">
         <?= $form->field($worker, 'cityId')->widget(Select2::classname(), [
             'data' => $cityList,
+            'language' => 'en',
+            'options' => ['placeholder' => 'Select a state ...','class'=>'form-control'],
+//            'pluginOptions' => [
+//                'allowClear' => true
+//            ],
+        ]);
+        ?>
+    </div>
+    <div class="col-md-4 mb-3">
+        <?= $form->field($worker, 'profession_id')->widget(Select2::classname(), [
+            'data' => $profession_list,
             'language' => 'en',
             'options' => ['placeholder' => 'Select a state ...'],
 //            'pluginOptions' => [
@@ -123,25 +137,14 @@ $this->registerJs($js);
     <div class="col-md-6 mb-3">
         <?= $form->field($worker, 'hobby')->textInput() ?>
     </div>
-     <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'profession_id')->widget(Select2::classname(), [
-            'data' => $profession_list,
-            'language' => 'en',
-            'options' => ['placeholder' => 'Select a state ...'],
-//            'pluginOptions' => [
-//                'allowClear' => true
-//            ],
-        ]);
-        ?>
-    </div>
-</div>
-
-<div class="row form-group ">
     <div class="col-md-6 mb-3 ">
         <?= $form->field($worker, 'photo')->fileInput() ?>
     </div>
+</div>
 
-
+<!--Dynamic form labor activity-->
+<div class="padding-v-md">
+    <div class="line line-dashed"></div>
 </div>
 <div class="row">
     <?php DynamicFormWidget::begin([
@@ -149,7 +152,7 @@ $this->registerJs($js);
         'widgetBody' => '.container-items', // required: css class selector
         'widgetItem' => '.item', // required: css class
         'limit' => 4, // the maximum times, an element can be cloned (default 999)
-        'min' => 1, // 0 or 1 (default 1)
+        'min' => 0, // 0 or 1 (default 1)
         'insertButton' => '.add-item', // css class
         'deleteButton' => '.remove-item', // css class
         'model' => $modelsLaborActivity[0],
@@ -157,14 +160,14 @@ $this->registerJs($js);
         'formFields' => [
             'company_name',
             'position',
-            'form_date',
+            'form-date',
             'to_date'
         ],
     ]); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> LaborActivity Book
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Add address</button>
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> <?=Yii::t('app','Add Labor Activity')?></button>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
@@ -182,20 +185,41 @@ $this->registerJs($js);
                             echo Html::activeHiddenInput($modelLaborActivity, "[{$index}]id");
                         }
                         ?>
-                        <?= $form->field($modelLaborActivity, "[{$index}]company_name")->textInput(['maxlength' => true]) ?>
+
 
                         <div class="row">
+                            <div class="col-sm-6">
+                                <?= $form->field($modelLaborActivity, "[{$index}]company_name")->textInput(['maxlength' => true]) ?>
+                            </div>
                             <div class="col-sm-6">
                                 <?= $form->field($modelLaborActivity, "[{$index}]position")->textInput(['maxlength' => true]) ?>
                             </div>
-                            <div class="col-sm-6">
-                                <?= $form->field($modelLaborActivity, "[{$index}]form_date")->textInput(['maxlength' => true]) ?>
-                            </div>
+
                         </div><!-- end:row -->
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelLaborActivity, "[{$index}]to_date")->textInput(['maxlength' => true]) ?>
+                                <label for="laboractivity-form_date"><?=Yii::t('app','Time to start work')?></label>
+                                <?php
+                                echo DatePicker::widget([
+                                    'model' => $modelLaborActivity,
+                                    'attribute' => 'form_date',
+                                    'language' => 'ru',
+//                                    'dateFormat' => 'yyyy-MM-dd',
+                                ]);
+                                ?>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="laboractivity-to_date"><?=Yii::t('app','Time to finish work')?></label>
+                                <?php
+                                echo DatePicker::widget([
+                                    'model' => $modelLaborActivity,
+                                    'attribute' => 'to_date',
+                                    'language' => 'ru',
+//                                    'dateFormat' => 'yyyy-MM-dd',
+                                ]);
+                                ?>
                             </div>
                         </div><!-- end:row -->
 
@@ -208,64 +232,8 @@ $this->registerJs($js);
 
 
 </div>
-<div class="row">
-    <?php DynamicFormWidget::begin([
-        'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
-        'widgetBody' => '.container-items-language', // required: css class selector
-        'widgetItem' => '.item-language', // required: css class
-        'limit' => 4, // the maximum times, an element can be cloned (default 999)
-        'min' => 1, // 0 or 1 (default 1)
-        'insertButton' => '.add-item-language', // css class
-        'deleteButton' => '.remove-item-language', // css class
-        'model' => $modelsLaborActivity[0],
-        'formId' => 'dynamic-form',
-        'formFields' => [
-            'language_id',
-            'rate'
-        ],
-    ]); ?>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-envelope"></i> <?=Yii::t('app','Worker language books')?>
-            <button type="button" class="pull-right add-item-language btn btn-success btn-xs"><i class="fa fa-plus"></i><?=Yii::t('app','Add Worker Language')?></button>
-            <div class="clearfix"></div>
-        </div>
-        <div class="panel-body container-items-language"><!-- widgetContainer -->
-            <?php foreach ($modelsWorkerLanguage as $index => $modelWorkerLanguage): ?>
-                <div class="item-language panel panel-default"><!-- widgetBody -->
-                    <div class="panel-heading">
-                        <span class="panel-title-address">WorkerLanguage: <?= ($index + 1) ?></span>
-                        <button type="button" class="pull-right remove-item-language btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="panel-body">
-                        <?php
-                        // necessary for update action.
-                        if (!$modelWorkerLanguage->isNewRecord) {
-                            echo Html::activeHiddenInput($modelWorkerLanguage, "[{$index}]id");
-                        }
-                        ?>
+<!--Dynamic form Model language-->
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <?= $form->field($modelWorkerLanguage, "[{$index}]language_id")->dropDownList($language_list,['prompt'=>Yii::t('app','Select a language')]) ?>
-                            </div>
-                            <div class="col-sm-6">
-                                <?= $form->field($modelWorkerLanguage, "[{$index}]rate")->dropDownList([1,2,3,4,5]) ?>
-                            </div>
-                        </div><!-- end:row -->
-
-
-
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php DynamicFormWidget::end(); ?>
-
-
-</div>
 <div class="row form-group">
 
     <div class="col-md-12">

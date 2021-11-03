@@ -190,7 +190,7 @@ protected function findWorkerlanguage($worker_id)
         return $this->render('worker-create', [
             'worker' => $worker,
             'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity,
-            'modelsWorkerlanguage' => (empty($modelsWorkerlanguage)) ? [new Workerlanguage] : $modelsWorkerlanguage
+            'modelsWorkerLanguage' => (empty($modelsWorkerLanguage)) ? [new WorkerLanguage] : $modelsWorkerLanguage
         ]);
 
 
