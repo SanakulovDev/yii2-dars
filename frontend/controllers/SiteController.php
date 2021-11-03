@@ -191,21 +191,21 @@ class SiteController extends Controller
                 }
             }
         }
-        else {
-            $user->username = $model->username;
-            $user->email = $model->email;
-            $user->password = $model->password;
-
-            $user->role = !empty($model->director_name) ? 'company' : 'worker';
-            $a = $user->role;
-            if ($user = $user->signup()) {
-                if ($a === 'worker'){
-                    Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
-                    return $this->redirect('/site/login/');
-                }
-
-            }
-        }
+//        else {
+//            $user->username = $model->username;
+//            $user->email = $model->email;
+//            $user->password = $model->password;
+//
+//            $user->role = !empty($model->director_name) ? 'company' : 'worker';
+//            $a = $user->role;
+//            if ($user = $user->signup()) {
+//                if ($a === 'worker'){
+//                    Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
+//                    return $this->redirect('/site/login/');
+//                }
+//
+//            }
+//        }
         return $this->render('signup', [
             'model' => $model
         ]);

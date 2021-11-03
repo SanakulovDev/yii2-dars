@@ -3,6 +3,8 @@
 /**
  *
  * @var \frontend\models\Worker $worker
+ * @var \frontend\models\LaborActivity $laborActivity
+ * @var \frontend\models\WorkerLanguage $workerLanguage
  */
 $lang = 'name_' . Yii::$app->language;
 $langTolower = 'name' . ucfirst(Yii::$app->language);
@@ -38,9 +40,34 @@ echo \yii\widgets\DetailView::widget([
         'hobby',
         [
             'attribute' => 'profession_id',
-            'value' =>  $worker->professions->$lang
+            'value' => $worker->professions->$lang
         ]
 
+    ],
+]);
+
+?>
+<h1>Labor Activity</h1>
+<?php
+echo \yii\widgets\DetailView::widget([
+    'model' => $laborActivity,
+    'attributes' => [
+        'company_name',
+        'position',
+        'form_date',
+        'to_date'
+    ],
+]);
+?>
+<h1>Worker Language</h1>
+<?php
+echo \yii\widgets\DetailView::widget([
+    'model' => $workerLanguage,
+    'attributes' => [
+        'name_uz',
+        'name_en',
+        'name_ru',
+        'name_cyrl'
     ],
 ]);
 ?>

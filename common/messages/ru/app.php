@@ -101,8 +101,9 @@ return [
     'Terms of Service'=>'условия обслуживания',
     //    Pagination
     'Prev'=>'',
-    'Next'=>''
+    'Next'=>'',
 
-
+    // worker-form translate
+    'Select a language'=>'Выберите язык',
 ];
 ?>

@@ -40,13 +40,19 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
+        $laborActivity = $this->findLaborAcitivity($worker->id);
+        $workerLanguage  = $this->findWorkerlanguage($worker->id);
         if (empty($worker)) {
             return $this->render('worker', [
-                'worker' => new Worker()
+                'worker' => new Worker(),
+                'laborActivity'=>$laborActivity,
+                'workerLanguage'=>$workerLanguage
             ]);
         }
         return $this->render('worker', [
-            'worker' => $worker
+            'worker' => $worker,
+            'laborActivity'=>$laborActivity,
+            'workerLanguage'=>$workerLanguage
         ]);
     }
 
@@ -54,6 +60,22 @@ class CabinetController extends Controller
     {
         if (($company = Company::findOne(['userId' => $userId])) !== null) {
             return $company;
+        }
+        return false;
+
+    }
+    protected function findLaborAcitivity($worker_id)
+    {
+        if (($laborActivity = LaborActivity::findOne(['worker_id' => $worker_id])) !== null) {
+            return $laborActivity;
+        }
+        return false;
+
+    }
+protected function findWorkerlanguage($worker_id)
+    {
+        if (($laborActivity = WorkerLanguage::findAll(['worker_id' => $worker_id])) !== null) {
+            return $laborActivity;
         }
         return false;
 
@@ -88,6 +110,8 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
         $worker->scenario = Worker::SCENARIO_WORKEREDIT;
+
+
         if (!empty($worker)) {
             if ($worker->load($this->request->post())) {
                 $image = UploadedFile::getInstance($worker, 'photo');
@@ -108,23 +132,26 @@ class CabinetController extends Controller
 
         return $this->redirect(['worker-create']);
     }
-
+//worker create action location
     public function actionWorkerCreate()
     {
         $identity = \Yii::$app->user->identity;
         $worker = new Worker();
         $modelsLaborActivity = [new LaborActivity];
-
+        $modelsWorkerLanguage = [new WorkerLanguage];
         $worker->scenario = Worker::SCENARIO_EDIT;
         if ($worker->load(\Yii::$app->request->post())) {
 
             $modelsLaborActivity = Model::createMultiple(LaborActivity::classname());
             Model::loadMultiple($modelsLaborActivity, Yii::$app->request->post());
 
+            $modelsWorkerLanguage = Model::createMultiple(WorkerLanguage::classname());
+            Model::loadMultiple($modelsWorkerLanguage, Yii::$app->request->post());
+
             // validate all models
             $valid = $worker->validate();
             $valid = Model::validateMultiple($modelsLaborActivity) && $valid;
-
+             $valid = Model::validateMultiple($modelsWorkerLanguage) && $valid;
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 $image = UploadedFile::getInstance($worker, 'photo');
@@ -135,6 +162,13 @@ class CabinetController extends Controller
                         foreach ($modelsLaborActivity as $modelLaborActivity) {
                             $modelLaborActivity->worker_id = $worker->id;
                             if (!($flag = $modelLaborActivity->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                        foreach ($modelsWorkerLanguage as $modelWorkerLanguage) {
+                            $modelWorkerLanguage->worker_id = $worker->id;
+                            if (!($flag = $modelWorkerLanguage->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }
@@ -155,7 +189,8 @@ class CabinetController extends Controller
 
         return $this->render('worker-create', [
             'worker' => $worker,
-            'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity
+            'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity,
+            'modelsWorkerlanguage' => (empty($modelsWorkerlanguage)) ? [new Workerlanguage] : $modelsWorkerlanguage
         ]);
 
 

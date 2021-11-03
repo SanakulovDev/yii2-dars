@@ -101,6 +101,12 @@ return [
 
 //    Pagination
     'Prev'=>'',
-    'Next'=>''
+    'Next'=>'',
+
+
+// worker-form translate
+    'Select a language'=>'Тилни танланг',
+
+
 ];
 ?>

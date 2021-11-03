@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @var \frontend\models\LaborActivity $modelsLaborActivity
+ * @var \frontend\models\Worker $worker
+ * @var \frontend\models\WorkerLanguage $modelsWorkerLanguage
+ */
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\widgets\ActiveForm;
@@ -9,6 +14,7 @@ $cityList = \common\models\City::selectList($worker->regionId);
 $nationality = \frontend\models\Nationality::selectList();
 $genderList = \common\models\Gender::selectList();
 $profession_list = \common\models\Profession::selectList();
+$language_list = \common\models\Language::selectList();
 
 
 $js = '
@@ -23,6 +29,9 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
         jQuery(this).html("LaborActivity: " + (index + 1))
     });
 });
+
+
+
 ';
 
 $this->registerJs($js);
@@ -199,7 +208,64 @@ $this->registerJs($js);
 
 
 </div>
+<div class="row">
+    <?php DynamicFormWidget::begin([
+        'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+        'widgetBody' => '.container-items-language', // required: css class selector
+        'widgetItem' => '.item-language', // required: css class
+        'limit' => 4, // the maximum times, an element can be cloned (default 999)
+        'min' => 1, // 0 or 1 (default 1)
+        'insertButton' => '.add-item-language', // css class
+        'deleteButton' => '.remove-item-language', // css class
+        'model' => $modelsLaborActivity[0],
+        'formId' => 'dynamic-form',
+        'formFields' => [
+            'language_id',
+            'rate'
+        ],
+    ]); ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-envelope"></i> <?=Yii::t('app','Worker language books')?>
+            <button type="button" class="pull-right add-item-language btn btn-success btn-xs"><i class="fa fa-plus"></i><?=Yii::t('app','Add Worker Language')?></button>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body container-items-language"><!-- widgetContainer -->
+            <?php foreach ($modelsWorkerLanguage as $index => $modelWorkerLanguage): ?>
+                <div class="item-language panel panel-default"><!-- widgetBody -->
+                    <div class="panel-heading">
+                        <span class="panel-title-address">WorkerLanguage: <?= ($index + 1) ?></span>
+                        <button type="button" class="pull-right remove-item-language btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <?php
+                        // necessary for update action.
+                        if (!$modelWorkerLanguage->isNewRecord) {
+                            echo Html::activeHiddenInput($modelWorkerLanguage, "[{$index}]id");
+                        }
+                        ?>
 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <?= $form->field($modelWorkerLanguage, "[{$index}]language_id")->dropDownList($language_list,['prompt'=>Yii::t('app','Select a language')]) ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <?= $form->field($modelWorkerLanguage, "[{$index}]rate")->dropDownList([1,2,3,4,5]) ?>
+                            </div>
+                        </div><!-- end:row -->
+
+
+
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php DynamicFormWidget::end(); ?>
+
+
+</div>
 <div class="row form-group">
 
     <div class="col-md-12">

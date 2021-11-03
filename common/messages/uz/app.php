@@ -98,7 +98,10 @@ return [
 
     //    Pagination
     'Prev'=>'',
-    'Next'=>''
+    'Next'=>'',
+
+    // worker-form translate
+    'Select a language'=>'Tilni tanlang',
 
 ];
 ?>
