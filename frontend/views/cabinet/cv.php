@@ -19,7 +19,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
     <div class="col-sm-12">
         <table class="table table-hover">
             <tr>
-                <td>
+                <td class="">
                     <?php
                     echo \yii\widgets\DetailView::widget([
                         'model' => $worker,
