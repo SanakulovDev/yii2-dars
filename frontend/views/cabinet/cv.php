@@ -23,7 +23,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <?php
                     echo \yii\widgets\DetailView::widget([
                         'model' => $worker,
-                        'options'=>['class'=>''],
+                        'options'=>['class'=>'table table-bordered'],
                         'attributes' => [
                             'firstname',
                             'lastname',
@@ -66,7 +66,8 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
         <table class="table">
             <tr>
                 <td>
-                    <h3 style="font-weight: bold;"><?= Yii::t('app', 'Hobbies') ?></h3>
+                    <h3 style="font-weight: bold;" class="bg-warning"><?= Yii::t('app', 'Hobbies') ?></h3>
+                    <a href="https://m.kun.uz">KUn uz</a>
                 </td>
                 <td>
                     <?= $worker->hobby ?>

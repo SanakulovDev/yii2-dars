@@ -119,7 +119,7 @@ class Worker extends \yii\db\ActiveRecord
             self::SCENARIO_WORKEREDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
                 'gender','phone','photo','hobby','profession_id'
                 ],
-            self::SCENARIO_WORKERLANG=>['hobby','profession_id']
+//            self::SCENARIO_WORKERLANG=>['hobby','profession_id']
 
         ];
     }

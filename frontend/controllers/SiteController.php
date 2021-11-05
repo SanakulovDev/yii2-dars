@@ -13,6 +13,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
 use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
+use frontend\models\Worker;
 use Mpdf\Tag\Article;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -88,12 +89,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $jobSats = JobStats::findOne(['id'=>1]);
-
-        $query = Partners::find()
-            ->where(['status' => 1])
-            ->orderBy('order')
-            ->all();
+        $jobSats = JobStats::findOne(['id' => 1]);
+            $query = Partners::find()
+                ->where(['status' => 1])
+                ->orderBy('order')
+                ->all();
         return $this->render('index', [
             'query' => $query,
             'jobStats' => $jobSats

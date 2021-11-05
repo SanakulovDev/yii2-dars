@@ -11,6 +11,7 @@ use Yii;
  * @property int $company_number
  * @property int $job_post_number
  * @property int $user_number
+ * @property int $cv_count
  */
 class JobStats extends \yii\db\ActiveRecord
 {
@@ -28,8 +29,8 @@ class JobStats extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_number', 'job_post_number', 'user_number'], 'required'],
-            [['company_number', 'job_post_number', 'user_number'], 'integer'],
+            [['company_number', 'job_post_number', 'user_number','cv_count'], 'required'],
+            [['company_number', 'job_post_number', 'user_number','cv_count'], 'integer'],
         ];
     }
 
@@ -43,6 +44,7 @@ class JobStats extends \yii\db\ActiveRecord
             'company_number' => Yii::t('app', 'Company Number'),
             'job_post_number' => Yii::t('app', 'Job Post Number'),
             'user_number' => Yii::t('app', 'User Number'),
+            'cv_count' => Yii::t('app', 'Workers'),
         ];
     }
 }

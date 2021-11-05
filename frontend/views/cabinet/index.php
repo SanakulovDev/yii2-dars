@@ -30,7 +30,6 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
         ],
     ],
 ]);
-
 ?>
  <?= Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success'])?>
 

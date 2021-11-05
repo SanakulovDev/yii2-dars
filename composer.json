@@ -54,8 +54,8 @@
         "rmrevin/yii2-fontawesome": "2.10.*",
         "2amigos/yii2-tinymce-widget": "~1.1",
         "wbraganca/yii2-dynamicform": "*",
-        "kartik-v/yii2-mpdf": "dev-master"
-
+        "kartik-v/yii2-mpdf": "dev-master",
+        "conquer/i18n": "*"
 
 
     }

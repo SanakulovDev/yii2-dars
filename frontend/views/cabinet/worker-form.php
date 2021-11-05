@@ -89,7 +89,7 @@ $this->registerJs($js);
             'name' => 'birthdate',
             'options' => ['placeholder' => 'Select a birthdate'],
             'pluginOptions' => [
-                'format' => 'dd-M-yyyy',
+                'format' => 'yyyy-mm-dd',
             ]
         ]);
         ?>
@@ -198,7 +198,7 @@ $this->registerJs($js);
                                     'value' => '',
                                     'options' => ['placeholder' => 'Select issue date ...'],
                                     'pluginOptions' => [
-                                        'format' => 'dd-M-yyyy',
+                                        'format' => 'yyyy-mm-dd',
                                     ]
                                 ]);
                                 ?>
@@ -210,7 +210,7 @@ $this->registerJs($js);
                                     'value' => '',
                                     'options' => ['placeholder' => 'Select issue date ...'],
                                     'pluginOptions' => [
-                                        'format' => 'dd-M-yyyy',
+                                        'format' => 'yyyy-mm-dd',
                                         'todayHighlight' => true
                                     ]
                                 ]);

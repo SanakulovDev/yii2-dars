@@ -24,7 +24,7 @@ $this->title = 'My Yii Application';
 
             </div>
             <?php foreach ($query as $item): ?>
-                <div class="col-6 col-lg-4 col-md-6 text-center">
+                <div class="col-6 col-lg-3 col-md-6 text-center">
                     <a href="<?= $item->url ?>">
                         <img src="<?= "/uploads/" . $item->logo ?>" alt="Image" class="img-fluid"
                              style="max-width: <?= $item->maxwidth ?>px;">
@@ -55,21 +55,26 @@ $this->title = 'My Yii Application';
                 <span class="caption"><?=Yii::t('app','Company  count')?></span>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number" data-number=<?=$jobStats->job_post_number?>><?=$jobStats->job_post_number?></strong>
                 </div>
                 <span class="caption"><?=Yii::t('app','Vacancies')?></span>
             </div>
 
-            <div class="col-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number" data-number=<?=$jobStats->user_number?>><?=$jobStats->user_number?></strong>
                 </div>
                 <span class="caption"><?=Yii::t('app','User count')?></span>
             </div>
-
-
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number"
+                            data-number=<?= $jobStats->cv_count ?>><?= $jobStats->cv_count ?></strong>
+                </div>
+                <span class="caption"><?= Yii::t('app', 'Workers') ?></span>
+            </div>
 
 
         </div>
