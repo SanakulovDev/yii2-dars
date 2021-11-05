@@ -95,6 +95,19 @@ class Worker extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Profession::class, ['id' => 'profession_id']);
     }
+    public function getWorkerLanguage()
+    {
+        return $this->hasOne(WorkerLanguage::class, ['id' => 'worker_id']);
+    }
+    public function getWorkerLanguages()
+    {
+        return $this->hasMany(WorkerLanguage::class, ['worker_id' => 'id']);
+    }
+
+    public function getLaborActivity()
+    {
+        return $this->hasMany(LaborActivity::class, ['worker_id' => 'id']);
+    }
 
 
     public function scenarios()

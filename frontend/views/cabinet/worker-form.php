@@ -6,11 +6,13 @@
  * @var \frontend\models\WorkerLanguage $modelsWorkerLanguage
  */
 
+use frontend\models\WorkerLanguage;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+
 $regionList = \common\models\Region::selectList();
 $cityList = \common\models\City::selectList($worker->regionId);
 $nationality = \frontend\models\Nationality::selectList();
@@ -32,8 +34,17 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
     });
 });
 
+jQuery(".dynamicform_wrapper_language").on("afterInsert", function(e, item) {
+    jQuery(".dynamicform_wrapper_language .panel-title-language").each(function(index) {
+        jQuery(this).html("Worker Language: " + (index + 1))
+    });
+});
 
-
+jQuery(".dynamicform_wrapper_language").on("afterDelete", function(e) {
+    jQuery(".dynamicform_wrapper_language .panel-title-language").each(function(index) {
+        jQuery(this).html("Worker Language: " + (index + 1))
+    });
+});
 
 ';
 
@@ -41,7 +52,7 @@ $this->registerJs($js);
 ?>
 
 <h2 class="mb-4"><?= Yii::t('app', 'Edit worker information') ?></h2>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data','id'=>'dynamic-form']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'id' => 'dynamic-form']]); ?>
 <div class="col-md-12">
     <?php if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -74,45 +85,25 @@ $this->registerJs($js);
         <?= $form->field($worker, 'patronymic')->textInput() ?>
     </div>
     <div class="col-md-6 mb-3">
-        <?= $form->field($worker, 'birthdate')->widget(\yii\jui\DatePicker::classname(), [
-            'language' => 'ru',
-            'dateFormat' => 'yyyy-MM-dd',
-        ]) ?>
+        <?= DatePicker::widget([
+            'name' => 'birthdate',
+            'options' => ['placeholder' => 'Select a birthdate'],
+            'pluginOptions' => [
+                'format' => 'dd-M-yyyy',
+            ]
+        ]);
+        ?>
     </div>
 </div>
 <div class="row form-group ">
     <div class="col-md-4 mb-3 ">
-        <?= $form->field($worker, 'regionId')->widget(Select2::classname(), [
-            'data' => $regionList,
-            'language' => 'en',
-            'options' => ['placeholder' => 'Select a state ...'],
-//            'pluginOptions' => [
-//                'allowClear' => true
-//            ],
-        ]);
-        ?>
+        <?= $form->field($worker, 'regionId')->dropDownList($regionList, ['prompt' => 'Select a region']) ?>
     </div>
     <div class="col-md-4 mb-3 ">
-        <?= $form->field($worker, 'cityId')->widget(Select2::classname(), [
-            'data' => $cityList,
-            'language' => 'en',
-            'options' => ['placeholder' => 'Select a state ...','class'=>'form-control'],
-//            'pluginOptions' => [
-//                'allowClear' => true
-//            ],
-        ]);
-        ?>
+        <?= $form->field($worker, 'cityId')->dropDownList($cityList, ['prompt' => 'Select a city']) ?>
     </div>
     <div class="col-md-4 mb-3">
-        <?= $form->field($worker, 'profession_id')->widget(Select2::classname(), [
-            'data' => $profession_list,
-            'language' => 'en',
-            'options' => ['placeholder' => 'Select a state ...'],
-//            'pluginOptions' => [
-//                'allowClear' => true
-//            ],
-        ]);
-        ?>
+        <?= $form->field($worker, 'profession_id')->dropDownList($profession_list, ['prompt' => 'Select a profession']) ?>
     </div>
 </div>
 <div class="row form-group ">
@@ -129,7 +120,7 @@ $this->registerJs($js);
     <div class="col-md-6 mb-3">
         <?= $form->field($worker, 'gender')->dropDownList($genderList) ?>
     </div>
-     <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3">
         <?= $form->field($worker, 'nationality_id')->dropDownList($nationality) ?>
     </div>
 </div>
@@ -143,16 +134,14 @@ $this->registerJs($js);
 </div>
 
 <!--Dynamic form labor activity-->
-<div class="padding-v-md">
-    <div class="line line-dashed"></div>
-</div>
+
 <div class="row">
     <?php DynamicFormWidget::begin([
         'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
         'widgetBody' => '.container-items', // required: css class selector
         'widgetItem' => '.item', // required: css class
         'limit' => 4, // the maximum times, an element can be cloned (default 999)
-        'min' => 0, // 0 or 1 (default 1)
+        'min' => 1, // 0 or 1 (default 1)
         'insertButton' => '.add-item', // css class
         'deleteButton' => '.remove-item', // css class
         'model' => $modelsLaborActivity[0],
@@ -160,22 +149,27 @@ $this->registerJs($js);
         'formFields' => [
             'company_name',
             'position',
-            'form-date',
+            'form_date',
             'to_date'
         ],
     ]); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> LaborActivity Book
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> <?=Yii::t('app','Add Labor Activity')?></button>
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i
+                        class="fa fa-plus"></i> <?= Yii::t('app', 'Add Labor Activity') ?></button>
             <div class="clearfix"></div>
         </div>
+
+
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsLaborActivity as $index => $modelLaborActivity): ?>
+
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <span class="panel-title-address">LaborActivity: <?= ($index + 1) ?></span>
-                        <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i
+                                    class="fa fa-minus"></i></button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
@@ -199,25 +193,26 @@ $this->registerJs($js);
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="laboractivity-form_date"><?=Yii::t('app','Time to start work')?></label>
-                                <?php
-                                echo DatePicker::widget([
-                                    'model' => $modelLaborActivity,
-                                    'attribute' => 'form_date',
-                                    'language' => 'ru',
-//                                    'dateFormat' => 'yyyy-MM-dd',
+                                <?= DatePicker::widget([
+                                    'name' => 'form_date',
+                                    'value' => '',
+                                    'options' => ['placeholder' => 'Select issue date ...'],
+                                    'pluginOptions' => [
+                                        'format' => 'dd-M-yyyy',
+                                    ]
                                 ]);
                                 ?>
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="laboractivity-to_date"><?=Yii::t('app','Time to finish work')?></label>
-                                <?php
-                                echo DatePicker::widget([
-                                    'model' => $modelLaborActivity,
-                                    'attribute' => 'to_date',
-                                    'language' => 'ru',
-//                                    'dateFormat' => 'yyyy-MM-dd',
+                                <?= DatePicker::widget([
+                                    'name' => 'to_date',
+                                    'value' => '',
+                                    'options' => ['placeholder' => 'Select issue date ...'],
+                                    'pluginOptions' => [
+                                        'format' => 'dd-M-yyyy',
+                                        'todayHighlight' => true
+                                    ]
                                 ]);
                                 ?>
                             </div>
@@ -233,7 +228,71 @@ $this->registerJs($js);
 
 </div>
 <!--Dynamic form Model language-->
+<div class="row">
+    <?php DynamicFormWidget::begin([
+        'widgetContainer' => 'dynamicform_wrapper_language', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+        'widgetBody' => '.container-items-language', // required: css class selector
+        'widgetItem' => '.item-language', // required: css class
+        'limit' => 4, // the maximum times, an element can be cloned (default 999)
+        'min' => 1, // 0 or 1 (default 1)
+        'insertButton' => '.add-item-language', // css class
+        'deleteButton' => '.remove-item-language', // css class
+        'model' => $modelsWorkerLanguage[0],
+        'formId' => 'dynamic-form',
+        'formFields' => [
+            'language_id',
+            'rate'
+        ],
+    ]); ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-envelope"></i> WorkerLanguage Book
+            <button type="button" class="pull-right add-item-language btn btn-success btn-xs"><i
+                        class="fa fa-plus"></i> <?= Yii::t('app', 'Add Worker language') ?></button>
+            <div class="clearfix"></div>
+        </div>
 
+
+        <div class="panel-body container-items-language"><!-- widgetContainer -->
+            <?php foreach ($modelsWorkerLanguage
+
+            as $index => $modelWorkerLanguage): ?>
+
+            <div class="item-language panel panel-default"><!-- widgetBody -->
+                <div class="panel-heading">
+                    <span class="panel-title-language">WorkerLanguage: <?= ($index + 1) ?></span>
+                    <button type="button" class="pull-right remove-item-language btn btn-danger btn-xs"><i
+                                class="fa fa-minus"></i></button>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    // necessary for update action.
+                    if (!$modelWorkerLanguage->isNewRecord) {
+                        echo Html::activeHiddenInput($modelWorkerLanguage, "[{$index}]id");
+                    }
+                    ?>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <?= $form->field($modelWorkerLanguage, "[{$index}]language_id")->dropDownList($language_list, ['prompt' => Yii::t('app', 'Select a language')]) ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <?= $form->field($modelWorkerLanguage, "[{$index}]rate")->dropDownList([1, 2, 3, 4, 5], ['prompt' => Yii::t('app', 'Select a rate')]) ?>
+                        </div>
+
+                    </div><!-- end:row -->
+
+
+                </div><!-- end:row -->
+
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php DynamicFormWidget::end(); ?>
+</div>
 <div class="row form-group">
 
     <div class="col-md-12">

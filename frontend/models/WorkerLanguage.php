@@ -59,7 +59,7 @@ class WorkerLanguage extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLanguage()
+    public function getLanguages()
     {
         return $this->hasOne(Language::className(), ['id' => 'language_id']);
     }

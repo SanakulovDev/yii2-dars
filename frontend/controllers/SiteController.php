@@ -5,8 +5,10 @@ namespace frontend\controllers;
 use common\models\Appeals;
 use common\models\City;
 use common\models\Partners;
+use common\models\User;
 use frontend\models\ApplyVacancy;
 use frontend\models\Company;
+use frontend\models\JobStats;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
 use frontend\models\VacancySearch;
@@ -86,11 +88,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $jobSats = JobStats::findOne(['id'=>1]);
+
         $query = Partners::find()
             ->where(['status' => 1])
             ->orderBy('order')
             ->all();
-        return $this->render('index', ['query' => $query]);
+        return $this->render('index', [
+            'query' => $query,
+            'jobStats' => $jobSats
+        ]);
     }
 
     /**
@@ -177,7 +184,7 @@ class SiteController extends Controller
             $user->role = !empty($model->director_name) ? 'company' : 'worker';
             $a = $user->role;
             if ($user = $user->signup()) {
-                if ($a === 'worker'){
+                if ($a === 'worker') {
                     Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
                     return $this->redirect('/site/login/');
                 }
@@ -319,11 +326,11 @@ class SiteController extends Controller
     public function actionVacancyViews($id)
     {
         $vacancy = $this->findModel($id);
-        $vacancyx =$this->findVacancyx($vacancy->profession_id, $id);
+        $vacancyx = $this->findVacancyx($vacancy->profession_id, $id);
         $count = $vacancyx->count();
         $pages = new Pagination([
-            'totalCount' =>$count,
-            'pageSize'=>3
+            'totalCount' => $count,
+            'pageSize' => 3
         ]);
         $vacancyx = $vacancyx->offset($pages->offset)
             ->limit($pages->limit)
@@ -337,7 +344,7 @@ class SiteController extends Controller
                 'dataProvider' => $dataProvider,
                 'vacancy' => $vacancy,
                 'vacancyx' => $vacancyx,
-                'pages'=>$pages
+                'pages' => $pages
             ]);
         }
         return $this->redirect('vacancy-view-all');
@@ -349,15 +356,15 @@ class SiteController extends Controller
         $vacancy = Vacancy::find()->orderBy('user_id');
         $count = $vacancy->count();
         $pages = new Pagination([
-            'totalCount' =>$count,
-            'pageSize'=>3
+            'totalCount' => $count,
+            'pageSize' => 3
         ]);
         $vacancy = $vacancy->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
         return $this->render('vacancy-view-all', [
             'vacancy' => $vacancy,
-            'pages'=>$pages
+            'pages' => $pages
         ]);
     }
 
@@ -398,7 +405,7 @@ class SiteController extends Controller
 
     protected function findVacancyx($profession_id, $id)
     {
-        if (($vacancyx = Vacancy::find()->where(['profession_id' => $profession_id])->andWhere(['!=','id',$id])) !== null) {
+        if (($vacancyx = Vacancy::find()->where(['profession_id' => $profession_id])->andWhere(['!=', 'id', $id])) !== null) {
             return $vacancyx;
         }
         return false;

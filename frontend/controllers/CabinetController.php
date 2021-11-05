@@ -41,18 +41,18 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
         $laborActivity = $this->findLaborAcitivity($worker->id);
-        $workerLanguage  = $this->findWorkerlanguage($worker->id);
+        $workerLanguage = $this->findWorkerlanguage($worker->id);
         if (empty($worker)) {
             return $this->render('worker', [
                 'worker' => new Worker(),
-                'laborActivity'=>$laborActivity,
-                'workerLanguage'=>$workerLanguage
+                'laborActivity' => $laborActivity,
+                'workerLanguage' => $workerLanguage
             ]);
         }
         return $this->render('worker', [
             'worker' => $worker,
-            'laborActivity'=>$laborActivity,
-            'workerLanguage'=>$workerLanguage
+            'laborActivity' => $laborActivity,
+            'workerLanguage' => $workerLanguage
         ]);
     }
 
@@ -64,6 +64,7 @@ class CabinetController extends Controller
         return false;
 
     }
+
     protected function findLaborAcitivity($worker_id)
     {
         if (($laborActivity = LaborActivity::findOne(['worker_id' => $worker_id])) !== null) {
@@ -72,10 +73,11 @@ class CabinetController extends Controller
         return false;
 
     }
-protected function findWorkerlanguage($worker_id)
+
+    protected function findWorkerlanguage($worker_id)
     {
-        if (($laborActivity = WorkerLanguage::findAll(['worker_id' => $worker_id])) !== null) {
-            return $laborActivity;
+        if (($workerLanguage = WorkerLanguage::findOne(['worker_id' => $worker_id])) !== null) {
+            return $workerLanguage;
         }
         return false;
 
@@ -104,34 +106,96 @@ protected function findWorkerlanguage($worker_id)
 
     }
 
+// action worker edit
 
     public function actionWorkerEdit()
     {
-        $identity = \Yii::$app->user->identity;
+        $identity = Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
+        $modelsLaborActivity = $worker->laborActivity;
+        $modelsWorkerLanguage = $worker->workerLanguages;
         $worker->scenario = Worker::SCENARIO_WORKEREDIT;
 
 
-        if (!empty($worker)) {
-            if ($worker->load($this->request->post())) {
-                $image = UploadedFile::getInstance($worker, 'photo');
 
-                if ($worker->upload($image) && $worker->save()) {
-                    \Yii::$app->session->setFlash('success', \Yii::t('app', 'Your data has been successfully modified'));
-                    return $this->redirect(['index', 'id' => $worker->id]);
-                } else {
-                    \Yii::$app->session->setFlash('error', \Yii::t('app', 'An error occurred while modifying your data'));
-                }
+        if ($worker->load($this->request->post())) {
 
+            $oldWorkerIds = ArrayHelper::map($modelsWorkerLanguage, 'id', 'id');
+            $modelsWorkerLanguage = Model::createMultiple(WorkerLanguage::classname(), $modelsWorkerLanguage);
+            Model::loadMultiple($modelsWorkerLanguage, Yii::$app->request->post());
+            $deletedWorkerIDs = array_diff($oldWorkerIds, array_filter(ArrayHelper::map($modelsWorkerLanguage, 'id', 'id')));
 
+            $oldLaborIds = ArrayHelper::map($modelsLaborActivity, 'id', 'id');
+            $modelsLaborActivity = Model::createMultiple(LaborActivity::classname(), $modelsLaborActivity);
+            Model::loadMultiple($modelsLaborActivity, Yii::$app->request->post());
+            $deletedLaborIDs = array_diff($oldLaborIds, array_filter(ArrayHelper::map($modelsLaborActivity, 'id', 'id')));
+
+            // ajax validation
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(
+                    ActiveForm::validateMultiple($modelsWorkerLanguage),
+                    ActiveForm::validateMultiple($modelsLaborActivity),
+                    ActiveForm::validate($worker)
+                );
             }
-            return $this->render('worker-edit', [
-                'worker' => $worker
-            ]);
+
+            // validate all models
+            $valid = $worker->validate();
+            $valid = Model::validateMultiple($modelsWorkerLanguage) && Model::validateMultiple($modelsLaborActivity) && $valid;
+
+            if ($valid) {
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                $image = UploadedFile::getInstance($worker, 'photo');
+                $worker->userId = $identity->id;
+                try {
+                    if ($flag = ($worker->upload($image) && $worker->save(false))) {
+                        if (! empty($deletedWorkerIDs)) {
+                            WorkerLanguage::deleteAll(['id' => $deletedWorkerIDs]);
+                        }
+                        foreach ($modelsWorkerLanguage as $modelWorkerLanguage) {
+                            $modelWorkerLanguage->worker_id = $worker->id;
+                            if (! ($flag = $modelWorkerLanguage->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                        if (! empty($deletedLaborIDs)) {
+                            LaborActivity::deleteAll(['id' => $deletedLaborIDs]);
+                        }
+                        foreach ($modelsLaborActivity as $modelLaborActivity) {
+                            $modelLaborActivity->worker_id = $worker->id;
+                            if (! ($flag = $modelLaborActivity->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['worker', 'id' => $worker->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
+
+            return $this->redirect(['worker-create']);
+
+
         }
 
-        return $this->redirect(['worker-create']);
+        return $this->render('worker-edit', [
+            'worker' => $worker,
+            'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity,
+            'modelsWorkerLanguage' => (empty($modelsWorkerLanguage)) ? [new WorkerLanguage] : $modelsWorkerLanguage
+        ]);
+
+
     }
+
 //worker create action location
     public function actionWorkerCreate()
     {
@@ -151,7 +215,7 @@ protected function findWorkerlanguage($worker_id)
             // validate all models
             $valid = $worker->validate();
             $valid = Model::validateMultiple($modelsLaborActivity) && $valid;
-             $valid = Model::validateMultiple($modelsWorkerLanguage) && $valid;
+            $valid = Model::validateMultiple($modelsWorkerLanguage) && $valid;
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 $image = UploadedFile::getInstance($worker, 'photo');
@@ -205,4 +269,65 @@ protected function findWorkerlanguage($worker_id)
     }
 
 
+    public function actionCvDownload(){
+        $identity = \Yii::$app->user->identity;
+        $worker = $this->findWorker($identity->id);
+
+        // get your HTML raw content without any layouts or scripts
+        $content = $this->renderPartial('cv',['worker'=>$worker]);
+
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'Krajee Report Title'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetTitle' => 'Sanakulov Dev',
+                'SetHeader' => ['Sanakulov Dev: ' . date("r")],
+                'SetFooter' => ['|Page {PAGENO}|'],
+
+
+            ]
+        ]);
+
+
+
+
+
+        // return the pdf output as per the destination setting
+        return $pdf->render();
+    }
+    public function actionCv(){
+        $identity = \Yii::$app->user->identity;
+        $worker = $this->findWorker($identity->id);
+        $laborActivity = $this->findLaborAcitivity($worker->id);
+        $workerLanguage = $this->findWorkerlanguage($worker->id);
+        if (empty($worker)) {
+            return $this->render('cv', [
+                'worker' => new Worker(),
+                'laborActivity' => $laborActivity,
+                'workerLanguage' => $workerLanguage
+            ]);
+        }
+        return $this->render('cv', [
+            'worker' => $worker,
+            'laborActivity' => $laborActivity,
+            'workerLanguage' => $workerLanguage
+        ]);
+    }
 }

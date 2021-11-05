@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Create');
 <?= $this->render('worker-form', [
     'worker' => $worker,
     'modelsLaborActivity' => (empty($modelsLaborActivity)) ? [new LaborActivity] : $modelsLaborActivity,
-//    'modelsWorkerLanguage' => (empty($modelsWorkerLanguage)) ? [new WorkerLanguage] : $modelsWorkerLanguage
+    'modelsWorkerLanguage' => (empty($modelsWorkerLanguage)) ? [new WorkerLanguage] : $modelsWorkerLanguage
 ]) ?>
+
+
 
 

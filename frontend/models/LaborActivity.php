@@ -63,4 +63,5 @@ class LaborActivity extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Worker::className(), ['id' => 'worker_id']);
     }
+
 }

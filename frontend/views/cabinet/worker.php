@@ -41,34 +41,35 @@ echo \yii\widgets\DetailView::widget([
         [
             'attribute' => 'profession_id',
             'value' => $worker->professions->$lang
-        ]
+        ],
+        [
+            'label' => 'Languages',
+            'value' => function($worker) use ($lang){
+                $know_langs = '';
+                if($worker->workerLanguages) {
+                    foreach ($worker->workerLanguages as $worker_lang){
+                        $temp = $worker_lang->languages ? $worker_lang->languages->$lang . ' ' . $worker_lang->rate . ', ' : ' ';
+                        $know_langs .= $temp . ' ';
+                    }
+                }
+                return $know_langs;
+            }
+        ],
+        [
+            'label' => 'Labor Activity',
+            'value' => function($worker) use ($lang){
+                $know_labor_activity = '';
+                if($worker->laborActivity) {
+                    foreach ($worker->laborActivity as $worker_labor_activity){
+                        $temp = $worker_labor_activity ? $worker_labor_activity->company_name . ' korxonasida ' . $worker_labor_activity->position . ' lavozimida ' . $worker_labor_activity->form_date . ' dan ' . $worker_labor_activity->to_date . ' gacha ' : ' ' ;
+                        $know_labor_activity .= $temp . ' ';
+                    }
+                }
+                return $know_labor_activity;
+            }
+        ],
+    ],
+]);
+?>
 
-    ],
-]);
-
-?>
-<h1>Labor Activity</h1>
-<?php
-echo \yii\widgets\DetailView::widget([
-    'model' => $laborActivity,
-    'attributes' => [
-        'company_name',
-        'position',
-        'form_date',
-        'to_date'
-    ],
-]);
-?>
-<h1>Worker Language</h1>
-<?php
-echo \yii\widgets\DetailView::widget([
-    'model' => $workerLanguage,
-    'attributes' => [
-        'name_uz',
-        'name_en',
-        'name_ru',
-        'name_cyrl'
-    ],
-]);
-?>
 <?= \yii\helpers\Html::a(Yii::t('app', 'Edit'), '/cabinet/worker-edit', ['class' => 'btn btn-success']) ?>
