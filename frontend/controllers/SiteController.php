@@ -11,6 +11,7 @@ use frontend\models\Company;
 use frontend\models\JobStats;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
+use frontend\models\VacancyOrders;
 use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
 use frontend\models\Worker;
@@ -90,13 +91,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $jobSats = JobStats::findOne(['id' => 1]);
-            $query = Partners::find()
-                ->where(['status' => 1])
-                ->orderBy('order')
-                ->all();
+        $query = Partners::find()
+            ->where(['status' => 1])
+            ->orderBy('order')
+            ->all();
         return $this->render('index', [
             'query' => $query,
-            'jobStats' => $jobSats
+            'jobStats' => $jobSats,
+
         ]);
     }
 
@@ -337,6 +339,24 @@ class SiteController extends Controller
             ->all();
         $vacancy->views++;
         if ($vacancy->save()) {
+
+
+            if (Yii::$app->user->identity->username) {
+                $worker = Worker::findOne(['userId' => Yii::$app->user->identity->id]);
+                if (!empty($worker->photo)) {
+
+                    Yii::$app->session->setFlash('success', "Sizga mos xabar jo'natildi");
+                    return $this->render('vacancy-orders', [
+                        'vacancyOrders' => empty($vacancyOrders) ? (new VacancyOrders()) : $vacancyOrders,
+
+                    ]);
+                }
+                else{
+                    return $this->redirect('/cabinet/worker');
+                }
+            }
+
+
             $searchModel = new VacancySearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             return $this->render('vacancy-views', [
@@ -368,32 +388,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionApplyVacancy($id)
-    {
-        $apply_vacancy = new ApplyVacancy();
-        $image = UploadedFile::getInstance($apply_vacancy, 'rezume');
-        $apply_vacancy->company_id = $this->findModel($id)->company_id;
-        $apply_vacancy->vacancy_id = $this->findModel($id)->id;
-        if ($apply_vacancy->upload($image) && $apply_vacancy->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', "Xabaringiz jo'natildi tez orada sizga aloqaga chiqamiz"));
-            return $this->redirect(['vacancy-views', 'id' => $id]);
-        } else {
-            Yii::$app->session->setFlash('danger', Yii::t('app', "Xabaringiz jo'natilmadi. Qaytadan urinib ko'ring"));
-        }
-        return $this->render('apply-vacancy', [
-            'apply_vacancy' => $apply_vacancy
-        ]);
-
-    }
-
-    protected function findApplyVacancy($id)
-    {
-        if (($apply_vacancy = ApplyVacancy::findOne(['id' => $id])) !== null) {
-            return $apply_vacancy;
-        }
-        return false;
-    }
-
     protected function findModel($id)
     {
         if (($vacancy = Vacancy::findOne(['id' => $id])) !== null) {
@@ -407,6 +401,39 @@ class SiteController extends Controller
     {
         if (($vacancyx = Vacancy::find()->where(['profession_id' => $profession_id])->andWhere(['!=', 'id', $id])) !== null) {
             return $vacancyx;
+        }
+        return false;
+    }
+
+
+//    Vacancy Orders action
+
+
+    public function actionVacancyOrders($id)
+    {
+        $vacancyOrders = $this->findVacancyOrders($id);
+        $vacancy = $this->findModel($id);
+        if (Yii::$app->user->identity->username) {
+            $worker = Worker::findOne(['userId' => Yii::$app->user->id]);
+            if (!empty($worker->photo)) {
+
+                Yii::$app->session->setFlash('success', "Sizga mos xabar jo'natildi");
+                return $this->render('vacancy-orders', [
+                    'vacancyOrders' => empty($vacancyOrders) ? (new VacancyOrders()) : $vacancyOrders,
+
+                ]);
+            }
+            else{
+                return $this->redirect('/cabinet/worker');
+            }
+        }
+        return $this->redirect('/site/login');
+    }
+
+    protected function findVacancyOrders($id)
+    {
+        if (($vacancyOrders = VacancyOrders::findOne(['id' => $id])) !== null) {
+            return $vacancyOrders;
         }
         return false;
     }

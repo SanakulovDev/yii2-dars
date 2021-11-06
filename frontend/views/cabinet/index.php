@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-$lang = 'name_'.Yii::$app->language;
-$langTolower = 'name'.ucfirst(Yii::$app->language);
+
+$lang = 'name_' . Yii::$app->language;
+$langTolower = 'name' . ucfirst(Yii::$app->language);
 ?>
-<h2><?=ucfirst($company->name).'  '.Yii::t('app','Company informations')?></h2>
+<h2><?= ucfirst($company->name) . '  ' . Yii::t('app', 'Company informations') ?></h2>
 <?= \yii\widgets\DetailView::widget([
     'model' => $company,
     'attributes' => [
@@ -31,5 +32,5 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
     ],
 ]);
 ?>
- <?= Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success'])?>
+<?= Html::a(Yii::t('app', 'Edit'), '/cabinet/edit', ['class' => 'btn btn-success']) ?>
 

@@ -11,7 +11,6 @@ $this->title = 'My Yii Application';
 <section class="site-section py-4">
     <div class="container">
 
-
         <div class="row align-items-center">
             <div class="col-12 text-center mt-4 mb-5">
                 <div class="row justify-content-center">

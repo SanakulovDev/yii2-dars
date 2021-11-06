@@ -22,7 +22,22 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
         ]);
         ?>
         <div class="row align-items-center mb-5">
-
+            <?php if (Yii::$app->session->hasFlash('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?= Yii::$app->session->getFlash('success') ?>
+                </div>
+            <?php endif; ?>
+            <?php if (Yii::$app->session->hasFlash('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?= Yii::$app->session->getFlash('error') ?>
+                </div>
+            <?php endif; ?>
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="d-flex align-items-center">
                     <div class=" p-2 d-inline-block mr-3 " style="width: 150px">
@@ -50,7 +65,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                             <?= Yii::t('app', 'Save Job') ?></a>
                     </div>
                     <div class="col-6">
-                        <?=Html::a(Yii::t('app','Apply now'),['apply-vacancy', 'id' => $vacancy->id],['class'=>'btn btn-block btn-primary btn-md'])?>
+                        <?=Html::a('Apply now','/site/vacancy-views?id='.$vacancy->id,['class'=>'btn btn-block btn-primary btn-md'])?>
                     </div>
                 </div>
             </div>
@@ -78,7 +93,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                                     class="icon-heart-o mr-2 text-danger"></span><?=Yii::t('app','Save Job')?></a>
                     </div>
                     <div class="col-6">
-                        <a href="#" class="btn btn-block btn-primary btn-md"><?=Yii::t('app','Apply now')?></a>
+                        <?=Html::submitButton('Apply now',['class'=>'btn btn-block btn-primary btn-md'])?>
                     </div>
                 </div>
 
