@@ -39,8 +39,8 @@ class m211019_061150_create_vacancy_table extends Migration
             'views' => $this->integer(),
             'status' => $this->integer()->defaultValue(1),
             'deadline' => $this->date(),
-            'created_at' => $this->timestamp(),
-            'updated_at' => $this->date (),
+            'created_at' => $this->timestamp()->defaultExpression('NOW()'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')->append('ON UPDATE NOW()'),
         ]);
 
         // creates index for column `user_id`

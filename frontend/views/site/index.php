@@ -6,6 +6,7 @@
 
 
 $this->title = 'My Yii Application';
+
 ?>
 <section class="site-section py-4">
     <div class="container">
