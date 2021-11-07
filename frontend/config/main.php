@@ -83,7 +83,7 @@ return [
                 'port' => '587',
                 'encryption' => 'tls',
                 'username' => 'murodsanakulov52@gmail.com',
-                'password' => 'rtpgjcdygszhsfnq',
+                'password' => 'qnnzlhgrthscoglf',
             ],
         ],
 

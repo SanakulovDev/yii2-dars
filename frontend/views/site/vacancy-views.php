@@ -65,7 +65,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                             <?= Yii::t('app', 'Save Job') ?></a>
                     </div>
                     <div class="col-6">
-                        <?=Html::a('Apply now','/site/vacancy-views?id='.$vacancy->id,['class'=>'btn btn-block btn-primary btn-md'])?>
+                        <?=Html::a('Apply now','/site/vacancy-views?id='.$vacancy->id.'&get=true',['class'=>'btn btn-block btn-primary btn-md'])?>
                     </div>
                 </div>
             </div>
@@ -188,4 +188,6 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
 
     </div>
 </section>
+
+
 

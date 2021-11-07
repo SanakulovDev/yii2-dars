@@ -63,6 +63,9 @@ class VacancyController extends Controller
         ]);
     }
 
+
+
+
     /**
      * Creates a new Vacancy model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -75,6 +78,7 @@ class VacancyController extends Controller
         $company =  $this->findCompany($identity->id);
         if ($this->request->isPost) {
             $image = UploadedFile::getInstance($model, 'image');
+            $model->deadline = date('Y-m-d', time() + 30 * 24 * 3600);
             $model->company_id = $company->id;
             $model->user_id = $company->userId;
             if ($model->load($this->request->post()) && $model->upload($image) && $model->save()) {
