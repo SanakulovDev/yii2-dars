@@ -326,7 +326,7 @@ class SiteController extends Controller
 //        }
 //    }
 
-    public function actionVacancyViews($id, $get = null)
+    public function actionVacancyViews($id, $get = false)
     {
 
         $vacancy = $this->findModel($id);
@@ -347,7 +347,7 @@ class SiteController extends Controller
 
         $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
         $vacancyOrders->vacancy_id = intval($id);
-        $vacancyOrders->worker_id = $identity->id;
+        $vacancyOrders->worker_id = (Worker::findOne(['userId'=>$identity->id]))->id;
         $vacancyOrders->company_id = $vacancy->company_id;
 
         $company = Company::findOne(['id' => $vacancyOrders->company_id]);
@@ -357,15 +357,13 @@ class SiteController extends Controller
         $worker = Worker::findOne(['userId' => $identity->id]);
 
         if ($get == 'true') {
+            $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
             if ($identity) {
                 if (!empty($worker->photo)) {
-                    var_dump($vacancyOrders->validate());
-                    die();
-                    if ($vacancyOrders->save() && $company->save()) {
+
+                    if (!$v_order && $vacancyOrders->save() && $company->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
-                        var_dump($company);
-                        die();
                     }
                 }
                 else {
@@ -377,6 +375,7 @@ class SiteController extends Controller
             }
         }
         if ($vacancy->save()) {
+
             $searchModel = new VacancySearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             return $this->render('vacancy-views', [
@@ -384,7 +383,9 @@ class SiteController extends Controller
                 'dataProvider' => $dataProvider,
                 'vacancy' => $vacancy,
                 'vacancyx' => $vacancyx,
-                'pages' => $pages
+                'v_order' => $v_order,
+                'pages' => $pages,
+                'get' => $get
             ]);
         }
         return $this->redirect('vacancy-view-all');
@@ -425,26 +426,6 @@ class SiteController extends Controller
         return false;
     }
 
-    public function actionVacancyOrders()
-    {
-        $vacancyOrders = $this->findVacancyOrders();
-        if (Yii::$app->user->identity->username) {
-            $worker = Worker::findOne(['userId' => Yii::$app->user->identity->id]);
-            if (!empty($worker->photo)) {
-                $vacancyOrders->worker_view = $vacancyOrders->worker_view + 1;
-                $vacancyOrders->worker_id = Yii::$app->user->identity->id;
-                if ($vacancyOrders->save()) {
-                    Yii::$app->session->setFlash('success', "Sizga mos xabar jo'natildi");
-                    return $this->render('vacancy-views?id=' . $id, [
-                        'vacancyOrders' => empty($vacancyOrders) ? (new VacancyOrders()) : $vacancyOrders,
-
-                    ]);
-                }
-            } else {
-                return $this->redirect('/cabinet/worker');
-            }
-        }
-    }
 
     protected function findVacancyOrders($id)
     {

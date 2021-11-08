@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "vacancy_orders".
@@ -100,7 +101,19 @@ class VacancyOrders extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_VACANCYVIEWS => ['company_id','worker_id','vacancy_id']
+            self::SCENARIO_VACANCYVIEWS => ['company_id', 'worker_id', 'vacancy_id']
         ];
     }
+
+    public static function arr_status()
+    {
+        $arr= [
+            1 => Yii::t('app', "Under consideration"),
+            2 => Yii::t('app', 'The company rejected the worker’s resume'),
+            3 => Yii::t('app', 'The company called you for an interview'),
+            4 => Yii::t('app', 'The company offered you a job.')
+        ];
+        return  $arr;
+    }
+
 }

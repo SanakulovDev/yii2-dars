@@ -5,8 +5,8 @@ use mdm\admin\components\MenuHelper;
 use yii\bootstrap4\Nav;
 use yii\helpers\Html;
 use frontend\models\SignupForm;
-/*
- * $company  frontend/models/Company
+/**
+ * @var $company \frontend\models\Company
  */
 ?>
 <div class="col-md-3" style="text-align: center;">

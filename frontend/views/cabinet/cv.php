@@ -67,7 +67,6 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
             <tr>
                 <td>
                     <h3 style="font-weight: bold;" class="bg-warning"><?= Yii::t('app', 'Hobbies') ?></h3>
-                    <a href="https://m.kun.uz">KUn uz</a>
                 </td>
                 <td>
                     <?= $worker->hobby ?>

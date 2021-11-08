@@ -7,6 +7,7 @@ use common\models\User;
 use Complex\Exception;
 use frontend\models\Company;
 use frontend\models\LaborActivity;
+use frontend\models\VacancyOrders;
 use frontend\models\Worker;
 use frontend\models\WorkerLanguage;
 use Yii;
@@ -328,6 +329,24 @@ class CabinetController extends Controller
             'worker' => $worker,
             'laborActivity' => $laborActivity,
             'workerLanguage' => $workerLanguage
+        ]);
+    }
+
+
+//    Apply messages
+
+    public function actionApplyMessages(){
+        $identity = \Yii::$app->user->identity;
+        $company = $this->findModel($identity->id);
+        $vacancyOrders = VacancyOrders::findAll(['company_id' => $company->id]);
+        foreach ($vacancyOrders as $item){
+
+            $worker = Worker::findAll(['id'=>$item->worker_id]);
+        }
+        return $this->render('apply-messages',[
+            'company'=>$company,
+            'vacancyOrders' =>$vacancyOrders,
+            'worker'=>$worker
         ]);
     }
 }

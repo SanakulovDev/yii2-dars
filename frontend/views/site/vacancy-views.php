@@ -4,8 +4,9 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
-$lang = 'name_'.Yii::$app->language;
-$langTolower = 'name'.ucfirst(Yii::$app->language);
+
+$lang = 'name_' . Yii::$app->language;
+$langTolower = 'name' . ucfirst(Yii::$app->language);
 ?>
 <section class="site-section">
     <div class="container">
@@ -21,23 +22,24 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             ],
         ]);
         ?>
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <?= Yii::$app->session->getFlash('error') ?>
+            </div>
+        <?php endif; ?>
         <div class="row align-items-center mb-5">
-            <?php if (Yii::$app->session->hasFlash('success')): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <?= Yii::$app->session->getFlash('success') ?>
-                </div>
-            <?php endif; ?>
-            <?php if (Yii::$app->session->hasFlash('error')): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="d-flex align-items-center">
                     <div class=" p-2 d-inline-block mr-3 " style="width: 150px">
@@ -59,13 +61,17 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             </div>
             <div class="col-lg-4">
                 <div class="row">
-                    <div class="col-6">
-                        <a href="#" class="btn btn-block btn-light btn-md">
-                            <span class="icon-heart-o mr-2 text-danger"></span>
-                            <?= Yii::t('app', 'Save Job') ?></a>
-                    </div>
-                    <div class="col-6">
-                        <?=Html::a('Apply now','/site/vacancy-views?id='.$vacancy->id.'&get=true',['class'=>'btn btn-block btn-primary btn-md'])?>
+
+                    <div class="col-10">
+                        <?php if ($v_order) : ?>
+                            <a href="#"
+                               class="btn fs-4 btn-block btn-warning btn-lg">
+                                <span class="icon-spinner"></span>
+                                Under consideration</a>
+                        <?php else : ?>
+                            <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
+
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
@@ -74,42 +80,66 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             <div class="col-lg-8">
                 <div class="mb-5">
                     <figure class="mb-5">
-                        <?=Html::img('/jobboard/images/job_single_img_1.jpg',['class'=>'img-fluid rounded', 'alt'=>Yii::t('app','Here is the picture')])?>
+                        <?= Html::img('/jobboard/images/job_single_img_1.jpg', ['class' => 'img-fluid rounded', 'alt' => Yii::t('app', 'Here is the picture')]) ?>
 
                     </figure>
                     <h3 class="h5 d-flex align-items-center mb-4 text-primary">
-                        <span class="icon-align-left mr-3"></span><?=Yii::t('app','Job Description')?>
+                        <span class="icon-align-left mr-3"></span><?= Yii::t('app', 'Job Description') ?>
                     </h3>
                     <?php
-                    $description = 'description_'.Yii::$app->language;
+                    $description = 'description_' . Yii::$app->language;
                     ?>
-                        <p><?=$vacancy->$description?></p>
+                    <p><?= $vacancy->$description ?></p>
                 </div>
 
 
                 <div class="row mb-5">
                     <div class="col-6">
                         <a href="#" class="btn btn-block btn-light btn-md"><span
-                                    class="icon-heart-o mr-2 text-danger"></span><?=Yii::t('app','Save Job')?></a>
+                                    class="icon-heart-o mr-2 text-danger"></span><?= Yii::t('app', 'Save Job') ?></a>
                     </div>
                     <div class="col-6">
-                        <?=Html::submitButton('Apply now',['class'=>'btn btn-block btn-primary btn-md'])?>
+                        <?php if ($v_order) : ?>
+                            <a href="#"
+                               class="btn fs-4 btn-block btn-warning btn-lg">
+                                <span class="icon-spinner"></span>
+                                Under consideration</a>
+                        <?php else : ?>
+                            <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
+
+                        <?php endif ?>
                     </div>
                 </div>
 
             </div>
             <div class="col-lg-4">
                 <div class="bg-light p-3 border rounded mb-4">
-                    <h3 class="text-primary  mt-3 h5 pl-3 mb-3 "><?=Yii::t('app','Job Summary')?></h3>
+                    <h3 class="text-primary  mt-3 h5 pl-3 mb-3 "><?= Yii::t('app', 'Job Summary') ?></h3>
                     <ul class="list-unstyled pl-3 mb-0">
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Published on').': '?></strong> <?=date('Y-m-d', $vacancy->created_at)?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Vacancy:')?></strong> <?=$vacancy->count_vacancy?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Employment / Status:')?></strong><?=$vacancy->jobType->$lang?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Experience').':  '?></strong> <?=$vacancy->experience?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Job Location:')?></strong><?=$vacancy->address?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Salary').':  '?></strong> <?=$vacancy->salary?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Gender').':  '?></strong> <?=$vacancy->genders->$lang?></li>
-                        <li class="mb-2"><strong class="text-black"><?=Yii::t('app','Application Deadline:')?></strong> <?=$vacancy->deadline?></li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Published on') . ': ' ?></strong> <?= date('Y-m-d', $vacancy->created_at) ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Vacancy:') ?></strong> <?= $vacancy->count_vacancy ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Employment / Status:') ?></strong><?= $vacancy->jobType->$lang ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Experience') . ':  ' ?></strong> <?= $vacancy->experience ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Job Location:') ?></strong><?= $vacancy->address ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Salary') . ':  ' ?></strong> <?= $vacancy->salary ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Gender') . ':  ' ?></strong> <?= $vacancy->genders->$lang ?>
+                        </li>
+                        <li class="mb-2"><strong
+                                    class="text-black"><?= Yii::t('app', 'Application Deadline:') ?></strong> <?= $vacancy->deadline ?>
+                        </li>
                     </ul>
                 </div>
 
@@ -120,7 +150,8 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
                         <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
-                        <a href="https://telegram.me/<?=str_replace('@','',$vacancy->telegram)?>" target="_blanks" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-telegram"></span></a>
+                        <a href="https://telegram.me/<?= str_replace('@', '', $vacancy->telegram) ?>" target="_blanks"
+                           class="pt-3 pb-3 pr-3 pl-0"><span class="icon-telegram"></span></a>
                     </div>
                 </div>
 
@@ -135,7 +166,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
 
-                <h2 class="section-title mb-2"><?= $pages->totalCount.' '.Yii::t('app','Job Listed')?></h2>
+                <h2 class="section-title mb-2"><?= $pages->totalCount . ' ' . Yii::t('app', 'Job Listed') ?></h2>
             </div>
         </div>
 
@@ -170,7 +201,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
 
         <div class="row pagination-wrap">
             <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of <?=$pages->totalCount?> Jobs</span>
+                <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs</span>
             </div>
             <div class="col-md-6 text-center text-md-right">
                 <?= LinkPager::widget([
