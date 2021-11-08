@@ -22,6 +22,7 @@ use Yii;
  * @property string $date
  * @property string|null $created_At
  * @property string|null $updated_At
+ * @property integer|null $apply_messages
  */
 class Company extends \yii\db\ActiveRecord
 {
@@ -35,6 +36,7 @@ class Company extends \yii\db\ActiveRecord
 
     const SCENARIO_UPDATE='update';
     const SCENARIO_SIGNUP='signup';
+    const SCENARIO_APPLY= 'company-update';
     public static function tableName()
     {
         return 'company';
@@ -47,7 +49,7 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'username','password','regionId','cityId','status','director_name','phone'],'required'],
-            [['userId', 'regionId', 'cityId', 'status'], 'integer'],
+            [['userId', 'regionId', 'cityId', 'status','apply_messages'], 'integer'],
             [['date', 'created_At', 'updated_At'], 'safe'],
             [['name', 'username'], 'string', 'max' => 35],
             [['director_name','username'], 'string', 'max' => 50],
@@ -76,6 +78,7 @@ class Company extends \yii\db\ActiveRecord
             'image' => Yii::t('app', 'image'),
             'status' => Yii::t('app', 'Status'),
             'date' => Yii::t('app', 'Date'),
+            'apply_messages'=>Yii::t('app','Apply messages'),
             'created_At' => Yii::t('app', 'Created  At'),
             'updated_At' => Yii::t('app', 'Updated  At'),
         ];
@@ -108,7 +111,8 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             self::SCENARIO_UPDATE => ['name','director_name','phone','regionId','cityId','address','image'],
-            self::SCENARIO_SIGNUP => ['name','director_name','phone','regionId','cityId','address','image','username','password','email']
+            self::SCENARIO_SIGNUP => ['name','director_name','phone','regionId','cityId','address','image','username','password','email'],
+            self::SCENARIO_APPLY => ['apply_messages']
         ];
     }
 

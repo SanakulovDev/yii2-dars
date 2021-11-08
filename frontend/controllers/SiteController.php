@@ -326,11 +326,9 @@ class SiteController extends Controller
 //        }
 //    }
 
-    public function actionVacancyViews($id, $get=null)
+    public function actionVacancyViews($id, $get = null)
     {
-        if (!empty($get)){
 
-        }
         $vacancy = $this->findModel($id);
         $vacancyx = $this->findVacancyx($vacancy->profession_id, $id);
         $count = $vacancyx->count();
@@ -344,7 +342,40 @@ class SiteController extends Controller
         $vacancy->views++;
 
 
+        $identity = Yii::$app->user->identity;
+        $vacancyOrders = new VacancyOrders();
 
+        $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
+        $vacancyOrders->vacancy_id = intval($id);
+        $vacancyOrders->worker_id = $identity->id;
+        $vacancyOrders->company_id = $vacancy->company_id;
+
+        $company = Company::findOne(['id' => $vacancyOrders->company_id]);
+        $company->scenario = Company::SCENARIO_APPLY;
+        $company->apply_messages++;
+
+        $worker = Worker::findOne(['userId' => $identity->id]);
+
+        if ($get == 'true') {
+
+            if ($identity) {
+                if (!empty($worker->photo)) {
+                    var_dump($vacancyOrders->validate());
+                    die();
+                    if ($vacancyOrders->save() && $company->save()) {
+                        Yii::$app->session->setFlash('success', 'Apply messages');
+                        var_dump($company);
+                        die();
+                    }
+                }
+                else {
+                    return $this->redirect('/cabinet/worker');
+                }
+            } else {
+
+                return $this->redirect('/site/login');
+            }
+        }
         if ($vacancy->save()) {
             $searchModel = new VacancySearch();
             $dataProvider = $searchModel->search($this->request->queryParams);

@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $company_id
  * @property int $vacancy_id
- * @property int|null $worker_id
+ * @property int $worker_id
  * @property int $status
  * @property int|null $company_view
  * @property int|null $worker_view
@@ -26,6 +26,9 @@ class VacancyOrders extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    const  SCENARIO_VACANCYVIEWS = 'vacancy-views';
+
     public static function tableName()
     {
         return 'vacancy_orders';
@@ -37,7 +40,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'vacancy_id', 'status'], 'required'],
+//            [['company_id', 'vacancy_id', 'worker_id'], 'required'],
             [['company_id', 'vacancy_id', 'worker_id', 'status', 'company_view', 'worker_view'], 'integer'],
             [['created_at', 'date_approval'], 'safe'],
             [['worker_id'], 'exist', 'skipOnError' => true, 'targetClass' => Worker::className(), 'targetAttribute' => ['worker_id' => 'id']],
@@ -92,5 +95,12 @@ class VacancyOrders extends \yii\db\ActiveRecord
     public function getWorker()
     {
         return $this->hasOne(Worker::className(), ['id' => 'worker_id']);
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_VACANCYVIEWS => ['company_id','worker_id','vacancy_id']
+        ];
     }
 }
