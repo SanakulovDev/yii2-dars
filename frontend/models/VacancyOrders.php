@@ -29,7 +29,12 @@ class VacancyOrders extends \yii\db\ActiveRecord
      */
 
     const  SCENARIO_VACANCYVIEWS = 'vacancy-views';
-
+    const STATUSLIST = [
+        0 => 'Yuborilgan',
+        1 => 'Bekor qilingan',
+        2 => 'Suhbatga chaqiridi',
+        3 => 'Ishga taklif qilindi',
+    ];
     public static function tableName()
     {
         return 'vacancy_orders';
@@ -105,15 +110,6 @@ class VacancyOrders extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function arr_status()
-    {
-        $arr= [
-            1 => Yii::t('app', "Under consideration"),
-            2 => Yii::t('app', 'The company rejected the worker’s resume'),
-            3 => Yii::t('app', 'The company called you for an interview'),
-            4 => Yii::t('app', 'The company offered you a job.')
-        ];
-        return  $arr;
-    }
+
 
 }

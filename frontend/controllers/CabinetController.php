@@ -118,7 +118,6 @@ class CabinetController extends Controller
         $worker->scenario = Worker::SCENARIO_WORKEREDIT;
 
 
-
         if ($worker->load($this->request->post())) {
 
             $oldWorkerIds = ArrayHelper::map($modelsWorkerLanguage, 'id', 'id');
@@ -152,22 +151,22 @@ class CabinetController extends Controller
                 $worker->userId = $identity->id;
                 try {
                     if ($flag = ($worker->upload($image) && $worker->save(false))) {
-                        if (! empty($deletedWorkerIDs)) {
+                        if (!empty($deletedWorkerIDs)) {
                             WorkerLanguage::deleteAll(['id' => $deletedWorkerIDs]);
                         }
                         foreach ($modelsWorkerLanguage as $modelWorkerLanguage) {
                             $modelWorkerLanguage->worker_id = $worker->id;
-                            if (! ($flag = $modelWorkerLanguage->save(false))) {
+                            if (!($flag = $modelWorkerLanguage->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }
                         }
-                        if (! empty($deletedLaborIDs)) {
+                        if (!empty($deletedLaborIDs)) {
                             LaborActivity::deleteAll(['id' => $deletedLaborIDs]);
                         }
                         foreach ($modelsLaborActivity as $modelLaborActivity) {
                             $modelLaborActivity->worker_id = $worker->id;
-                            if (! ($flag = $modelLaborActivity->save(false))) {
+                            if (!($flag = $modelLaborActivity->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }
@@ -270,12 +269,17 @@ class CabinetController extends Controller
     }
 
 
-    public function actionCvDownload(){
+    public function actionCvDownload($id = null)
+    {
         $identity = \Yii::$app->user->identity;
-        $worker = $this->findWorker($identity->id);
+        $worker = Worker::findOne($id);
+        if (!$worker or $worker and $worker->userId == $identity->id) {
+            $worker = $this->findWorker($identity->id);
+        }
+
 
         // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('cv',['worker'=>$worker]);
+        $content = $this->renderPartial('cv', ['worker' => $worker]);
 
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
@@ -307,13 +311,12 @@ class CabinetController extends Controller
         ]);
 
 
-
-
-
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
-    public function actionCv(){
+
+    public function actionCv()
+    {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
         $laborActivity = $this->findLaborAcitivity($worker->id);
@@ -335,18 +338,32 @@ class CabinetController extends Controller
 
 //    Apply messages
 
-    public function actionApplyMessages(){
+    public function actionApplyMessages()
+    {
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
-        $vacancyOrders = VacancyOrders::findAll(['company_id' => $company->id]);
-        foreach ($vacancyOrders as $item){
+        $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
 
-            $worker = Worker::findAll(['id'=>$item->worker_id]);
-        }
-        return $this->render('apply-messages',[
-            'company'=>$company,
-            'vacancyOrders' =>$vacancyOrders,
-            'worker'=>$worker
+
+        return $this->render('apply-messages', [
+            'company' => $company,
+            'vacancyOrders' => $vacancyOrders,
+
+        ]);
+    }
+
+//    public function actionWorkerOrder
+    public function actionWorkerOrder()
+    {
+        $identity = \Yii::$app->user->identity;
+        $worker = $this->findWorker($identity->id);
+        $vacancyOrders = VacancyOrders::find()->where(['worker_id' => $worker])->all();
+
+
+        return $this->render('worker-order', [
+            'worker' => $worker,
+            'vacancyOrders' => $vacancyOrders,
+
         ]);
     }
 }

@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
  */
 
 $statuslist = \frontend\models\ApplyStatus::selectList();
-$name = 'name_'.Yii::$app->language;
+
 ?>
 
 <h3><?= Yii::t('app', 'Cv list') ?></h3>
@@ -23,10 +23,7 @@ $name = 'name_'.Yii::$app->language;
     <thead>
     <tr>
         <th><?= Yii::t('app', 'Id') ?></th>
-        <th><?= Yii::t('app', 'Firstname') ?></th>
-        <th><?= Yii::t('app', 'Vacancy name') ?></th>
-        <th><?= Yii::t('app', 'Cv') ?></th>
-        <th><?= Yii::t('app', 'Phone') ?></th>
+        <th><?= Yii::t('app', 'Company') ?></th>
         <th><?= Yii::t('app', 'Status') ?></th>
         <th><?= Yii::t('app', 'Created_at') ?></th>
 
@@ -37,10 +34,7 @@ $name = 'name_'.Yii::$app->language;
     <?php foreach ($vacancyOrders as $item): ?>
         <tr>
             <td><?= $item->id ?></td>
-            <td><?= $item->worker->firstname ?></td>
-            <td><?= $item->vacancy->profession->$name ?></td>
-            <td><?= Html::a(Yii::t('app', 'Show'), "/cabinet/cv-download?id=" . $item->worker_id) ?></td>
-            <td><?= $item->worker->phone ?></td>
+            <td><?= $item->company->name ?></td>
             <td><?= isset(VacancyOrders::STATUSLIST[$item->status]) ? VacancyOrders::STATUSLIST[$item->status] : 'Topilmadi' ?></td>
             <td><?= $item->created_at?></td>
         </tr>
@@ -49,3 +43,4 @@ $name = 'name_'.Yii::$app->language;
 </table>
 
 <?php ActiveForm::end(); ?>
+
