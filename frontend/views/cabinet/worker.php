@@ -12,7 +12,15 @@ use yii\helpers\Html;
  * @var \frontend\models\WorkerLanguage $workerLanguage
  */
 $lang = 'name_' . Yii::$app->language;
-$langTolower = 'name' . ucfirst(Yii::$app->language);
+$langTolower = 'name' . ucfirst(Yii::$app->language);?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Sizga xabar keldi <a href="/cabinet/worker-order/" class="alert-link"><span
+                class="badge badge-primary"><?= $worker->apply_messages ?></span></a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php
 echo \yii\widgets\DetailView::widget([
     'model' => $worker,
     'attributes' => [

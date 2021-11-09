@@ -26,6 +26,7 @@ use Yii;
  * @property string $updated_at
  * @property string $hobby
  * @property string $profession_id
+ * @property string $apply_messages
  */
 class Worker extends \yii\db\ActiveRecord
 {
@@ -35,7 +36,7 @@ class Worker extends \yii\db\ActiveRecord
 
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_WORKEREDIT = 'worker-edit';
-    const SCENARIO_WORKERLANG = 'worker-language';
+    const SCENARIO_APPLY_M = 'applys-message';
     public static function tableName()
     {
         return 'worker';
@@ -47,7 +48,7 @@ class Worker extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId','regionId','cityId', 'gender', 'nationality_id','profession_id'], 'integer'],
+            [['userId','regionId','cityId', 'gender', 'nationality_id','profession_id','apply_messages'], 'integer'],
             [['birthdate', 'created_at', 'updated_at'], 'safe'],
             [['firstname', 'lastname', 'patronymic', 'address', 'phone','hobby'], 'string', 'max' => 255],
             [['photo'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
@@ -119,7 +120,7 @@ class Worker extends \yii\db\ActiveRecord
             self::SCENARIO_WORKEREDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
                 'gender','phone','photo','hobby','profession_id'
                 ],
-//            self::SCENARIO_WORKERLANG=>['hobby','profession_id']
+            self::SCENARIO_APPLY_M=>['apply_messages']
 
         ];
     }

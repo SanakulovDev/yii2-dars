@@ -341,11 +341,21 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
-
-        foreach($vacancyOrders as $item){
-            $item->compan
+        $company->scenario = Company::SCENARIO_APPLY;
+        foreach ($vacancyOrders as $item) {
+            $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
+            $item->company_view++;
+            $company->apply_messages--;
+            $worker = Worker::findOne(['id' => $item->worker_id]);
+            if ($worker)
+                $worker->apply_messages++;
+            $item->save();
         }
-
+        $worker->scenario = Worker::SCENARIO_APPLY_M;
+        if ($worker->save() && $company->save())
+        {
+            return $this->redirect('index');
+        }
         return $this->render('apply-messages', [
             'company' => $company,
             'vacancyOrders' => $vacancyOrders,
@@ -354,12 +364,18 @@ class CabinetController extends Controller
     }
 
 //    public function actionWorkerOrder
+
+
     public function actionWorkerOrder()
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-        $vacancyOrders = VacancyOrders::find()->where(['worker_id' => $worker])->all();
+        $vacancyOrders = VacancyOrders::find()->where(['worker_id' => $worker->id])->all();
 
+        foreach ($vacancyOrders as $item) {
+            $item->worker_view++;
+
+        }
 
         return $this->render('worker-order', [
             'worker' => $worker,

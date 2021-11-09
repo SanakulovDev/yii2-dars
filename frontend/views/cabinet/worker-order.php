@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
  */
 
 $statuslist = \frontend\models\ApplyStatus::selectList();
-
+$id = 0;
 ?>
 
 <h3><?= Yii::t('app', 'Cv list') ?></h3>
@@ -33,7 +33,7 @@ $statuslist = \frontend\models\ApplyStatus::selectList();
     <tbody>
     <?php foreach ($vacancyOrders as $item): ?>
         <tr>
-            <td><?= $item->id ?></td>
+            <td><?= ++$id ?></td>
             <td><?= $item->company->name ?></td>
             <td><?= isset(VacancyOrders::STATUSLIST[$item->status]) ? VacancyOrders::STATUSLIST[$item->status] : 'Topilmadi' ?></td>
             <td><?= $item->created_at?></td>

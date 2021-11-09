@@ -4,6 +4,7 @@ use frontend\models\VacancyOrders;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+
 /**
  *
  * @var \frontend\models\VacancyOrders $vacancyOrders
@@ -13,6 +14,7 @@ use yii\widgets\ActiveForm;
 
 $statuslist = \frontend\models\ApplyStatus::selectList();
 $name = 'name_'.Yii::$app->language;
+$id = 0;
 ?>
 
 <h3><?= Yii::t('app', 'Cv list') ?></h3>
@@ -36,7 +38,7 @@ $name = 'name_'.Yii::$app->language;
     <tbody>
     <?php foreach ($vacancyOrders as $item): ?>
         <tr>
-            <td><?= $item->id ?></td>
+            <td><?= ++$Id ?></td>
             <td><?= $item->worker->firstname ?></td>
             <td><?= $item->vacancy->profession->$name ?></td>
             <td><?= Html::a(Yii::t('app', 'Show'), "/cabinet/cv-download?id=" . $item->worker_id) ?></td>
