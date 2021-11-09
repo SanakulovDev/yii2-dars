@@ -2,8 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\Language;
-use common\models\User;
 use Complex\Exception;
 use frontend\models\Company;
 use frontend\models\LaborActivity;
@@ -344,6 +342,9 @@ class CabinetController extends Controller
         $company = $this->findModel($identity->id);
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
 
+        foreach($vacancyOrders as $item){
+            $item->compan
+        }
 
         return $this->render('apply-messages', [
             'company' => $company,
