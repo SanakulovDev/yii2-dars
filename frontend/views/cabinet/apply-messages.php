@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
  */
 
 $statuslist = \frontend\models\ApplyStatus::selectList();
-$name = 'name_'.Yii::$app->language;
+$name = 'name_' . Yii::$app->language;
 $id = 0;
 ?>
 
@@ -31,6 +31,7 @@ $id = 0;
         <th><?= Yii::t('app', 'Phone') ?></th>
         <th><?= Yii::t('app', 'Status') ?></th>
         <th><?= Yii::t('app', 'Created_at') ?></th>
+        <th></th>
 
     </tr>
     </thead>
@@ -43,8 +44,11 @@ $id = 0;
             <td><?= $item->vacancy->profession->$name ?></td>
             <td><?= Html::a(Yii::t('app', 'Show'), "/cabinet/cv-download?id=" . $item->worker_id) ?></td>
             <td><?= $item->worker->phone ?></td>
-            <td><?= isset(VacancyOrders::STATUSLIST[$item->status]) ? VacancyOrders::STATUSLIST[$item->status] : 'Topilmadi' ?></td>
-            <td><?= $item->created_at?></td>
+            <!--            <td>-->
+            <? //= $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST)?><!--</td>-->
+            <td><?= isset(VacancyOrders::STATUSLIST[$item->status == 0]) ? $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST) : VacancyOrders::STATUSLIST[$item->status] ?></td>
+            <td><?= $item->created_at ?></td>
+            <td><?= Html::submitButton(Yii::t('app','Save'),['class'=>'btn btn-outline-success'])?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

@@ -343,19 +343,21 @@ class CabinetController extends Controller
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
         $company->scenario = Company::SCENARIO_APPLY;
         foreach ($vacancyOrders as $item) {
-            $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
-            $item->company_view++;
-            $company->apply_messages--;
-            $worker = Worker::findOne(['id' => $item->worker_id]);
-            if ($worker)
-                $worker->apply_messages++;
-            $item->save();
+            if ($item->load($this->request->post())) {
+                if ($item->status > 0) {
+                    $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
+                    $item->company_view++;
+                    $company->apply_messages--;
+                    $worker = Worker::findOne(['id' => $item->worker_id]);
+                    if ($worker)
+                        $worker->apply_messages++;
+                    $item->save();
+                }
+            }
         }
         $worker->scenario = Worker::SCENARIO_APPLY_M;
-        if ($worker->save() && $company->save())
-        {
-            return $this->redirect('index');
-        }
+        $worker->save() && $company->save();
+
         return $this->render('apply-messages', [
             'company' => $company,
             'vacancyOrders' => $vacancyOrders,
@@ -370,13 +372,25 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
+        $worker->scenario = Worker::SCENARIO_APPLY_M;
         $vacancyOrders = VacancyOrders::find()->where(['worker_id' => $worker->id])->all();
+        var_dump($this->request->post());
 
         foreach ($vacancyOrders as $item) {
-            $item->worker_view++;
+            if ($item->load($this->request->post())) {
+                if ($this->request->post()) {
+                    var_dump($this->request->post());
+                    $item->worker_view++;
+                    $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
 
+                    $worker->apply_messages--;
+//                    $item->save();
+//                    $worker->save();
+                }
+            }
         }
-
+        die();
+//        $worker->save();
         return $this->render('worker-order', [
             'worker' => $worker,
             'vacancyOrders' => $vacancyOrders,
