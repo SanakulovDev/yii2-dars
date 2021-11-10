@@ -30,6 +30,7 @@ $id = 0;
         <th><?= Yii::t('app', 'Cv') ?></th>
         <th><?= Yii::t('app', 'Phone') ?></th>
         <th><?= Yii::t('app', 'Status') ?></th>
+        <th><?= Yii::t('app', 'Rate') ?></th>
         <th><?= Yii::t('app', 'Created_at') ?></th>
         <th></th>
 
@@ -44,11 +45,12 @@ $id = 0;
             <td><?= $item->vacancy->profession->$name ?></td>
             <td><?= Html::a(Yii::t('app', 'Show'), "/cabinet/cv-download?id=" . $item->worker_id) ?></td>
             <td><?= $item->worker->phone ?></td>
-            <td>
-                <?= VacancyOrders::STATUSLIST[$item->status] != Yii::t('app', 'Yuborilgan') ?
-                    VacancyOrders::STATUSLIST[$item->status] :
-                    $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST)
+            <td id="vacancyOrders">
+                <?= VacancyOrders::STATUSLIST[$item->status]
                 ?>
+            </td>
+            <td>
+                <?= $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST) ?>
             </td>
             <td><?= $item->created_at ?></td>
             <td><?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-outline-success']) ?></td>

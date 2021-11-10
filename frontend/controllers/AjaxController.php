@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 use common\models\City;
+use frontend\models\VacancyOrders;
 use yii\web\Controller;
 class AjaxController extends Controller
 {
@@ -15,6 +16,13 @@ class AjaxController extends Controller
         {
             $data .= "<option value={$item->id}>{$item->$name}</option>";
         }
+        return $data;
+    }
+
+    public function actionChangeStatus($id = null, $action = null)
+    {
+        $data = VacancyOrders::findOne([$id]);
+        $data->status = $action;
         return $data;
     }
 }

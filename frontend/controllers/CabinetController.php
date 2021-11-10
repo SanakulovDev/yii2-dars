@@ -341,32 +341,11 @@ class CabinetController extends Controller
 
     public function actionApplyMessages()
     {
-
-
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
         $company->scenario = Company::SCENARIO_APPLY;
-        foreach ($vacancyOrders as $item) {
-            if ($this->request->post()) {
-                if ($item->load($this->request->post())) {
-                    $item->status = intval($_POST['VacancyOrders']['status']);
-                    $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
-                    $item->company_view++;
-                    $item->date_approval = date('yyyy-mm-dd H:i:s', time());
-                    $company->apply_messages--;
-                    $worker = Worker::findOne(['id' => $item->worker_id]);
-                    $worker->scenario = Worker::SCENARIO_APPLY_M;
-                    $worker->save();
-                    $company->save();
-                    if ($worker)
-                        $worker->apply_messages++;
-                    $item->save();
 
-                }
-            }
-        }
-//        die();
 
 
         return $this->render('apply-messages', [

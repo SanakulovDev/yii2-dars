@@ -33,7 +33,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
     const STATUSLIST = [
         0 => 'Yuborilgan',
         1 => 'Bekor qilingan',
-        2 => 'Suhbatga chaqiridi',
+        2 => 'Suhbatga chaqirildi',
         3 => 'Ishga taklif qilindi',
     ];
     public static function tableName()

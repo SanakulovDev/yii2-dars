@@ -74,8 +74,16 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <div class="col-10">
                         <?php if ($v_order) : ?>
                             <a href="#"
-                               class="btn fs-4 btn-block disabled   btn-light btn-lg">
-                                <span class="icon-spinner"></span>
+                               class="btn fs-4 btn-block disabled   btn-success btn-lg">
+                                <?php if ($v_order->status == 0): ?>
+                                    <span class="icon-spinner"></span>
+                                <?php elseif ($v_order->status == 1): ?>
+                                    <span class="icon-exclamation-triangle"></span>
+                                <?php elseif ($v_order->status == 2): ?>
+                                    <span class="icon-check-circle"></span>
+                                <?php elseif ($v_order->status == 3): ?>
+                                    <span class="icon-check"></span>
+                                <?php endif; ?>
                                <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
@@ -110,8 +118,16 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <div class="col-6">
                         <?php if ($v_order) : ?>
                             <a href="#"
-                               class="btn fs-4 btn-block btn-light disabled btn-lg">
-                                <span class="icon-spinner"></span>
+                               class="btn fs-4 btn-block btn-success disabled btn-lg">
+                                <?php if ($v_order->status == 0): ?>
+                                    <span class="icon-spinner"></span>
+                                <?php elseif ($v_order->status == 1): ?>
+                                    <span class="icon-exclamation-triangle"></span>
+                                <?php elseif ($v_order->status == 2): ?>
+                                    <span class="icon-check-circle"></span>
+                                <?php elseif ($v_order->status == 3): ?>
+                                    <span class="icon-check"></span>
+                                <?php endif; ?>
                                 <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
