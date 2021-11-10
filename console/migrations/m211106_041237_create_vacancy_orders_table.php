@@ -26,7 +26,7 @@ class m211106_041237_create_vacancy_orders_table extends Migration
             'company_view' => $this->integer(),
             'worker_view' => $this->integer(),
             'created_at' => $this->timestamp()->defaultExpression('NOW()'),
-            'date_approval' => $this->timestamp()
+            'date_approval' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')->append('ON UPDATE NOW()'),
         ]);
 
         // creates index for column `company_id`

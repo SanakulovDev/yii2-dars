@@ -39,16 +39,18 @@ $id = 0;
     <tbody>
     <?php foreach ($vacancyOrders as $item): ?>
         <tr>
-            <td><?= ++$Id ?></td>
+            <td><?= ++$id ?></td>
             <td><?= $item->worker->firstname ?></td>
             <td><?= $item->vacancy->profession->$name ?></td>
             <td><?= Html::a(Yii::t('app', 'Show'), "/cabinet/cv-download?id=" . $item->worker_id) ?></td>
             <td><?= $item->worker->phone ?></td>
-            <!--            <td>-->
-            <? //= $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST)?><!--</td>-->
-            <td><?= isset(VacancyOrders::STATUSLIST[$item->status == 0]) ? $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST) : VacancyOrders::STATUSLIST[$item->status] ?></td>
+            <td><?= VacancyOrders::STATUSLIST[$item->status]!= Yii::t('app','Yuborilgan')?
+                    VacancyOrders::STATUSLIST[$item->status]:
+                    $form->field($item, 'status')->dropDownList(VacancyOrders::STATUSLIST)
+                     ?>
+            </td>
             <td><?= $item->created_at ?></td>
-            <td><?= Html::submitButton(Yii::t('app','Save'),['class'=>'btn btn-outline-success'])?></td>
+            <td><?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-outline-success']) ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

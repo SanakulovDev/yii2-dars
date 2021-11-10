@@ -1,5 +1,6 @@
 <?php
 
+use frontend\models\VacancyOrders;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
@@ -67,7 +68,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                             <a href="#"
                                class="btn fs-4 btn-block btn-warning btn-lg">
                                 <span class="icon-spinner"></span>
-                                Under consideration</a>
+                               <?=VacancyOrders::STATUSLIST?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
 

@@ -26,6 +26,7 @@ $id = 0;
         <th><?= Yii::t('app', 'Company') ?></th>
         <th><?= Yii::t('app', 'Status') ?></th>
         <th><?= Yii::t('app', 'Created_at') ?></th>
+        <th><?= Yii::t('app', 'Date approval') ?></th>
 
     </tr>
     </thead>
@@ -37,6 +38,7 @@ $id = 0;
             <td><?= $item->company->name ?></td>
             <td><?= isset(VacancyOrders::STATUSLIST[$item->status]) ? VacancyOrders::STATUSLIST[$item->status] : 'Topilmadi' ?></td>
             <td><?= $item->created_at?></td>
+            <td><?= $item->date_approval?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
