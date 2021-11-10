@@ -103,5 +103,16 @@ return [
     // worker-form translate
     'Select a language'=>'Tilni tanlang',
 
+    //vacancy orderCv list
+    'Cv list' => "Cv ro'yxati",
+    'Vacancy name'=>'Vakansiya nomi',
+    'Company View'=>"Kompaniya ko'rinishi",
+    'Worker View'=>"Ishchi ko'rinishi",
+    'Created_at'=>'Sana yaratish',
+    'Date approval'=>'Tasdiqlash sanasi',
+    'Cv'=>'Rezyume',
+    'Show'=>"Ko'rsatish",
+    'You have received messages'=>'Siz xabarlarni oldingiz',
+
 ];
 ?>

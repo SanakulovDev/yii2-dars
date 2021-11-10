@@ -64,7 +64,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'company_id' => Yii::t('app', 'Company ID'),
-            'vacancy_id' => Yii::t('app', 'Vacancy ID'),
+            'vacancy_id' => Yii::t('app', 'Vacancy name'),
             'worker_id' => Yii::t('app', 'Worker ID'),
             'status' => Yii::t('app', 'Status'),
             'company_view' => Yii::t('app', 'Company View'),

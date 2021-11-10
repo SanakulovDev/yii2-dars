@@ -105,5 +105,17 @@ return [
 
     // worker-form translate
     'Select a language'=>'Выберите язык',
+
+    //vacancy orderCv list
+    'Cv list' => 'Список резюме',
+    'Vacancy name'=>'Название вакансии',
+    'Company View'=>'Взгляд компании',
+    'Worker View'=>'Просмотр рабочих',
+    'Created_at'=>'Дата создания',
+    'Date approval'=>'Дата утверждения',
+    'Cv'=>'Резюме',
+    'Show'=>'Показать',
+    'You have received messages'=>'Вы получили сообщения',
+
 ];
 ?>

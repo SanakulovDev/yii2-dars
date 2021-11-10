@@ -1,12 +1,10 @@
 <?php
 
 namespace frontend\controllers;
-
 use common\models\Appeals;
 use common\models\City;
 use common\models\Partners;
 use common\models\User;
-use frontend\models\ApplyVacancy;
 use frontend\models\Company;
 use frontend\models\JobStats;
 use frontend\models\ResendVerificationEmailForm;

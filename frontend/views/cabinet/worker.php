@@ -13,13 +13,19 @@ use yii\helpers\Html;
  */
 $lang = 'name_' . Yii::$app->language;
 $langTolower = 'name' . ucfirst(Yii::$app->language);?>
+<?php if($worker->apply_messages > 0) :?>
+<audio id="myAudio" autoplay>
+    <source src="/frontend/web/notification3.mp3" type="audio/mp3">
+</audio>
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    Sizga xabar keldi <a href="/cabinet/worker-order/" class="alert-link"><span
+    <?=Yii::t('app','You have received messages')?>
+    <a href="/cabinet/worker-order/" class="alert-link"><span
                 class="badge badge-primary"><?= $worker->apply_messages ?></span></a>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+<?php endif;?>
 <?php
 echo \yii\widgets\DetailView::widget([
     'model' => $worker,

@@ -5,6 +5,8 @@ use yii\bootstrap4\Nav;
 use yii\helpers\Html;
 
 AppAsset::register($this);
+
+
 ?>
 <?php $this->beginPage() ?>
     <!doctype html>
@@ -50,6 +52,7 @@ AppAsset::register($this);
 
                 <div class="col-md-9">
                     <?= $content; ?>
+
                 </div>
             </div>
 

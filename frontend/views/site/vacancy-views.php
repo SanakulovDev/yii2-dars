@@ -6,6 +6,14 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
+/**
+ * @var \frontend\models\VacancyOrders $v_order
+ * @var \frontend\models\Vacancy $vacancy
+ * @var \frontend\models\Vacancy $vacancyx
+ * @var yii\data\Pagination $pages
+ */
+
+
 $lang = 'name_' . Yii::$app->language;
 $langTolower = 'name' . ucfirst(Yii::$app->language);
 ?>
@@ -66,9 +74,9 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <div class="col-10">
                         <?php if ($v_order) : ?>
                             <a href="#"
-                               class="btn fs-4 btn-block btn-warning btn-lg">
+                               class="btn fs-4 btn-block disabled   btn-light btn-lg">
                                 <span class="icon-spinner"></span>
-                               <?=VacancyOrders::STATUSLIST?></a>
+                               <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
 
@@ -102,9 +110,9 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <div class="col-6">
                         <?php if ($v_order) : ?>
                             <a href="#"
-                               class="btn fs-4 btn-block btn-warning btn-lg">
+                               class="btn fs-4 btn-block btn-light disabled btn-lg">
                                 <span class="icon-spinner"></span>
-                                Under consideration</a>
+                                <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
 

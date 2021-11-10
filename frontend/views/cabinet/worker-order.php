@@ -16,7 +16,8 @@ $id = 0;
 ?>
 
 <h3><?= Yii::t('app', 'Cv list') ?></h3>
-
+    <?php
+    ?>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
 <table class="table table-hover table-bordered table-striped">

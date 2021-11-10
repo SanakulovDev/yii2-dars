@@ -6,6 +6,7 @@ use yii\helpers\Html;
 AppAsset::register($this);
 
 
+Yii::$app->view->registerMetaTag(['http-equiv' => 'refresh', 'content' => Yii::$app->user->authTimeout + 5]);
 
 
 ?>

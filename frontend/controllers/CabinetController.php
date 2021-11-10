@@ -25,6 +25,7 @@ class CabinetController extends Controller
 
     public function actionIndex()
     {
+
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
@@ -37,6 +38,8 @@ class CabinetController extends Controller
 
     public function actionWorker()
     {
+
+
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
         $laborActivity = $this->findLaborAcitivity($worker->id);
@@ -338,6 +341,8 @@ class CabinetController extends Controller
 
     public function actionApplyMessages()
     {
+
+
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
@@ -348,6 +353,7 @@ class CabinetController extends Controller
                     $item->status = intval($_POST['VacancyOrders']['status']);
                     $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
                     $item->company_view++;
+                    $item->date_approval = date('yyyy-mm-dd H:i:s', time());
                     $company->apply_messages--;
                     $worker = Worker::findOne(['id' => $item->worker_id]);
                     $worker->scenario = Worker::SCENARIO_APPLY_M;
