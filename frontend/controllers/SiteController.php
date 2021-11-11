@@ -191,6 +191,8 @@ class SiteController extends Controller
                     return $this->redirect('/site/login/');
                 }
                 $image = UploadedFile::getInstance($model, 'logo');
+                var_dump($image);
+                die();
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
