@@ -56,7 +56,6 @@
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-mpdf": "dev-master",
         "conquer/i18n": "*",
-      "ext-json": "*",
-      "ext-http": "*"
+        "ext-http": "*"
     }
 }
