@@ -57,7 +57,7 @@ class Company extends \yii\db\ActiveRecord
             [['phone'], 'string', 'max' => 30],
             [['email'], 'email'],
             [['password'],'string'],
-            [['logo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
+            ['logo', 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, svg, ttif']
         ];
     }
 
