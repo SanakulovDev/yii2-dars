@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
-/*
+/**
  *
- * $vacancy frontend/models/Vacancy
+ *  @var $vacancy \frontend\models\Vacancy
  */
 
 $lang = 'name_' . Yii::$app->language;
@@ -36,7 +36,6 @@ $lang = 'name_' . Yii::$app->language;
         <ul class="job-listings mb-5">
             <?php foreach ($vacancy as $key => $item): ?>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-<!--                    --><?//= Html::a(Yii::t('app', ''), ['vacancy-views', 'id' => $item->id])     ?>
                     <a href="vacancy-views?id=<?=$item->id?>&get=<?=null?>"></a>
                     <div class="job-listing-logo">
                         <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>

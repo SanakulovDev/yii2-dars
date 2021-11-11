@@ -38,18 +38,16 @@ class CabinetController extends Controller
 
     public function actionWorker()
     {
-
-
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-        $laborActivity = $this->findLaborAcitivity($worker->id);
-        $workerLanguage = $this->findWorkerlanguage($worker->id);
         if (empty($worker)) {
             return $this->render('worker', [
                 'worker' => new Worker(),
-                'laborActivity' => $laborActivity,
-                'workerLanguage' => $workerLanguage
             ]);
+        }
+        else{
+            $laborActivity = $this->findLaborAcitivity($worker->id);
+            $workerLanguage = $this->findWorkerlanguage($worker->id);
         }
         return $this->render('worker', [
             'worker' => $worker,
