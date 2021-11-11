@@ -328,20 +328,24 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
-        $v_order = VacancyOrders::find()->where(['vacancy_id' => $vacancy->id]);
-        if ($v_order) {
-            $v_order->vacancy_id = intval($id);
-            $v_order->company_id = $vacancy->company_id;
-            $vacancyOrders = $v_order;
-        }
-        else{
-        $vacancyOrders = new VacancyOrders();
-        }
+
 
         if (!empty($identity)) {
             $worker = Worker::findOne(['userId' => $identity->id]);
-            if ($worker)
-                $vacancyOrders->company_id = $worker->id;
+            if ($worker) {
+
+                $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
+                if ($v_order) {
+                    $v_order->vacancy_id = intval($id);
+                    $v_order->company_id = $vacancy->company_id;
+                    $v_order->company_id = $worker->id;
+                    $vacancyOrders = $v_order;
+                } else {
+                    $vacancyOrders = new VacancyOrders();
+                }
+
+
+            }
         }
         $company = Company::findOne($vacancyOrders->company_id);
         $company->scenario = Company::SCENARIO_APPLY;
