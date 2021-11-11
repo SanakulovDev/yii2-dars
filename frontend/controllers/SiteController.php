@@ -339,7 +339,7 @@ class SiteController extends Controller
             if ($worker)
                 $vacancyOrders->company_id = $worker->id;
         }
-        $company = Company::findOne(['id' => $vacancyOrders->company_id]);
+        $company = Company::findOne($vacancyOrders->company_id);
         $company->scenario = Company::SCENARIO_APPLY;
         $company->apply_messages++;
 
