@@ -50,7 +50,7 @@ $this->title = 'My Yii Application';
 
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
-                    <strong class="number" data-number=<?php /*$job_stats->company_number*/?>><?=$job_stats->company_number?></strong>
+                    <strong class="number" data-number=<?php echo $job_stats->company_number?>><?php echo $job_stats->company_number?></strong>
                 </div>
                 <span class="caption"><?=Yii::t('app','Company  count')?></span>
             </div>
