@@ -330,11 +330,9 @@ class SiteController extends Controller
         $identity = Yii::$app->user->identity;
         $v_order = VacancyOrders::find()->where(['vacancy_id' => $vacancy->id]);
         if ($v_order) {
+            $v_order->vacancy_id = intval($id);
+            $v_order->company_id = $vacancy->company_id;
             $vacancyOrders = $v_order;
-
-            $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
-            $vacancyOrders->vacancy_id = intval($id);
-            $vacancyOrders->company_id = $vacancy->company_id;
         }
         else{
         $vacancyOrders = new VacancyOrders();
