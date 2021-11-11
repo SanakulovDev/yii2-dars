@@ -353,10 +353,11 @@ class SiteController extends Controller
 
 
         if ($get == 'true') {
-            $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
             if ($identity) {
+                $worker = Worker::findOne(['userId' => $identity->id]);
                 if (!empty($worker->photo)) {
+                    $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
                     if (!$v_order && $vacancyOrders->save() && $company->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
