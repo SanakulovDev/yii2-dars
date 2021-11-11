@@ -89,14 +89,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $jobSats = JobStats::findOne(['id' => 1]);
+        $job_stats = JobStats::find();
         $query = Partners::find()
             ->where(['status' => 1])
             ->orderBy('order')
             ->all();
         return $this->render('index', [
             'query' => $query,
-            'jobStats' => $jobSats,
+            'job_stats' => $job_stats,
 
         ]);
     }
