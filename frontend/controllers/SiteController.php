@@ -336,6 +336,8 @@ class SiteController extends Controller
             $vacancyOrders->vacancy_id = intval($id);
             $vacancyOrders->company_id = $vacancy->company_id;
         }
+        var_dump($identity);
+        die();
         if ($identity->id) {
             $worker = Worker::findOne(['userId' => $identity->id]);
             if ($worker)
