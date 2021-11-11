@@ -328,6 +328,7 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
+        $vacancyOrders = $this->findVacancyOrders();
         $vacancyOrders = new VacancyOrders();
 
         $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
