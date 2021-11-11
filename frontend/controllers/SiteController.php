@@ -190,6 +190,8 @@ class SiteController extends Controller
                     Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
                     return $this->redirect('/site/login/');
                 }
+                var_dump($model->errors);
+                die();
                 $image = UploadedFile::getInstance($model, 'logo');
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {

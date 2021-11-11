@@ -100,7 +100,7 @@ class Company extends \yii\db\ActiveRecord
     }
     public function getRegion()
     {
-        return $this->hasOne(Region::class, ['id' => 'regionId']);
+        return $this->hasMany(Region::class, ['id' => 'regionId']);
     }
     public function getCity()
     {
