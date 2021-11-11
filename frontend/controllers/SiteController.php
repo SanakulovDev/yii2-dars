@@ -328,13 +328,14 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
-        $vacancyOrders = $this->findVacancyOrders();
-        $vacancyOrders = new VacancyOrders();
+        $x = VacancyOrders::find()->where(['vacancy_id' => $vacancy->id]);
+        if ($x) {
+            $vacancyOrders = new VacancyOrders();
 
-        $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
-        $vacancyOrders->vacancy_id = intval($id);
-        $vacancyOrders->company_id = $vacancy->company_id;
-
+            $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
+            $vacancyOrders->vacancy_id = intval($id);
+            $vacancyOrders->company_id = $vacancy->company_id;
+        }
         if ($identity->id) {
             $worker = Worker::findOne(['userId' => $identity->id]);
             if ($worker)
@@ -418,7 +419,7 @@ class SiteController extends Controller
 
     protected function findVacancyOrders($id)
     {
-        if (($vacancyOrders = VacancyOrders::findOne(['id' => $id])) !== null) {
+        if (($vacancyOrders = VacancyOrders::findOne($id)) !== null) {
             return $vacancyOrders;
         }
         return false;
