@@ -26,12 +26,12 @@ AppAsset::register($this);
     </head>
     <?php $this->beginBody() ?>
     <body class="top">
-    <!--<div id="overlayer"></div>-->
-    <!--<div class="loader">-->
-    <!--    <div class="spinner-border text-primary" role="status">-->
-    <!--        <span class="sr-only">Loading...</span>-->
-    <!--    </div>-->
-    <!--</div>-->
+    <div id="overlayer"></div>
+    <div class="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <div class="site-wrap">
 
         <div class="site-mobile-menu site-navbar-target">
