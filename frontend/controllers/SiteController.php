@@ -337,7 +337,7 @@ class SiteController extends Controller
             $vacancyOrders->company_id = $vacancy->company_id;
         }
 
-        if (empty($identity)) {
+        if (!empty($identity)) {
             $worker = Worker::findOne(['userId' => $identity->id]);
             if ($worker)
                 $vacancyOrders->company_id = $worker->id;
@@ -345,8 +345,6 @@ class SiteController extends Controller
         $company = Company::findOne($vacancyOrders->company_id);
         $company->scenario = Company::SCENARIO_APPLY;
         $company->apply_messages++;
-
-        $worker = Worker::findOne(['userId' => $identity->id]);
 
         if ($get == 'true') {
             $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
