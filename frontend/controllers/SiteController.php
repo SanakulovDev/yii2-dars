@@ -352,7 +352,7 @@ class SiteController extends Controller
         }
 
 
-        if ($get == 'true') {
+        if (!empty($identity) && $get == 'true') {
             $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
             if ($identity) {
