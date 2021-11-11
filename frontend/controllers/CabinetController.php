@@ -42,7 +42,7 @@ class CabinetController extends Controller
         $worker = $this->findWorker($identity->id);
         if (empty($worker)) {
             return $this->render('worker', [
-                'worker' => new Worker(),
+                'worker' => $worker
             ]);
         }
         else{

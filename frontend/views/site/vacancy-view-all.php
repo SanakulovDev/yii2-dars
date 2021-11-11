@@ -36,7 +36,7 @@ $lang = 'name_' . Yii::$app->language;
         <ul class="job-listings mb-5">
             <?php foreach ($vacancy as $key => $item): ?>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="vacancy-views?id=<?=$item->id?>&get=<?=null?>"></a>
+                    <a href="vacancy-views?id=<?=$item->id?>&get=null"></a>
                     <div class="job-listing-logo">
                         <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                     </div>
