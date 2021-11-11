@@ -343,13 +343,13 @@ class SiteController extends Controller
                 } else {
                     $vacancyOrders = new VacancyOrders();
                 }
-
+                $company = Company::findOne($vacancyOrders->company_id);
+                $company->scenario = Company::SCENARIO_APPLY;
+                $company->apply_messages++;
 
             }
         }
-        $company = Company::findOne($vacancyOrders->company_id);
-        $company->scenario = Company::SCENARIO_APPLY;
-        $company->apply_messages++;
+
 
         if ($get == 'true') {
             $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
