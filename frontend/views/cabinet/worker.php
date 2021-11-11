@@ -34,11 +34,11 @@ echo \yii\widgets\DetailView::widget([
         'lastname',
         'patronymic',
         'birthdate',
-        [
-            'attribute' => 'regionId',
-            'label' => Yii::t('app', 'Region'),
-            'value' => $worker->region->$langTolower
-        ],
+//        [
+//            'attribute' => 'regionId',
+//            'label' => Yii::t('app', 'Region'),
+//            'value' => $worker->region->$langTolower
+//        ],
         [
             'attribute' => 'cityId',
             'label' => Yii::t('app', 'City'),

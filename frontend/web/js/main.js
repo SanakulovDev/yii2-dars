@@ -54,23 +54,6 @@ $('#vacancy-region_id').change(function(){
     });
 });
 
-$('#vacancyorders-status').change(function(){
-    let id = $(this).val();
-    let action = id;
-    $.ajax({
-        method: "get",
-        url: "/ajax/change-status",
-        data: { id: id, action: action},
-        success: function(data) {
-            $('#vacancyOrders').html(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        }
-    });
-});
 
 $('#vacancy-profession_id').select2();
 $('#vacancy-city_id').select2();

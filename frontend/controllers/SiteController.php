@@ -1,6 +1,7 @@
 <?php
 
 namespace frontend\controllers;
+
 use common\models\Appeals;
 use common\models\City;
 use common\models\Partners;
@@ -89,7 +90,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        $job_stats = JobStats::findOne(['id'=>1]);
+        $job_stats = JobStats::findOne(['id' => 1]);
         $query = Partners::find()
             ->where(['status' => 1])
             ->orderBy('order')
@@ -199,21 +200,7 @@ class SiteController extends Controller
                 }
             }
         }
-//        else {
-//            $user->username = $model->username;
-//            $user->email = $model->email;
-//            $user->password = $model->password;
-//
-//            $user->role = !empty($model->director_name) ? 'company' : 'worker';
-//            $a = $user->role;
-//            if ($user = $user->signup()) {
-//                if ($a === 'worker'){
-//                    Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
-//                    return $this->redirect('/site/login/');
-//                }
-//
-//            }
-//        }
+
         return $this->render('signup', [
             'model' => $model
         ]);
@@ -345,9 +332,13 @@ class SiteController extends Controller
 
         $vacancyOrders->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
         $vacancyOrders->vacancy_id = intval($id);
-        $vacancyOrders->worker_id = (Worker::findOne(['userId'=>$identity->id]))->id;
         $vacancyOrders->company_id = $vacancy->company_id;
 
+        if ($identity) {
+            $worker = Worker::findOne(['userId' => $identity->id]);
+            if ($worker)
+                $vacancyOrders->company_id = $worker->id;
+        }
         $company = Company::findOne(['id' => $vacancyOrders->company_id]);
         $company->scenario = Company::SCENARIO_APPLY;
         $company->apply_messages++;
@@ -363,8 +354,7 @@ class SiteController extends Controller
                     if (!$v_order && $vacancyOrders->save() && $company->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
                     }
-                }
-                else {
+                } else {
                     return $this->redirect('/cabinet/worker');
                 }
             } else {
