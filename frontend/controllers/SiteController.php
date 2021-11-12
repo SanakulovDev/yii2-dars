@@ -329,15 +329,15 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
-
-
+        $worker = Worker::findOne(['userId' => $identity->id]);
+        $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
         if ($get == 'true') {
 
             if ($identity) {
-                $worker = Worker::findOne(['userId' => $identity->id]);
+
                 if (!empty($worker->photo)) {
-                    $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
+
                     $v_order->worker_id =$worker->id;
                     $v_order->vacancy_id = $vacancy->id;
                     $vacancy->company_id = $vacancy->company->id;
