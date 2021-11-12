@@ -25,7 +25,7 @@ use Yii;
  * @property int $region_id
  * @property int $city_id
  * @property string $image
- * @property int $count_vacancy
+ * @property int $count
  * @property int|null $salary
  * @property int|null $gender
  * @property string|null $experience
@@ -59,8 +59,8 @@ class Vacancy extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'user_id', 'profession_id', 'region_id', 'city_id', 'image', 'count_vacancy'], 'required'],
-            [['company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count_vacancy', 'salary', 'gender', 'views', 'status'], 'integer'],
+            [['company_id', 'user_id', 'profession_id', 'region_id', 'city_id', 'image', 'count'], 'required'],
+            [['company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count', 'salary', 'gender', 'views', 'status'], 'integer'],
             [['deadline', 'created_at', 'updated_at'], 'safe'],
             [['description_uz', 'description_ru', 'description_en', 'description_cyrl'], 'string', 'max' => 255],
             ['image', 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'svg'], 'maxSize' => 1024 * 1024 * 4],
@@ -91,7 +91,7 @@ class Vacancy extends \yii\db\ActiveRecord
             'region_id' => Yii::t('app', 'Region'),
             'city_id' => Yii::t('app', 'City'),
             'image' => Yii::t('app', 'image'),
-            'count_vacancy' => Yii::t('app', 'Number of jobs'),
+            'count' => Yii::t('app', 'Number of jobs'),
             'salary' => Yii::t('app', 'Salary'),
             'gender' => Yii::t('app', 'Gender'),
             'experience' => Yii::t('app', 'Experience'),

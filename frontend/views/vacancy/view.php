@@ -72,7 +72,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
                 'value' => '@web/uploads/vacancy/' . $model->image,
                 'format' => ['image', ['width' => '150', 'height' => '150']]
             ],
-            'count_vacancy',
+            'count',
             'salary',
             [
                 'attribute' => 'gender',

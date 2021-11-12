@@ -19,12 +19,6 @@ $genderList = \common\models\Gender::selectList();
 
 
 ?>
-
-<style>
-    #vacancy-profession_id {
-        visibility: visible !important;
-    }
-</style>
 <div class="vacancy-form">
 
 
@@ -252,7 +246,7 @@ $genderList = \common\models\Gender::selectList();
 
                     <div class="form-group row">
                         <div class="col-md-4">
-                            <?= $form->field($model, 'count_vacancy')->textInput() ?>
+                            <?= $form->field($model, 'count')->textInput() ?>
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'salary')->textInput() ?>
