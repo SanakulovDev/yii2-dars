@@ -40,17 +40,10 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-        if (empty($worker)) {
-            return $this->render('worker', [
-                'worker' => new Worker(),
-                'laborActivity' => new LaborActivity(),
-                'workerLanguage' => new LaborActivity()
-            ]);
-        }
-        else{
-            $laborActivity = $this->findLaborAcitivity($worker->id);
-            $workerLanguage = $this->findWorkerlanguage($worker->id);
-        }
+
+        $laborActivity = $this->findLaborAcitivity($worker->id);
+        $workerLanguage = $this->findWorkerlanguage($worker->id);
+
         return $this->render('worker', [
             'worker' => $worker,
             'laborActivity' => $laborActivity,
@@ -347,7 +340,6 @@ class CabinetController extends Controller
         $company->scenario = Company::SCENARIO_APPLY;
 
 
-
         return $this->render('apply-messages', [
             'company' => $company,
             'vacancyOrders' => $vacancyOrders,
@@ -375,8 +367,8 @@ class CabinetController extends Controller
 
         foreach ($vacancyOrders as $item) {
             $item->scenario = VacancyOrders::SCENARIO_APPLY_MESSAGES;
-           $item->worker_view++;
-           $item->save();
+            $item->worker_view++;
+            $item->save();
         }
         return $this->render('worker-order', [
             'worker' => $worker,
