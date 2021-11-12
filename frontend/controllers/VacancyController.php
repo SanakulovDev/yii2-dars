@@ -58,8 +58,14 @@ class VacancyController extends Controller
      */
     public function actionView($id)
     {
+        $identity= Yii::$app->user->identity;
+        if ($identity !== null){
+            $company = $this->findCompany($identity->id);
+            $model = Vacancy::findAll(['company_id'=>$company->id]);
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' =>isset($model)?$model:$this->findModel($id),
         ]);
     }
 
