@@ -40,13 +40,14 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = $this->findWorker($identity->id);
-
+        if (empty($worker))
+            return $this->redirect('worker-create');
         $laborActivity = $this->findLaborAcitivity($worker->id);
         $workerLanguage = $this->findWorkerlanguage($worker->id);
 
         return $this->render('worker', [
             'worker' => $worker,
-            'laborActivity' => $laborActivity,
+            'laborActivity' => $worker,
             'workerLanguage' => $workerLanguage
         ]);
     }
