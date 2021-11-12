@@ -87,8 +87,8 @@ class Company extends \yii\db\ActiveRecord
     public function upload($image)     
     {
         if ($image !== null) {
-            $dir = "uploads/company/";
-            $image_name = $this->name."_".time();
+            $dir = "web/uploads/company/";
+            $image_name =time();
             $image_name .= '.'.$image->extension;
             if ($image->saveAs($dir.$image_name)) {
                 $this->logo = $image_name;
