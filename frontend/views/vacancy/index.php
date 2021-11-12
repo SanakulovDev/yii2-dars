@@ -49,7 +49,7 @@ $name_two = 'name' . ucfirst(Yii::$app->language);
                 <td><?= $item->address?></td>
                 <td>
                     <a href="view?id=<?=$item->id?>"><span class="icon-eye"></span></a>
-                    <a href="update?id=<?=$item->id?>"><span class="icon-pen"></span></a>
+                    <a href="update?id=<?=$item->id?>"><span class="icon-pencil"></span></a>
                     <a href="delete?id=<?=$item->id?>"><span class="icon-trash"></span></a>
                 </td>
             </tr>
