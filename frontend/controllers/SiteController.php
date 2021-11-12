@@ -342,12 +342,13 @@ class SiteController extends Controller
                     $v_order->company_id = $vacancy->company_id;
                     $v_order->company_id = $worker->id;
                     $vacancyOrders = $v_order;
+                    $company = Company::findOne($vacancyOrders->company_id);
+                    $company->scenario = Company::SCENARIO_APPLY;
+                    $company->apply_messages++;
                 } else {
                     $vacancyOrders = new VacancyOrders();
                 }
-                $company = Company::findOne($vacancyOrders->company_id);
-                $company->scenario = Company::SCENARIO_APPLY;
-                $company->apply_messages++;
+
 
             }
         }
