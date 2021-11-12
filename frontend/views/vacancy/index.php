@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\VacancySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,6 +11,8 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Vacancies');
 $this->params['breadcrumbs'][] = $this->title;
+$name = 'name_'.Yii::$app->language;
+$name_two = 'name' . ucfirst(Yii::$app->language);
 ?>
 <div class="vacancy-index">
 
@@ -20,25 +23,35 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= \yii\widgets\DetailView::widget([
-            'model'=>$model,
-//        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'description_uz',
-            'count',
-            'salary',
-            'experience',
-            'telegram',
-            'address',
+    <div class="row">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th><?= Yii::t('app', 'Username') ?></th>
+                <th><?= Yii::t('app', 'Company name') ?></th>
+                <th><?= Yii::t('app', 'Profession name') ?></th>
+                <th><?= Yii::t('app', 'Region') ?></th>
+                <th><?= Yii::t('app', 'City') ?></th>
+                <th><?= Yii::t('app', 'Address') ?></th>
+            </tr>
+            </thead>
+            <tbody>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+            <?php foreach ($model as $item): ?>
+            <tr>
+                <td><?= $item->user->username?></td>
+                <td><?= $item->company->name?></td>
+                <td><?= $item->profession->$name?></td>
+                <td><?= $item->region->$name_two?></td>
+                <td><?= $item->city->$name_two?></td>
+                <td><?= $item->address?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
 
+    </div>
     <?php Pjax::end(); ?>
 
 </div>
