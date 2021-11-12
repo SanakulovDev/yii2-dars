@@ -56,7 +56,7 @@ class VacancyController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
         $identity= Yii::$app->user->identity;
         if ($identity !== null){
@@ -65,7 +65,7 @@ class VacancyController extends Controller
         }
 
         return $this->render('view', [
-            'model' =>isset($model)?$model:$this->findModel($id),
+            'model' =>isset($model)?$model:'',
         ]);
     }
 
