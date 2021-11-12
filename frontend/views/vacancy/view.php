@@ -17,7 +17,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
 <div class="vacancy-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <?php  if ($model!=null): ?>
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => ($model!=null)?$model->id:null], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => ($model!=null)?$model->id:null], [
@@ -28,7 +28,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             ],
         ]) ?>
     </p>
-    <?php  if ($model!=null): ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
