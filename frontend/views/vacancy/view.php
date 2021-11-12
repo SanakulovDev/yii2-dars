@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Vacancy */
 
-$this->title = $model->id;
+$this->title = ($model!=null)?$model->id:Yii::t('app','Vacancy not found');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Vacancies'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -28,6 +28,7 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
             ],
         ]) ?>
     </p>
+    <?php  if ($model!=null): ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -88,5 +89,5 @@ $langTolower = 'name'.ucfirst(Yii::$app->language);
 
         ],
     ]) ?>
-
+<?php endif;?>
 </div>
