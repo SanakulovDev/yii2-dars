@@ -37,18 +37,18 @@ echo \yii\widgets\DetailView::widget([
         [
             'attribute' => 'regionId',
             'label' => Yii::t('app', 'Region'),
-            'value' => $worker?$worker->region->$langTolower:Yii::t('app','Not included')
+            'value' => $worker !==null?$worker->region->$langTolower:Yii::t('app','Not included')
         ],
         [
             'attribute' => 'cityId',
             'label' => Yii::t('app', 'City'),
-            'value' => $worker?$worker->city->$langTolower:Yii::t('app','Not included')
+            'value' => $worker !==null?$worker->city->$langTolower:Yii::t('app','Not included')
         ],
         'address',
         'phone',
         [
             'attribute' => 'gender',
-            'value' => $worker?$worker->genders->$lang:Yii::t('app','Not included')
+            'value' => $worker!==null?$worker->genders->$lang:Yii::t('app','Not included')
         ],
         'nationality_id',
         [
@@ -59,7 +59,7 @@ echo \yii\widgets\DetailView::widget([
         'hobby',
         [
             'attribute' => 'profession_id',
-            'value' => $worker?$worker->professions->$lang:Yii::t('app','Not included')
+            'value' => $worker!==null?$worker->professions->$lang:Yii::t('app','Not included')
         ],
         [
             'label' => 'Languages',
