@@ -34,6 +34,7 @@ $name_two = 'name' . ucfirst(Yii::$app->language);
                 <th><?= Yii::t('app', 'Region') ?></th>
                 <th><?= Yii::t('app', 'City') ?></th>
                 <th><?= Yii::t('app', 'Address') ?></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -46,6 +47,11 @@ $name_two = 'name' . ucfirst(Yii::$app->language);
                 <td><?= $item->region->$name_two?></td>
                 <td><?= $item->city->$name_two?></td>
                 <td><?= $item->address?></td>
+                <td>
+                    <a href="view?id=<?=$item->id?>"><span class="icon-eye"></span></a>
+                    <a href="update?id=<?=$item->id?>"><span class="icon-pen"></span></a>
+                    <a href="delete?id=<?=$item->id?>"><span class="icon-trash"></span></a>
+                </td>
             </tr>
             <?php endforeach; ?>
             </tbody>
