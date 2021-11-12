@@ -20,7 +20,7 @@ use Yii;
  * @property string $description_uz
  * @property string $description_ru
  * @property string $description_en
- * @property string $descrition_cyrl
+ * @property string $description_cyrl
  * @property int|null $job_type_id
  * @property int $region_id
  * @property int $city_id
