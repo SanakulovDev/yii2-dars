@@ -331,7 +331,6 @@ class SiteController extends Controller
         $identity = Yii::$app->user->identity;
 
 
-        $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id]);
 
         if ($get == 'true') {
 
@@ -339,21 +338,10 @@ class SiteController extends Controller
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 if (!empty($worker->photo)) {
                     $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
-                    if ($v_order) {
-                        $v_order->vacancy_id = intval($id);
-                        $v_order->company_id = $vacancy->company_id;
-                        $v_order->company_id = $worker->id;
-                        $vacancyOrders = $v_order;
-                        $company = Company::findOne($vacancyOrders->company_id);
-                        $company->scenario = Company::SCENARIO_APPLY;
-                        $company->apply_messages++;
-                    } else {
-                        $vacancyOrders = new VacancyOrders();
-                    }
-                    $company = Company::findOne($vacancyOrders->company_id);
-                    $company->scenario = Company::SCENARIO_APPLY;
-                    $company->apply_messages++;
-                    if (!$v_order && $vacancyOrders->save() && $company->save()) {
+                    $v_order->worker_id =$worker->id;
+                    $v_order->vacancy_id = $vacancy->id;
+                    $vacancy->company_id = $vacancy->company->id;
+                    if (!$v_order && $v_order->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
                     }
                 } else {
