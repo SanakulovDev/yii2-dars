@@ -37,12 +37,12 @@ return [
             'loginUrl' => ['site/login'],
             'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
-            'authTimeout' => 60,
+            'authTimeout' => 60*5,
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
-            'timeout' => 60
+            'timeout' => 60*5
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
