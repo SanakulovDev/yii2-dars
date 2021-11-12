@@ -56,7 +56,7 @@ class VacancyController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView()
+    public function actionView($id)
     {
         $identity= Yii::$app->user->identity;
         if ($identity !== null){
@@ -87,7 +87,7 @@ class VacancyController extends Controller
             $model->deadline = date('Y-m-d', time() + 30 * 24 * 3600);
             $model->company_id = $company->id;
             $model->user_id = $company->userId;
-            var_dump($model->load($this->request->post()));
+            var_dump();
             die();
             if ($model->load($this->request->post()) && $model->upload($image) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
