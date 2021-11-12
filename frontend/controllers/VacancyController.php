@@ -62,12 +62,10 @@ class VacancyController extends Controller
         if ($identity !== null){
             $company = $this->findCompany($identity->id);
             $model = Vacancy::findAll(['company_id'=>$company->id]);
-            var_dump($model);
-            die();
         }
 
         return $this->render('view', [
-            'model' =>isset($model)?$model:'',
+            'model' =>isset($model)?$model:null,
         ]);
     }
 
