@@ -312,7 +312,7 @@ class SiteController extends Controller
 //        }
 //    }
 
-    public function actionVacancyViews($id, $get = false)
+    public function actionVacancyViews($id=null, $get = false)
     {
 
         $vacancy = $this->findModel($id);
@@ -339,7 +339,7 @@ class SiteController extends Controller
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 if (!empty($worker->photo)) {
                     $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
-                    if (!$v_order) {
+                    if ($v_order) {
                         $v_order->vacancy_id = intval($id);
                         $v_order->company_id = $vacancy->company_id;
                         $v_order->company_id = $worker->id;
