@@ -16,7 +16,8 @@ use yii\web\UploadedFile;
  */
 class VacancyController extends Controller
 {
-    public  $layout = "cabinet";
+    public $layout = "cabinet";
+
     /**
      * @inheritDoc
      */
@@ -41,12 +42,20 @@ class VacancyController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new VacancySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $model = $dataProvider;
+        $identity = Yii::$app->user->identity;
+        if ($identity !== null) {
+            $company = $this->findCompany($identity->id);
+            if ($company)
+                $model = Vacancy::findAll(['company_id' => $company->id]);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model
         ]);
     }
 
@@ -65,8 +74,6 @@ class VacancyController extends Controller
     }
 
 
-
-
     /**
      * Creates a new Vacancy model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -76,7 +83,7 @@ class VacancyController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $model = new Vacancy();
-        $company =  $this->findCompany($identity->id);
+        $company = $this->findCompany($identity->id);
         if ($this->request->isPost) {
             $image = UploadedFile::getInstance($model, 'image');
             $model->deadline = date('Y-m-d', time() + 30 * 24 * 3600);
@@ -93,6 +100,7 @@ class VacancyController extends Controller
             'model' => $model,
         ]);
     }
+
     protected function findCompany($id)
     {
         if ($company = Company::findOne(['userId' => $id])) {
@@ -100,6 +108,7 @@ class VacancyController extends Controller
         }
         return $company;
     }
+
     /**
      * Updates an existing Vacancy model.
      * If update is successful, the browser will be redirected to the 'view' page.

@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\VacancySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model \frontend\models\Vacancy */
 
 $this->title = Yii::t('app', 'Vacancies');
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $model,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
