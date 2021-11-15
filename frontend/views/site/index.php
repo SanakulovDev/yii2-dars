@@ -140,14 +140,6 @@ $this->title = 'My Yii Application';
             </div>
             <div class="col-md-4">
                 <button id="vacancy-show-more" class="btn"><?= Yii::t('app', 'Show more') ?></button>
-                <?= GridView::widget([
-                    'dataProvider' => $vacancy,
-                    'pager' => [
-                        'class' => LoadMorePager::class,
-                        'label' => 'Show more data'
-                    ],
-                    // ...other GridView options, like 'columns'...
-                ]) ?>
             </div>
             <div class="col-md-4 text-center text-md-right">
                 <?= LinkPager::widget([
@@ -166,3 +158,4 @@ $this->title = 'My Yii Application';
 
     </div>
 </section>
+

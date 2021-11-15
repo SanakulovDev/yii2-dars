@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Appeals;
 use common\models\City;
 use common\models\Partners;
+use common\models\Profession;
 use common\models\User;
 use frontend\models\Company;
 use frontend\models\JobStats;
@@ -15,6 +16,7 @@ use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
 use frontend\models\Worker;
 use Mpdf\Tag\Article;
+use PhpOffice\PhpSpreadsheet\Chart\Exception;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\Pagination;
@@ -385,13 +387,41 @@ class SiteController extends Controller
 
 //    action loadmore
 
-    public function actionLoadMore()
+    public function actionImportExcel()
     {
-//        $dataProvider;
+        $inputFile = 'uploads/profession.xlsx';
+        try{
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFile);
+        } catch (Exception $e) {
+            die('Error');
+        }
 
-    return $this->render('loadmore', [
-        'dataProvider' => $dataProvider,
-    ]);
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+
+        for($row=1; $row <= $highestRow; $row++)
+        {
+            $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+
+            if($row==1)
+            {
+                continue;
+            }
+
+            $siswa = new Profession();
+            $siswa->name_uz = $rowData[0][0];
+            $siswa->name_ru  = $rowData[0][1];
+            $siswa->name_en  = $rowData[0][2];
+            $siswa->name_cyrl  = $rowData[0][3];
+
+            $siswa->save();
+
+            print_r($siswa->getErrors());
+        }
+        die('okay');
     }
 
     protected function findModel($id)
