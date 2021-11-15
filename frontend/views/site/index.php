@@ -56,6 +56,7 @@ $this->title = 'My Yii Application';
         </div>
         <div class="row pb-0 block__19738 section-counter">
 
+
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
 
                 <div class="d-flex align-items-center justify-content-center mb-2">
