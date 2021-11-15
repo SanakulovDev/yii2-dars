@@ -389,7 +389,7 @@ class SiteController extends Controller
 
     public function actionImportExcel()
     {
-        $inputFile = 'uploads/profession.xlsx';
+        $inputFile = 'uploads/excel/profession.xlsx';
         try{
             $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
             $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
