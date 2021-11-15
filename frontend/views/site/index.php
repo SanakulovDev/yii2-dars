@@ -25,9 +25,8 @@ $this->title = 'My Yii Application';
             <div class="col-12 text-center mt-4 mb-5">
                 <div class="row justify-content-center">
                     <div class="col-md-7">
-                        <h2 class="section-title mb-2">Company We've Helped</h2>
-                        <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam
-                            fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
+                        <h2 class="section-title mb-2"><?= Yii::t('app','Partners')?></h2>
+
 
                     </div>
                 </div>
@@ -52,8 +51,7 @@ $this->title = 'My Yii Application';
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
                 <h2 class="section-title mb-2 text-white"><?= Yii::t('app', 'JobBoard Site Stats') ?></h2>
-                <p class="lead text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita unde
-                    officiis recusandae sequi excepturi corrupti.</p>
+
             </div>
         </div>
         <div class="row pb-0 block__19738 section-counter">

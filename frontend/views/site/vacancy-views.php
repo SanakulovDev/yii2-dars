@@ -96,10 +96,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
         <div class="row">
             <div class="col-lg-8">
                 <div class="mb-5">
-                    <figure class="mb-5">
-                        <?= Html::img('/jobboard/images/job_single_img_1.jpg', ['class' => 'img-fluid rounded', 'alt' => Yii::t('app', 'Here is the picture')]) ?>
 
-                    </figure>
                     <h3 class="h5 d-flex align-items-center mb-4 text-primary">
                         <span class="icon-align-left mr-3"></span><?= Yii::t('app', 'Job Description') ?>
                     </h3>
