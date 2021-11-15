@@ -392,8 +392,8 @@ class SiteController extends Controller
     {
         $inputFile = 'uploads/excel/profession.xlsx';
         try{
-            $inputFileType = PHPExcel_IOFactory::identify($inputFile);
-            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
             $objPHPExcel = $objReader->load($inputFile);
         } catch (Exception $e) {
             die('Error');
