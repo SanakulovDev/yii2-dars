@@ -61,7 +61,7 @@ $this->title = 'My Yii Application';
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number"
-                            data-number=<?php echo $job_stats->company_number ?>><?php echo $job_stats->company_number ?></strong>
+                            data-number=<?php echo $job_stats!==null? $job_stats->company_number : 0 ?>><?php echo $job_stats!==null?$job_stats->company_number : 0 ?></strong>
                 </div>
                 <span class="caption"><?= Yii::t('app', 'Company  count') ?></span>
             </div>
@@ -69,7 +69,7 @@ $this->title = 'My Yii Application';
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number"
-                            data-number=<?= $job_stats->job_post_number ?>><?= $job_stats->job_post_number ?></strong>
+                            data-number=<?= $job_stats !== null? $job_stats->job_post_number: 0 ?>><?= $job_stats !== null? $job_stats->job_post_number:0 ?></strong>
                 </div>
                 <span class="caption"><?= Yii::t('app', 'Vacancies') ?></span>
             </div>
@@ -77,14 +77,14 @@ $this->title = 'My Yii Application';
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number"
-                            data-number=<?= $job_stats->user_number ?>><?= $job_stats->user_number ?></strong>
+                            data-number=<?= $job_stats !== null? $job_stats->user_number:0 ?>><?= $job_stats !== null? $job_stats->user_number:0 ?></strong>
                 </div>
                 <span class="caption"><?= Yii::t('app', 'User count') ?></span>
             </div>
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
                     <strong class="number"
-                            data-number=<?= $job_stats->cv_count ?>><?= $job_stats->cv_count ?></strong>
+                            data-number=<?= $job_stats !== null? $job_stats->cv_count:0 ?>><?= $job_stats !== null? $job_stats->cv_count:0 ?></strong>
                 </div>
                 <span class="caption"><?= Yii::t('app', 'Workers') ?></span>
             </div>
