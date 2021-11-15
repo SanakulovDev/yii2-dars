@@ -16,6 +16,7 @@ use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
 use frontend\models\Worker;
 use Mpdf\Tag\Article;
+use PHPExcel_IOFactory;
 use PhpOffice\PhpSpreadsheet\Chart\Exception;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -391,8 +392,8 @@ class SiteController extends Controller
     {
         $inputFile = 'uploads/excel/profession.xlsx';
         try{
-            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
-            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $inputFileType = PHPExcel_IOFactory::identify($inputFile);
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
             $objPHPExcel = $objReader->load($inputFile);
         } catch (Exception $e) {
             die('Error');
