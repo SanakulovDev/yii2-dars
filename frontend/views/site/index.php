@@ -90,18 +90,7 @@ $this->title = 'My Yii Application';
 
 <section class="site-section" id="next">
     <div class="container">
-        <?php
-        echo Breadcrumbs::widget([
-            'itemTemplate' => "<li>{link}</li>\n",
-            'links' => [
-                [
-                    'label' => '/' . Yii::t('app', 'Vacancy views') . '/',
-                    'url' => ['site/vacancy-view-all'],
-                ],
-                Yii::t('app', 'Vacancy views')
-            ],
-        ]);
-        ?>
+
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
 
@@ -139,10 +128,13 @@ $this->title = 'My Yii Application';
         </ul>
 
         <div class="row pagination-wrap">
-            <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+            <div class="col-md-4 text-center text-md-left mb-4 mb-md-0">
                 <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
             </div>
-            <div class="col-md-6 text-center text-md-right">
+            <div class="col-md-4">
+                <button id="vacancy-show-more" class="btn"><?=Yii::t('app','Show more')?></button>
+            </div>
+            <div class="col-md-4 text-center text-md-right">
                 <?= LinkPager::widget([
                     'pagination' => $pages,
                     'options' => ['class' => 'custom-pagination ml-auto d-flex align-items-center justify-content-end nav'],
