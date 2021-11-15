@@ -10,7 +10,7 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
-
+$lang = 'name_' . Yii::$app->language;
 $this->title = 'My Yii Application';
 
 ?>
