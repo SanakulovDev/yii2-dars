@@ -104,11 +104,14 @@ class SiteController extends Controller
             ->where(['status' => 1])
             ->orderBy('order')
             ->all();
+
+
         return $this->render('index', [
             'query' => $query,
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
-            'pages' => $pages
+            'pages' => $pages,
+            'dataProvider'=>$vacancy
         ]);
     }
 
@@ -322,7 +325,7 @@ class SiteController extends Controller
 //        }
 //    }
 
-    public function actionVacancyViews($id=null, $get = false)
+    public function actionVacancyViews($id = null, $get = false)
     {
 
         $vacancy = $this->findModel($id);
@@ -347,11 +350,11 @@ class SiteController extends Controller
             if ($identity) {
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
                 if (!empty($worker->photo)) {
-                if ($v_order) {
-                    $v_order->worker_id = $worker->id;
-                    $v_order->vacancy_id = $vacancy->id;
-                    $vacancy->company_id = $vacancy->company->id;
-                }
+                    if ($v_order) {
+                        $v_order->worker_id = $worker->id;
+                        $v_order->vacancy_id = $vacancy->id;
+                        $vacancy->company_id = $vacancy->company->id;
+                    }
                     if (!$v_order && $v_order->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
                     }
@@ -380,22 +383,15 @@ class SiteController extends Controller
         return $this->redirect('vacancy-view-all');
     }
 
+//    action loadmore
 
-    public function actionVacancyViewAll()
+    public function actionLoadMore()
     {
-        $vacancy = Vacancy::find()->orderBy('user_id');
-        $count = $vacancy->count();
-        $pages = new Pagination([
-            'totalCount' => $count,
-            'pageSize' => 3
-        ]);
-        $vacancy = $vacancy->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
-        return $this->render('vacancy-view-all', [
-            'vacancy' => $vacancy,
-            'pages' => $pages
-        ]);
+//        $dataProvider;
+
+    return $this->render('loadmore', [
+        'dataProvider' => $dataProvider,
+    ]);
     }
 
     protected function findModel($id)

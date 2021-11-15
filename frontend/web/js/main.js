@@ -57,3 +57,24 @@ $('#vacancy-region_id').change(function(){
 
 $('#vacancy-profession_id').select2();
 $('#vacancy-city_id').select2();
+
+//Vacancy show more ajax
+
+$('#vacancy-show-more').click(function(){
+    let id = $(this).val();
+    $.ajax({
+        method: "get",
+        url: "/ajax/vacancy",
+        data: { id: id},
+        success: function(data) {
+            $('#vacancy-city_id').html(data);
+            // location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
+    });
+});
+

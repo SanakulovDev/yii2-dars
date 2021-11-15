@@ -4,12 +4,16 @@
 /* @var $query \common\models\Partners */
 /* @var $job_stats \frontend\models\JobStats */
 /* @var $vacancy \frontend\models\Vacancy */
+
 /* @var $pages \yii\data\Pagination */
 
 
+use sjaakp\loadmore\LoadMorePager;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
+
 $lang = 'name_' . Yii::$app->language;
 $this->title = 'My Yii Application';
 
@@ -56,23 +60,26 @@ $this->title = 'My Yii Application';
 
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
-                    <strong class="number" data-number=<?php echo $job_stats->company_number?>><?php echo $job_stats->company_number?></strong>
+                    <strong class="number"
+                            data-number=<?php echo $job_stats->company_number ?>><?php echo $job_stats->company_number ?></strong>
                 </div>
-                <span class="caption"><?=Yii::t('app','Company  count')?></span>
+                <span class="caption"><?= Yii::t('app', 'Company  count') ?></span>
             </div>
 
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
-                    <strong class="number" data-number=<?=$job_stats->job_post_number?>><?=$job_stats->job_post_number?></strong>
+                    <strong class="number"
+                            data-number=<?= $job_stats->job_post_number ?>><?= $job_stats->job_post_number ?></strong>
                 </div>
-                <span class="caption"><?=Yii::t('app','Vacancies')?></span>
+                <span class="caption"><?= Yii::t('app', 'Vacancies') ?></span>
             </div>
 
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
-                    <strong class="number" data-number=<?=$job_stats->user_number?>><?=$job_stats->user_number?></strong>
+                    <strong class="number"
+                            data-number=<?= $job_stats->user_number ?>><?= $job_stats->user_number ?></strong>
                 </div>
-                <span class="caption"><?=Yii::t('app','User count')?></span>
+                <span class="caption"><?= Yii::t('app', 'User count') ?></span>
             </div>
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <div class="d-flex align-items-center justify-content-center mb-2">
@@ -101,7 +108,7 @@ $this->title = 'My Yii Application';
         <ul class="job-listings mb-5">
             <?php foreach ($vacancy as $key => $item): ?>
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="vacancy-views?id=<?=$item->id?>&get=false"></a>
+                    <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                     <div class="job-listing-logo">
                         <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                     </div>
@@ -132,7 +139,15 @@ $this->title = 'My Yii Application';
                 <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
             </div>
             <div class="col-md-4">
-                <button id="vacancy-show-more" class="btn"><?=Yii::t('app','Show more')?></button>
+                <button id="vacancy-show-more" class="btn"><?= Yii::t('app', 'Show more') ?></button>
+                <?= GridView::widget([
+                    'dataProvider' => $vacancy,
+                    'pager' => [
+                        'class' => LoadMorePager::class,
+                        'label' => 'Show more data'
+                    ],
+                    // ...other GridView options, like 'columns'...
+                ]) ?>
             </div>
             <div class="col-md-4 text-center text-md-right">
                 <?= LinkPager::widget([
