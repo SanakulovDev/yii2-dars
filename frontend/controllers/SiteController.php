@@ -424,8 +424,8 @@ class SiteController extends Controller
             $siswa->name_cyrl  = $rowData[0][3];
 
             $siswa->save();
-
             print_r($siswa->getErrors());
+
         }
         die('okay');
     }

@@ -49,7 +49,7 @@ class SignupForm extends Model
             $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
-            $user->status = 10;
+            $user->status = 9;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             if ($user->save() && $this->sendEmail($user)) {
