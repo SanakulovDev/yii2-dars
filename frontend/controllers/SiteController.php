@@ -90,6 +90,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
+        $vacancy = Vacancy::find()->orderBy('user_id');
+        $count = $vacancy->count();
+        $pages = new Pagination([
+            'totalCount' => $count,
+            'pageSize' => 3
+        ]);
+        $vacancy = $vacancy->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
         $job_stats = JobStats::findOne(['id' => 1]);
         $query = Partners::find()
             ->where(['status' => 1])
@@ -98,7 +107,8 @@ class SiteController extends Controller
         return $this->render('index', [
             'query' => $query,
             'job_stats' => $job_stats,
-
+            'vacancy' => $vacancy,
+            'pages' => $pages
         ]);
     }
 
