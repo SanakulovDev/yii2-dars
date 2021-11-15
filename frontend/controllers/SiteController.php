@@ -430,6 +430,11 @@ class SiteController extends Controller
         die('okay');
     }
 
+
+    public function actionImportVacancy()
+    {
+
+    }
     protected function findModel($id)
     {
         if (($vacancy = Vacancy::findOne(['id' => $id])) !== null) {
