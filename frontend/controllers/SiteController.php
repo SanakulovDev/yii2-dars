@@ -16,7 +16,7 @@ use frontend\models\VacancySearch;
 use frontend\models\VerifyEmailForm;
 use frontend\models\Worker;
 use Mpdf\Tag\Article;
-use PHPExcel_IOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Chart\Exception;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -31,6 +31,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use PHPExcel;
 
 /**
  * Site controller
