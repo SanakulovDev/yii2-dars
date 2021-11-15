@@ -394,10 +394,12 @@ class SiteController extends Controller
 
     public function actionImportExcel()
     {
-        $inputFile = 'uploads/excel/profession.xlsx';
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $inputFile = \Yii::getAlias('@app/web/uploads/excel/profession.xlsx');
         try{
-            $inputFileType = PHPExcel_IOFactory::identify($inputFile);
-            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
             $objPHPExcel = $objReader->load($inputFile);
         } catch (Exception $e) {
             die('Error');
@@ -406,7 +408,6 @@ class SiteController extends Controller
         $sheet = $objPHPExcel->getSheet(0);
         $highestRow = $sheet->getHighestRow();
         $highestColumn = $sheet->getHighestColumn();
-
         for($row=1; $row <= $highestRow; $row++)
         {
             $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
