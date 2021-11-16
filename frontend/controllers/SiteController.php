@@ -485,7 +485,7 @@ class SiteController extends Controller
                 $siswa->region_id = $company->regionId;
                 $siswa->city_id = $company->cityId;
             }
-            $siswa->job_type_id = $rowData[0][8];
+            $siswa->job_type_id = 1;
             $siswa->count = $rowData[0][11];
             $siswa->salary = $rowData[0][12];
             $siswa->gender = $rowData[0][13];
