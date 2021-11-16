@@ -6,6 +6,11 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\VacancySearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$profession = \common\models\Profession::selectList();
+$region = \common\models\Region::selectList();
+$job_type = \common\models\JobType::selectList();
+$city = [];
 ?>
 
 <div class="vacancy-search">
@@ -18,51 +23,19 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'company_id') ?>
 
-    <?= $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'profession_id') ?>
 
-    <?= $form->field($model, 'description_uz') ?>
+    <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt'=>'Select a profession']) ?>
 
-    <?php // echo $form->field($model, 'description_ru') ?>
+    <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt'=>'Select a job type']) ?>
 
-    <?php // echo $form->field($model, 'description_en') ?>
+    <?= $form->field($model, 'region_id')->dropDownList($job_type,['prompt'=>'Select a region']) ?>
 
-    <?php // echo $form->field($model, 'descrition_cyrl') ?>
+    <?= $form->field($model, 'city_id')->dropDownList($job_type,['prompt'=>'Select a city']) ?>
 
-    <?php // echo $form->field($model, 'job_type_id') ?>
 
-    <?php // echo $form->field($model, 'region_id') ?>
-
-    <?php // echo $form->field($model, 'city_id') ?>
-
-    <?php // echo $form->field($model, 'image') ?>
-
-    <?php // echo $form->field($model, 'count_vacancy') ?>
-
-    <?php // echo $form->field($model, 'salary') ?>
-
-    <?php // echo $form->field($model, 'gender') ?>
-
-    <?php // echo $form->field($model, 'experience') ?>
-
-    <?php // echo $form->field($model, 'telegram') ?>
-
-    <?php // echo $form->field($model, 'address') ?>
-
-    <?php // echo $form->field($model, 'views') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'deadline') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
