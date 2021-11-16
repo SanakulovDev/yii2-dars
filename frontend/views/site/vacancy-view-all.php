@@ -40,8 +40,6 @@ $city = [];
         <div class="row">
             <div class="col-md-4">
                 <?php echo $this->render('/vacancy/_search',['model'=>$searchModel])?>
-
-                <?php \yii\widgets\ActiveForm::end() ?>
             </div>
             <div class="col-md-8">
                 <ul class="job-listings mb-5">
