@@ -78,3 +78,7 @@ $('#vacancy-show-more').click(function(){
     });
 });
 
+
+
+
+

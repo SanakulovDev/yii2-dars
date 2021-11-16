@@ -470,7 +470,7 @@ class SiteController extends Controller
                     $company->director_name = "John Doe";
                     $company->regionId = 10;
                     $company->cityId = 8;
-                    $company->address = "Singapur";
+                    $company->address = $rowData[0][15];
                     $company->phone = "+998-11-111-1111";
                     $company->logo = '';
                     $company->date = date('Y-m-d H:i:s');
@@ -492,7 +492,7 @@ class SiteController extends Controller
                 $company->director_name = "John Doe";
                 $company->regionId = $rowData[0][8];
                 $company->cityId = $rowData[0][9];
-                $company->address = "Singapur";
+                $company->address = $rowData[0][15];
                 $company->phone = "+998-11-111-1111";
                 $company->logo = '';
                 $company->date = date('Y-m-d H:i:s');

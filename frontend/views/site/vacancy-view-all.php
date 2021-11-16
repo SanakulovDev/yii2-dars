@@ -6,11 +6,14 @@ use yii\widgets\LinkPager;
 
 /**
  *
- *  @var $vacancy \frontend\models\Vacancy
+ * @var $vacancy \frontend\models\Vacancy
  */
 
 $lang = 'name_' . Yii::$app->language;
-
+$profession = \common\models\Profession::selectList();
+$region = \common\models\region::selectList();
+$job_type = \common\models\JobType::selectList();
+$city = [];
 ?>
 <section class="site-section" id="next">
     <div class="container">
@@ -32,35 +35,70 @@ $lang = 'name_' . Yii::$app->language;
                 <h2 class="section-title mb-2"><?= $pages->totalCount . ' ' . Yii::t('app', 'Job Listed') ?></h2>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h4><?= Yii::t('app', 'Filter Vacancy') ?></h4>
 
-        <ul class="job-listings mb-5">
-            <?php foreach ($vacancy as $key => $item): ?>
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                    <a href="vacancy-views?id=<?=$item->id?>&get=false"></a>
-                    <div class="job-listing-logo">
-                        <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <?= $form->field($vacancy, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
+
                     </div>
-
-                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?= $item->profession ? $item->profession->$lang : 'Kiritilmagan' ?></h2>
-                            <strong><?= $item->company->name ?></strong>
-                            <br>
-                            <i class="far fa-eye"></i>
-                            <strong><?= $item->views ?></strong>
-                        </div>
-                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                            <span class="icon-room"></span> <?= $item->address ?>
-                        </div>
-                        <div class="job-listing-meta">
-                            <span class="badge badge-danger"><?= $item->jobType ? $item->jobType->$lang : null ?></span>
-                        </div>
+                </div>
+               <div class="form-group row">
+                    <div class="col-md-12">
+                        <?= $form->field($vacancy, 'profession_id')->dropDownList($profession, ['prompt' => 'Select a profession']) ?>
                     </div>
-                </li>
-            <?php endforeach ?>
+                </div>
+               <div class="form-group row">
+                    <div class="col-md-12">
+                        <?= $form->field($vacancy, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
+
+                    </div>
+                </div>
+              <div class="form-group row">
+                    <div class="col-md-12">
+                        <?= $form->field($vacancy, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
+
+                    </div>
+                </div>
 
 
-        </ul>
+                <?php \yii\widgets\ActiveForm::end() ?>
+            </div>
+            <div class="col-md-8">
+                <ul class="job-listings mb-5">
+                    <?php foreach ($vacancy as $key => $item): ?>
+                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
+                            <div class="job-listing-logo">
+                                <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                            </div>
+
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                    <h2><?= $item->profession ? $item->profession->$lang : 'Kiritilmagan' ?></h2>
+                                    <strong><?= $item->company->name ?></strong>
+                                    <br>
+                                    <i class="far fa-eye"></i>
+                                    <strong><?= $item->views ?></strong>
+                                </div>
+                                <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                    <span class="icon-room"></span> <?= $item->address ?>
+                                </div>
+                                <div class="job-listing-meta">
+                                    <span class="badge badge-danger"><?= $item->jobType ? $item->jobType->$lang : null ?></span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach ?>
+
+
+                </ul>
+            </div>
+        </div>
+
 
         <div class="row pagination-wrap">
             <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
