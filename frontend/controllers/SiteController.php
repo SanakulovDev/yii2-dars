@@ -454,7 +454,7 @@ class SiteController extends Controller
 
             $siswa = new Vacancy();
             $company = Company::findOne(['name' => $rowData[0][0]]);
-            $user = User::findOne(['username'=>$rowData[0][0]]);
+            $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
 
             if (empty($company->id) && empty($user->username)) {
                 $company = new Company();
@@ -463,6 +463,9 @@ class SiteController extends Controller
                 $user->username = $rowData[0][0];
                 $user->email = $rowData[0][0] . '@mail.ru';
                 $user->password = strtolower($rowData[0][0]);
+                $user->status = 9;
+                $user->setPassword($user->password);
+                $user->generateAuthKey();
                 $user->role = 'company';
                 if ($user = $user->signup()) {
                     $company->userId = $user->id;
