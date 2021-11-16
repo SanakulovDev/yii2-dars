@@ -455,11 +455,8 @@ class SiteController extends Controller
             $siswa = new Vacancy();
             $company = Company::findOne(['name' => $rowData[0][0]]);
             $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
-            var_dump($user);
-            die();
-            if (empty($company->id) && empty($user->username)) {
-                $company = new Company();
-                $company->scenario = Company::SCENARIO_VACANCY;
+            if (empty($user->username) && empty($company->id)) {
+
                 $user = new SignupForm();
                 $user->username = $rowData[0][0];
                 $user->email = $rowData[0][0] . '@mail.ru';
@@ -469,6 +466,8 @@ class SiteController extends Controller
                 $user->generateAuthKey();
                 $user->role = 'company';
                 if ($user = $user->signup()) {
+                    $company = new Company();
+                    $company->scenario = Company::SCENARIO_VACANCY;
                     $company->userId = $user->id;
                     $company->name = $user->username;
                     $company->director_name = "John Doe";
@@ -486,7 +485,29 @@ class SiteController extends Controller
                         $siswa->image = $company->image;
                     }
                 }
-            } else {
+            }
+            elseif (!empty($user->username) && empty($company->id)){
+
+                $company = new Company();
+                $company->scenario = Company::SCENARIO_VACANCY;
+                $company->userId = $user->id;
+                $company->name = $user->username;
+                $company->director_name = "John Doe";
+                $company->regionId = $rowData[0][8];
+                $company->cityId = $rowData[0][9];
+                $company->address = "Singapur";
+                $company->phone = "+998-11-111-1111";
+                $company->logo = '';
+                $company->date = date('Y-m-d H:i:s');
+                if ($company->save()) {
+                    $siswa->company_id = $company->id;
+                    $siswa->user_id = $company->userId;
+                    $siswa->region_id = $company->regionId;
+                    $siswa->city_id = $company->cityId;
+                    $siswa->image = $company->image;
+                }
+            }
+            else{
                 $siswa->company_id = $company->id;
                 $siswa->user_id = $company->userId;
                 $siswa->region_id = $company->regionId;
