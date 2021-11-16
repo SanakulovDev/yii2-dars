@@ -339,7 +339,7 @@ class SiteController extends Controller
         $count = $vacancyx->count();
         $pages = new Pagination([
             'totalCount' => $count,
-            'pageSize' => 3
+            'pageSize' => 10
         ]);
         $vacancyx = $vacancyx->offset($pages->offset)
             ->limit($pages->limit)
