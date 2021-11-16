@@ -16,7 +16,7 @@ $city = [];
 <div class="vacancy-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['vacancy-view-all'],
         'method' => 'get',
         'options' => [
             'data-pjax' => 1
