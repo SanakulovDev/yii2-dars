@@ -39,33 +39,7 @@ $city = [];
         </div>
         <div class="row">
             <div class="col-md-4">
-                <h4><?= Yii::t('app', 'Filter Vacancy') ?></h4>
-
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <?= $form->field($searchModel, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
-
-                    </div>
-                </div>
-               <div class="form-group row">
-                    <div class="col-md-12">
-                        <?= $form->field($searchModel, 'profession_id')->dropDownList($profession, ['prompt' => 'Select a profession']) ?>
-                    </div>
-                </div>
-               <div class="form-group row">
-                    <div class="col-md-12">
-                        <?= $form->field($searchModel, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
-
-                    </div>
-                </div>
-              <div class="form-group row">
-                    <div class="col-md-12">
-                        <?= $form->field($searchModel, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
-
-                    </div>
-                </div>
-
+                <?php echo $this->render('/vacancy/_search',['model'=>$searchModel])?>
 
                 <?php \yii\widgets\ActiveForm::end() ?>
             </div>
