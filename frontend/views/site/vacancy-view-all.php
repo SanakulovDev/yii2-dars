@@ -17,8 +17,7 @@ $region = \common\models\Region::selectList();
 $job_type = \common\models\JobType::selectList();
 $city = [];
 
-var_dump($dataProvider->models);
-die();
+
 ?>
 <section class="site-section" id="next">
     <div class="container">
