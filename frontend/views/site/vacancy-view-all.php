@@ -1,12 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
 /**
  *
  * @var $vacancy \frontend\models\Vacancy
+ * @var $searchModel \frontend\models\VacancySearch
  */
 
 $lang = 'name_' . Yii::$app->language;
@@ -39,27 +41,27 @@ $city = [];
             <div class="col-md-4">
                 <h4><?= Yii::t('app', 'Filter Vacancy') ?></h4>
 
-                <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
                 <div class="form-group row">
                     <div class="col-md-12">
-                        <?= $form->field($vacancy, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
+                        <?= $form->field($searchModel, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
 
                     </div>
                 </div>
                <div class="form-group row">
                     <div class="col-md-12">
-                        <?= $form->field($vacancy, 'profession_id')->dropDownList($profession, ['prompt' => 'Select a profession']) ?>
+                        <?= $form->field($searchModel, 'profession_id')->dropDownList($profession, ['prompt' => 'Select a profession']) ?>
                     </div>
                 </div>
                <div class="form-group row">
                     <div class="col-md-12">
-                        <?= $form->field($vacancy, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
+                        <?= $form->field($searchModel, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
 
                     </div>
                 </div>
               <div class="form-group row">
                     <div class="col-md-12">
-                        <?= $form->field($vacancy, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
+                        <?= $form->field($searchModel, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
 
                     </div>
                 </div>

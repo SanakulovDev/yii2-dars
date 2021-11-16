@@ -392,6 +392,7 @@ class SiteController extends Controller
 
 public function actionVacancyViewAll()
 {
+    $searchModel = new VacancySearch();
     $vacancy = Vacancy::find()->orderBy('user_id');
     $count = $vacancy->count();
     $pages = new Pagination([
@@ -405,6 +406,7 @@ public function actionVacancyViewAll()
     return $this->render('vacancy-view-all', [
         'vacancy' => $vacancy,
         'pages' => $pages,
+        'searchModel' => $searchModel,
     ]);
 }
 
