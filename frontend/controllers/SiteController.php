@@ -99,14 +99,18 @@ class SiteController extends Controller
     {
 
         $vacancy = Vacancy::find()->orderBy('user_id');
-        $count = $vacancy->count();
-        $pages = new Pagination([
-            'totalCount' => $count,
-            'pageSize' => 10
-        ]);
-        $vacancy = $vacancy->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        if ($vacancy) {
+
+            $count = $vacancy->count();
+            $pages = new Pagination([
+                'totalCount' => $count,
+                'pageSize' => 10
+            ]);
+            $vacancy = $vacancy->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
+        }
+        else $vacancy = new  Vacancy();
         $job_stats = JobStats::findOne(['id' => 1]);
         $query = Partners::find()
             ->where(['status' => 1])

@@ -17,7 +17,8 @@ $region = \common\models\Region::selectList();
 $job_type = \common\models\JobType::selectList();
 $city = [];
 
-
+//var_dump($dataProvider->models);
+//die();
 ?>
 <section class="site-section" id="next">
     <div class="container">
@@ -41,11 +42,13 @@ $city = [];
         </div>
         <div class="row">
             <div class="col-md-4">
+                <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Yii::t('app', 'Reset'),'vacancy-view-all', ['class' => 'btn btn-outline-secondary']) ?>
                 <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
             </div>
             <div class="col-md-8">
                 <ul class="job-listings mb-5">
-                    <?php foreach ($vacancy as $key => $item): ?>
+                    <?php foreach ($dataProvider->models as $key => $item): ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">

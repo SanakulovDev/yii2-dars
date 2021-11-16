@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
 $profession = \common\models\Profession::selectList();
 $region = \common\models\Region::selectList();
 $job_type = \common\models\JobType::selectList();
+$gender = \common\models\Gender::selectList();
 $city = [];
 ?>
 
@@ -27,14 +28,17 @@ $city = [];
 
 
 
-    <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt'=>'Select a profession']) ?>
+    <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt' => 'Select a profession']) ?>
 
-    <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt'=>'Select a job type']) ?>
+    <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt' => 'Select a job type']) ?>
 
-    <?= $form->field($model, 'region_id')->dropDownList($region,['prompt'=>'Select a region']) ?>
+    <?= $form->field($model, 'region_id')->dropDownList($region,['prompt' => 'Select a region']) ?>
 
-    <?= $form->field($model, 'city_id')->dropDownList($city,['prompt'=>'Select a city']) ?>
+    <?= $form->field($model, 'city_id')->dropDownList($city,['prompt' => 'Select a city']) ?>
 
+    <?= $form->field($model, 'gender')->dropDownList($gender,['prompt' => 'Select a gender']) ?>
+
+    <?= $form->field($model, 'salary')?>
 
 
     <div class="form-group">
