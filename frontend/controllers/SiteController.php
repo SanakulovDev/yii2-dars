@@ -393,18 +393,18 @@ class SiteController extends Controller
 public function actionVacancyViewAll()
 {
     $searchModel = new VacancySearch();
-    $vacancy = Vacancy::find()->orderBy('user_id');
-    $count = $vacancy->count();
+    $dataProvider = $searchModel->search($this->request->queryParams);
+    $count = $dataProvider->count();
     $pages = new Pagination([
         'totalCount' => $count,
         'pageSize' => 10
     ]);
-    $vacancy = $vacancy->offset($pages->offset)
+    $dataProvider = $dataProvider->offset($pages->offset)
         ->limit($pages->limit)
         ->all();
 
     return $this->render('vacancy-view-all', [
-        'vacancy' => $vacancy,
+        'dataProvider' => $dataProvider,
         'pages' => $pages,
         'searchModel' => $searchModel,
     ]);

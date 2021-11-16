@@ -7,7 +7,7 @@ use yii\widgets\LinkPager;
 
 /**
  *
- * @var $vacancy \frontend\models\Vacancy
+ * @var $dataProvider \frontend\models\Vacancy
  * @var $searchModel \frontend\models\VacancySearch
  */
 
@@ -43,7 +43,7 @@ $city = [];
             </div>
             <div class="col-md-8">
                 <ul class="job-listings mb-5">
-                    <?php foreach ($vacancy as $key => $item): ?>
+                    <?php foreach ($dataProvider as $key => $item): ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">
