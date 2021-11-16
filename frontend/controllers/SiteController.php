@@ -457,7 +457,7 @@ class SiteController extends Controller
             $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
             if (empty($user->username) && empty($company->id)) {
 
-                $user = new SignupForm();
+                $user = new User();
                 $user->username = $rowData[0][0];
                 $user->email = $rowData[0][0] . '@mail.ru';
                 $user->password = strtolower($rowData[0][0]);
@@ -465,7 +465,7 @@ class SiteController extends Controller
                 $user->setPassword($user->password);
                 $user->generateAuthKey();
                 $user->role = 'company';
-                if ($user = $user->signup()) {
+                if ($user->save()) {
                     $company = new Company();
                     $company->scenario = Company::SCENARIO_VACANCY;
                     $company->userId = $user->id;
