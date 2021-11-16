@@ -458,6 +458,7 @@ class SiteController extends Controller
 
             if (empty($company) && empty($user)) {
                 $company = new Company();
+                $company->scenario = Company::SCENARIO_VACANCY;
                 $user = new SignupForm();
                 $user->username = $rowData[0][0];
                 $user->email = $rowData[0][0] . '@mail.ru';
@@ -473,12 +474,13 @@ class SiteController extends Controller
                     $company->phone = "+998-11-111-1111";
                     $company->logo = '';
                     $company->date = date('Y-m-d H:i:s');
-                    $company->save();
-                    $siswa->company_id = $company->id;
-                    $siswa->user_id = $company->userId;
-                    $siswa->region_id = $company->regionId;
-                    $siswa->city_id = $company->cityId;
-                    $siswa->image = $company->image;
+                    if ($company->save()) {
+                        $siswa->company_id = $company->id;
+                        $siswa->user_id = $company->userId;
+                        $siswa->region_id = $company->regionId;
+                        $siswa->city_id = $company->cityId;
+                        $siswa->image = $company->image;
+                    }
                 }
             } else {
                 $siswa->company_id = $company->id;

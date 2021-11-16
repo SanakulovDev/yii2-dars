@@ -36,7 +36,7 @@ class Company extends \yii\db\ActiveRecord
 
     const SCENARIO_UPDATE='update';
     const SCENARIO_SIGNUP='signup';
-    const SCENARIO_APPLY= 'company-update';
+    const SCENARIO_VACANCY= 'import-vacancy';
     public static function tableName()
     {
         return 'company';
@@ -112,7 +112,7 @@ class Company extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_UPDATE => ['name','director_name','phone','regionId','cityId','address','image'],
             self::SCENARIO_SIGNUP => ['name','director_name','phone','regionId','cityId','address','image','username','password','email'],
-            self::SCENARIO_APPLY => ['apply_messages']
+            self::SCENARIO_VACANCY => ['userId','name','direactor_name','regionId','cityId','address','phone','date','logo']
         ];
     }
 
