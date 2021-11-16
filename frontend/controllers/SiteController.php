@@ -462,7 +462,7 @@ class SiteController extends Controller
                 $user->email = $rowData[0][0] . '@mail.ru';
                 $user->password = strtolower($rowData[0][0]);
                 $user->role = 'company';
-                if ($user->signup()) {
+                if ($user = $user->signup()) {
                     $company = new Company();
                     $company->scenario = Company::SCENARIO_VACANCY;
                     $company->userId = $user->id;
