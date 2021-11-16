@@ -457,13 +457,10 @@ class SiteController extends Controller
             $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
             if (empty($user->username) && empty($company->id)) {
 
-                $user = new User();
+                $user = new SignupForm();
                 $user->username = $rowData[0][0];
                 $user->email = $rowData[0][0] . '@mail.ru';
                 $user->password = strtolower($rowData[0][0]);
-                $user->status = 9;
-                $user->setPassword(strtolower($rowData[0][0]));
-                $user->generateAuthKey();
                 $user->role = 'company';
                 if ($user->save()) {
                     $company = new Company();
