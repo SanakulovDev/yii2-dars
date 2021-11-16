@@ -490,7 +490,7 @@ class SiteController extends Controller
             $siswa->gender = $rowData[0][13];
             $siswa->experience = $rowData[0][14];
             $siswa->telegram = $rowData[0][15];
-            $siswa->address = $rowData[0][16];
+//            $siswa->address = $rowData[0][16];
 
             $siswa->save();
             print_r($siswa->getErrors());
