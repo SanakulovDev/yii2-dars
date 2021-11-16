@@ -457,8 +457,6 @@ class SiteController extends Controller
             $company = Company::findOne(['name' => $rowData[0][0]]);
             $user = User::findOne(['username'=>$rowData[0][0]]);
 
-            var_dump($rowData[0][2]);
-            die();
             if (empty($company) && empty($user)) {
                 $company = new Company();
                 $user = new SignupForm();
@@ -493,6 +491,16 @@ class SiteController extends Controller
             $profession = Profession::findOne([$lang=>$rowData[0][2]]);
             if (empty($profession)){
                 $profession = new Profession();
+                $profession->name_uz = $rowData[0][2];
+                $profession->name_ru = $rowData[0][2];
+                $profession->name_en = $rowData[0][2];
+                $profession->name_cyrl = $rowData[0][2];
+                if ($profession->save()){
+                    $siswa->profession_id = $profession->id;
+                }
+            }
+            else{
+                $siswa->profession_id = $profession->id;
             }
             $siswa->count = $rowData[0][10];
             $siswa->salary = $rowData[0][11];
