@@ -462,7 +462,7 @@ class SiteController extends Controller
                 $user->email = $rowData[0][0] . '@mail.ru';
                 $user->password = strtolower($rowData[0][0]);
                 $user->status = 9;
-                $user->setPassword($user->password);
+                $user->setPassword(strtolower($rowData[0][0]));
                 $user->generateAuthKey();
                 $user->role = 'company';
                 if ($user->save()) {
