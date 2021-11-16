@@ -455,7 +455,8 @@ class SiteController extends Controller
             $siswa = new Vacancy();
             $company = Company::findOne(['name' => $rowData[0][0]]);
             $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
-
+            var_dump($company);
+            die();
             if (empty($company->id) && empty($user->username)) {
                 $company = new Company();
                 $company->scenario = Company::SCENARIO_VACANCY;
