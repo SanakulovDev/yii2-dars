@@ -118,7 +118,7 @@ class SiteController extends Controller
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
             'pages' => $pages,
-            'dataProvider'=>$vacancy
+            'dataProvider' => $vacancy
         ]);
     }
 
@@ -397,7 +397,7 @@ class SiteController extends Controller
 
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $inputFile = \Yii::getAlias('@app/web/uploads/excel/profession.xlsx');
-        try{
+        try {
             $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
             $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
             $objPHPExcel = $objReader->load($inputFile);
@@ -408,20 +408,18 @@ class SiteController extends Controller
         $sheet = $objPHPExcel->getSheet(0);
         $highestRow = $sheet->getHighestRow();
         $highestColumn = $sheet->getHighestColumn();
-        for($row=1; $row <= $highestRow; $row++)
-        {
-            $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
 
-            if($row==1)
-            {
+            if ($row == 1) {
                 continue;
             }
 
             $siswa = new Profession();
             $siswa->name_uz = $rowData[0][0];
-            $siswa->name_ru  = $rowData[0][1];
-            $siswa->name_en  = $rowData[0][2];
-            $siswa->name_cyrl  = $rowData[0][3];
+            $siswa->name_ru = $rowData[0][1];
+            $siswa->name_en = $rowData[0][2];
+            $siswa->name_cyrl = $rowData[0][3];
 
             $siswa->save();
             print_r($siswa->getErrors());
@@ -430,11 +428,77 @@ class SiteController extends Controller
         die('okay');
     }
 
-
+// action Import Vacancy section
     public function actionImportVacancy()
     {
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $inputFile = \Yii::getAlias('@app/web/uploads/excel/vacancy.xlsx');
+        try {
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFile);
+        } catch (Exception $e) {
+            die('Error');
+        }
 
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+
+
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+            if ($row == 1) {
+                continue;
+            }
+
+            $siswa = new Vacancy();
+            $company = Company::findOne(['name' => $rowData[0][0]]);
+            if (empty($company)) {
+                $company = new Company();
+                $user = new SignupForm();
+                $user->username = $rowData[0][0];
+                $user->email = $rowData[0][0] . '@mail.ru';
+                $user->password = strtolower($rowData[0][0]);
+                $user->role = 'company';
+                if ($user = $user->signup()) {
+                    $company->userId = $user->id;
+                    $company->name = $user->username;
+                    $company->director_name = "John Doe";
+                    $company->regionId = 10;
+                    $company->cityId = 8;
+                    $company->address = "Singapur";
+                    $company->phone = "+998-11-111-1111";
+                    $company->logo = '';
+                    $company->date = date('Y-m-d H:i:s');
+                    $company->save();
+                    $siswa->company_id = $company->id;
+                    $siswa->user_id = $company->userId;
+                    $siswa->region_id = $company->regionId;
+                    $siswa->city_id = $company->cityId;
+                }
+            } else {
+                $siswa->company_id = $company->id;
+                $siswa->user_id = $company->userId;
+                $siswa->region_id = $company->regionId;
+                $siswa->city_id = $company->cityId;
+            }
+            $siswa->job_type_id = $rowData[0][8];
+            $siswa->count = $rowData[0][11];
+            $siswa->salary = $rowData[0][12];
+            $siswa->gender = $rowData[0][13];
+            $siswa->experience = $rowData[0][14];
+            $siswa->telegram = $rowData[0][15];
+            $siswa->address = $rowData[0][16];
+
+            $siswa->save();
+            print_r($siswa->getErrors());
+
+        }
+        die('okay');
     }
+
     protected function findModel($id)
     {
         if (($vacancy = Vacancy::findOne(['id' => $id])) !== null) {
