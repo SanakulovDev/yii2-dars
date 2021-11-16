@@ -402,7 +402,7 @@ public function actionVacancyViewAll()
         ->limit($pages->limit)
         ->all();
 
-    return $this->render('index', [
+    return $this->render('vacancy-view-all', [
         'vacancy' => $vacancy,
         'pages' => $pages,
     ]);
