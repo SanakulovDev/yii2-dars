@@ -494,7 +494,7 @@ class SiteController extends Controller
 //            $siswa->address = $rowData[0][16];
 
             $siswa->save();
-            print_r($siswa->getErrors());
+            print_r($siswa);
 
         }
         die('okay');
