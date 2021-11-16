@@ -456,6 +456,9 @@ class SiteController extends Controller
             $siswa = new Vacancy();
             $company = Company::findOne(['name' => $rowData[0][0]]);
             $user = User::findOne(['username'=>$rowData[0][0]]);
+
+            var_dump($rowData[0][2]);
+            die();
             if (empty($company) && empty($user)) {
                 $company = new Company();
                 $user = new SignupForm();
@@ -485,12 +488,17 @@ class SiteController extends Controller
                 $siswa->region_id = $company->regionId;
                 $siswa->city_id = $company->cityId;
             }
+            $lang = 'name_'.Yii::$app->language;
             $siswa->job_type_id = 1;
-            $siswa->count = $rowData[0][11];
-            $siswa->salary = $rowData[0][12];
-            $siswa->gender = $rowData[0][13];
-            $siswa->experience = $rowData[0][14];
-            $siswa->telegram = $rowData[0][15];
+            $profession = Profession::findOne([$lang=>$rowData[0][2]]);
+            if (empty($profession)){
+                $profession = new Profession();
+            }
+            $siswa->count = $rowData[0][10];
+            $siswa->salary = $rowData[0][11];
+            $siswa->gender = $rowData[0][12];
+            $siswa->experience = $rowData[0][13];
+            $siswa->telegram = $rowData[0][14];
 //            $siswa->address = $rowData[0][16];
 
             $siswa->save();
