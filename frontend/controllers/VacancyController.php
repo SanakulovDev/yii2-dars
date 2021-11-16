@@ -42,7 +42,6 @@ class VacancyController extends Controller
      */
     public function actionIndex()
     {
-
         $searchModel = new VacancySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         $model = $dataProvider;

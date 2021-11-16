@@ -60,14 +60,14 @@ $('#vacancy-city_id').select2();
 
 //Vacancy show more ajax
 
-$('#vacancy-show-more').click(function(){
+$('#vacancysearch-region_id').click(function(){
     let id = $(this).val();
     $.ajax({
         method: "get",
         url: "/ajax/city",
         data: { id: id},
         success: function(data) {
-            $('#vacancy-city_id').html(data);
+            $('#vacancysearch-city_id').html(data);
             // location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
