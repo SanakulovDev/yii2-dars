@@ -118,7 +118,6 @@ class SiteController extends Controller
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
             'pages' => $pages,
-            'dataProvider' => $vacancy
         ]);
     }
 
