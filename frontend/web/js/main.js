@@ -64,7 +64,7 @@ $('#vacancy-show-more').click(function(){
     let id = $(this).val();
     $.ajax({
         method: "get",
-        url: "/ajax/vacancy",
+        url: "/ajax/city",
         data: { id: id},
         success: function(data) {
             $('#vacancy-city_id').html(data);

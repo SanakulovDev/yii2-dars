@@ -31,9 +31,9 @@ $city = [];
 
     <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt'=>'Select a job type']) ?>
 
-    <?= $form->field($model, 'region_id')->dropDownList($job_type,['prompt'=>'Select a region']) ?>
+    <?= $form->field($model, 'region_id')->dropDownList($region,['prompt'=>'Select a region']) ?>
 
-    <?= $form->field($model, 'city_id')->dropDownList($job_type,['prompt'=>'Select a city']) ?>
+    <?= $form->field($model, 'city_id')->dropDownList($city,['prompt'=>'Select a city']) ?>
 
 
 
