@@ -9,6 +9,7 @@ use yii\widgets\LinkPager;
  *
  * @var $vacancy \frontend\models\Vacancy
  * @var $searchModel \frontend\models\VacancySearch
+ * @var $dataProvider \frontend\models\Vacancy
  */
 
 $lang = 'name_' . Yii::$app->language;
@@ -39,11 +40,11 @@ $city = [];
         </div>
         <div class="row">
             <div class="col-md-4">
-                <?php echo $this->render('/vacancy/_search',['model'=>$searchModel])?>
+                <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
             </div>
             <div class="col-md-8">
                 <ul class="job-listings mb-5">
-                    <?php foreach ($vacancy as $key => $item): ?>
+                    <?php foreach ($dataProvider as $key => $item): ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">
