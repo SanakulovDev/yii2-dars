@@ -22,6 +22,7 @@ use PHPExcel_Reader_Excel5;
 use PHPExcel_Worksheet_Drawing;
 use PhpOffice\PhpSpreadsheet\Chart\Exception;
 use Yii;
+use yii\base\Action;
 use yii\base\InvalidArgumentException;
 use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
@@ -389,7 +390,23 @@ class SiteController extends Controller
         return $this->redirect('vacancy-view-all');
     }
 
-//    action loadmore
+public function actionVacancyViewAll()
+{
+    $vacancy = Vacancy::find()->orderBy('user_id');
+    $count = $vacancy->count();
+    $pages = new Pagination([
+        'totalCount' => $count,
+        'pageSize' => 10
+    ]);
+    $vacancy = $vacancy->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+    return $this->render('index', [
+        'vacancy' => $vacancy,
+        'pages' => $pages,
+    ]);
+}
 
 //    public function actionImportExcel()
 //    {
