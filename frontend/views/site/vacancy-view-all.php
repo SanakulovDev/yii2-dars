@@ -11,7 +11,7 @@ use yii\widgets\LinkPager;
 
 $lang = 'name_' . Yii::$app->language;
 $profession = \common\models\Profession::selectList();
-$region = \common\models\region::selectList();
+$region = \common\models\Region::selectList();
 $job_type = \common\models\JobType::selectList();
 $city = [];
 ?>
