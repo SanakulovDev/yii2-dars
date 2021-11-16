@@ -110,7 +110,7 @@ $this->title = 'My Yii Application';
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                     <div class="job-listing-logo">
-                        <?= Html::img("/uploads/vacancy/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                        <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
