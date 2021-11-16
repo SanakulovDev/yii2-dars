@@ -139,7 +139,7 @@ $this->title = 'My Yii Application';
                 <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
             </div>
             <div class="col-md-4">
-                <a href="/vacancy-view-all" id="vacancy-show-more" class="btn"><?= Yii::t('app', 'Show more') ?></a>
+                <?= Html::a(Yii::t('app', 'Show more'),'vacancy-view-all',['class'=>'btn btn-info'])?>
             </div>
             <div class="col-md-4 text-center text-md-right">
                 <?= LinkPager::widget([
