@@ -229,7 +229,7 @@ $this->title = 'My Yii Application';
 
         series: [{
             data: data,
-            name: <?=$vacancy->address?>,
+            name: <?=$vacancy->company->name?>,
             states: {
                 hover: {
                     color: '#BADA55'
