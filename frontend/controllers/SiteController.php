@@ -415,7 +415,7 @@ public function actionVacancyViewAll()
     $searchModel = new VacancySearch();
     $dataProvider = $searchModel->search($this->request->queryParams);
     $vacancy = Vacancy::find()->orderBy('user_id');
-    $count = $vacancy->count();
+    $count = $dataProvider->getCount();
     $pages = new Pagination([
         'totalCount' => $count,
         'pageSize' => 10
