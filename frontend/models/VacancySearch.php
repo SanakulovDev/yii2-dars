@@ -78,8 +78,6 @@ class VacancySearch extends Vacancy
             'city_id' => $this->city_id,
             'count' => $this->count,
             'salary' => $this->salary,
-//            'salary_begin' => $this->salary_begin,
-//            'salary_end' => $this->salary_end,
             'gender' => $this->gender,
             'views' => $this->views,
             'status' => $this->status,
@@ -87,7 +85,7 @@ class VacancySearch extends Vacancy
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
+        $query->andFilterWhere(['between','salary', $this->salary_begin, $this->salary_end]);
         $query->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'description_ru', $this->description_ru])
             ->andFilterWhere(['like', 'description_en', $this->description_en])
