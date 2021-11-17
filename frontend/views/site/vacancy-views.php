@@ -124,7 +124,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                                 <?php elseif ($v_order->status == 3): ?>
                                     <span class="icon-check"></span>
                                 <?php endif; ?>
-                                <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
+<!--                                --><?//=VacancyOrders::STATUSLIST[$v_order->status]?><!--</a>-->
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
 
