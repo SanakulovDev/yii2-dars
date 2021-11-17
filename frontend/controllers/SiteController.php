@@ -415,10 +415,10 @@ public function actionVacancyViewAll()
     $searchModel = new VacancySearch();
     $dataProvider = $searchModel->search($this->request->queryParams);
     $vacancy = Vacancy::find()->orderBy('user_id');
-    $count = $dataProvider->getCount();
+    $count = $dataProvider->count;
     $pages = new Pagination([
         'totalCount' => $count,
-        'pageSize' => 10
+        'pageSize' => 3
     ]);
     $vacancy = $vacancy->offset($pages->offset)
         ->limit($pages->limit)
