@@ -504,7 +504,7 @@ public function actionVacancyViewAll()
                         $siswa->user_id = $company->userId;
                         $siswa->region_id = $company->regionId;
                         $siswa->city_id = $company->cityId;
-                        $siswa->image = $company->image;
+                        $siswa->image = $company->logo;
                     }
                 }
             }
