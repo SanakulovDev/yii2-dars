@@ -353,19 +353,34 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
+        $v_order = new VacancyOrders();
         if ($get == 'true') {
-
             if ($identity) {
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
                 if (!empty($worker->photo)) {
                     if (!$v_order) {
+                        $v_order = new VacancyOrders();
                         $v_order->worker_id = $worker->id;
                         $v_order->vacancy_id = $vacancy->id;
                         $vacancy->company_id = $vacancy->company->id;
                     }
                     if (!$v_order && $v_order->save()) {
                         Yii::$app->session->setFlash('success', 'Apply messages');
+                        if ($vacancy->save()) {
+
+                            $searchModel = new VacancySearch();
+                            $dataProvider = $searchModel->search($this->request->queryParams);
+                            return $this->render('vacancy-views', [
+                                'searchModel' => $searchModel,
+                                'dataProvider' => $dataProvider,
+                                'vacancy' => $vacancy,
+                                'vacancyx' => $vacancyx,
+                                'v_order' => $v_order,
+                                'pages' => $pages,
+                                'get' => $get
+                            ]);
+                        }
                     }
                 } else {
                     return $this->redirect('/cabinet/worker');
@@ -384,7 +399,7 @@ class SiteController extends Controller
                 'dataProvider' => $dataProvider,
                 'vacancy' => $vacancy,
                 'vacancyx' => $vacancyx,
-                'v_order' => $v_order?$v_order: new VacancyOrders(),
+                'v_order' => $v_order,
                 'pages' => $pages,
                 'get' => $get
             ]);
