@@ -362,6 +362,7 @@ class SiteController extends Controller
                 if (!empty($worker->photo)) {
                     if (empty($v_order)) {
                         $v_order = new VacancyOrders();
+                        $v_order->scenario = VacancyOrders::SCENARIO_VACANCYVIEWS;
                         $v_order->worker_id = $worker->id;
                         $v_order->vacancy_id = $vacancy->id;
                         $vacancy->company_id = $vacancy->company->id;
