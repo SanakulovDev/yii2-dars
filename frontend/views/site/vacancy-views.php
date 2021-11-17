@@ -112,7 +112,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                                     class="icon-heart-o mr-2 text-danger"></span><?= Yii::t('app', 'Save Job') ?></a>
                     </div>
                     <div class="col-6">
-                        <?php if ($v_order) : ?>
+                        <?php if (!empty($v_order->status)) : ?>
                             <a href="#"
                                class="btn fs-4 btn-block btn-success disabled btn-lg">
                                 <?php if ($v_order->status == 0): ?>
