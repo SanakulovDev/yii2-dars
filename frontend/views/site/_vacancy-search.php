@@ -38,8 +38,8 @@ $city = [];
 
     <?= $form->field($model, 'gender')->dropDownList($gender,['prompt' => 'Select a gender']) ?>
 
-    <?= $form->field($model, 'salary1')?>
-    <?= $form->field($model, 'salary2')?>
+    <?= $form->field($model, 'salary')?>
+<!--    --><?//= $form->field($model, 'salary2')?>
 
 
     <div class="form-group">

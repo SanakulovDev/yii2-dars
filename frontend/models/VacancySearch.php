@@ -14,6 +14,8 @@ class VacancySearch extends Vacancy
     /**
      * {@inheritdoc}
      */
+    public $salary1;
+    public $salary2;
     public function rules()
     {
         return [
@@ -38,6 +40,12 @@ class VacancySearch extends Vacancy
      *
      * @return ActiveDataProvider
      */
+//    public function salaryFunction()
+//    {
+//        if ($this->salary > $this->salary1 && $this->salary < $this->salary2){
+//            return $this->salary();
+//        }
+//    }
     public function search($params)
     {
         $query = Vacancy::find();
@@ -47,7 +55,7 @@ class VacancySearch extends Vacancy
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -70,8 +78,6 @@ class VacancySearch extends Vacancy
             'city_id' => $this->city_id,
             'count' => $this->count,
             'salary' => $this->salary,
-            'salary1' => $this->salary1,
-            'salary2' => $this->salary2,
             'gender' => $this->gender,
             'views' => $this->views,
             'status' => $this->status,

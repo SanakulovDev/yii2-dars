@@ -37,8 +37,11 @@ $city = [];
         ?>
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-
-                <h2 class="section-title mb-2"><?= $pages->totalCount . ' ' . Yii::t('app', 'Job Listed') ?></h2>
+                <?php if (empty($dataProvider)):?>
+                <h2 class="section-title mb-2"><?= 0 . ' ta '. Yii::t('app', 'Job Listed') ?></h2>
+                <?php else :?>
+                <h2 class="section-title mb-2"><?= $dataProvider->count . ' ' . Yii::t('app', 'Job Listed') ?></h2>
+                <?php endif;?>
             </div>
         </div>
         <div class="row">
@@ -48,8 +51,16 @@ $city = [];
                 <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
             </div>
             <div class="col-md-8">
+<!--                --><?php
+//                var_dump($dataProvider->count);
+//                die;
+//                ?>
+
                 <ul class="job-listings mb-5">
                     <?php foreach ($dataProvider->models as $key => $item): ?>
+                    <?php if (empty($item)):?>
+                    <h5><?= Yii::t('app','Not found Vacancy')?></h5>
+                    <?php endif ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">
