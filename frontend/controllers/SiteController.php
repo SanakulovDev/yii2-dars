@@ -358,30 +358,30 @@ class SiteController extends Controller
             if ($identity) {
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
-                var_dump($v_order);
-                die();
+
                 if (!empty($worker->photo)) {
-                    if (!$v_order) {
+                    if (empty($v_order)) {
                         $v_order = new VacancyOrders();
                         $v_order->worker_id = $worker->id;
                         $v_order->vacancy_id = $vacancy->id;
                         $vacancy->company_id = $vacancy->company->id;
-                    }
-                    if (!$v_order && $v_order->save()) {
-                        Yii::$app->session->setFlash('success', 'Apply messages');
-                        if ($vacancy->save()) {
 
-                            $searchModel = new VacancySearch();
-                            $dataProvider = $searchModel->search($this->request->queryParams);
-                            return $this->render('vacancy-views', [
-                                'searchModel' => $searchModel,
-                                'dataProvider' => $dataProvider,
-                                'vacancy' => $vacancy,
-                                'vacancyx' => $vacancyx,
-                                'v_order' => $v_order,
-                                'pages' => $pages,
-                                'get' => $get
-                            ]);
+                        if ($v_order->save()) {
+                            Yii::$app->session->setFlash('success', 'Apply messages');
+                            if ($vacancy->save()) {
+
+                                $searchModel = new VacancySearch();
+                                $dataProvider = $searchModel->search($this->request->queryParams);
+                                return $this->render('vacancy-views', [
+                                    'searchModel' => $searchModel,
+                                    'dataProvider' => $dataProvider,
+                                    'vacancy' => $vacancy,
+                                    'vacancyx' => $vacancyx,
+                                    'v_order' => $v_order,
+                                    'pages' => $pages,
+                                    'get' => $get
+                                ]);
+                            }
                         }
                     }
                 } else {
