@@ -18,7 +18,7 @@ class VacancySearch extends Vacancy
     {
         return [
             [['id', 'company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count', 'salary', 'gender', 'views', 'status'], 'integer'],
-            [['description_uz', 'description_ru', 'description_en', 'description_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
+            [['salary1','salary2','description_uz', 'description_ru', 'description_en', 'description_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -70,6 +70,8 @@ class VacancySearch extends Vacancy
             'city_id' => $this->city_id,
             'count' => $this->count,
             'salary' => $this->salary,
+            'salary1' => $this->salary1,
+            'salary2' => $this->salary2,
             'gender' => $this->gender,
             'views' => $this->views,
             'status' => $this->status,

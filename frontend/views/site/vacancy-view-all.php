@@ -9,6 +9,7 @@ use yii\widgets\LinkPager;
  *
  * @var $vacancy \frontend\models\Vacancy
  * @var $searchModel \frontend\models\VacancySearch
+ * @var $dataProvider \yii\data\ActiveDataProvider
  */
 
 $lang = 'name_' . Yii::$app->language;

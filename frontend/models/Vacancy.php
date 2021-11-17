@@ -46,6 +46,8 @@ class Vacancy extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $salary1;
+    public $salary2;
     public static function tableName()
     {
         return 'vacancy';
@@ -61,7 +63,7 @@ class Vacancy extends \yii\db\ActiveRecord
         return [
             [['company_id', 'user_id', 'profession_id', 'region_id', 'city_id', 'count'], 'required'],
             [['company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count', 'salary', 'gender', 'views', 'status'], 'integer'],
-            [['deadline', 'created_at', 'updated_at'], 'safe'],
+            [['deadline', 'created_at', 'updated_at','salary1', 'salary2'], 'safe'],
             [['description_uz', 'description_ru', 'description_en', 'description_cyrl'], 'string', 'max' => 255],
             ['image', 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'svg'], 'maxSize' => 1024 * 1024 * 4],
             [['experience'], 'string', 'max' => 250],
