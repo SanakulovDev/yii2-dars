@@ -87,6 +87,32 @@ $this->title = 'My Yii Application';
     </div>
 </section>
 
+<section class="site-section py-4">
+    <div class="container">
+
+        <div class="row align-items-center">
+            <div class="col-12 text-center mt-4 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <h2 class="section-title mb-2"><?= Yii::t('app','Partners')?></h2>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <?php foreach ($query as $item): ?>
+                <div class="col-6 col-lg-3 col-md-6 text-center">
+                    <a href="<?= $item->url ?>">
+                        <img src="<?= "/uploads/" . $item->logo ?>" alt="Image" class="img-fluid"
+                             style="max-width: <?= $item->maxwidth ?>px;">
+                    </a>
+                </div>
+
+            <?php endforeach ?>
+        </div>
+    </div>
+</section>
 
 <section class="site-section" id="next">
     <div class="container">
@@ -152,32 +178,7 @@ $this->title = 'My Yii Application';
     </div>
 </section>
 
-<section class="site-section py-4">
-    <div class="container">
 
-        <div class="row align-items-center">
-            <div class="col-12 text-center mt-4 mb-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-7">
-                        <h2 class="section-title mb-2"><?= Yii::t('app','Partners')?></h2>
-
-
-                    </div>
-                </div>
-
-            </div>
-            <?php foreach ($query as $item): ?>
-                <div class="col-6 col-lg-3 col-md-6 text-center">
-                    <a href="<?= $item->url ?>">
-                        <img src="<?= "/uploads/" . $item->logo ?>" alt="Image" class="img-fluid"
-                             style="max-width: <?= $item->maxwidth ?>px;">
-                    </a>
-                </div>
-
-            <?php endforeach ?>
-        </div>
-    </div>
-</section>
 
 
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
@@ -228,7 +229,7 @@ $this->title = 'My Yii Application';
 
         series: [{
             data: data,
-            name: 'Random data',
+            name: <?=$vacancy->address?>,
             states: {
                 hover: {
                     color: '#BADA55'
