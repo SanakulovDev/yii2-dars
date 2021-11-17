@@ -359,7 +359,7 @@ class SiteController extends Controller
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
                 if (!empty($worker->photo)) {
-                    if ($v_order) {
+                    if (!$v_order) {
                         $v_order->worker_id = $worker->id;
                         $v_order->vacancy_id = $vacancy->id;
                         $vacancy->company_id = $vacancy->company->id;
