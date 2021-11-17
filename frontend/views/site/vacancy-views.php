@@ -72,7 +72,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                 <div class="row">
 
                     <div class="col-10">
-                        <?php if ($v_order) : ?>
+                        <?php if (!empty($v_order->status)) : ?>
                             <a href="#"
                                class="btn fs-4 btn-block disabled   btn-success btn-lg">
                                 <?php if ($v_order->status == 0): ?>
@@ -84,7 +84,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                                 <?php elseif ($v_order->status == 3): ?>
                                     <span class="icon-check"></span>
                                 <?php endif; ?>
-                               <?=VacancyOrders::STATUSLIST[$v_order->status]?></a>
+                               <?php VacancyOrders::STATUSLIST[$v_order->status]?></a>
                         <?php else : ?>
                             <?= Html::a('Apply now', '/site/vacancy-views?id=' . $vacancy->id . '&get=true', ['class' => 'btn btn-block btn-primary btn-md']); ?>
 
