@@ -62,7 +62,7 @@ $city = [];
                     <h5><?= Yii::t('app','Not found Vacancy')?></h5>
                     <?php endif ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                            <a href="vacancy-views?id=<?= $item->id ?>&get=false"></a>
+                            <a href="/site/vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">
                                 <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                             </div>
