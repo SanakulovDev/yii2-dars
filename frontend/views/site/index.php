@@ -18,30 +18,23 @@ $lang = 'name_' . Yii::$app->language;
 $this->title = 'My Yii Application';
 
 ?>
-<section class="site-section py-4">
-    <div class="container">
+<style>
+    #container {
+        height: 500px;
+        min-width: 310px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
-        <div class="row align-items-center">
-            <div class="col-12 text-center mt-4 mb-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-7">
-                        <h2 class="section-title mb-2"><?= Yii::t('app','Partners')?></h2>
+    .loading {
+        margin-top: 10em;
+        text-align: center;
+        color: gray;
+    }
+</style>
+<section class="site-section">
+    <div class="container" id="container">
 
-
-                    </div>
-                </div>
-
-            </div>
-            <?php foreach ($query as $item): ?>
-                <div class="col-6 col-lg-3 col-md-6 text-center">
-                    <a href="<?= $item->url ?>">
-                        <img src="<?= "/uploads/" . $item->logo ?>" alt="Image" class="img-fluid"
-                             style="max-width: <?= $item->maxwidth ?>px;">
-                    </a>
-                </div>
-
-            <?php endforeach ?>
-        </div>
     </div>
 </section>
 
@@ -158,4 +151,96 @@ $this->title = 'My Yii Application';
 
     </div>
 </section>
+
+<section class="site-section py-4">
+    <div class="container">
+
+        <div class="row align-items-center">
+            <div class="col-12 text-center mt-4 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <h2 class="section-title mb-2"><?= Yii::t('app','Partners')?></h2>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <?php foreach ($query as $item): ?>
+                <div class="col-6 col-lg-3 col-md-6 text-center">
+                    <a href="<?= $item->url ?>">
+                        <img src="<?= "/uploads/" . $item->logo ?>" alt="Image" class="img-fluid"
+                             style="max-width: <?= $item->maxwidth ?>px;">
+                    </a>
+                </div>
+
+            <?php endforeach ?>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/uz/uz-all.js"></script>
+<script>
+    var data = [
+        ['uz-fa', 0],
+        ['uz-tk', 1],
+        ['uz-an', 2],
+        ['uz-ng', 3],
+        ['uz-ji', 4],
+        ['uz-si', 5],
+        ['uz-ta', 6],
+        ['uz-bu', 7],
+        ['uz-kh', 8],
+        ['uz-qr', 9],
+        ['uz-nw', 10],
+        ['uz-sa', 11],
+        ['uz-qa', 12],
+        ['uz-su', 13]
+    ];
+
+    // Create the chart
+    Highcharts.mapChart('container', {
+        chart: {
+            map: 'countries/uz/uz-all'
+        },
+
+        title: {
+            text: 'Highmaps basic demo'
+        },
+
+        subtitle: {
+            text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/uz/uz-all.js">Uzbekistan</a>'
+        },
+
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+
+        colorAxis: {
+            min: 0
+        },
+
+        series: [{
+            data: data,
+            name: 'Random data',
+            states: {
+                hover: {
+                    color: '#BADA55'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    });
+
+</script>
+
 

@@ -29,6 +29,9 @@ class AppAsset extends AssetBundle
 
         "/jobboard/js/custom.js",
         'js/main.js',
+
+
+
     ];
     public $css = [
         "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css",

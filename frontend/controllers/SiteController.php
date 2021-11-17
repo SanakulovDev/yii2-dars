@@ -366,7 +366,7 @@ class SiteController extends Controller
                         $v_order->worker_id = $worker->id;
                         $v_order->vacancy_id = $vacancy->id;
                         $v_order->company_id = $vacancy->company_id;
-                        $v_order->status = 1;
+                        $v_order->status = 0;
                         if ($v_order->save()) {
                             Yii::$app->session->setFlash('success', 'Apply messages');
                             if ($vacancy->save()) {
