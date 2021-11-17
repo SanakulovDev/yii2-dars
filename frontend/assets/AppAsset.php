@@ -29,7 +29,7 @@ class AppAsset extends AssetBundle
 
         "/jobboard/js/custom.js",
         'js/main.js',
-
+        'https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js'
 
 
     ];

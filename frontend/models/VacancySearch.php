@@ -14,13 +14,13 @@ class VacancySearch extends Vacancy
     /**
      * {@inheritdoc}
      */
-    public $salary1;
-    public $salary2;
+    public $salary_begin;
+    public $salary_end;
     public function rules()
     {
         return [
             [['id', 'company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count', 'salary', 'gender', 'views', 'status'], 'integer'],
-            [['salary1','salary2','description_uz', 'description_ru', 'description_en', 'description_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
+            [['salary_begin','salary_end','description_uz', 'description_ru', 'description_en', 'description_cyrl', 'image', 'experience', 'telegram', 'address', 'deadline', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -78,6 +78,8 @@ class VacancySearch extends Vacancy
             'city_id' => $this->city_id,
             'count' => $this->count,
             'salary' => $this->salary,
+//            'salary_begin' => $this->salary_begin,
+//            'salary_end' => $this->salary_end,
             'gender' => $this->gender,
             'views' => $this->views,
             'status' => $this->status,

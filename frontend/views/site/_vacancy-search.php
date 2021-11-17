@@ -38,7 +38,16 @@ $city = [];
 
     <?= $form->field($model, 'gender')->dropDownList($gender,['prompt' => 'Select a gender']) ?>
 
-    <?= $form->field($model, 'salary')?>
+   
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model,'salary_begin')->textInput(['type'=>'number'])?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'salary_end')->textInput(['type'=>'number'])?>
+        </div>
+    </div>
+
 
 
 

@@ -51,10 +51,7 @@ $city = [];
                 <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
             </div>
             <div class="col-md-8">
-<!--                --><?php
-//                var_dump($dataProvider->count);
-//                die;
-//                ?>
+
 
                 <ul class="job-listings mb-5">
                     <?php foreach ($dataProvider->models as $key => $item): ?>
