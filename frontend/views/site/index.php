@@ -138,9 +138,7 @@ $this->title = 'My Yii Application';
         </div>
         <div class="row pb-0 block__19738 section-counter">
 
-            <?php
-//            vd($job_stats);
-            ?>
+
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
 
                 <div class="d-flex align-items-center justify-content-center mb-2">
@@ -220,7 +218,7 @@ $this->title = 'My Yii Application';
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <a href="/site/vacancy-views?id=<?= $item->id ?>&get=false"></a>
                     <div class="job-listing-logo">
-                        <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                        <?= Html::img("$item->image?/uploads/company/$item->image: https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
@@ -277,88 +275,88 @@ $this->title = 'My Yii Application';
 
     var data = [{
         "hc-key": "uz-qr",
-        "value": 800,
-        "resume_value": 528,
-        "company_value": 2993,
-        "vacancy_value": "1451"
+        "value": 10,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(10)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(10)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(10)[0]['count(*)']?>
     }, {
         "hc-key": "uz-bu",
-        "value": 900,
-        "resume_value": 418,
-        "company_value": 3562,
-        "vacancy_value": "4383"
+        "value": 6,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(6)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(6)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(6)[0]['count(*)']?>
     }, {
         "hc-key": "uz-sa",
-        "value": 1000,
-        "resume_value": 536,
-        "company_value": 4211,
-        "vacancy_value": "1767"
+        "value": 7,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(7)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(7)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(7)[0]['count(*)']?>
     }, {
         "hc-key": "uz-nw",
-        "value": 1100,
-        "resume_value": 329,
-        "company_value": 2212,
-        "vacancy_value": "634"
+        "value": 9,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(9)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(9)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(9)[0]['count(*)']?>
     }, {
         "hc-key": "uz-an",
-        "value": 1200,
-        "resume_value": 401,
-        "company_value": 3866,
-        "vacancy_value": "3162"
+        "value": 1,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(1)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(1)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(1)[0]['count(*)']?>
     }, {
         "hc-key": "uz-fa",
-        "value": 1300,
-        "resume_value": 438,
-        "company_value": 4493,
-        "vacancy_value": "3003"
+        "value": 14,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(14)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(14)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(14)[0]['count(*)']?>
     }, {
         "hc-key": "uz-su",
-        "value": 1400,
-        "resume_value": 292,
-        "company_value": 4041,
-        "vacancy_value": "3442"
+        "value": 12,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(12)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(12)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(12)[0]['count(*)']?>
     }, {
         "hc-key": "uz-si",
-        "value": 1500,
-        "resume_value": 230,
-        "company_value": 1799,
-        "vacancy_value": "1607"
+        "value": 11,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(11)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(11)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(11)[0]['count(*)']?>
     }, {
         "hc-key": "uz-kh",
-        "value": 1600,
-        "resume_value": 452,
-        "company_value": 2769,
-        "vacancy_value": "891"
+        "value": 3,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(3)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(3)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(3)[0]['count(*)']?>
     }, {
         "hc-key": "uz-ta",
-        "value": 1700,
-        "resume_value": 516,
-        "company_value": 4947,
-        "vacancy_value": "3208"
+        "value": 5,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(5)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(5)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(5)[0]['count(*)']?>
     }, {
         "hc-key": "uz-qa",
-        "value": 1800,
-        "resume_value": 720,
-        "company_value": 4311,
-        "vacancy_value": "3737"
+        "value": 13,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(13)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(13)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(13)[0]['count(*)']?>
     }, {
         "hc-key": "uz-ji",
-        "value": 1900,
-        "resume_value": 251,
-        "company_value": 3944,
-        "vacancy_value": "2157"
+        "value": 8,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(8)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(8)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(8)[0]['count(*)']?>
     }, {
         "hc-key": "uz-ng",
-        "value": 2100,
-        "resume_value": 451,
-        "company_value": 3353,
-        "vacancy_value": "1989"
+        "value": 2,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(2)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(2)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(2)[0]['count(*)']?>
     }, {
         "hc-key": "uz-tk",
-        "value": 2200,
-        "resume_value": 1323,
-        "company_value": 10354,
-        "vacancy_value": "11047"
+        "value": 4,
+        "resume_value": <?= \frontend\models\Report::resumeMapJoin(4)[0]['count(*)']?>,
+        "company_value": <?= \frontend\models\Report::companyMapJoin(4)[0]['count(*)']?>,
+        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(4)[0]['count(*)']?>
     }];
 
     // Create the chart
