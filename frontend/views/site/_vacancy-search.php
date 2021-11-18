@@ -1,5 +1,6 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -27,9 +28,24 @@ $city = [];
 
 
 
-
-    <?= $form->field($model, 'profession_id')->dropDownList($profession,['prompt' => 'Select a profession']) ?>
-
+    <?= $form->field($model, 'profession_id')->widget(Select2::classname(), [
+    'data' => $profession,
+    'language' => 'de',
+    'options' => ['placeholder' => 'Select a profession ...'],
+    'pluginOptions' => [
+    'allowClear' => true
+    ],
+    ]);
+    ?>
+    <?= $form->field($model, 'job_type_id')->widget(Select2::classname(), [
+        'data' => $profession,
+        'language' => 'de',
+        'options' => ['placeholder' => 'Select a job type ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    ?>
     <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt' => 'Select a job type']) ?>
 
     <?= $form->field($model, 'region_id')->dropDownList($region,['prompt' => 'Select a region']) ?>

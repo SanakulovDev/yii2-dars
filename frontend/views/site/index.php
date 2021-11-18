@@ -20,9 +20,8 @@ $this->title = 'My Yii Application';
 ?>
 <style>
     #container {
-        height: 500px;
-        min-width: 310px;
-        max-width: 800px;
+        height: 700px;
+        width: 1000px;
         margin: 0 auto;
     }
 
@@ -49,7 +48,8 @@ $this->title = 'My Yii Application';
                             <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <div class="dropdown bootstrap-select" style="width: 100%;"><select class="selectpicker"
+                            <div class="dropdown bootstrap-select" style="width: 100%;">
+                                <select class="selectpicker"
                                                                                                 data-style="btn-white btn-lg"
                                                                                                 data-width="100%"
                                                                                                 data-live-search="true"
@@ -138,7 +138,9 @@ $this->title = 'My Yii Application';
         </div>
         <div class="row pb-0 block__19738 section-counter">
 
-
+            <?php
+//            vd($job_stats);
+            ?>
             <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
 
                 <div class="d-flex align-items-center justify-content-center mb-2">
@@ -272,23 +274,6 @@ $this->title = 'My Yii Application';
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/uz/uz-all.js"></script>
 <script>
-    // var data = [
-    //     ['uz-fa', 0],
-    //     ['uz-tk', 1],
-    //     ['uz-an', 2],
-    //     ['uz-ng', 3],
-    //     ['uz-ji', 4],
-    //     ['uz-si', 5],
-    //     ['uz-ta', 6],
-    //     ['uz-bu', 7],
-    //     ['uz-kh', 8],
-    //     ['uz-qr', 9],
-    //     ['uz-nw', 10],
-    //     ['uz-sa', 11],
-    //     ['uz-qa', 12],
-    //     ['uz-su', 13]
-    // ];
-
 
     var data = [{
         "hc-key": "uz-qr",
@@ -427,6 +412,7 @@ $this->title = 'My Yii Application';
     });
 
 </script>
+
 
 
 

@@ -21,6 +21,7 @@ use PHPExcel_IOFactory;
 use PHPExcel_Reader_Excel5;
 use PHPExcel_Worksheet_Drawing;
 use PhpOffice\PhpSpreadsheet\Chart\Exception;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Yii;
 use yii\base\Action;
 use yii\base\InvalidArgumentException;
@@ -435,8 +436,7 @@ public function actionVacancyViewAll()
     public function actionImportExcel()
     {
 
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $inputFile = \Yii::getAlias('@app/web/uploads/excel/profession.xlsx');
+        $inputFile = 'uploads/excel/profession.xlsx';
         try {
             $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
             $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
@@ -530,6 +530,7 @@ public function actionVacancyViewAll()
             $profession = Profession::findOne(['name_uz'=>$rowData[0][2]]);
             if (empty($profession)){
                 $profession = new Profession();
+
                 $profession->name_uz = $rowData[0][2];
                 $profession->name_ru = $rowData[0][2];
                 $profession->name_en = $rowData[0][2];
@@ -541,6 +542,10 @@ public function actionVacancyViewAll()
             else{
                 $siswa->profession_id = $profession->id;
             }
+            $siswa->description_uz =  $rowData[0][3];
+            $siswa->description_ru =  $rowData[0][4];
+            $siswa->description_en =  $rowData[0][5];
+            $siswa->description_cyrl =  $rowData[0][6];
             $siswa->count = $rowData[0][10];
             $siswa->salary = $rowData[0][11];
             $siswa->gender = $rowData[0][12];
