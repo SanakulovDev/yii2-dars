@@ -220,7 +220,11 @@ $this->title = 'My Yii Application';
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                     <a href="/site/vacancy-views?id=<?= $item->id ?>&get=false"></a>
                     <div class="job-listing-logo">
-                        <?= Html::img("$item->image?/uploads/company/$item->image: https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                        <?php if ($item->image): ?>
+                            <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                        <?php else: ?>
+                            <?= Html::img("https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
@@ -288,9 +292,7 @@ $this->title = 'My Yii Application';
 
     </div>
 </section>
-<?php
-//vd(Report::mapJoin(1));
-?>
+
 
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>

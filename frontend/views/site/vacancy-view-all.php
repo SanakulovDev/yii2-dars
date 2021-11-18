@@ -37,29 +37,33 @@ $city = [];
         ?>
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <?php if (empty($dataProvider)):?>
-                <h2 class="section-title mb-2"><?= 0 . ' ta '. Yii::t('app', 'Job Listed') ?></h2>
-                <?php else :?>
-                <h2 class="section-title mb-2"><?= $dataProvider->count . ' ' . Yii::t('app', 'Job Listed') ?></h2>
-                <?php endif;?>
+                <?php if (empty($dataProvider)): ?>
+                    <h2 class="section-title mb-2"><?= 0 . ' ta ' . Yii::t('app', 'Job Listed') ?></h2>
+                <?php else : ?>
+                    <h2 class="section-title mb-2"><?= $dataProvider->count . ' ' . Yii::t('app', 'Job Listed') ?></h2>
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
+                <?php echo $this->render('_vacancy-search', ['model' => $searchModel]) ?>
             </div>
             <div class="col-md-8">
 
 
                 <ul class="job-listings mb-5">
                     <?php foreach ($dataProvider->models as $key => $item): ?>
-                    <?php if (empty($item)):?>
-                    <h5><?= Yii::t('app','Not found Vacancy')?></h5>
-                    <?php endif ?>
+                        <?php if (empty($item)): ?>
+                            <h5><?= Yii::t('app', 'Not found Vacancy') ?></h5>
+                        <?php endif ?>
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
                             <a href="/site/vacancy-views?id=<?= $item->id ?>&get=false"></a>
                             <div class="job-listing-logo">
-                                <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']) ?>
+                                <?php if ($item->image): ?>
+                                    <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                                <?php else: ?>
+                                    <?= Html::img("https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                                <?php endif; ?>
                             </div>
 
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
