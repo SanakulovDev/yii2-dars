@@ -31,7 +31,7 @@ class Report extends \yii\base\Model
         $query = (new Query())
             ->select('count(*)')
             ->from('vacancy')
-            ->where("vacancy.company_id = $data")
+            ->where("vacancy.region_id = $data")
             ->all();
         return $query;
     }
