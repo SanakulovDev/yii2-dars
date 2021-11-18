@@ -8,6 +8,7 @@
 /* @var $pages \yii\data\Pagination */
 
 
+use frontend\models\Report;
 use sjaakp\loadmore\LoadMorePager;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -50,11 +51,11 @@ $this->title = 'My Yii Application';
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <div class="dropdown bootstrap-select" style="width: 100%;">
                                 <select class="selectpicker"
-                                                                                                data-style="btn-white btn-lg"
-                                                                                                data-width="100%"
-                                                                                                data-live-search="true"
-                                                                                                title="Select Region"
-                                                                                                tabindex="-98">
+                                        data-style="btn-white btn-lg"
+                                        data-width="100%"
+                                        data-live-search="true"
+                                        title="Select Region"
+                                        tabindex="-98">
                                     <option class="bs-title-option" value=""></option>
                                     <option>Anywhere</option>
                                     <option>San Francisco</option>
@@ -84,6 +85,7 @@ $this->title = 'My Yii Application';
                                     <option>Part Time</option>
                                     <option>Full Time</option>
                                 </select>
+
 
                                 <div class="dropdown-menu " role="combobox">
                                     <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
@@ -244,7 +246,27 @@ $this->title = 'My Yii Application';
 
         <div class="row pagination-wrap">
             <div class="col-md-4 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
+                <?php
+                $begin = $pages->getPage() * $pages->pageSize + 1;
+                $end = $begin + count($vacancy) - 1;
+                if ($begin > $end) {
+                    $begin = $end;
+                }
+                $current_page = $pages->getPage();
+                $page = $pages->getPage() + 1;
+                $pageCount = $pages->pageCount;
+
+
+                $summary = Yii::t('yii', 'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> {totalCount, plural, one{item} other{items}}.', [
+                    'begin' => $begin,
+                    'end' => $end,
+                    'count' => $pages->totalCount,
+                    'totalCount' => $pages->totalCount,
+                    'page' => $page,
+                    'pageCount' => $page]);
+                ?>
+                <span><?= $summary ?></span>
+
             </div>
             <div class="col-md-4">
                 <?= Html::a(Yii::t('app', 'Show more'), '/site/vacancy-view-all', ['class' => 'btn btn-info']) ?>
@@ -266,7 +288,9 @@ $this->title = 'My Yii Application';
 
     </div>
 </section>
-
+<?php
+//vd(Report::mapJoin(1));
+?>
 
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
@@ -276,87 +300,87 @@ $this->title = 'My Yii Application';
     var data = [{
         "hc-key": "uz-qr",
         "value": 10,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(10)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(10)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(10)[0]['count(*)']?>
+        "resume_value":<?= Report::mapJoin(10)[1][0]['resume']?>,
+        "company_value":<?= Report::mapJoin(10)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(10)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-bu",
         "value": 6,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(6)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(6)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(6)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(6)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(6)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(6)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-sa",
         "value": 7,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(7)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(7)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(7)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(7)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(7)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(7)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-nw",
         "value": 9,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(9)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(9)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(9)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(9)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(9)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(9)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-an",
         "value": 1,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(1)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(1)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(1)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(1)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(1)[0][0]['company']?>,
+        "vacancy_value": <?= Report::mapJoin(1)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-fa",
         "value": 14,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(14)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(14)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(14)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(14)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(14)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(14)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-su",
         "value": 12,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(12)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(12)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(12)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(12)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(12)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(12)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-si",
         "value": 11,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(11)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(11)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(11)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(1)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(11)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(11)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-kh",
         "value": 3,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(3)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(3)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(3)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(3)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(3)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(3)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ta",
         "value": 5,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(5)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(5)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(5)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(5)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(5)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(5)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-qa",
         "value": 13,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(13)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(13)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(13)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(13)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(13)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(13)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ji",
         "value": 8,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(8)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(8)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(8)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(8)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(8)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(8)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ng",
         "value": 2,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(2)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(2)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(2)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(2)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(2)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(2)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-tk",
         "value": 4,
-        "resume_value": <?= \frontend\models\Report::resumeMapJoin(4)[0]['count(*)']?>,
-        "company_value": <?= \frontend\models\Report::companyMapJoin(4)[0]['count(*)']?>,
-        "vacancy_value": <?= \frontend\models\Report::vacancyMapJoin(4)[0]['count(*)']?>
+        "resume_value": <?= Report::mapJoin(4)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(4)[0][0]['company']?>,
+        "vacancy_value":<?= Report::mapJoin(4)[2][0]['vacancy']?>
     }];
 
     // Create the chart
@@ -391,7 +415,7 @@ $this->title = 'My Yii Application';
             name: 'Uzbekistan Respublikasi',
             states: {
                 hover: {
-                    color: '#BADA55'
+                    color: '#ffffff'
                 }
             },
             dataLabels: {

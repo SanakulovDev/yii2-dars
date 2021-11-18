@@ -6,35 +6,30 @@ use yii\db\Query;
 
 class Report extends \yii\base\Model
 {
-    public static function companyMapJoin($data)
+    public static function mapJoin($data)
     {
-        $query = (new Query())
-            ->select('count(*)')
+        $company = (new Query())
+            ->select('count(*) as company')
             ->from('vacancy')
             ->where("vacancy.region_id = $data")
             ->innerJoin('company','vacancy.company_id = company.id')
             ->all();
-        return $query;
-    }
-    public static function resumeMapJoin($data)
-    {
-        $query = (new Query())
-            ->select('count(*)')
+        $resume = (new Query())
+            ->select('count(*) as resume')
             ->from('vacancy')
-            ->where("vacancy.region_id = $data")
+            ->where("region_id = $data")
             ->innerJoin('vacancy_orders','vacancy.id = vacancy_orders.vacancy_id')
             ->all();
-        return $query;
-    }
-    public static function vacancyMapJoin($data)
-    {
-        $query = (new Query())
-            ->select('count(*)')
+        $vacancy = (new Query())
+            ->select('count(*) as vacancy')
             ->from('vacancy')
             ->where("vacancy.region_id = $data")
             ->all();
-        return $query;
+        $result = array($company, $resume, $vacancy);
+
+        return $result;
     }
+
 
 
 }

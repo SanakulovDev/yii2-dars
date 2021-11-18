@@ -88,7 +88,26 @@ $city = [];
 
         <div class="row pagination-wrap">
             <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of <?= $pages->totalCount ?> Jobs </span>
+                <?php
+                $begin = $pages->getPage() * $pages->pageSize + 1;
+                $end = $begin + count($vacancy) - 1;
+                if ($begin > $end) {
+                    $begin = $end;
+                }
+                $current_page = $pages->getPage();
+                $page = $pages->getPage() + 1;
+                $pageCount = $pages->pageCount;
+
+
+                $summary = Yii::t('yii', 'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> {totalCount, plural, one{item} other{items}}.', [
+                    'begin' => $begin,
+                    'end' => $end,
+                    'count' => $pages->totalCount,
+                    'totalCount' => $pages->totalCount,
+                    'page' => $page,
+                    'pageCount' => $page]);
+                ?>
+                <span><?= $summary ?></span>
             </div>
             <div class="col-md-6 text-center text-md-right">
                 <?= LinkPager::widget([

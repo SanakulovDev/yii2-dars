@@ -55,7 +55,7 @@
                                 href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small>
                 </p>
-                <p>
+                <span>
                     <!-- START WWW.UZ TOP-RATING -->
                     <SCRIPT language="javascript" type="text/javascript">
                         <!--
@@ -94,7 +94,11 @@
                                                                                                  width=88 border=0
                                                                                                  alt="Топ рейтинг www.uz"></A>
                 </NOSCRIPT><!-- FINISH WWW.UZ TOP-RATING -->
-                </p>
+                </span>
+                <span>
+                   <a href="http://bank.uz/currency/cb.html" title="Bank.uz - все о банках Узбекистана" target="_blank"><img
+                               src="http://bank.uz/scripts/informercb?fg=A9A9A9&bg=FFFFFF" border="0"/></a>
+                </span>
             </div>
         </div>
     </div>

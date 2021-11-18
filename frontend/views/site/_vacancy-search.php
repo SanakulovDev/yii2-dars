@@ -29,47 +29,46 @@ $city = [];
 
 
     <?= $form->field($model, 'profession_id')->widget(Select2::classname(), [
-    'data' => $profession,
-    'language' => 'de',
-    'options' => ['placeholder' => 'Select a profession ...'],
-    'pluginOptions' => [
-    'allowClear' => true
-    ],
-    ]);
-    ?>
-    <?= $form->field($model, 'job_type_id')->widget(Select2::classname(), [
         'data' => $profession,
         'language' => 'de',
-        'options' => ['placeholder' => 'Select a job type ...'],
+        'options' => ['placeholder' => 'Select a profession ...'],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]);
     ?>
-    <?= $form->field($model, 'job_type_id')->dropDownList($job_type,['prompt' => 'Select a job type']) ?>
+    <?= $form->field($model, 'job_type_id')->widget(Select2::classname(), [
+        'data' => $profession,
+        'language' => 'uz',
+        'options' => ['placeholder' => 'Select a job type ...'],
+        'pluginOptions' => [
+            'label' => false,
+            'allowClear' => true
+        ],
+    ]);
+    ?>
+    <?= $form->field($model, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
 
-    <?= $form->field($model, 'region_id')->dropDownList($region,['prompt' => 'Select a region']) ?>
+    <?= $form->field($model, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
 
-    <?= $form->field($model, 'city_id')->dropDownList($city,['prompt' => 'Select a city']) ?>
+    <?= $form->field($model, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
 
-    <?= $form->field($model, 'gender')->dropDownList($gender,['prompt' => 'Select a gender']) ?>
+    <?= $form->field($model, 'gender')->dropDownList($gender, ['prompt' => 'Select a gender']) ?>
 
-   
+
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model,'salary_begin')->textInput(['type'=>'number'])?>
+            <?= $form->field($model, 'salary_begin')->textInput(['type' => 'number']) ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'salary_end')->textInput(['type'=>'number'])?>
+            <?= $form->field($model, 'salary_end')->textInput(['type' => 'number']) ?>
         </div>
     </div>
 
 
-
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Reset'),'vacancy-view-all', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'Reset'), 'vacancy-view-all', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
