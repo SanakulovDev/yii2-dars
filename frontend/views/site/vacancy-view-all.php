@@ -46,8 +46,6 @@ $city = [];
         </div>
         <div class="row">
             <div class="col-md-4">
-                <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-                <?= Html::a(Yii::t('app', 'Reset'),'vacancy-view-all', ['class' => 'btn btn-outline-secondary']) ?>
                 <?php echo $this->render('_vacancy-search',['model'=>$searchModel])?>
             </div>
             <div class="col-md-8">
