@@ -16,11 +16,11 @@ $('.highcharts-name-andijon').click(function(){
 });
 
 $('.highcharts-name-kashkadarya').click(function(){
-    $(location).attr('href','/site/vacancy-view-all?VacancySearch%5Bregion_id%5D=12');
+    $(location).attr('href','/site/vacancy-view-all?VacancySearch%5Bregion_id%5D=13');
 });
 
 $('.highcharts-name-surkhandarya').click(function(){
-    $(location).attr('href','/site/vacancy-view-all?VacancySearch%5Bregion_id%5D=13');
+    $(location).attr('href','/site/vacancy-view-all?VacancySearch%5Bregion_id%5D=12');
 });
 $('.highcharts-name-samarkand').click(function(){
     $(location).attr('href','/site/vacancy-view-all?VacancySearch%5Bregion_id%5D=7');
