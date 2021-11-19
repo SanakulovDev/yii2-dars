@@ -494,6 +494,7 @@ public function actionVacancyViewAll()
             }
 
             $siswa = new Vacancy();
+            $siswa->deadline = date('Y-m-d', time()+86400*30);
             $company = Company::findOne(['name' => $rowData[0][0]]);
             $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
             if (empty($user->username)) {
