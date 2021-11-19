@@ -109,14 +109,16 @@ return [
 
 //vacancy orderCv list
     'Cv list' => 'Cв рўйхати',
-    'Vacancy name'=>'Ваканция номи',
-    'Company View'=>'Компания кўриниши',
-    'Worker View'=>'Ишчи кўриниши',
-    'Created_at'=>'Сана яратиш',
-    'Date approval'=>'Тасдиқлаш санаси',
-    'Cv'=>'Резюме',
-    'Show'=>'Кўрсатиш',
-    'You have received messages'=>'Сиз хабарларни олдингиз',
-
+    'Vacancy name' => 'Ваканция номи',
+    'Company View' => 'Компания кўриниши',
+    'Worker View' => 'Ишчи кўриниши',
+    'Created_at' => 'Сана яратиш',
+    'Date approval' => 'Тасдиқлаш санаси',
+    'Cv' => 'Резюме',
+    'Show' => 'Кўрсатиш',
+    'You have received messages' => 'Сиз хабарларни олдингиз',
+//search sections
+    'The Easiest Way To Get Your Dream Job' => '',
+    ''
 ];
 ?>

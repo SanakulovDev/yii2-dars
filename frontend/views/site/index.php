@@ -17,7 +17,8 @@ use yii\widgets\LinkPager;
 
 $lang = 'name_' . Yii::$app->language;
 $this->title = 'My Yii Application';
-
+$region_list = \common\models\Region::selectList();
+$job_type_list = \common\models\JobType::selectList();
 ?>
 <style>
     #container {
@@ -39,82 +40,82 @@ $this->title = 'My Yii Application';
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
                 <div class="mb-5 text-center">
-                    <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
-                        perferendis.</p>
+                    <h1 class="text-white font-weight-bold"><?= Yii::t('app', 'The Easiest Way To Get Your Dream Job') ?></h1>
+
                 </div>
 
-                    <?php $form = \yii\widgets\ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data','class'=>'search-jobs-form']])?>
-                    <div class="row mb-5">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <div class="dropdown bootstrap-select" style="width: 100%;">
-                                <select class="selectpicker"
-                                        data-style="btn-white btn-lg"
-                                        data-width="100%"
-                                        data-live-search="true"
-                                        title="Select Region"
-                                        tabindex="-98">
-                                    <option class="bs-title-option" value=""></option>
-                                    <option>Anywhere</option>
-                                    <option>San Francisco</option>
-                                    <option>Palo Alto</option>
-                                    <option>New York</option>
-                                    <option>Manhattan</option>
-                                    <option>Ontario</option>
-                                    <option>Toronto</option>
-                                    <option>Kansas</option>
-                                    <option>Mountain View</option>
-                                </select>
+                <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'search-jobs-form']]) ?>
+                <div class="row mb-5">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <div class="dropdown bootstrap-select" style="width: 100%;">
+                            <select class="selectpicker"
+                                    data-style="btn-white btn-lg"
+                                    data-width="100%"
+                                    data-live-search="true"
+                                    title="Select Region"
+                                    tabindex="-98">
+                                <option class="bs-title-option" value=""></option>
+                                <option>Anywhere</option>
+                                <option>San Francisco</option>
+                                <option>Palo Alto</option>
+                                <option>New York</option>
+                                <option>Manhattan</option>
+                                <option>Ontario</option>
+                                <option>Toronto</option>
+                                <option>Kansas</option>
+                                <option>Mountain View</option>
+                            </select>
+                            <!--                                --><? //= $form->field($vacancy,'region_id')->dropDownList($region_list,['prompt'=>Yii::t('app','Select a region')])?>
 
-                                <div class="dropdown-menu " role="combobox">
-                                    <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
-                                                                     role="textbox" aria-label="Search"></div>
-                                    <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
-                                        <ul class="dropdown-menu inner show"></ul>
-                                    </div>
+                            <div class="dropdown-menu " role="combobox">
+                                <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
+                                                                 role="textbox" aria-label="Search"></div>
+                                <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
+                                    <ul class="dropdown-menu inner show"></ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <div class="dropdown bootstrap-select" style="width: 100%;">
-                                <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                        data-live-search="true" title="Select Job Type" tabindex="-98">
-                                    <option class="bs-title-option" value=""></option>
-                                    <option>Part Time</option>
-                                    <option>Full Time</option>
-                                </select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <div class="dropdown bootstrap-select" style="width: 100%;">
+                            <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
+                                    data-live-search="true" title="Select Job Type" tabindex="-98">
+                                <option class="bs-title-option" value=""></option>
+                                <option>Part Time</option>
+                                <option>Full Time</option>
+                            </select>
 
 
-                                <div class="dropdown-menu " role="combobox">
-                                    <div class="bs-searchbox">
-                                        <input type="text" class="form-control" autocomplete="off"
-                                               role="textbox" aria-label="Search">
-                                    </div>
-                                    <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
-                                        <ul class="dropdown-menu inner show"></ul>
-                                    </div>
+                            <div class="dropdown-menu " role="combobox">
+                                <div class="bs-searchbox">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                           role="textbox" aria-label="Search">
+                                </div>
+                                <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
+                                    <ul class="dropdown-menu inner show"></ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
-                                        class="icon-search icon mr-2"></span>Search Job
-                            </button>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 popular-keywords">
-                            <h3>Trending Keywords:</h3>
-                            <ul class="keywords list-unstyled m-0 p-0">
-                                <li><a href="#" class="">UI Designer</a></li>
-                                <li><a href="#" class="">Python</a></li>
-                                <li><a href="#" class="">Developer</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
+                                    class="icon-search icon mr-2"></span>Search Job
+                        </button>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 popular-keywords">
+                        <h3>Trending Keywords:</h3>
+                        <ul class="keywords list-unstyled m-0 p-0">
+                            <li><a href="#" class="">UI Designer</a></li>
+                            <li><a href="#" class="">Python</a></li>
+                            <li><a href="#" class="">Developer</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <?php \yii\widgets\ActiveForm::end() ?>
             </div>
         </div>
@@ -305,87 +306,87 @@ $this->title = 'My Yii Application';
     var data = [{
         "hc-key": "uz-qr",
         "value": 10,
-        "resume_value": <?= Report::mapJoin(10)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(10)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(10)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(10)[0]?>,
+        "company_value": <?= Report::mapJoin(10)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(10)[2]?>
     }, {
         "hc-key": "uz-bu",
         "value": 6,
-        "resume_value": <?= Report::mapJoin(6)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(6)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(6)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(6)[0]?>,
+        "company_value": <?= Report::mapJoin(6)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(6)[2]?>
     }, {
         "hc-key": "uz-sa",
         "value": 7,
-        "resume_value": <?= Report::mapJoin(7)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(7)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(7)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(7)[0]?>,
+        "company_value": <?= Report::mapJoin(7)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(7)[2]?>
     }, {
         "hc-key": "uz-nw",
         "value": 9,
-        "resume_value": <?= Report::mapJoin(9)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(9)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(9)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(9)[0]?>,
+        "company_value": <?= Report::mapJoin(9)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(9)[2]?>
     }, {
         "hc-key": "uz-an",
         "value": 1,
-        "resume_value": <?= Report::mapJoin(1)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(1)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(1)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(1)[0]?>,
+        "company_value": <?= Report::mapJoin(1)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(1)[2]?>
     }, {
         "hc-key": "uz-fa",
         "value": 14,
-        "resume_value": <?= Report::mapJoin(14)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(14)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(14)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(14)[0]?>,
+        "company_value": <?= Report::mapJoin(14)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(14)[2]?>
     }, {
         "hc-key": "uz-su",
         "value": 12,
-        "resume_value": <?= Report::mapJoin(12)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(12)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(12)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(12)[0]?>,
+        "company_value": <?= Report::mapJoin(12)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(12)[2]?>
     }, {
         "hc-key": "uz-si",
         "value": 11,
-        "resume_value": <?= Report::mapJoin(1)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(11)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(11)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(11)[0]?>,
+        "company_value": <?= Report::mapJoin(11)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(11)[2]?>
     }, {
         "hc-key": "uz-kh",
         "value": 3,
-        "resume_value": <?= Report::mapJoin(3)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(3)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(3)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(3)[0]?>,
+        "company_value": <?= Report::mapJoin(3)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(3)[2]?>
     }, {
         "hc-key": "uz-ta",
         "value": 5,
-        "resume_value": <?= Report::mapJoin(5)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(5)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(5)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(5)[0]?>,
+        "company_value": <?= Report::mapJoin(5)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(5)[2]?>
     }, {
         "hc-key": "uz-qa",
         "value": 13,
-        "resume_value": <?= Report::mapJoin(13)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(13)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(13)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(13)[0]?>,
+        "company_value": <?= Report::mapJoin(13)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(13)[2]?>
     }, {
         "hc-key": "uz-ji",
         "value": 8,
-        "resume_value": <?= Report::mapJoin(8)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(8)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(8)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(8)[0]?>,
+        "company_value": <?= Report::mapJoin(8)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(8)[2]?>
     }, {
         "hc-key": "uz-ng",
         "value": 2,
-        "resume_value": <?= Report::mapJoin(2)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(2)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(2)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(2)[0]?>,
+        "company_value": <?= Report::mapJoin(2)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(2)[2]?>
     }, {
         "hc-key": "uz-tk",
         "value": 4,
-        "resume_value": <?= Report::mapJoin(4)[1][0]['resume']?>,
-        "company_value": <?= Report::mapJoin(4)[0][0]['company']?>,
-        "vacancy_value": <?= Report::mapJoin(4)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(4)[0]?>,
+        "company_value": <?= Report::mapJoin(4)[1]?>,
+        "vacancy_value": <?= Report::mapJoin(4)[2]?>
     }];
 
     // Create the chart
@@ -433,7 +434,7 @@ $this->title = 'My Yii Application';
                 borderWidth: 0,
                 shadow: false,
                 useHTML: true,
-                pointFormat: '<p><strong>{point.name}</strong></p><br><p>Иш берувчилар / Работодателей: <span>{point.company_value}</span></p><br><p>Бўш иш ўринлари / Вакансии: <span>{point.vacancy_value}</span></p><br><p>Квоталанган иш ўринлари / Квотируемые рабочие места: <span>{point.quota_value}</span></p><br><p>Резюмелар / Резюме: <span>{point.resume_value}</span></p>'
+                pointFormat: '<p><strong>{point.name}</strong></p><br><p>Иш берувчилар / Работодателей: <span>{point.company_value}</span></p><br><p>Бўш иш ўринлари / Вакансии: <span>{point.vacancy_value}</span></p><br><p>Резюмелар / Резюме: <span>{point.resume_value}</span></p>'
             }
         }]
     });

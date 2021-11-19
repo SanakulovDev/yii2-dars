@@ -10,23 +10,24 @@ class Report extends \yii\base\Model
     {
         $company = (new Query())
             ->select('count(*) as company')
-            ->from('vacancy')
-            ->where("vacancy.region_id = $data")
-            ->innerJoin('company','vacancy.company_id = company.id')
-            ->all();
+            ->from('company')
+            ->where("company.regionId = $data");
+
         $resume = (new Query())
             ->select('count(*) as resume')
             ->from('vacancy')
             ->where("region_id = $data")
-            ->innerJoin('vacancy_orders','vacancy.id = vacancy_orders.vacancy_id')
-            ->all();
+            ->innerJoin('vacancy_orders','vacancy.id = vacancy_orders.vacancy_id');
+
         $vacancy = (new Query())
             ->select('count(*) as vacancy')
             ->from('vacancy')
-            ->where("vacancy.region_id = $data")
-            ->all();
-        $result = array($company, $resume, $vacancy);
+            ->where("vacancy.region_id = $data");
 
+        $resume= $resume->count();
+        $company  = $company->count();
+        $vacancy = $vacancy->count();
+        $result = array($resume, $company, $vacancy);
         return $result;
     }
 
