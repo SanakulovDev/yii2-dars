@@ -99,6 +99,9 @@
                    <a href="http://bank.uz/currency/cb.html" title="Bank.uz - все о банках Узбекистана" target="_blank"><img
                                src="http://bank.uz/scripts/informercb?fg=A9A9A9&bg=FFFFFF" border="0"/></a>
                 </span>
+                <span>
+
+                </span>
             </div>
         </div>
     </div>
