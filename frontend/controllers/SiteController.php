@@ -506,7 +506,7 @@ public function actionVacancyViewAll()
                 $user->role = 'company';
                 $user = $user->signup();
             }
-            if (empty($company->id)){
+            if (empty($company->name)){
 
                 $company = new Company();
                 $company->scenario = Company::SCENARIO_VACANCY;
