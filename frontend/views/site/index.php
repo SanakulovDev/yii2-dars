@@ -43,7 +43,8 @@ $this->title = 'My Yii Application';
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur
                         perferendis.</p>
                 </div>
-                <form method="post" class="search-jobs-form">
+
+                    <?php $form = \yii\widgets\ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data','class'=>'search-jobs-form']])?>
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
@@ -88,8 +89,10 @@ $this->title = 'My Yii Application';
 
 
                                 <div class="dropdown-menu " role="combobox">
-                                    <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
-                                                                     role="textbox" aria-label="Search"></div>
+                                    <div class="bs-searchbox">
+                                        <input type="text" class="form-control" autocomplete="off"
+                                               role="textbox" aria-label="Search">
+                                    </div>
                                     <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
                                         <ul class="dropdown-menu inner show"></ul>
                                     </div>
@@ -112,7 +115,7 @@ $this->title = 'My Yii Application';
                             </ul>
                         </div>
                     </div>
-                </form>
+                <?php \yii\widgets\ActiveForm::end() ?>
             </div>
         </div>
     </div>
@@ -122,7 +125,7 @@ $this->title = 'My Yii Application';
     </a>
 
 </section>
-
+<!--map container sections-->
 <section class="site-section">
     <div class="container" id="container">
 
@@ -302,27 +305,27 @@ $this->title = 'My Yii Application';
     var data = [{
         "hc-key": "uz-qr",
         "value": 10,
-        "resume_value":<?= Report::mapJoin(10)[1][0]['resume']?>,
-        "company_value":<?= Report::mapJoin(10)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(10)[2][0]['vacancy']?>
+        "resume_value": <?= Report::mapJoin(10)[1][0]['resume']?>,
+        "company_value": <?= Report::mapJoin(10)[0][0]['company']?>,
+        "vacancy_value": <?= Report::mapJoin(10)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-bu",
         "value": 6,
         "resume_value": <?= Report::mapJoin(6)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(6)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(6)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(6)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-sa",
         "value": 7,
         "resume_value": <?= Report::mapJoin(7)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(7)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(7)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(7)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-nw",
         "value": 9,
         "resume_value": <?= Report::mapJoin(9)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(9)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(9)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(9)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-an",
         "value": 1,
@@ -334,55 +337,55 @@ $this->title = 'My Yii Application';
         "value": 14,
         "resume_value": <?= Report::mapJoin(14)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(14)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(14)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(14)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-su",
         "value": 12,
         "resume_value": <?= Report::mapJoin(12)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(12)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(12)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(12)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-si",
         "value": 11,
         "resume_value": <?= Report::mapJoin(1)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(11)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(11)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(11)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-kh",
         "value": 3,
         "resume_value": <?= Report::mapJoin(3)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(3)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(3)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(3)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ta",
         "value": 5,
         "resume_value": <?= Report::mapJoin(5)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(5)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(5)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(5)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-qa",
         "value": 13,
         "resume_value": <?= Report::mapJoin(13)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(13)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(13)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(13)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ji",
         "value": 8,
         "resume_value": <?= Report::mapJoin(8)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(8)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(8)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(8)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-ng",
         "value": 2,
         "resume_value": <?= Report::mapJoin(2)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(2)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(2)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(2)[2][0]['vacancy']?>
     }, {
         "hc-key": "uz-tk",
         "value": 4,
         "resume_value": <?= Report::mapJoin(4)[1][0]['resume']?>,
         "company_value": <?= Report::mapJoin(4)[0][0]['company']?>,
-        "vacancy_value":<?= Report::mapJoin(4)[2][0]['vacancy']?>
+        "vacancy_value": <?= Report::mapJoin(4)[2][0]['vacancy']?>
     }];
 
     // Create the chart

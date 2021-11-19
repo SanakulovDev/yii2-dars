@@ -355,7 +355,7 @@ class SiteController extends Controller
 
         $identity = Yii::$app->user->identity;
         $v_order = new VacancyOrders();
-        if ($get == 'true') {
+        if ($get === 'true') {
             if ($identity) {
                 $worker = Worker::findOne(['userId' => $identity->id]);
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
