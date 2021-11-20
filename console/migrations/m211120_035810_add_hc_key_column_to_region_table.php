@@ -13,6 +13,7 @@ class m211120_035810_add_hc_key_column_to_region_table extends Migration
     public function safeUp()
     {
         $this->addColumn('{{%region}}', 'hc_key', $this->string(10)->notNull());
+
     }
 
     /**

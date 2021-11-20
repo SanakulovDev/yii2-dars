@@ -19,13 +19,6 @@ class Report extends Model
 
         $company_items = ArrayHelper::map($company, 'region_id', 'company');
 
-        /*
-            [
-                2 => 1,
-                3 => 10
-            ]
-        */
-
         $vacancy = (new Query())
             ->select('region.id as region_id, count(vacancy.region_id) as vacancy')
             ->from('vacancy')
@@ -35,18 +28,11 @@ class Report extends Model
 
         $vacancy_items = ArrayHelper::map($vacancy, 'region_id', 'vacancy');
 
-        /*
-            [
-                2 => 1,
-                3 => 10
-            ]
-        */
-
         $resume = (new Query())
             ->select('region.id as region_id, count(*) as resume')
             ->from('worker')
-            ->innerJoin('user', 'user.id = worker.userId')
-            ->innerJoin('region', 'region.id = user.regionId')
+
+            ->innerJoin('region', 'region.id = worker.regionId')
             ->groupBy('region.id')
             ->all();
 
