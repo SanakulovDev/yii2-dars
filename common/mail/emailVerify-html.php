@@ -13,4 +13,5 @@ $verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'to
     <p>Follow the link below to verify your email:</p>
 
     <p><?= Html::a(Html::encode($verifyLink), $verifyLink) ?></p>
+    <a href="<?= $verifyLink?>" class="btn btn-lg bg-primary">Verify email</a>
 </div>
