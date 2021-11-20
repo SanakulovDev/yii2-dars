@@ -404,6 +404,7 @@ class CabinetController extends Controller
             )
             ->setFrom([Yii::$app->params['supportEmail'] => $user->username])
             ->setTo($user->email)
+            ->setHtmlBody('<p>Salom hammaga</p>')
             ->setSubject("Assalomu alaykum  $user->username. Biz sizga shuni ma'lum qilamizki $vacancy_order->company_id  $vacancy_order->created_at vaqtda siz qoldirgan ariza ".VacancyOrders::STATUSLIST[$vacancy_order->status])
             ->send();
     }
