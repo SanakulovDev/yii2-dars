@@ -350,13 +350,9 @@ class CabinetController extends Controller
         ]);
     }
 
-//    public function  actionCancel
 
 
-    public function actionCancel($id = null, $action = null)
-    {
 
-    }
 
 //    public function actionWorkerOrder
 

@@ -141,7 +141,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                     <h3 class="text-primary  mt-3 h5 pl-3 mb-3 "><?= Yii::t('app', 'Job Summary') ?></h3>
                     <ul class="list-unstyled pl-3 mb-0">
                         <li class="mb-2"><strong
-                                    class="text-black"><?= Yii::t('app', 'Published on') . ': ' ?></strong> <?= date('Y-m-d', $vacancy->created_at) ?>
+                                    class="text-black"><?= Yii::t('app', 'Published on') . ': ' ?></strong> <?=  $vacancy->created_at ?>
                         </li>
                         <li class="mb-2"><strong
                                     class="text-black"><?= Yii::t('app', 'Vacancy:') ?></strong> <?= $vacancy->count ?>
