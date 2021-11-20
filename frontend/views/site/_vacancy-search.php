@@ -31,7 +31,7 @@ $city = [];
     <?= $form->field($model, 'profession_id')->widget(Select2::classname(), [
         'data' => $profession,
         'language' => 'de',
-        'options' => ['placeholder' => 'Select a profession ...'],
+        'options' => ['placeholder' => 'Select a profession ...','class'=>'form-control'],
         'pluginOptions' => [
             'allowClear' => true
         ],

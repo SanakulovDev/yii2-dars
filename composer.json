@@ -58,6 +58,8 @@
         "kartik-v/yii2-mpdf": "dev-master",
         "conquer/i18n": "*",
         "sjaakp/yii2-loadmore": "*",
-        "phpoffice/phpexcel": "dev-develop"
+        "phpoffice/phpexcel": "dev-develop",
+        "himiklab/yii2-recaptcha-widget" : "*"
+
     }
 }

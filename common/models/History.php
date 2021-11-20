@@ -74,4 +74,12 @@ class History extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'userId']);
     }
+
+
+//    trigger function
+
+    public function history()
+    {
+
+    }
 }

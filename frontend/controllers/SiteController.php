@@ -9,6 +9,7 @@ use common\models\Profession;
 use common\models\User;
 use frontend\models\Company;
 use frontend\models\JobStats;
+use frontend\models\Report;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Vacancy;
 use frontend\models\VacancyOrders;
@@ -110,20 +111,20 @@ class SiteController extends Controller
             $vacancy = $vacancy->offset($pages->offset)
                 ->limit($pages->limit)
                 ->all();
-        }
-        else $vacancy = new  Vacancy();
+        } else $vacancy = new  Vacancy();
         $job_stats = JobStats::findOne(['id' => 1]);
         $query = Partners::find()
             ->where(['status' => 1])
             ->orderBy('order')
             ->all();
 
-
+        $result_maps = Report::MapJoin();
         return $this->render('index', [
             'query' => $query,
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
             'pages' => $pages,
+            'result_maps'=>$result_maps
         ]);
     }
 
@@ -354,10 +355,12 @@ class SiteController extends Controller
 
 
         $identity = Yii::$app->user->identity;
-        $v_order = new VacancyOrders();
+        $worker = Worker::findOne(['userId' => $identity->id]);
+
+        $v_order = VacancyOrders::findOne(['']);
         if ($get === 'true') {
             if ($identity) {
-                $worker = Worker::findOne(['userId' => $identity->id]);
+
                 $v_order = VacancyOrders::findOne(['vacancy_id' => $vacancy->id, 'worker_id' => $worker->id]);
 
                 if (!empty($worker->photo)) {
@@ -411,27 +414,27 @@ class SiteController extends Controller
         return $this->redirect('vacancy-view-all');
     }
 
-public function actionVacancyViewAll()
-{
-    $searchModel = new VacancySearch();
-    $dataProvider = $searchModel->search($this->request->queryParams);
-    $vacancy = Vacancy::find()->orderBy('user_id');
-    $count = $dataProvider->count;
-    $pages = new Pagination([
-        'totalCount' => $count,
-        'pageSize' => 3
-    ]);
-    $vacancy = $vacancy->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();
+    public function actionVacancyViewAll()
+    {
+        $searchModel = new VacancySearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        $vacancy = Vacancy::find()->orderBy('user_id');
+        $count = $dataProvider->count;
+        $pages = new Pagination([
+            'totalCount' => $count,
+            'pageSize' => 3
+        ]);
+        $vacancy = $vacancy->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
 
-    return $this->render('vacancy-view-all', [
-        'vacancy' => $vacancy,
-        'pages' => $pages,
-        'searchModel' => $searchModel,
-        'dataProvider' => $dataProvider,
-    ]);
-}
+        return $this->render('vacancy-view-all', [
+            'vacancy' => $vacancy,
+            'pages' => $pages,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     public function actionImportExcel()
     {
@@ -494,9 +497,9 @@ public function actionVacancyViewAll()
             }
 
             $siswa = new Vacancy();
-            $siswa->deadline = date('Y-m-d', time()+86400*30);
+            $siswa->deadline = date('Y-m-d', time() + 86400 * 30);
             $company = Company::findOne(['name' => $rowData[0][0]]);
-            $user = User::findOne(['username'=>strtolower($rowData[0][0])]);
+            $user = User::findOne(['username' => strtolower($rowData[0][0])]);
             if (empty($user->username)) {
 
                 $user = new SignupForm();
@@ -506,7 +509,7 @@ public function actionVacancyViewAll()
                 $user->role = 'company';
                 $user = $user->signup();
             }
-            if (empty($company->name)){
+            if (empty($company->name)) {
 
                 $company = new Company();
                 $company->scenario = Company::SCENARIO_VACANCY;
@@ -526,27 +529,26 @@ public function actionVacancyViewAll()
             $siswa->region_id = $company->regionId;
             $siswa->city_id = $company->cityId;
             $siswa->image = $company->image;
-            $lang = 'name_'.Yii::$app->language;
+            $lang = 'name_' . Yii::$app->language;
             $siswa->job_type_id = 1;
-            $profession = Profession::findOne(['name_uz'=>$rowData[0][2]]);
-            if (empty($profession)){
+            $profession = Profession::findOne(['name_uz' => $rowData[0][2]]);
+            if (empty($profession)) {
                 $profession = new Profession();
 
                 $profession->name_uz = $rowData[0][2];
                 $profession->name_ru = $rowData[0][2];
                 $profession->name_en = $rowData[0][2];
                 $profession->name_cyrl = $rowData[0][2];
-                if ($profession->save()){
+                if ($profession->save()) {
                     $siswa->profession_id = $profession->id;
                 }
-            }
-            else{
+            } else {
                 $siswa->profession_id = $profession->id;
             }
-            $siswa->description_uz =  $rowData[0][3];
-            $siswa->description_ru =  $rowData[0][4];
-            $siswa->description_en =  $rowData[0][5];
-            $siswa->description_cyrl =  $rowData[0][6];
+            $siswa->description_uz = $rowData[0][3];
+            $siswa->description_ru = $rowData[0][4];
+            $siswa->description_en = $rowData[0][5];
+            $siswa->description_cyrl = $rowData[0][6];
             $siswa->count = $rowData[0][10];
             $siswa->salary = $rowData[0][11];
             $siswa->gender = $rowData[0][12];

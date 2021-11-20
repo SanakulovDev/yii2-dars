@@ -62,7 +62,7 @@ $city = [];
                                 <?php if ($item->image): ?>
                                     <?= Html::img("/uploads/company/$item->image", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
                                 <?php else: ?>
-                                    <?= Html::img("https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                                    <?= Html::img("https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg"  , ['class' => 'img-fluid', 'alt' => 'Image','width'=>200]); ?>
                                 <?php endif; ?>
                             </div>
 
