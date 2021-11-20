@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use Complex\Exception;
 use frontend\models\Company;
 use frontend\models\LaborActivity;
+use frontend\models\SignupForm;
 use frontend\models\VacancyOrders;
 use frontend\models\Worker;
 use frontend\models\WorkerLanguage;
@@ -338,12 +340,12 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $vacancyOrders = VacancyOrders::find()->where(['company_id' => $company->id])->all();
-        $company->scenario = Company::SCENARIO_APPLY;
+//        $company->scenario = Company::SCENARIO_APPLY;
 
 
         return $this->render('apply-messages', [
             'company' => $company,
-            'vacancyOrders' => $vacancyOrders,
+            'vacancyOrders' => $vacancyOrders ? $vacancyOrders : null,
 
         ]);
     }
@@ -376,5 +378,37 @@ class CabinetController extends Controller
             'vacancyOrders' => $vacancyOrders,
 
         ]);
+    }
+
+
+//action rate_order
+    public function actionRateVacancy($id = null, $action = null)
+    {
+        $vacancy_order = VacancyOrders::findOne($id);
+        if ($vacancy_order) {
+            $vacancy_order->status = $action;
+            $vacancy_order->scenario = VacancyOrders::SCENARIO_STATUS;
+            $vacancy_order->save();
+
+            $worker = Worker::findOne($vacancy_order->worker_id);
+            $user = User::findOne($worker->userId);
+            if ($this->sendEmail($user, $vacancy_order))
+                return $this->redirect('apply-messages');
+        }
+        return $this->redirect('index');
+    }
+
+    public function sendEmail($user, $vacancy_order)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => $user->username])
+            ->setTo($user->email)
+            ->setSubject("Assalomu alaykum  $user->username. Biz sizga shuni ma'lum qilamizki $vacancy_order->company_id  $vacancy_order->created_at vaqtda siz qoldirgan ariza ".VacancyOrders::STATUSLIST[$vacancy_order->status])
+            ->send();
     }
 }

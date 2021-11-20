@@ -37,7 +37,7 @@ Yii::$app->view->registerMetaTag(['http-equiv' => 'refresh', 'content' => Yii::$
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <div class="site-wrap">
+    <div class="site-wrap" style="overflow: hidden">
 
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">

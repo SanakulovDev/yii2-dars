@@ -68,7 +68,6 @@ $job_type_list = \common\models\JobType::selectList();
                                 <option>Kansas</option>
                                 <option>Mountain View</option>
                             </select>
-                            <!--                                --><? //= $form->field($vacancy,'region_id')->dropDownList($region_list,['prompt'=>Yii::t('app','Select a region')])?>
 
                             <div class="dropdown-menu " role="combobox">
                                 <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
@@ -303,7 +302,6 @@ $job_type_list = \common\models\JobType::selectList();
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/uz/uz-all.js"></script>
-<?php //$result_maps =  Report::mapJoin();?>
 <?php
 if ($result_maps) {
     $arr = [
@@ -322,121 +320,20 @@ if ($result_maps) {
         'uz-qa',
         'uz-fa'
     ];
-//    vd(count($arr));
-    $sql = [];
-for ($i = 0; $i < count($arr); $i++) {
-    $sql[$i]= "UPDATE region SET `hc_key` = '$arr[$i]' WHERE id = $i + 1";
-    Yii::$app->db->createCommand($sql[$i])->execute();
-}
-//vd($sql);
+//    $sql = [];
+//for ($i = 0; $i < count($arr); $i++) {
+//    $sql[$i]= "UPDATE region SET `hc_key` = '$arr[$i]' WHERE id = $i + 1";
+//    Yii::$app->db->createCommand($sql[$i])->execute();
+//}
 
 
-//    Yii::$app->db->createCommand()->batchInsert('region', ['hc_key'], [
-//        ['uz-an'],
-//        ['uz-ng'],
-//        ['uz-kh'],
-//        ['uz-tk'],
-//        ['uz-ta'],
-//        ['uz-bu'],
-//        ['uz-sa'],
-//        ['uz-ji'],
-//        ['uz-nw'],
-//        ['uz-qr'],
-//        ['uz-si'],
-//        ['uz-su'],
-//        ['uz-qa'],
-//        ['uz-fa'],
-//    ])->execute();
+
 }
 
 ?>
 <script>
 
-    var data = [{
-        "hc-key": "uz-qr",
-        "value": 10,
-        "resume_value": <?= Report::mapJoin(10)[0]?>,
-        "company_value": <?= Report::mapJoin(10)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(10)[2]?>
-    }, {
-        "hc-key": "uz-bu",
-        "value": 6,
-        "resume_value": <?= Report::mapJoin(6)[0]?>,
-        "company_value": <?= Report::mapJoin(6)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(6)[2]?>
-    }, {
-        "hc-key": "uz-sa",
-        "value": 7,
-        "resume_value": <?= Report::mapJoin(7)[0]?>,
-        "company_value": <?= Report::mapJoin(7)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(7)[2]?>
-    }, {
-        "hc-key": "uz-nw",
-        "value": 9,
-        "resume_value": <?= Report::mapJoin(9)[0]?>,
-        "company_value": <?= Report::mapJoin(9)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(9)[2]?>
-    }, {
-        "hc-key": "uz-an",
-        "value": 1,
-        "resume_value": <?= Report::mapJoin(1)[0]?>,
-        "company_value": <?= Report::mapJoin(1)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(1)[2]?>
-    }, {
-        "hc-key": "uz-fa",
-        "value": 14,
-        "resume_value": <?= Report::mapJoin(14)[0]?>,
-        "company_value": <?= Report::mapJoin(14)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(14)[2]?>
-    }, {
-        "hc-key": "uz-su",
-        "value": 12,
-        "resume_value": <?= Report::mapJoin(12)[0]?>,
-        "company_value": <?= Report::mapJoin(12)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(12)[2]?>
-    }, {
-        "hc-key": "uz-si",
-        "value": 11,
-        "resume_value": <?= Report::mapJoin(11)[0]?>,
-        "company_value": <?= Report::mapJoin(11)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(11)[2]?>
-    }, {
-        "hc-key": "uz-kh",
-        "value": 3,
-        "resume_value": <?= Report::mapJoin(3)[0]?>,
-        "company_value": <?= Report::mapJoin(3)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(3)[2]?>
-    }, {
-        "hc-key": "uz-ta",
-        "value": 5,
-        "resume_value": <?= Report::mapJoin(5)[0]?>,
-        "company_value": <?= Report::mapJoin(5)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(5)[2]?>
-    }, {
-        "hc-key": "uz-qa",
-        "value": 13,
-        "resume_value": <?= Report::mapJoin(13)[0]?>,
-        "company_value": <?= Report::mapJoin(13)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(13)[2]?>
-    }, {
-        "hc-key": "uz-ji",
-        "value": 8,
-        "resume_value": <?= Report::mapJoin(8)[0]?>,
-        "company_value": <?= Report::mapJoin(8)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(8)[2]?>
-    }, {
-        "hc-key": "uz-ng",
-        "value": 2,
-        "resume_value": <?= Report::mapJoin(2)[0]?>,
-        "company_value": <?= Report::mapJoin(2)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(2)[2]?>
-    }, {
-        "hc-key": "uz-tk",
-        "value": 4,
-        "resume_value": <?= Report::mapJoin(4)[0]?>,
-        "company_value": <?= Report::mapJoin(4)[1]?>,
-        "vacancy_value": <?= Report::mapJoin(4)[2]?>
-    }];
+    var data = <?= $result_maps?>
 
     // Create the chart
     Highcharts.mapChart('container', {

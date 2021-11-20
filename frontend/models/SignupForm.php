@@ -46,21 +46,22 @@ class SignupForm extends Model
      */
     public function signup()
     {
-            $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->status = 9;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            if ($user->save() && $this->sendEmail($user)) {
-                $auth = Yii::$app->authManager;
-                $authrole = $auth->getRole($this->role);
-                if (!$auth->getAssignment($this->role, $user->id)) {
-                    $auth->assign($authrole, $user->id);
-                }
-                return $user;
-
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->status = 9;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        if ($user->save() && $this->sendEmail($user)) {
+            $auth = Yii::$app->authManager;
+            $authrole = $auth->getRole($this->role);
+            if (!$auth->getAssignment($this->role, $user->id)) {
+                $auth->assign($authrole, $user->id);
             }
+            return $user;
+
+        }
 
         return null;
     }
@@ -70,17 +71,17 @@ class SignupForm extends Model
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    protected function sendEmail($user)
+    public function sendEmail($user)
     {
         return Yii::$app
-        ->mailer
-        ->compose(
-            ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-            ['user' => $user]
-        )
-        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Anvar Sanakulov'])
-        ->setTo($this->email)
-        ->setSubject('Xush kelibsiz sizga yangi xabar yuborildi ' . Yii::$app->name)
-        ->send();
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Anvar Sanakulov'])
+            ->setTo($user->email)
+            ->setSubject('Xush kelibsiz sizga yangi xabar yuborildi ' . Yii::$app->name)
+            ->send();
     }
 }

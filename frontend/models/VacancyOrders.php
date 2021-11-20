@@ -30,6 +30,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
 
     const  SCENARIO_VACANCYVIEWS = 'vacancy-views';
     const SCENARIO_APPLY_MESSAGES = 'apply-messages';
+    const SCENARIO_STATUS = 'rate-vacancy';
     const STATUSLIST = [
         0 => 'Yuborilgan',
         1 => 'Bekor qilingan',
@@ -47,7 +48,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'vacancy_id', 'worker_id', 'status'], 'required'],
+            [['company_id', 'vacancy_id', 'worker_id'], 'required'],
             [['company_id', 'vacancy_id', 'worker_id', 'status', 'company_view', 'worker_view'], 'integer'],
             [['created_at', 'date_approval'], 'safe'],
             [['worker_id'], 'exist', 'skipOnError' => true, 'targetClass' => Worker::className(), 'targetAttribute' => ['worker_id' => 'id']],
@@ -108,7 +109,8 @@ class VacancyOrders extends \yii\db\ActiveRecord
     {
         return [
             self::SCENARIO_VACANCYVIEWS => ['company_id', 'worker_id', 'vacancy_id'],
-            self::SCENARIO_APPLY_MESSAGES =>['company_view']
+            self::SCENARIO_APPLY_MESSAGES =>['company_view'],
+            self::SCENARIO_STATUS =>['statuss']
         ];
     }
 
