@@ -9,4 +9,4 @@ Hello <?= $user->username ?>,
 
 Follow the link below to verify your email:
 
-<?= $verifyLink ?>
+<a href="<?= $verifyLink?>" class="btn btn-lg bg-primary">Verify email</a>
