@@ -99,7 +99,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
+        $searchmodel = new VacancySearch();
+        $dataProvider = $searchmodel->search($this->request->queryParams);
         $vacancy = Vacancy::find()->orderBy('user_id');
         if ($vacancy) {
 
@@ -150,6 +151,13 @@ class SiteController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+//    actionVerifyEmail
+
+    public function actionVerifyEmails()
+    {
+        return $this->render('verify-emails');
     }
 
 
@@ -214,14 +222,14 @@ class SiteController extends Controller
             if ($user = $user->signup()) {
                 if ($a === 'worker') {
                     Yii::$app->session->setFlash('success', "Siz muvaffaqaiyatli ro'yxatdan o'tdingiz!!!");
-                    return $this->redirect('/site/login/');
+                    return $this->redirect('/site/verify-emails/');
                 }
                 $image = UploadedFile::getInstance($model, 'logo');
 
                 $model->userId = $user->id;
                 if ($model->upload($image) && $model->save()) {
                     Yii::$app->session->setFlash('success', 'Ma`lumotlaringiz muvaffaqiyatli companiya nomidan qo`shildi.');
-                    return $this->redirect('/site/login/');
+                    return $this->redirect('/site/verify-emails/');
                 } else {
                     Yii::$app->session->setFlash('danger', 'Ma`lumotlar kiritishda xatolik mavjud!!!.');
                 }
