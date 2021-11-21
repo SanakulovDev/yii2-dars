@@ -110,7 +110,7 @@ class VacancyOrders extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_VACANCYVIEWS => ['company_id', 'worker_id', 'vacancy_id'],
             self::SCENARIO_APPLY_MESSAGES =>['company_view'],
-            self::SCENARIO_STATUS =>['statuss']
+            self::SCENARIO_STATUS =>['status','company_view']
         ];
     }
 

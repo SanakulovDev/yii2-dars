@@ -31,9 +31,11 @@ class CabinetController extends Controller
         $identity = \Yii::$app->user->identity;
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
-        if ($company)
+        if ($company) {
+            $vacancy_order = VacancyOrders::findAll(['company_id' =>$company->id]);
             return $this->render('index',
                 ['company' => $company]);
+            }
         return $this->redirect('worker');
     }
 
@@ -384,6 +386,7 @@ class CabinetController extends Controller
         if ($vacancy_order) {
             $vacancy_order->status = $action;
             $vacancy_order->scenario = VacancyOrders::SCENARIO_STATUS;
+            $vacancy_order->company_view = 1;
             $vacancy_order->save();
 
             $worker = Worker::findOne($vacancy_order->worker_id);
