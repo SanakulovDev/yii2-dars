@@ -22,7 +22,9 @@ use yii\helpers\Html;
                     <li class="nav-item " role="presentation"><a href="/site/contact"
                                                                 class="nav-link "><?= Yii::t('app', 'Contact') ?></a>
                     </li>
-
+                    <li class="nav-item " role="presentation"><a href="/portfolio/index"
+                                                                 class="nav-link "><?= Yii::t('app', 'Portfolio') ?></a>
+                    </li>
                 </ul>
                 <a href="/vacancy/create" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block m-1"><span
                             class="mr-2 icon-add"></span><?=Yii::t('app','Post a Job')?></a>

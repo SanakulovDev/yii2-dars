@@ -9,6 +9,7 @@
 
 
 use frontend\models\Report;
+use kartik\select2\Select2;
 use sjaakp\loadmore\LoadMorePager;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -325,7 +326,6 @@ if ($result_maps) {
 //    $sql[$i]= "UPDATE region SET `hc_key` = '$arr[$i]' WHERE id = $i + 1";
 //    Yii::$app->db->createCommand($sql[$i])->execute();
 //}
-
 
 
 }

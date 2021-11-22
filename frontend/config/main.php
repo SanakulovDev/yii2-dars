@@ -110,6 +110,7 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
+            'portfolio/*',
             'sanakulov/*',
             'ajax/*',
             'gii/*',
