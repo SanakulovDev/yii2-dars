@@ -62,7 +62,7 @@
             <div class="column right">
                 <div class="text">I'm Sherali and I'm a <span class="typing-2"></span></div>
                 <p>Lorem  ipsum dolor sit amet consectetur adipisicing elit. Rerum laudantium nisi neque esse! Dolorum, impedit? Soluta est ducimus excepturi explicabo consectetur aliquid ratione doloribus porro praesentium eaque? Omnis, incidunt explicabo! Sint numquam optio dolorem, pariatur tenetur eum unde, delectus eaque incidunt ipsa sapiente. Debitis, alias quis corporis maiores non excepturi natus nulla facilis praesentium, dolore nobis quasi incidunt atque unde!</p>
-                <a href="#">Download CV</a>
+                <a href="/potfolio/rezume.docx">Download CV</a>
             </div>
 
         </div>
