@@ -13,6 +13,7 @@ use kartik\select2\Select2;
 use sjaakp\loadmore\LoadMorePager;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
@@ -45,60 +46,25 @@ $job_type_list = \common\models\JobType::selectList();
 
                 </div>
 
-                <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'search-jobs-form']]) ?>
+                <?php $form = ActiveForm::begin([
+                    'action' => ['/site/vacancy-view-all'],
+                    'method' => 'get',
+                    'options' => [
+                        'data-pjax' => 1,
+                        'enctype'=>'multipart/form-data'
+                    ],
+                ]); ?>
                 <div class="row mb-5">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
+
+                        <?= $form->field($searchModel, 'company_id')->textInput()->label(false)?>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <div class="dropdown bootstrap-select" style="width: 100%;">
-                            <select class="selectpicker"
-                                    data-style="btn-white btn-lg"
-                                    data-width="100%"
-                                    data-live-search="true"
-                                    title="Select Region"
-                                    tabindex="-98">
-                                <option class="bs-title-option" value=""></option>
-                                <option>Anywhere</option>
-                                <option>San Francisco</option>
-                                <option>Palo Alto</option>
-                                <option>New York</option>
-                                <option>Manhattan</option>
-                                <option>Ontario</option>
-                                <option>Toronto</option>
-                                <option>Kansas</option>
-                                <option>Mountain View</option>
-                            </select>
-
-                            <div class="dropdown-menu " role="combobox">
-                                <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"
-                                                                 role="textbox" aria-label="Search"></div>
-                                <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
-                                    <ul class="dropdown-menu inner show"></ul>
-                                </div>
-                            </div>
-                        </div>
+                        <?= $form->field($searchModel, 'region_id')->textInput()->label(false)?>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <div class="dropdown bootstrap-select" style="width: 100%;">
-                            <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%"
-                                    data-live-search="true" title="Select Job Type" tabindex="-98">
-                                <option class="bs-title-option" value=""></option>
-                                <option>Part Time</option>
-                                <option>Full Time</option>
-                            </select>
 
-
-                            <div class="dropdown-menu " role="combobox">
-                                <div class="bs-searchbox">
-                                    <input type="text" class="form-control" autocomplete="off"
-                                           role="textbox" aria-label="Search">
-                                </div>
-                                <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
-                                    <ul class="dropdown-menu inner show"></ul>
-                                </div>
-                            </div>
-                        </div>
+                        <?= $form->field($searchModel, 'job_type_id')->textInput()->label(false)?>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
@@ -387,40 +353,6 @@ if ($result_maps) {
 
 </script>
 
-
-<!--<script async src="https://www.google.com/recaptcha/api.js"></script>-->
-<!--<script>-->
-<!---->
-<!--    // How this code snippet works:-->
-<!--    // This logic overwrites the default behavior of `grecaptcha.ready()` to-->
-<!--    // ensure that it can be safely called at any time. When `grecaptcha.ready()`-->
-<!--    // is called before reCAPTCHA is loaded, the callback function that is passed-->
-<!--    // by `grecaptcha.ready()` is enqueued for execution after reCAPTCHA is-->
-<!--    // loaded.-->
-<!--    if(typeof grecaptcha === 'undefined') {-->
-<!--        grecaptcha = {};-->
-<!--    }-->
-<!--    grecaptcha.ready = function(cb){-->
-<!--        if(typeof grecaptcha === 'undefined') {-->
-<!--            // window.__grecaptcha_cfg is a global variable that stores reCAPTCHA's-->
-<!--            // configuration. By default, any functions listed in its 'fns' property-->
-<!--            // are automatically executed when reCAPTCHA loads.-->
-<!--            const c = '___grecaptcha_cfg';-->
-<!--            window[c] = window[c] || {};-->
-<!--            (window[c]['fns'] = window[c]['fns']||[]).push(cb);-->
-<!--        } else {-->
-<!--            cb();-->
-<!--        }-->
-<!--    }-->
-<!---->
-<!--    // Usage-->
-<!--    grecaptcha.ready(function(){-->
-<!--        grecaptcha.render("container", {-->
-<!--            sitekey: "ABC-123"-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!---->
 
 
 

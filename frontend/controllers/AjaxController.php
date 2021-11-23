@@ -20,6 +20,12 @@ class AjaxController extends Controller
         return $data;
     }
 
+//    action indexSearch
+    public function actionIndexSearch()
+    {
+
+    }
+
     public function actionChangeStatus($id = null, $action = null)
     {
         $data = VacancyOrders::findOne([$id]);

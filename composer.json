@@ -59,7 +59,8 @@
         "conquer/i18n": "*",
         "sjaakp/yii2-loadmore": "*",
         "phpoffice/phpexcel": "dev-develop",
-        "himiklab/yii2-recaptcha-widget" : "*"
+        "himiklab/yii2-recaptcha-widget" : "*",
+        "fedemotta/yii2-cronjob": "*"
 
     }
 }

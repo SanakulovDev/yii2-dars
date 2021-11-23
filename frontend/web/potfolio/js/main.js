@@ -37,17 +37,19 @@ $(window).scroll(function(){
         $('.navbar').removeClass("sticky");
     }
     if(this.scrollY > 500){
-        $('.scroll-up-btn').addClass('show');
+        $('#scroll-up').addClass('show');
     }
     else{
-        $('.scroll-up-btn').removeClass('show');
+        $('#scroll-up').removeClass('show');
     }
 });
 
 // slide-up script
 
-$('.scroll-up-btn').click(function(){
-    $('body').animate({screenTop: 0});
+$('#scroll-up').click(function(){
+    // alert("cfhvhbkjngh");
+    $('#html').animate({scrollTop: 0});
+
 });
 
 // typing animation 

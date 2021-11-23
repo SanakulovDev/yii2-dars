@@ -2,10 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use frontend\models\Emails;
 
 /**
- * @var \frontend\models\Emails $email
+ * @var \common\models\Portfolio $email
  */
 ?>
 

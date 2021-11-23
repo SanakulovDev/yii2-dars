@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         "/jobboard/js/custom.js",
         'js/main.js',
         'js/map.js',
+        'js/select2.full.js'
 
 
     ];
@@ -44,7 +45,8 @@ class AppAsset extends AssetBundle
         "/jobboard/css/owl.carousel.min.css",
         "/jobboard/css/animate.min.css",
         "/jobboard/css/style.css",
-        "css/header.css"
+        "css/header.css",
+        'css/selecr2.min.css'
     ];
     public $depends = [
         'yii\web\YiiAsset',

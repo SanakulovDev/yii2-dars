@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aaed831030aab1c90623fb70e2ba11b8",
+    "content-hash": "b7807a1358982a9cf606f36f846aaa16",
     "packages": [
         {
             "name": "2amigos/qrcode-library",
@@ -722,6 +722,56 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/master"
             },
             "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
+            "name": "fedemotta/yii2-cronjob",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fedemotta/yii2-cronjob.git",
+                "reference": "351b893f66e8758933183bfafb653d72a109e053"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fedemotta/yii2-cronjob/zipball/351b893f66e8758933183bfafb653d72a109e053",
+                "reference": "351b893f66e8758933183bfafb653d72a109e053",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "fedemotta\\cronjob\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Federico Nicolás Motta",
+                    "email": "fedemotta@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension to help in the creation of automated console scripts",
+            "keywords": [
+                "console",
+                "cron",
+                "crontab",
+                "extension",
+                "job",
+                "schedule",
+                "script",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/fedemotta/yii2-cronjob/issues",
+                "source": "https://github.com/fedemotta/yii2-cronjob/tree/master"
+            },
+            "time": "2015-10-07T20:47:12+00:00"
         },
         {
             "name": "hail812/yii2-adminlte-widgets",

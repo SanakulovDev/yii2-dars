@@ -56,8 +56,8 @@ class Portfolio extends \yii\db\ActiveRecord
 //                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Anvar Sanakulov'])
-            ->setTo($user->email)
+            ->setFrom([$user->email => Yii::$app->name . ' Anvar Sanakulov'])
+            ->setTo(Yii::$app->params['supportEmail'])
             ->setSubject($user->subject)
             ->setTextBody($user->content)
             ->send();

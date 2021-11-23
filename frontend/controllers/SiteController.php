@@ -99,8 +99,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $searchmodel = new VacancySearch();
-        $dataProvider = $searchmodel->search($this->request->queryParams);
+
         $vacancy = Vacancy::find()->orderBy('user_id');
         if ($vacancy) {
             $count = $vacancy->count();
@@ -119,12 +118,15 @@ class SiteController extends Controller
             ->all();
 
         $result_maps = Report::MapJoin();
+        $searchModel = new VacancySearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('index', [
             'query' => $query,
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
             'pages' => $pages,
-            'result_maps'=>$result_maps
+            'result_maps'=>$result_maps,
+            'searchModel'=>$searchModel
         ]);
     }
 

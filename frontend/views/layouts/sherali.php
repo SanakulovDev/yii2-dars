@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +11,10 @@
     <title>My Portfolio</title>
 </head>
 <body>
-<div class="scroll-up-btn">
+<div class="scroll-up-btn" id="scroll-up">
     <i class="fas fa-angle-up"></i>
 </div>
-<nav class="navbar">
+<nav class="navbar" >
     <div class="max-width">
         <div class="logo">
             <a href="#">Portfo<span>lio.</span></a> </div>
