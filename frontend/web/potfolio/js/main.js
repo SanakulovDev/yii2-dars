@@ -47,7 +47,7 @@ $(window).scroll(function(){
 // slide-up script
 
 $('.scroll-up-btn').click(function(){
-    $('html').animate({screenTop: 0});
+    $('body').animate({screenTop: 0});
 });
 
 // typing animation 

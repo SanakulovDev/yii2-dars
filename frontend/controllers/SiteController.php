@@ -103,7 +103,6 @@ class SiteController extends Controller
         $dataProvider = $searchmodel->search($this->request->queryParams);
         $vacancy = Vacancy::find()->orderBy('user_id');
         if ($vacancy) {
-
             $count = $vacancy->count();
             $pages = new Pagination([
                 'totalCount' => $count,
