@@ -93,17 +93,16 @@ class Report extends Model
             ->select('id, nameUz')
             ->from('region')
             ->all();
-//        $region_items = ArrayHelper::map($region, 'id', 'nameUz');
-//        vd($region_items);
+
         foreach ($region as $item) {
             $series[] =
                 [
                     'name' => $item['nameUz'],
                     'data' => [
-                        [$company_items[$item['id']]
-                            , $vacancy_items[$item['id']]
-                            , $resume_items[$item['id']]],
-                    ],
+                        [$company_items[$item['id']],
+                            $vacancy_items[$item['id']]
+                        ],
+                    ]
                 ];
         }
         return $series;
