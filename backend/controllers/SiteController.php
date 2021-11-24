@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use frontend\models\Report;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -62,7 +63,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $result = Report::MapJoin();
+        $seriya = Report::adminChart();
+        return $this->render('index',[
+            'result'=>$result,
+            'seriya'=>$seriya
+        ]);
     }
 
     /**

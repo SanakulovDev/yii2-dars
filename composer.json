@@ -60,7 +60,11 @@
         "sjaakp/yii2-loadmore": "*",
         "phpoffice/phpexcel": "dev-develop",
         "himiklab/yii2-recaptcha-widget" : "*",
-        "fedemotta/yii2-cronjob": "*"
+        "fedemotta/yii2-cronjob": "*",
+        "2amigos/yii2-chartjs-widget": "~2.0",
+        "practically/yii2-chartjs": "^1.1",
+        "miloschuman/yii2-highcharts-widget": "*",
+        "onmotion/yii2-widget-apexcharts": "^1.0"
 
     }
 }

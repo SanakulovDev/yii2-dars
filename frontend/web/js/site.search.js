@@ -1,4 +1,4 @@
-$('#loginform-username').select2({
+$('#select2').select2({
     ajax: {
         url: '/ajax/index-search',
         data: function (params) {
