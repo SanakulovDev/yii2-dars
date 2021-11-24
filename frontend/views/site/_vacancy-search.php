@@ -37,16 +37,6 @@ $city = [];
         ],
     ]);
     ?>
-    <?= $form->field($model, 'job_type_id')->widget(Select2::classname(), [
-        'data' => $profession,
-        'language' => 'uz',
-        'options' => ['placeholder' => 'Select a job type ...'],
-        'pluginOptions' => [
-            'label' => false,
-            'allowClear' => true
-        ],
-    ]);
-    ?>
     <?= $form->field($model, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
 
     <?= $form->field($model, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
