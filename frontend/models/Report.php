@@ -59,16 +59,9 @@ class Report extends Model
 
     }
 
-    public static function adminChart()
+    public static function vacancyChart()
     {
-        $company = (new Query())
-            ->select('region.id as region_id, count(company.regionId) as company')
-            ->from('company')
-            ->innerJoin('region', 'company.regionId = region.id')
-            ->groupBy('region.id')
-            ->all();
 
-        $company_items = ArrayHelper::map($company, 'region_id', 'company');
 
         $vacancy = (new Query())
             ->select('region.id as region_id, count(vacancy.region_id) as vacancy')
@@ -78,16 +71,6 @@ class Report extends Model
             ->all();
 
         $vacancy_items = ArrayHelper::map($vacancy, 'region_id', 'vacancy');
-
-        $resume = (new Query())
-            ->select('region.id as region_id, count(*) as resume')
-            ->from('worker')
-            ->innerJoin('region', 'region.id = worker.regionId')
-            ->groupBy('region.id')
-            ->all();
-
-        $resume_items = ArrayHelper::map($resume, 'region_id', 'resume');
-
 
         $region = (new Query())
             ->select('id, nameUz')
@@ -99,12 +82,72 @@ class Report extends Model
                 [
                     'name' => $item['nameUz'],
                     'data' => [
-                        [$company_items[$item['id']],
-                            $vacancy_items[$item['id']]
+
+                        [
+                            $item['id'] , $vacancy_items[$item['id']],
                         ],
+
                     ]
                 ];
         }
         return $series;
+    }
+    public static function resumeChart()
+    {
+        $resume = (new Query())
+            ->select('region.id as region_id, count(*) as resume')
+            ->from('worker')
+            ->innerJoin('region', 'region.id = worker.regionId')
+            ->groupBy('region.id')
+            ->all();
+
+        $resume_items = ArrayHelper::map($resume, 'region_id', 'resume');
+
+        $region = (new Query())
+            ->select('id, nameUz')
+            ->from('region')
+            ->all();
+
+        foreach ($region as $item) {
+            $series[] =
+                [
+                    'name' => $item['nameUz'],
+                    'data' => [
+
+                        [
+                            $item['id'], $resume_items[$item['id']],
+                        ],
+
+                    ]
+                ];
+        }
+        return $series;
+    }
+    public static function vacancyCount()
+    {
+        $count_vacancy = (new \yii\db\Query())
+            ->select('count(*) as soni')
+            ->from('vacancy')
+            ->all();
+        $region_list = (new Query())
+            ->select('id, nameUz')
+            ->from('region')
+            ->all();
+        $region_items = ArrayHelper::map($region_list,'id','nameUz');
+        $result = [];
+        $count = (new Query())
+            ->select('count(*) as soni')
+            ->from('vacancy')
+            ->all();
+        foreach ($region_items as $key => $item) {
+            $vacancy = (new Query())
+                ->select('count(*) as soni')
+                ->from('vacancy')
+                ->where("region_id = $key")
+            ->all();
+            $result[] = round($vacancy[0]['soni'] * 100 / $count[0]['soni'], 2);
+
+        }
+        return $result;
     }
 }

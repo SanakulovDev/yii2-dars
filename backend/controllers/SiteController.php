@@ -64,10 +64,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $result = Report::MapJoin();
-        $seriya = Report::adminChart();
-        return $this->render('index',[
-            'result'=>$result,
-            'seriya'=>$seriya
+        $seriya = Report::vacancyChart();
+        $resume = Report::resumeChart();
+        $count = Report::vacancyCount();
+        return $this->render('index', [
+            'result' => $result,
+            'seriya' => $seriya,
+            'resume' => $resume,
+            'count' => $count,
         ]);
     }
 

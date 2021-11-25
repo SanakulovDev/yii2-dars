@@ -9,13 +9,9 @@
 /* @var $searchModel \frontend\models\VacancySearch */
 
 
-use frontend\models\Report;
-use kartik\select2\Select2;
-use sjaakp\loadmore\LoadMorePager;
-use yii\grid\GridView;
+use common\widgets\NewsWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
 $lang = 'name_' . Yii::$app->language;
@@ -36,6 +32,7 @@ $job_type_list = \common\models\JobType::selectList();
         color: gray;
     }
 </style>
+<?= NewsWidget::widget() ?>
 <section class="home-section section-hero overlay bg-image"
          style="background-image: url('/jobboard/images/hero_1.jpg');" id="home-section">
 
@@ -58,7 +55,7 @@ $job_type_list = \common\models\JobType::selectList();
                 <div class="row mb-5 align-items-center justify-content-center">
                     <div class="col-12 col-sm-6 col-md-8 m-0 col-lg-3 mb-4 mb-lg-0">
 
-                        <select  name="" id="select2" data-width="250" data-height="30">
+                        <select  class="form-control m-2 p-2"  name="" id="select2" data-width="250" data-height="30">
                             <option value="">---</option>
                         </select>
                     </div>
