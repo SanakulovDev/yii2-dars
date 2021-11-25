@@ -32,7 +32,7 @@ $job_type_list = \common\models\JobType::selectList();
         color: gray;
     }
 </style>
-<?= NewsWidget::widget() ?>
+<?//= NewsWidget::widget() ?>
 <section class="home-section section-hero overlay bg-image"
          style="background-image: url('/jobboard/images/hero_1.jpg');" id="home-section">
 
