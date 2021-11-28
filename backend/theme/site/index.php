@@ -2,9 +2,9 @@
 
 use dosamigos\chartjs\ChartJs;
 use frontend\models\Report;
-use miloschuman\highcharts\Highcharts;
-use practically\chartjs\Chart;
-use yii\web\JsExpression;
+use bsadnu\googlecharts\ColumnChart;
+
+
 
 /**
  *
@@ -17,10 +17,10 @@ $region_list = (new \yii\db\Query())->select('nameUz')->from('region')->all();
 //Report::vacancyCount();
 ?>
 <div class="container-fluid">
-    <div class="row">
-        <div class="card card-danger">
+
+        <div class="card card-danger"   >
             <div class="card-header">
-                <h3 class="card-title">Donut Chart</h3>
+                <h3 class="card-title">Pie Chart</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -138,8 +138,64 @@ $region_list = (new \yii\db\Query())->select('nameUz')->from('region')->all();
             </div>
             <!-- /.card-body -->
         </div>
+    <?php
+//    vd($generalChart);
+    ?>
+<div class="card card-success">
+    <div class="card-header">
+        <h3 class="card-title">Bar Chart</h3>
 
-
-
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
     </div>
+    <div class="card-body">
+    <?= \bsadnu\googlecharts\ColumnChart::widget([
+        'id' => 'my-column-chart-id',
+        'data' => $generalChart,
+        'options' => [
+            'fontName' => 'Times new Roman',
+            'height' => 400,
+            'fontSize' => 12,
+            'chartArea' => [
+                'left' => '5%',
+                'width' => '90%',
+                'height' => 350
+            ],
+            'tooltip' => [
+                'textStyle' => [
+                    'fontName' => 'Times new roman',
+                    'fontSize' => 13
+                ]
+            ],
+            'vAxis' => [
+                'title' => 'Sales and Expenses',
+                'titleTextStyle' => [
+                    'fontSize' => 13,
+                    'italic' => false
+                ],
+                'gridlines' => [
+                    'color' => '#e5e5e5',
+                    'count' => 10
+                ],
+                'minValue' => 0
+            ],
+            'legend' => [
+                'position' => 'top',
+                'alignment' => 'center',
+                'textStyle' => [
+                    'fontSize' => 12
+                ]
+            ]
+        ]
+    ]) ?>
+    </div>
+</div>
+
+
 </div>

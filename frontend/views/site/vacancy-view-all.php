@@ -45,10 +45,10 @@ $city = [];
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <?php echo $this->render('_vacancy-search', ['model' => $searchModel]) ?>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-5">
 
 
                 <ul class="job-listings mb-5">
@@ -72,7 +72,7 @@ $city = [];
                                     <strong><?= $item->company->name ?></strong>
                                     <br>
                                     <i class="far fa-eye"></i>
-                                    <strong><?= $item->views ?></strong>
+                                    <strong><?= $item->views? $item->views: 0 ?></strong>
                                 </div>
                                 <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                                     <span class="icon-room"></span> <?= $item->address ?>
@@ -86,6 +86,9 @@ $city = [];
 
 
                 </ul>
+            </div>
+            <div class="col-md-4">
+                <?= \common\widgets\VacancyWidget::widget()?>
             </div>
         </div>
 

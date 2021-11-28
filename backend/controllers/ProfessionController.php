@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Profession;
 use common\models\ProfessionSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,10 +40,18 @@ class ProfessionController extends Controller
     {
         $searchModel = new ProfessionSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $model = new Profession();
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model
         ]);
     }
 
@@ -54,6 +63,11 @@ class ProfessionController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

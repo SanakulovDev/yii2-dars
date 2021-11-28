@@ -1,6 +1,7 @@
 <?php
 
 use kartik\select2\Select2;
+use wbraganca\selectivity\SelectivityWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -28,22 +29,41 @@ $city = [];
 
 
 
-    <?= $form->field($model, 'profession_id')->widget(Select2::classname(), [
-        'data' => $profession,
-        'language' => 'de',
-        'options' => ['placeholder' => 'Select a profession ...','class'=>'form-control'],
+    <?= $form->field($model, 'profession_id')->widget(SelectivityWidget::classname(), [
         'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]);
-    ?>
-    <?= $form->field($model, 'job_type_id')->dropDownList($job_type, ['prompt' => 'Select a job type']) ?>
-
-    <?= $form->field($model, 'region_id')->dropDownList($region, ['prompt' => 'Select a region']) ?>
-
-    <?= $form->field($model, 'city_id')->dropDownList($city, ['prompt' => 'Select a city']) ?>
-
-    <?= $form->field($model, 'gender')->dropDownList($gender, ['prompt' => 'Select a gender']) ?>
+            'allowClear' => true,
+            'data' => $profession,
+            'placeholder' => 'No profession selected'
+        ]
+    ]) ?>
+    <?= $form->field($model, 'job_type_id')->widget(SelectivityWidget::classname(), [
+        'pluginOptions' => [
+            'allowClear' => true,
+            'data' => $job_type,
+            'placeholder' => 'No job type selected'
+        ]
+    ]) ?>
+    <?= $form->field($model, 'region_id')->widget(SelectivityWidget::classname(), [
+        'pluginOptions' => [
+            'allowClear' => true,
+            'data' => $region,
+            'placeholder' => 'No region selected'
+        ]
+    ]) ?>
+    <?= $form->field($model, 'city_id')->widget(SelectivityWidget::classname(), [
+        'pluginOptions' => [
+            'allowClear' => true,
+            'data' => $city,
+            'placeholder' => 'No profession selected'
+        ]
+    ]) ?>
+    <?= $form->field($model, 'gender')->widget(SelectivityWidget::classname(), [
+        'pluginOptions' => [
+            'allowClear' => true,
+            'data' => $gender,
+            'placeholder' => 'No gender selected'
+        ]
+    ]) ?>
 
 
     <div class="row">

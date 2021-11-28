@@ -67,11 +67,13 @@ class SiteController extends Controller
         $seriya = Report::vacancyChart();
         $resume = Report::resumeChart();
         $count = Report::vacancyCount();
+        $generalChart = Report::generalChart();
         return $this->render('index', [
             'result' => $result,
             'seriya' => $seriya,
             'resume' => $resume,
             'count' => $count,
+            'generalChart' => $generalChart
         ]);
     }
 

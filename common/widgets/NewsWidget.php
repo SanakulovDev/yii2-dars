@@ -6,9 +6,7 @@ use yii\helpers\Html;
 
 class NewsWidget extends \yii\base\Widget
 {
-    public $message;
-    public $date;
-    public $link;
+
     public function init()
     {
         parent::init();

@@ -39,22 +39,22 @@ class AjaxController extends Controller
             $sections1 = array_merge($regions, $cities);
             $sections2 = array_merge($professions, $job_types);
             $results = [];
-            if ($sections1) {
-                foreach ($sections1 as $city) {
-                    $results[] = [
-                        'id' => $city['id'],
-                        'text' => $city['nameUz']
-                    ];
-                }
-            }
-            if ($sections2) {
-                foreach ($sections2 as $city) {
-                    $results[] = [
-                        'id' => $city['id'],
-                        'text' => $city['name_uz']
-                    ];
-                }
-            }
+//            if ($sections1) {
+//                foreach ($sections1 as $city) {
+//                    $results[] = [
+//                        'id' => $city['id'],
+//                        'text' => $city['nameUz']
+//                    ];
+//                }
+//            }
+//            if ($sections2) {
+//                foreach ($sections2 as $city) {
+//                    $results[] = [
+//                        'id' => $city['id'],
+//                        'text' => $city['name_uz']
+//                    ];
+//                }
+//            }
             if ($companys){
                 foreach ($companys as $company) {
                     $results[]=[

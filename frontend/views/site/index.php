@@ -6,23 +6,28 @@
 /* @var $vacancy \frontend\models\Vacancy */
 
 /* @var $pages \yii\data\Pagination */
+
 /* @var $searchModel \frontend\models\VacancySearch */
 
 
 use common\widgets\NewsWidget;
+use common\widgets\VacancyWidget;
+use wbraganca\selectivity\SelectivityWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
 $lang = 'name_' . Yii::$app->language;
+$langUz = 'name' . ucfirst(Yii::$app->language);
 $this->title = 'My Yii Application';
 $region_list = \common\models\Region::selectList();
 $job_type_list = \common\models\JobType::selectList();
+$profession = \common\models\Profession::selectList();
 ?>
 <style>
     #container {
-        height: 700px;
-        width: 1000px;
+        height: 500px;
+        /*width: 1000px;*/
         margin: 0 auto;
     }
 
@@ -32,7 +37,7 @@ $job_type_list = \common\models\JobType::selectList();
         color: gray;
     }
 </style>
-<?//= NewsWidget::widget() ?>
+
 <section class="home-section section-hero overlay bg-image"
          style="background-image: url('/jobboard/images/hero_1.jpg');" id="home-section">
 
@@ -49,17 +54,41 @@ $job_type_list = \common\models\JobType::selectList();
                     'method' => 'get',
                     'options' => [
                         'data-pjax' => 1,
-                        'enctype'=>'multipart/form-data'
+                        'enctype' => 'multipart/form-data'
                     ],
                 ]); ?>
                 <div class="row mb-5 align-items-center justify-content-center">
-                    <div class="col-12 col-sm-6 col-md-8 m-0 col-lg-3 mb-4 mb-lg-0">
+                    <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0">
 
-                        <select  class="form-control m-2 p-2"  name="" id="select2" data-width="250" data-height="30">
+                        <select class="form-control m-2 p-2" name="VacancySearch[company_id]" id="select2" data-width="250" data-height="30">
                             <option value="">---</option>
                         </select>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mb-lg-0">
+                    <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0">
+                        <?= $form->field($searchModel, 'profession_id')->label(false)->widget(SelectivityWidget::classname(), [
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'data' => $profession,
+                                'placeholder' => Yii::t('app','Select as profession')
+                            ]
+                        ]) ?>
+
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0 ">
+
+
+                        <?= $form->field($searchModel, 'job_type_id')->label(false)->widget(SelectivityWidget::classname(), [
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'data' => $job_type_list,
+                                'placeholder' => Yii::t('app','Select as job type')
+                            ]
+                        ]) ?>
+
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3  mb-lg-0">
                         <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
                                     class="icon-search icon mr-2"></span>Search Job
                         </button>
@@ -88,8 +117,11 @@ $job_type_list = \common\models\JobType::selectList();
 <!--map container sections-->
 <section class="site-section">
     <div class="row">
-        <div class="col-mmd-12" id="container">
+        <div class="col-md-8" id="container">
 
+        </div>
+        <div class="col-md-4">
+            <?= VacancyWidget::widget(['count' => 3]) ?>
         </div>
     </div>
 </section>
@@ -198,7 +230,7 @@ $job_type_list = \common\models\JobType::selectList();
                             <strong><?= $item->company->name ?></strong>
                             <br>
                             <i class="far fa-eye"></i>
-                            <strong><?= $item->views ?></strong>
+                            <strong><?= $item->views?$item->views: 0 ?></strong>
                         </div>
                         <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                             <span class="icon-room"></span> <?= $item->address ?>
@@ -258,7 +290,6 @@ $job_type_list = \common\models\JobType::selectList();
     </div>
 </section>
 
-
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/uz/uz-all.js"></script>
@@ -280,12 +311,6 @@ if ($result_maps) {
         'uz-qa',
         'uz-fa'
     ];
-//    $sql = [];
-//for ($i = 0; $i < count($arr); $i++) {
-//    $sql[$i]= "UPDATE region SET `hc_key` = '$arr[$i]' WHERE id = $i + 1";
-//    Yii::$app->db->createCommand($sql[$i])->execute();
-//}
-
 
 }
 

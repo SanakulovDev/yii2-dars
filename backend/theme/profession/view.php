@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -16,7 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+<!--    --><?//= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-update-profession">Update</a>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -25,7 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?php
+    Modal::begin([
+        'id' => 'modal-update-profession',
+        'size'=>'lg'
+    ]);
+    echo $this->render('update', [
+        'model' => $model
+    ]);
 
+    Modal::end();
+    ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
