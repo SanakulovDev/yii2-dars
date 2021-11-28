@@ -65,7 +65,7 @@ $profession = \common\models\Profession::selectList();
                         </select>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0">
-                        <?= $form->field($searchModel, 'profession_id')->label(false)->widget(SelectivityWidget::classname(), [
+                        <?= $form->field($searchModel, 'profession_id',['options'=>['class'=>'m-0']])->label(false)->widget(SelectivityWidget::classname(), [
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $profession,
@@ -77,7 +77,7 @@ $profession = \common\models\Profession::selectList();
                     <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0 ">
 
 
-                        <?= $form->field($searchModel, 'job_type_id')->label(false)->widget(SelectivityWidget::classname(), [
+                        <?= $form->field($searchModel, 'job_type_id',['options'=>['class'=>'m-0']])->label(false)->widget(SelectivityWidget::classname(), [
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $job_type_list,
