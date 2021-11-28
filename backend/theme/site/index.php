@@ -8,8 +8,8 @@ use bsadnu\googlecharts\ColumnChart;
 
 /**
  *
- * @var  $result \frontend\models\Report
- * @var  $seriya \frontend\models\Report
+ * @var  $count \frontend\models\Report
+ * @var  $generalChart \frontend\models\Report
  */
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];

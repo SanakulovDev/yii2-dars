@@ -83,7 +83,7 @@ class Report extends Model
                     'name' => $item['nameUz'],
                     'data' => [
                         [
-                            $item['id'], intval($vacancy_items[$item['id']]),
+                            $item['id'] => intval($vacancy_items[$item['id']])
                         ],
 
                     ]
