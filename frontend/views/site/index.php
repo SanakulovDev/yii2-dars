@@ -4,6 +4,7 @@
 /* @var $query \common\models\Partners */
 /* @var $job_stats \frontend\models\JobStats */
 /* @var $vacancy \frontend\models\Vacancy */
+/* @var $trendVacancy \frontend\models\Vacancy */
 
 /* @var $pages \yii\data\Pagination */
 
@@ -69,7 +70,7 @@ $profession = \common\models\Profession::selectList();
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $profession,
-                                'placeholder' => Yii::t('app','Select as profession')
+                                'placeholder' => Yii::t('app','Select a profession')
                             ]
                         ]) ?>
 
@@ -81,7 +82,7 @@ $profession = \common\models\Profession::selectList();
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $job_type_list,
-                                'placeholder' => Yii::t('app','Select as job type')
+                                'placeholder' => Yii::t('app','Select the job type')
                             ]
                         ]) ?>
 
@@ -90,17 +91,24 @@ $profession = \common\models\Profession::selectList();
 
                     <div class="col-12 col-sm-6 col-md-3 col-lg-3  mb-lg-0">
                         <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
-                                    class="icon-search icon mr-2"></span>Search Job
+                                    class="icon-search icon mr-2"></span><?= Yii::t('app','Search Job')?>
                         </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 popular-keywords">
-                        <h3>Trending Keywords:</h3>
+                        <h3><?= Yii::t('app','Trending Keywords:')?></h3>
                         <ul class="keywords list-unstyled m-0 p-0">
-                            <li><a href="#" class="">UI Designer</a></li>
-                            <li><a href="#" class="">Python</a></li>
-                            <li><a href="#" class="">Developer</a></li>
+                            <?php
+//                            vd($trendVacancy);
+                            ?>
+                            <?php foreach ($trendVacancy as $item):?>
+                                <?php
+//                            vd($item->profession->$lang);
+                                ?>
+                                <li><a href="#"><?= $item->profession->$lang?></a></li>
+
+                            <?php endforeach;?>
                         </ul>
                     </div>
                 </div>
@@ -226,7 +234,7 @@ $profession = \common\models\Profession::selectList();
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?= $item->profession ? $item->profession->$lang : 'Kiritilmagan' ?></h2>
+                            <h2><?= $item->profession ? $item->profession->$lang : Yii::t('app','Not included')?></h2>
                             <strong><?= $item->company->name ?></strong>
                             <br>
                             <i class="far fa-eye"></i>

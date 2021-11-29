@@ -118,7 +118,20 @@ return [
     'Show' => 'Кўрсатиш',
     'You have received messages' => 'Сиз хабарларни олдингиз',
 //search sections
-    'The Easiest Way To Get Your Dream Job' => '',
-    ''
+    'The Easiest Way To Get Your Dream Job' => 'Ўз орзуингиздаги ишга эга бўлишнинг энг осон йўли',
+    'Trending Keywords:' => 'Оммабоп калит сўзлар:',
+    'Select a profession' => 'Бир касбни танланг',
+    'Search Job' => 'Иш қидириш',
+    'Select a gender' => 'Жинсни танланг',
+    'JobBoard Site Stats' => 'ЖобБоард сайт статистикаси',
+    'Not included' => 'Кирилмаган',
+    'Trending vacancy' => 'Оммабоп ваканция',
+    'Partners' => 'Ҳамкорлар',
+    'Show more' => 'Кўпроқ кўрсатиш',
+    'Salary begin' => 'Маош бошланиши',
+    'Salary end' => 'Маош охири',
+    'Search' => 'Қидирув',
+    'Reset' => 'Қайтиш',
+
 ];
 ?>

@@ -33,35 +33,35 @@ $city = [];
         'pluginOptions' => [
             'allowClear' => true,
             'data' => $profession,
-            'placeholder' => 'No profession selected'
+            'placeholder' => Yii::t('app',"Select a profession")
         ]
     ]) ?>
     <?= $form->field($model, 'job_type_id')->widget(SelectivityWidget::classname(), [
         'pluginOptions' => [
             'allowClear' => true,
             'data' => $job_type,
-            'placeholder' => 'No job type selected'
+            'placeholder' => Yii::t('app',"Select the job type")
         ]
     ]) ?>
     <?= $form->field($model, 'region_id')->widget(SelectivityWidget::classname(), [
         'pluginOptions' => [
             'allowClear' => true,
             'data' => $region,
-            'placeholder' => 'No region selected'
+            'placeholder' => Yii::t('app',"Select a region")
         ]
     ]) ?>
     <?= $form->field($model, 'city_id')->widget(SelectivityWidget::classname(), [
         'pluginOptions' => [
             'allowClear' => true,
             'data' => $city,
-            'placeholder' => 'No profession selected'
+            'placeholder' => Yii::t('app',"Select a city")
         ]
     ]) ?>
     <?= $form->field($model, 'gender')->widget(SelectivityWidget::classname(), [
         'pluginOptions' => [
             'allowClear' => true,
             'data' => $gender,
-            'placeholder' => 'No gender selected'
+            'placeholder' => Yii::t('app','Select a gender')
         ]
     ]) ?>
 

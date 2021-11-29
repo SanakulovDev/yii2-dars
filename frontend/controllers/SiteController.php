@@ -120,13 +120,16 @@ class SiteController extends Controller
         $result_maps = Report::MapJoin();
         $searchModel = new VacancySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $trendVacancy = Vacancy::find()->groupBy('profession_id')->orderBy('views DESC')->limit(3)->all();
+//        $trendVacancy = json_decode($trendVacancy);
         return $this->render('index', [
             'query' => $query,
             'job_stats' => $job_stats,
             'vacancy' => $vacancy,
             'pages' => $pages,
-            'result_maps'=>$result_maps,
-            'searchModel'=>$searchModel
+            'result_maps' => $result_maps,
+            'searchModel' => $searchModel,
+            'trendVacancy' => $trendVacancy
         ]);
     }
 

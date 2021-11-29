@@ -14,8 +14,7 @@ class VacancySearch extends Vacancy
     /**
      * {@inheritdoc}
      */
-    public $salary_begin;
-    public $salary_end;
+
     public function rules()
     {
         return [
