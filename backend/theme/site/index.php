@@ -155,11 +155,11 @@ $region_list = (new \yii\db\Query())->select('nameUz')->from('region')->all();
         </div>
     </div>
     <div class="card-body">
-    <?= \bsadnu\googlecharts\ColumnChart::widget([
+    <?= \bsadnu\googlecharts\ScatterChart::widget([
         'id' => 'my-column-chart-id',
         'data' => $generalChart,
         'options' => [
-            'fontName' => 'Times new Roman',
+            'fontName' => 'Verdana',
             'height' => 400,
             'fontSize' => 12,
             'chartArea' => [

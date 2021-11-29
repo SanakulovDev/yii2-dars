@@ -103,9 +103,7 @@ $profession = \common\models\Profession::selectList();
 //                            vd($trendVacancy);
                             ?>
                             <?php foreach ($trendVacancy as $item):?>
-                                <?php
-//                            vd($item->profession->$lang);
-                                ?>
+
                                 <li><a href="#"><?= $item->profession->$lang?></a></li>
 
                             <?php endforeach;?>
