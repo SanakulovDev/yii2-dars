@@ -43,7 +43,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
 //                    'pluralize' => false,
-                    'controller' => ['user', 'region']]
+                    'controller' => ['user', 'region','worker']]
             ],
         ]
 
