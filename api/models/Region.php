@@ -2,13 +2,13 @@
 
 namespace api\models;
 
-class User extends \common\models\User
+class Region extends \common\models\Region
 {
     public function fields()
     {
         return [
-            'username',
-            'password'
+            'nameUz',
+            'nameRu'
         ];
     }
 }

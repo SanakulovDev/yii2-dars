@@ -15,7 +15,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
-            // 'baseUrl' => '/admin',
+             'baseUrl' => '/api',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -42,7 +42,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'pluralize' => false,
+//                    'pluralize' => false,
                     'controller' => ['user', 'region']]
             ],
         ]
