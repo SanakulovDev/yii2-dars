@@ -299,7 +299,12 @@ $profession = \common\models\Profession::selectList();
 
 <section class="site-section">
     <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
 
+                <h2 class="section-title mb-2">Sardor akaning api</h2>
+            </div>
+        </div>
         <ul class="job-listings mb-5" id="vacancy-list">
 
         </ul>
