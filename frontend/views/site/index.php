@@ -61,16 +61,17 @@ $profession = \common\models\Profession::selectList();
                 <div class="row mb-5 align-items-center justify-content-center">
                     <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0">
 
-                        <select class="form-control m-2 p-2" name="VacancySearch[company_id]" id="select2" data-width="250" data-height="30">
+                        <select class="form-control m-2 p-2" name="VacancySearch[company_id]" id="select2"
+                                data-width="250" data-height="30">
                             <option value="">---</option>
                         </select>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0">
-                        <?= $form->field($searchModel, 'profession_id',['options'=>['class'=>'m-0']])->label(false)->widget(SelectivityWidget::classname(), [
+                        <?= $form->field($searchModel, 'profession_id', ['options' => ['class' => 'm-0']])->label(false)->widget(SelectivityWidget::classname(), [
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $profession,
-                                'placeholder' => Yii::t('app','Select a profession')
+                                'placeholder' => Yii::t('app', 'Select a profession')
                             ]
                         ]) ?>
 
@@ -78,11 +79,11 @@ $profession = \common\models\Profession::selectList();
                     <div class="col-12 col-sm-6 col-md-3 m-0 col-lg-3  mb-lg-0 ">
 
 
-                        <?= $form->field($searchModel, 'job_type_id',['options'=>['class'=>'m-0']])->label(false)->widget(SelectivityWidget::classname(), [
+                        <?= $form->field($searchModel, 'job_type_id', ['options' => ['class' => 'm-0']])->label(false)->widget(SelectivityWidget::classname(), [
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'data' => $job_type_list,
-                                'placeholder' => Yii::t('app','Select the job type')
+                                'placeholder' => Yii::t('app', 'Select the job type')
                             ]
                         ]) ?>
 
@@ -91,22 +92,22 @@ $profession = \common\models\Profession::selectList();
 
                     <div class="col-12 col-sm-6 col-md-3 col-lg-3  mb-lg-0">
                         <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span
-                                    class="icon-search icon mr-2"></span><?= Yii::t('app','Search Job')?>
+                                    class="icon-search icon mr-2"></span><?= Yii::t('app', 'Search Job') ?>
                         </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 popular-keywords">
-                        <h3><?= Yii::t('app','Trending Keywords:')?></h3>
+                        <h3><?= Yii::t('app', 'Trending Keywords:') ?></h3>
                         <ul class="keywords list-unstyled m-0 p-0">
                             <?php
-//                            vd($trendVacancy);
+                            //                            vd($trendVacancy);
                             ?>
-                            <?php foreach ($trendVacancy as $item):?>
+                            <?php foreach ($trendVacancy as $item): ?>
 
-                                <li><a href="#"><?= $item->profession->$lang?></a></li>
+                                <li><a href="#"><?= $item->profession->$lang ?></a></li>
 
-                            <?php endforeach;?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
@@ -232,11 +233,11 @@ $profession = \common\models\Profession::selectList();
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?= $item->profession ? $item->profession->$lang : Yii::t('app','Not included')?></h2>
+                            <h2><?= $item->profession ? $item->profession->$lang : Yii::t('app', 'Not included') ?></h2>
                             <strong><?= $item->company->name ?></strong>
                             <br>
                             <i class="far fa-eye"></i>
-                            <strong><?= $item->views?$item->views: 0 ?></strong>
+                            <strong><?= $item->views ? $item->views : 0 ?></strong>
                         </div>
                         <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
                             <span class="icon-room"></span> <?= $item->address ?>
@@ -296,8 +297,13 @@ $profession = \common\models\Profession::selectList();
     </div>
 </section>
 
-<section class="site-section" id="vacansies_isrofil">
+<section class="site-section">
+    <div class="container">
 
+        <ul class="job-listings mb-5" id="vacancy-list">
+
+        </ul>
+    </div>
 </section>
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>

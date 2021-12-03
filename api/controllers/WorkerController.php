@@ -17,6 +17,7 @@ class WorkerController extends \yii\rest\ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+        $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_HTML;
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::class,
             'cors' => [

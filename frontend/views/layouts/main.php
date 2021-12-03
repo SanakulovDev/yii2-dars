@@ -56,7 +56,6 @@ Yii::$app->view->registerMetaTag(['http-equiv' => 'refresh', 'content' => Yii::$
 
     </div>
     </body>
-
     <?php $this->endBody() ?>
 
     </html>

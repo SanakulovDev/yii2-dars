@@ -31,7 +31,8 @@ class AppAsset extends AssetBundle
         'js/main.js',
         'js/map.js',
         'js/select2.full.js',
-        'js/site.search.js'
+        'js/site.search.js',
+        'js/api.js'
 
     ];
     public $css = [
