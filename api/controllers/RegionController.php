@@ -3,7 +3,7 @@
 namespace api\controllers;
 
 use api\models\Region;
-use api\models\User;
+
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 
@@ -30,7 +30,6 @@ class RegionController extends \yii\rest\ActiveController
     {
         $actions = parent::actions();
         unset($actions['index']);
-//        unset($actions['create']);
         return $actions;
     }
 

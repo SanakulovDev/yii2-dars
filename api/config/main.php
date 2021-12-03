@@ -15,7 +15,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
-             'baseUrl' => '/api',
+//             'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
