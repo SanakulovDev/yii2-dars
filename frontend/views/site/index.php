@@ -296,6 +296,9 @@ $profession = \common\models\Profession::selectList();
     </div>
 </section>
 
+<section class="site-section" id="vacansies_isrofil">
+
+</section>
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/countries/uz/uz-all.js"></script>

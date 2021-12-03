@@ -80,6 +80,22 @@ $('#vacancysearch-region_id').click(function(){
 
 
 
+$.ajax({
+    url: 'http://yii2dars.loc/api/regions',
+    type: 'GET',
+    dataType: 'json',
+    success: function (data) {
+        console.lof(data);
+        text = '';
+        for(var value of data.items){
+            text += "<li class='job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center'>";
+
+        }
+        $('#vacansies_isrofil').html(text);
+    }
+});
+
+
 
 
 

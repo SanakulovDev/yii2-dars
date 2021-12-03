@@ -16,21 +16,15 @@ class RegionController extends \yii\rest\ActiveController
     ];
     public function behaviors()
     {
-        return [
-            [
-                'class' => 'yii\filters\ContentNegotiator',
-                'only' => ['view', 'index','create'],  // in a controller
-                // if in a module, use the following IDs for user actions
-                // 'only' => ['user/view', 'user/index']
-                'formats' => [
-                    'application/json' => Response::FORMAT_JSON,
-                ],
-                'languages' => [
-                    'en',
-                    'de',
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::class,
+            'cors' => [
+                'Origin' => ['*'],
             ],
+
         ];
+        return $behaviors;
     }
     public function actions()
     {
