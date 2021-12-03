@@ -37,10 +37,9 @@ class WorkerController extends \yii\rest\ActiveController
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Worker::find(),
-//            'pagination' => [
-//                'pageSize' => 2
-//            ]
+
         ]);
         return $dataProvider;
     }
+
 }
