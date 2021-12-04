@@ -4,8 +4,14 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
         let text = '';
-        console.log(data);
+        let count = 0;
+        // console.log(data);
         for (var value of data.items) {
+            count;
+            if (count === 2){
+                break;
+            }
+            count++;
             text += "<li class=\"job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center\">";
             text += "<a href=" + value['link'] + "></a>";
             text += "<div class='job-listing-logo'>";

@@ -54,7 +54,7 @@ echo \yii\widgets\DetailView::widget([
         [
             'attribute' => 'photo',
             'value' => '@web/uploads/user/' . $worker->photo,
-            'format' => ['image', ['width' => '150', 'height' => '150']]
+                'format' => ['image', ['width' => '150', 'height' => '150']]
         ],
         'hobby',
         [

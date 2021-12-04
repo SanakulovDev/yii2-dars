@@ -20,6 +20,8 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'enableSession' => false,
+            'loginUrl' => null,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
@@ -40,10 +42,11 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                'auth' => 'site/login',
                 [
                     'class' => 'yii\rest\UrlRule',
 //                    'pluralize' => false,
-                    'controller' => ['user', 'region','worker']]
+                    'controller' => ['user', 'region', 'worker']]
             ],
         ]
 

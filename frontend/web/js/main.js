@@ -78,12 +78,7 @@ $('#vacancysearch-region_id').click(function () {
     });
 });
 
-$(document).function()
-{
 
-
-
-}
 
 
 
