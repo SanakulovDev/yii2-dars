@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://api1.smartdesign.uz/vacancies',
+    url: 'http://api1.smartdesign.uz/vacancies?access-token=WI33-B56NxXXFjsXPjnR5EnsK_5f5ZIt',
     type: 'GET',
     dataType: 'json',
     success: function (data) {
@@ -7,10 +7,10 @@ $.ajax({
         let count = 0;
         // console.log(data);
         for (var value of data.items) {
-            count;
-            if (count === 2){
-                break;
-            }
+            // count;
+            // if (count === 2) {
+            //     break;
+            // }
             count++;
             text += "<li class=\"job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center\">";
             text += "<a href=" + value['link'] + "></a>";
