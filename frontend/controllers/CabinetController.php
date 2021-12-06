@@ -275,9 +275,7 @@ class CabinetController extends Controller
         if ($id == null) {
             $worker = $this->findWorker($identity->id);
         } else {
-            if ($worker->userId == $identity->id) {
-                $worker = $this->findWorker($worker->userId);
-            }
+            $worker = $this->findWorker($worker->userId);
         }
 
         // get your HTML raw content without any layouts or scripts
