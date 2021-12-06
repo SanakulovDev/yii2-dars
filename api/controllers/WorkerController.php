@@ -21,7 +21,6 @@ class WorkerController extends GeneralController
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Worker::find(),
-
         ]);
         return $dataProvider;
     }

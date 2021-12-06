@@ -36,7 +36,10 @@ class Worker extends \frontend\models\Worker
                 }
                 return null;
             },
-            'created_at'
+            'created_at',
+            'cv_link' => function ($model) {
+                return "http://anvar.smartdesign.uz/cabinet/cv-download?id=" . $model->id;
+            }
         ];
     }
 
