@@ -32,10 +32,10 @@ class CabinetController extends Controller
         $company = $this->findModel($identity->id);
         $worker = $this->findWorker($identity->id);
         if ($company) {
-            $vacancy_order = VacancyOrders::findAll(['company_id' =>$company->id]);
+            $vacancy_order = VacancyOrders::findAll(['company_id' => $company->id]);
             return $this->render('index',
                 ['company' => $company]);
-            }
+        }
         return $this->redirect('worker');
     }
 
@@ -272,10 +272,13 @@ class CabinetController extends Controller
     {
         $identity = \Yii::$app->user->identity;
         $worker = Worker::findOne($id);
-        if (!$worker or $worker and $worker->userId == $identity->id) {
+        if ($id == null) {
             $worker = $this->findWorker($identity->id);
+        } else {
+            if ($worker->userId == $identity->id) {
+                $worker = $this->findWorker($worker->userId);
+            }
         }
-
 
         // get your HTML raw content without any layouts or scripts
         $content = $this->renderPartial('cv', ['worker' => $worker]);
@@ -353,9 +356,6 @@ class CabinetController extends Controller
     }
 
 
-
-
-
 //    public function actionWorkerOrder
 
 
@@ -408,7 +408,7 @@ class CabinetController extends Controller
             ->setFrom([Yii::$app->params['supportEmail'] => $user->username])
             ->setTo($user->email)
             ->setHtmlBody('<p>Salom hammaga</p>')
-            ->setSubject("Assalomu alaykum  $user->username. Biz sizga shuni ma'lum qilamizki $vacancy_order->company_id  $vacancy_order->created_at vaqtda siz qoldirgan ariza ".VacancyOrders::STATUSLIST[$vacancy_order->status])
+            ->setSubject("Assalomu alaykum  $user->username. Biz sizga shuni ma'lum qilamizki $vacancy_order->company_id  $vacancy_order->created_at vaqtda siz qoldirgan ariza " . VacancyOrders::STATUSLIST[$vacancy_order->status])
             ->send();
     }
 }
