@@ -5,7 +5,6 @@ $.ajax({
     success: function (data) {
         let text = '';
         let count = 0;
-        // console.log(data);
         for (var value of data.items) {
             // count;
             // if (count === 2) {
