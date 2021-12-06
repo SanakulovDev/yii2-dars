@@ -4,7 +4,7 @@ use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 
 ?>
-<h1><?= Yii::t('app', ucfirst(Yii::$app->user->identity->username) . " " . Yii::t('app', ' personal information')) ?></h1>
+<h1><?= Yii::t('app', ucfirst(Yii::$app->user->identity?Yii::$app->user->identity->username:'') . " " . Yii::t('app', ' personal information')) ?></h1>
 <?php
 /**
  *
