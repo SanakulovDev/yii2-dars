@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        [
+            'class' => 'app\modules\v1\Module',
+            'controller' =>['v1/resume']
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -46,7 +51,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
 //                    'pluralize' => false,
-                    'controller' => ['user', 'region', 'worker']]
+                    'controller' => ['user', 'region', 'worker','v1/resume']]
             ],
         ]
 

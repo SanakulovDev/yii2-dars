@@ -24,6 +24,13 @@ return [
 
 
     'components' => [
+        'reCaptcha' => [
+            'class' => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
+            'siteKeyV2' => 'your siteKey v2',
+            'secretV2' => 'your secret key v2',
+            'siteKeyV3' => 'your siteKey v3',
+            'secretV3' => 'your secret key v3',
+        ],
 
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'

@@ -66,6 +66,5 @@
         "2amigos/yii2-chartjs-widget": "~2.0",
         "kartik-v/yii2-widgets": "dev-master",
         "wbraganca/yii2-selectivity": "*"
-
     }
 }
