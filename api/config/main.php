@@ -12,10 +12,9 @@ return [
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        [
-            'class' => 'app\modules\v1\Module',
-            'controller' =>['v1/resume']
-        ],
+        'v1' => [
+                'class' => 'api\modules\v1\Module',
+            ],
     ],
     'components' => [
         'request' => [
@@ -48,10 +47,11 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'auth' => 'site/login',
+                'add-worker' =>'v1/worker/create',
                 [
                     'class' => 'yii\rest\UrlRule',
 //                    'pluralize' => false,
-                    'controller' => ['user', 'region', 'worker','v1/resume']]
+                    'controller' => ['user', 'region', 'worker', 'v1/worker']]
             ],
         ]
 

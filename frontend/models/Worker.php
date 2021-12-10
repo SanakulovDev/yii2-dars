@@ -35,8 +35,8 @@ class Worker extends \yii\db\ActiveRecord
      */
 
     const SCENARIO_EDIT = 'edit';
-    const SCENARIO_WORKEREDIT = 'worker-edit';
-    const SCENARIO_APPLY_M = 'applys-message';
+    const SCENARIO_WORKER_EDIT = 'worker-edit';
+    const SCENARIO_APPLY_M = 'apply-message';
     public static function tableName()
     {
         return 'worker';
@@ -117,7 +117,7 @@ class Worker extends \yii\db\ActiveRecord
             self::SCENARIO_EDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
                 'gender','phone','photo','hobby','profession_id'
                 ],
-            self::SCENARIO_WORKEREDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
+            self::SCENARIO_WORKER_EDIT=>['firstname','lastname','regionId','cityId','address','patronymic','nationality_id','birthdate',
                 'gender','phone','photo','hobby','profession_id'
                 ],
             self::SCENARIO_APPLY_M=>['apply_messages']

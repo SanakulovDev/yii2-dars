@@ -114,7 +114,7 @@ class CabinetController extends Controller
         $worker = $this->findWorker($identity->id);
         $modelsLaborActivity = $worker->laborActivity;
         $modelsWorkerLanguage = $worker->workerLanguages;
-        $worker->scenario = Worker::SCENARIO_WORKEREDIT;
+        $worker->scenario = Worker::SCENARIO_WORKER_EDIT;
 
 
         if ($worker->load($this->request->post())) {
