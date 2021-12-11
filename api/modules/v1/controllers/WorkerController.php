@@ -3,7 +3,8 @@
 namespace api\modules\v1\controllers;
 
 use api\controllers\GeneralController;
-use api\models\Worker;
+use common\models\User;
+use frontend\models\Worker;
 use api\modules\v1\models\V1Worker;
 use frontend\models\SignupForm;
 use yii\data\ActiveDataProvider;
@@ -18,13 +19,10 @@ class WorkerController extends Controller
     {
         $model = new V1Worker();
         if (\Yii::$app->request->post()) {
-//            vd(\Yii::$app->request->post());
-            if ($model->load(\Yii::$app->request->post())) {
+            if ($model->load(\Yii::$app->request->post(),'')) {
                 $image = UploadedFile::getInstance($model, 'photo');
-                if ($model->upload($image) && $model->workerAdd()) {
-                    return $model;
-                }
-
+                if ($model->workerAdd())
+                    return 123;
             }
         }
         return [

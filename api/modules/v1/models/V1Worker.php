@@ -7,18 +7,24 @@ use common\models\User;
 use frontend\models\SignupForm;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sign;
 use Yii;
+use yii\base\Model;
+use yii\web\UploadedFile;
 
-class V1Worker extends \frontend\models\Worker
+class V1Worker extends Model
 {
     public $username;
     public $password;
     public $email;
+    public $firstname;
+    public $lastname;
+    public $hobby;
+    public $photo;
 
     public function rules()
     {
         return [
-            [['username', 'password',  'email'], 'required'],
-            [['username', 'password',  'email'], 'string'],
+            [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'required'],
+            [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'string'],
         ];
     }
 
@@ -34,7 +40,14 @@ class V1Worker extends \frontend\models\Worker
         $user->email = $this->email;
         $user->role = 'worker';
         if ($user = $user->signup()) {
-            return $user;
+            $image = UploadedFile::getInstance($worker, 'photo');
+            vd($user->role);
+            $worker->userId = $user->id;
+            $worker->firstname = $this->firstname;
+            $worker->lastname = $this->lastname;
+            $worker->hobby = $this->hobby;
+            if ($this->upload($image) && $worker->save())
+                return true;
         }
         return false;
     }
