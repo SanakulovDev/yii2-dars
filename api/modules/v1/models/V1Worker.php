@@ -23,7 +23,7 @@ class V1Worker extends Model
     public function rules()
     {
         return [
-            [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'required'],
+            [['username', 'password', 'email','firstname','lastname','hobby'], 'required'],
             [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'string'],
         ];
     }
@@ -40,14 +40,7 @@ class V1Worker extends Model
         $user->email = $this->email;
         $user->role = 'worker';
         if ($user = $user->signup()) {
-            $image = UploadedFile::getInstance($worker, 'photo');
-            vd($user->role);
-            $worker->userId = $user->id;
-            $worker->firstname = $this->firstname;
-            $worker->lastname = $this->lastname;
-            $worker->hobby = $this->hobby;
-            if ($this->upload($image) && $worker->save())
-                return true;
+           return $user;
         }
         return false;
     }

@@ -12,14 +12,21 @@ return [
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'sanakulov' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',
+        ],
         'v1' => [
-                'class' => 'api\modules\v1\Module',
-            ],
+            'class' => 'api\modules\v1\Module',
+        ],
     ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
 //             'baseUrl' => '',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -47,14 +54,17 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'auth' => 'site/login',
-                'add-worker' =>'v1/worker/create',
+                'add-worker' => 'v1/worker/create',
+                'add-vacancy' => 'v1/vacancy/create',
+                'find-vacancy' => 'v1/vacancy/search',
                 [
                     'class' => 'yii\rest\UrlRule',
 //                    'pluralize' => false,
-                    'controller' => ['user', 'region', 'worker', 'v1/worker']]
+                    'controller' => ['user', 'region', 'worker', 'v1/worker', 'v1/vacancy']]
             ],
-        ]
+        ],
 
     ],
+
     'params' => $params,
 ];
