@@ -53,7 +53,7 @@ $langTolower = 'name' . ucfirst(Yii::$app->language);
                 <div class="d-flex align-items-center">
                     <div class=" p-2 d-inline-block mr-3 " style="width: 150px">
                         <?php if ($vacancy->image): ?>
-                            <?= Html::img("/uploads/company/$vacancy->image", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
+                            <?= Html::img("/uploads/vacancy/$vacancy->image", ['class' => 'img-fluid', 'alt' => 'Image']); ?>
                         <?php else: ?>
                             <?= Html::img("https://previews.123rf.com/images/arcady31/arcady311509/arcady31150900028/46164370-job-vacancy-rubber-stamp.jpg"  , ['class' => 'img-fluid', 'alt' => 'Image','width'=>200]); ?>
                         <?php endif; ?>
