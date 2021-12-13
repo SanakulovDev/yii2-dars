@@ -9,7 +9,7 @@ use yii\web\UploadedFile;
 
 class VacancyController extends Controller
 {
-//    public $modelClass = 'api\modules\v1\models\Vacancy';
+//    public $modelClass = 'frontend\models\Vacancy';
 
     public function actionCreate()
     {

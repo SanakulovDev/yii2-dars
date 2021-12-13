@@ -18,13 +18,12 @@ class WorkerController extends Controller
     public function actionCreate()
     {
         $model = new V1Worker();
-        $worker = new \frontend\models\Worker();
         if (\Yii::$app->request->post()) {
-            if ($model->load(\Yii::$app->request->post(), '')) {
-                $image = UploadedFile::getInstance($model, 'photo');
-//                vd($image);
+            if ($model->load(\Yii::$app->request->post(), '') ) {
+                $image = UploadedFile::getInstanceByName('photo');
+//
                 if ($user = $model->workerAdd()) {
-                    return $user;
+                  return 1234;
                 }
             }
         }

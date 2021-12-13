@@ -6,6 +6,7 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\filters\RateLimiter;
 use yii\web\Response;
 
 class GeneralController extends \yii\rest\ActiveController
@@ -17,6 +18,12 @@ class GeneralController extends \yii\rest\ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        $behaviors['rateLimiter'] = [
+            'class' => RateLimiter::className(),
+            'enableRateLimitHeaders' => true,
+        ];
+
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::class,
             'authMethods' => [

@@ -6,6 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\filters\RateLimitInterface;
 use yii\web\IdentityInterface;
 
 /**
@@ -24,7 +25,7 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  * @property string $token
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -220,5 +221,24 @@ class User extends ActiveRecord implements IdentityInterface
     public function getCity()
     {
         return $this->hasOne(City::class, ['id' => 'cityId']);
+    }
+
+
+
+    public function getRateLimit($request, $action)
+    {
+        return [1, 5]; // $rateLimit requests per second
+    }
+
+    public function loadAllowance($request, $action)
+    {
+        return [$this->allowance, $this->allowance_updated_at];
+    }
+
+    public function saveAllowance($request, $action, $allowance, $timestamp)
+    {
+        $this->allowance = $allowance;
+        $this->allowance_updated_at = $timestamp;
+        $this->save();
     }
 }

@@ -25,6 +25,7 @@ class V1Worker extends Model
         return [
             [['username', 'password', 'email','firstname','lastname','hobby'], 'required'],
             [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'string'],
+            ['photo','file','extensions'=>'jpg, jpeg, png, svg, ttif']
         ];
     }
 
@@ -40,23 +41,13 @@ class V1Worker extends Model
         $user->email = $this->email;
         $user->role = 'worker';
         if ($user = $user->signup()) {
-           return $user;
+           $worker->firstname = $this->firstname;
+           $worker->lastname = $this->lastname;
+           $worker->hobby = $this->hobby;
+           $this->photo = UploadedFile::getInstanceByName('photo');
         }
         return false;
     }
 
-    public function upload($image)
-    {
-        if ($image) {
-            $dir = Yii::getAlias('@frontend') . "/web/uploads/user/";
-            $image_name = time();
-            $image_name .= '.' . $image->extension;
-            if ($image->saveAs($dir . $image_name)) {
-                $this->photo = $image_name;
-                return true;
-            }
-        }
 
-        return false;
-    }
 }
