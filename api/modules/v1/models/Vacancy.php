@@ -41,11 +41,9 @@ class Vacancy extends \frontend\models\Vacancy
         $model->city_id = $this->cityId;
         $model->job_type_id = $this->jobType;
         $model->count = $this->countVacancy;
-        $model->deadline = date('Y-m-d', time()+86400*30);
+        $model->deadline = date('Y-m-d', time() + 86400 * 30);
         $this->photo = UploadedFile::getInstanceByName('photo');
-//        vd($this);
         if ($model->upload($this->photo) && $model->save(false)) {
-//        vd($this->photo);
             return $model;
         }
         return $model->errors;

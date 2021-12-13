@@ -14,8 +14,9 @@ class VacancyController extends Controller
     public function actionCreate()
     {
         $model = new Vacancy();
-        if ($model->load(\Yii::$app->request->post(), '')) {
 
+        if ($model->load(\Yii::$app->request->post(), '')) {
+//        vd(\Yii::$app->request->post());
             if ($vacancy = $model->vacancySave()) {
                 return $vacancy;
             }

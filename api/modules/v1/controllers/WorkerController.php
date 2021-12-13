@@ -20,10 +20,8 @@ class WorkerController extends Controller
         $model = new V1Worker();
         if (\Yii::$app->request->post()) {
             if ($model->load(\Yii::$app->request->post(), '') ) {
-                $image = UploadedFile::getInstanceByName('photo');
-//
                 if ($user = $model->workerAdd()) {
-                  return 1234;
+                  return $user;
                 }
             }
         }

@@ -223,8 +223,6 @@ class User extends ActiveRecord implements IdentityInterface, RateLimitInterface
         return $this->hasOne(City::class, ['id' => 'cityId']);
     }
 
-
-
     public function getRateLimit($request, $action)
     {
         return [1, 5]; // $rateLimit requests per second

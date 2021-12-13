@@ -19,11 +19,13 @@ class V1Worker extends Model
     public $lastname;
     public $hobby;
     public $photo;
+    public $professionId;
 
     public function rules()
     {
         return [
-            [['username', 'password', 'email','firstname','lastname','hobby'], 'required'],
+            [['username', 'password', 'email','firstname','lastname','hobby','professionId'], 'required'],
+            ['professionId','integer'],
             [['username', 'password', 'email','firstname','lastname','hobby','photo'], 'string'],
             ['photo','file','extensions'=>'jpg, jpeg, png, svg, ttif']
         ];
@@ -44,7 +46,11 @@ class V1Worker extends Model
            $worker->firstname = $this->firstname;
            $worker->lastname = $this->lastname;
            $worker->hobby = $this->hobby;
+           $worker->profession_id = $this->professionId;
            $this->photo = UploadedFile::getInstanceByName('photo');
+           if ($worker->upload($this->photo) && $worker->save(false)){
+               return "Ma'lumotlar saqlandi";
+           }
         }
         return false;
     }
