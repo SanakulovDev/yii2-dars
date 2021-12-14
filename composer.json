@@ -65,6 +65,7 @@
         "fedemotta/yii2-cronjob": "*",
         "2amigos/yii2-chartjs-widget": "~2.0",
         "kartik-v/yii2-widgets": "dev-master",
-        "wbraganca/yii2-selectivity": "*"
+        "wbraganca/yii2-selectivity": "*",
+        "slavkovrn/yii2-chat": "*"
     }
 }
