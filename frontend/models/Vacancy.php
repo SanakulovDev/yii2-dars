@@ -61,7 +61,7 @@ class Vacancy extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'user_id', 'profession_id', 'region_id', 'city_id', 'count','photo'], 'required'],
+            [['company_id', 'user_id', 'profession_id', 'region_id', 'city_id', 'count','image'], 'required'],
             [['company_id', 'user_id', 'profession_id', 'job_type_id', 'region_id', 'city_id', 'count', 'salary', 'gender', 'views', 'status'], 'integer'],
             [['deadline', 'created_at', 'updated_at', 'salary_begin', 'salary_end'], 'safe'],
             [['description_uz', 'description_ru', 'description_en', 'description_cyrl'], 'string'],
