@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
                         <i class="fas fa-user"></i>
                         <div class="info">
                             <div class="head">Name</div>
-                            <div class="sub-title">Sherali Jo'rayev</div>
+                            <div class="sub-title">Xakimov Sardor</div>
                         </div>
                     </div>
 
